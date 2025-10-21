@@ -201,6 +201,7 @@ const Pricing = () => {
                   </div>
                 </div>
 
+                <div className="mt-8">
                 <Link to="/apply">
                   <Button 
                     className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-4 rounded-lg transition-all hover:scale-105"
@@ -208,6 +209,7 @@ const Pricing = () => {
                     Apply Now
                   </Button>
                 </Link>
+                </div>
               </CardContent>
             </Card>
           </div>
