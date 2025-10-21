@@ -1,0 +1,21 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Node / web
+node_modules/
+.dist/
+.build/
+.next/
+out/
+coverage/
+.cache/
+.env*
+
+# Logs
+*.log
+
+# Editor
+.vscode/
+.idea/
