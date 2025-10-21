@@ -91,6 +91,7 @@ const Pricing = () => {
                   </div>
                 </div>
 
+                <div className="mt-8">
                  <Link to="/signup">
                    <Button 
                      className="w-full bg-secondary/20 hover:bg-secondary/30 text-secondary-foreground font-bold py-4 rounded-lg border border-secondary/30 transition-all"
@@ -98,6 +99,7 @@ const Pricing = () => {
                      Get Started
                    </Button>
                  </Link>
+                </div>
               </CardContent>
             </Card>
 
@@ -146,6 +148,7 @@ const Pricing = () => {
                   </div>
                 </div>
 
+                <div className="mt-8">
                  <Link to="/signup">
                    <Button 
                      className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-4 rounded-lg transition-all hover:scale-105"
@@ -153,6 +156,7 @@ const Pricing = () => {
                      Get Started
                    </Button>
                  </Link>
+                </div>
               </CardContent>
             </Card>
 
@@ -314,12 +318,16 @@ const Pricing = () => {
                 Choose the program that fits your timeline and goals.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <Button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-bold px-8 py-4 rounded-full">
-                  Start 3-Month Coaching
-                </Button>
-                <Button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-bold px-8 py-4 rounded-full">
-                  Start 6-Month Coaching
-                </Button>
+                <Link to="/signup">
+                  <Button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-bold px-8 py-4 rounded-full">
+                    Start 3-Month Coaching
+                  </Button>
+                </Link>
+                <Link to="/signup">
+                  <Button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-bold px-8 py-4 rounded-full">
+                    Start 6-Month Coaching
+                  </Button>
+                </Link>
               </div>
             </div>
 
@@ -332,9 +340,11 @@ const Pricing = () => {
               <p className="text-lg text-foreground/80 mb-8">
                 Apply for our most exclusive coaching program with limited spots available.
               </p>
-              <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-black px-12 py-6 rounded-full text-lg shadow-lg hover:shadow-primary/50 transition-all hover:scale-105">
-                Apply for VIP Coaching
-              </Button>
+              <Link to="/apply">
+                <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-black px-12 py-6 rounded-full text-lg shadow-lg hover:shadow-primary/50 transition-all hover:scale-105">
+                  Apply for VIP Coaching
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
