@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Check, Star, Users, Clock, Target, Award, Lock, Smartphone, Utensils, Brain, BarChart3 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Pricing = () => {
   const testimonials = [
@@ -90,12 +91,13 @@ const Pricing = () => {
                   </div>
                 </div>
 
-                 <Button 
-                   className="w-full bg-secondary/20 hover:bg-secondary/30 text-secondary-foreground font-bold py-4 rounded-lg border border-secondary/30 transition-all"
-                   onClick={() => window.location.href = '/signup'}
-                 >
-                   Get Started
-                 </Button>
+                 <Link to="/signup">
+                   <Button 
+                     className="w-full bg-secondary/20 hover:bg-secondary/30 text-secondary-foreground font-bold py-4 rounded-lg border border-secondary/30 transition-all"
+                   >
+                     Get Started
+                   </Button>
+                 </Link>
               </CardContent>
             </Card>
 
@@ -144,12 +146,13 @@ const Pricing = () => {
                   </div>
                 </div>
 
-                 <Button 
-                   className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-4 rounded-lg transition-all hover:scale-105"
-                   onClick={() => window.location.href = '/signup'}
-                 >
-                   Get Started
-                 </Button>
+                 <Link to="/signup">
+                   <Button 
+                     className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-4 rounded-lg transition-all hover:scale-105"
+                   >
+                     Get Started
+                   </Button>
+                 </Link>
               </CardContent>
             </Card>
 
@@ -194,12 +197,13 @@ const Pricing = () => {
                   </div>
                 </div>
 
-                <Button 
-                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-4 rounded-lg transition-all hover:scale-105"
-                  onClick={() => window.location.href = 'http://localhost:8082/apply'}
-                >
-                  Apply Now
-                </Button>
+                <Link to="/apply">
+                  <Button 
+                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-4 rounded-lg transition-all hover:scale-105"
+                  >
+                    Apply Now
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
           </div>

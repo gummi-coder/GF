@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Play } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Stats = () => {
   return (
@@ -37,12 +38,13 @@ const Stats = () => {
             Works Regardless of Background and Experience.
           </p>
           <div className="text-center">
-            <Button 
-              className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-12 py-7 rounded-full text-lg"
-              onClick={() => window.location.href = 'http://localhost:8082/apply'}
-            >
-              APPLY NOW
-            </Button>
+            <Link to="/apply">
+              <Button 
+                className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-12 py-7 rounded-full text-lg"
+              >
+                APPLY NOW
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

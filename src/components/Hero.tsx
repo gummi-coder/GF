@@ -1,5 +1,6 @@
 import { Star, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -57,13 +58,14 @@ const Hero = () => {
         </div>
 
         {/* CTA Button */}
-        <Button 
-          size="lg"
-          className="bg-primary hover:bg-primary/90 text-primary-foreground font-black text-lg px-12 py-7 rounded-full animate-fade-in shadow-lg hover:shadow-primary/50 transition-all hover:scale-105"
-          onClick={() => window.location.href = 'http://localhost:8082/apply'}
-        >
-          APPLY NOW
-        </Button>
+        <Link to="/apply">
+          <Button 
+            size="lg"
+            className="bg-primary hover:bg-primary/90 text-primary-foreground font-black text-lg px-12 py-7 rounded-full animate-fade-in shadow-lg hover:shadow-primary/50 transition-all hover:scale-105"
+          >
+            APPLY NOW
+          </Button>
+        </Link>
       </div>
     </section>
   );

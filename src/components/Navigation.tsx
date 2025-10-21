@@ -78,12 +78,13 @@ const Navigation = () => {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Button 
-              className="bg-primary hover:bg-primary/90 text-white font-bold px-8 py-3 rounded-md uppercase text-sm tracking-wide"
-              onClick={() => window.location.href = 'http://localhost:8082/apply'}
-            >
-              APPLY NOW
-            </Button>
+            <Link to="/apply">
+              <Button 
+                className="bg-primary hover:bg-primary/90 text-white font-bold px-8 py-3 rounded-md uppercase text-sm tracking-wide"
+              >
+                APPLY NOW
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
