@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 0 0% 6%;
+    --foreground: 0 0% 98%;
+
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 0 0% 20%;
+    --muted-foreground: 0 0% 65%;
+
+    --accent: 217 91% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 217 91% 60%;
+
+    --radius: 0.5rem;
+
+    --star: 45 100% 51%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    /* Subtle pink dot grid + soft glows spread vertically through scroll */
+    background-image:
+      radial-gradient(hsl(var(--primary)/0.03) 1px, transparent 1px),
+      radial-gradient(hsl(var(--primary)/0.02) 1px, transparent 1px),
+      radial-gradient(ellipse 1000px 800px at 10% 5%, hsl(var(--primary)/0.20) 0%, transparent 60%),
+      radial-gradient(ellipse 900px 700px at 90% 15%, hsl(var(--primary)/0.14) 0%, transparent 60%),
+      radial-gradient(ellipse 1000px 800px at 15% 85%, hsl(var(--primary)/0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 900px 700px at 85% 95%, hsl(var(--primary)/0.14) 0%, transparent 60%);
+    background-size:
+      22px 22px,
+      22px 22px,
+      100% 2000px,
+      100% 2000px,
+      100% 2000px,
+      100% 2000px;
+    background-position:
+      0 0,
+      11px 11px,
+      0 0,
+      0 0,
+      0 100%,
+      0 100%;
+    background-repeat: repeat, repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+  }
+}
