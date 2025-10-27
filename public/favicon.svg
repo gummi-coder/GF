@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <style>
+      .text { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; font-weight: 900; }
+    </style>
+  </defs>
+  <!-- Black background -->
+  <rect width="512" height="512" fill="#000"/>
+
+  <!-- White pill for Training word -->
+  <g transform="translate(96,300)">
+    <rect x="120" y="-64" rx="36" ry="36" width="300" height="110" fill="#fff"/>
+  </g>
+
+  <!-- GF text (white) -->
+  <text x="120" y="300" fill="#fff" class="text" font-size="120" letter-spacing="2">GF</text>
+
+  <!-- Training text (black) inside pill -->
+  <text x="245" y="300" fill="#000" class="text" font-size="88">Training</text>
+</svg>
+
+
