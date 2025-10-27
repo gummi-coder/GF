@@ -8,10 +8,86 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Check, Star } from "lucide-react";
+import { useState } from "react";
+
+interface SignupFormData {
+  fullName: string;
+  email: string;
+  phone: string;
+  kennitala: string;
+  about: string;
+  fitnessLevel: string;
+  goals: string;
+  program: string;
+  terms: boolean;
+}
 
 const Signup = () => {
+  const [formData, setFormData] = useState<SignupFormData>({
+    fullName: "",
+    email: "",
+    phone: "",
+    kennitala: "",
+    about: "",
+    fitnessLevel: "",
+    goals: "",
+    program: "",
+    terms: false,
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleSubmit = async () => {
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+
+    try {
+      const formDataToSend = new FormData();
+      Object.entries(formData).forEach(([key, value]) => {
+        formDataToSend.append(key, typeof value === "boolean" ? (value ? "yes" : "no") : value);
+      });
+
+      const response = await fetch("https://formspree.io/f/xpwoqzyo", {
+        method: "POST",
+        body: formDataToSend,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (response.ok) {
+        setIsSubmitted(true);
+        setFormData({
+          fullName: "",
+          email: "",
+          phone: "",
+          kennitala: "",
+          about: "",
+          fitnessLevel: "",
+          goals: "",
+          program: "",
+          terms: false,
+        });
+      } else {
+        throw new Error("Form submission failed");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("Villa kom upp. Reyndu aftur síðar.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background text-foreground relative overflow-hidden" style={{
+      backgroundImage: `
+        radial-gradient(ellipse 1000px 800px at 10% 5%, hsl(var(--primary)/0.20) 0%, transparent 60%),
+        radial-gradient(ellipse 900px 700px at 85% 95%, hsl(var(--primary)/0.14) 0%, transparent 60%)
+      `,
+      backgroundSize: '100% 2000px, 100% 2000px',
+      backgroundPosition: '0 0, 0 100%',
+      backgroundRepeat: 'no-repeat, no-repeat'
+    }}>
       <Navigation />
       
       {/* Hero Section */}
@@ -43,102 +119,126 @@ const Signup = () => {
                 <CardHeader>
                   <CardTitle className="text-xl text-foreground">Búðu til aðgang þinn</CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="fullName" className="text-foreground">Fullt nafn *</Label>
-                    <Input 
-                      id="fullName" 
-                      placeholder="Fullt nafn" 
-                      className="bg-background/50 border-border/20"
-                    />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="email" className="text-foreground">Netfang *</Label>
-                    <Input 
-                      id="email" 
-                      type="email" 
-                      placeholder="Netfang" 
-                      className="bg-background/50 border-border/20"
-                    />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="phone" className="text-foreground">Símanúmer</Label>
-                    <Input 
-                      id="phone" 
-                      type="tel" 
-                      placeholder="Símanúmer" 
-                      className="bg-background/50 border-border/20"
-                    />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="kennitala" className="text-foreground">Kennitala *</Label>
-                    <Input 
-                      id="kennitala" 
-                      placeholder="Kennitala" 
-                      className="bg-background/50 border-border/20"
-                    />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="about" className="text-foreground">Upplýsingar um þig</Label>
-                    <Textarea 
-                      id="about" 
-                      placeholder="Lýstu þér og hvað þú ert að leita að..." 
-                      className="bg-background/50 border-border/20 min-h-[100px]"
-                    />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="fitnessLevel" className="text-foreground">Núverandi getustig *</Label>
-                    <Select>
-                      <SelectTrigger className="bg-background/50 border-border/20">
-                        <SelectValue placeholder="Veldu núverandi getustig" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="beginner">Byrjandi</SelectItem>
-                        <SelectItem value="intermediate">Miðlungs</SelectItem>
-                        <SelectItem value="advanced">Íþróttamaður</SelectItem>
-                        <SelectItem value="expert">Sérfræðingur</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="goals" className="text-foreground">Hvað er markmið þitt? *</Label>
-                    <Textarea 
-                      id="goals" 
-                      placeholder="Lýstu aðal markmiðum þínum (t.d. þyngdartap, vöðvaaukning, styrkur, þol, o.s.frv.)" 
-                      className="bg-background/50 border-border/20 min-h-[100px]"
-                    />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="program" className="text-foreground">Val á áætlun</Label>
-                    <Select>
-                      <SelectTrigger className="bg-background/50 border-border/20">
-                        <SelectValue placeholder="Veldu æfingaáætlun" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="basic">Basic - 3 mánaða áætlun</SelectItem>
-                        <SelectItem value="pro">Pro - 6 mánaða áætlun</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  
-                  <div className="flex items-center space-x-2">
-                    <Checkbox id="terms" />
-                    <Label htmlFor="terms" className="text-sm text-foreground/80">
-                      Ég samþykki skilmála og persónuverndarstefnu *
-                    </Label>
-                  </div>
-                  
-                  <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-6 rounded-full text-lg">
-                    Byrjaðu umbreytinguna
-                  </Button>
-                </CardContent>
+                {isSubmitted ? (
+                  <CardContent className="space-y-6">
+                    <div className="text-center">
+                      <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                        <Check className="w-8 h-8 text-primary-foreground" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-foreground mb-2">Takk fyrir skráninguna!</h3>
+                      <p className="text-foreground/70">Ég hef samband fljótlega.</p>
+                    </div>
+                  </CardContent>
+                ) : (
+                  <CardContent className="space-y-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="fullName" className="text-foreground">Fullt nafn *</Label>
+                      <Input 
+                        id="fullName" 
+                        placeholder="Fullt nafn" 
+                        className="bg-background/50 border-border/20"
+                        value={formData.fullName}
+                        onChange={(e) => setFormData((prev) => ({ ...prev, fullName: e.target.value }))}
+                      />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <Label htmlFor="email" className="text-foreground">Netfang *</Label>
+                      <Input 
+                        id="email" 
+                        type="email" 
+                        placeholder="Netfang" 
+                        className="bg-background/50 border-border/20"
+                        value={formData.email}
+                        onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
+                      />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <Label htmlFor="phone" className="text-foreground">Símanúmer</Label>
+                      <Input 
+                        id="phone" 
+                        type="tel" 
+                        placeholder="Símanúmer" 
+                        className="bg-background/50 border-border/20"
+                        value={formData.phone}
+                        onChange={(e) => setFormData((prev) => ({ ...prev, phone: e.target.value }))}
+                      />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <Label htmlFor="kennitala" className="text-foreground">Kennitala *</Label>
+                      <Input 
+                        id="kennitala" 
+                        placeholder="Kennitala" 
+                        className="bg-background/50 border-border/20"
+                        value={formData.kennitala}
+                        onChange={(e) => setFormData((prev) => ({ ...prev, kennitala: e.target.value }))}
+                      />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <Label htmlFor="about" className="text-foreground">Upplýsingar um þig</Label>
+                      <Textarea 
+                        id="about" 
+                        placeholder="Lýstu þér og hvað þú ert að leita að..." 
+                        className="bg-background/50 border-border/20 min-h-[100px]"
+                        value={formData.about}
+                        onChange={(e) => setFormData((prev) => ({ ...prev, about: e.target.value }))}
+                      />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <Label htmlFor="fitnessLevel" className="text-foreground">Núverandi getustig *</Label>
+                      <Select value={formData.fitnessLevel} onValueChange={(value) => setFormData((prev) => ({ ...prev, fitnessLevel: value }))}>
+                        <SelectTrigger className="bg-background/50 border-border/20">
+                          <SelectValue placeholder="Veldu núverandi getustig" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="beginner">Byrjandi</SelectItem>
+                          <SelectItem value="intermediate">Miðlungs</SelectItem>
+                          <SelectItem value="advanced">Íþróttamaður</SelectItem>
+                          <SelectItem value="expert">Sérfræðingur</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <Label htmlFor="goals" className="text-foreground">Hvað er markmið þitt? *</Label>
+                      <Textarea 
+                        id="goals" 
+                        placeholder="Lýstu aðal markmiðum þínum (t.d. þyngdartap, vöðvaaukning, styrkur, þol, o.s.frv.)" 
+                        className="bg-background/50 border-border/20 min-h-[100px]"
+                        value={formData.goals}
+                        onChange={(e) => setFormData((prev) => ({ ...prev, goals: e.target.value }))}
+                      />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <Label htmlFor="program" className="text-foreground">Val á áætlun</Label>
+                      <Select value={formData.program} onValueChange={(value) => setFormData((prev) => ({ ...prev, program: value }))}>
+                        <SelectTrigger className="bg-background/50 border-border/20">
+                          <SelectValue placeholder="Veldu æfingaáætlun" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="basic">Basic - 3 mánaða áætlun</SelectItem>
+                          <SelectItem value="pro">Pro - 6 mánaða áætlun</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    
+                    <div className="flex items-center space-x-2">
+                      <Checkbox id="terms" checked={formData.terms} onCheckedChange={(checked) => setFormData((prev) => ({ ...prev, terms: Boolean(checked) }))} />
+                      <Label htmlFor="terms" className="text-sm text-foreground/80">
+                        Ég samþykki skilmála og persónuverndarstefnu *
+                      </Label>
+                    </div>
+                    
+                    <Button onClick={handleSubmit} disabled={isSubmitting} className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-6 rounded-full text-lg">
+                      {isSubmitting ? "Sendi..." : "Byrjaðu umbreytinguna"}
+                    </Button>
+                  </CardContent>
+                )}
               </Card>
             </div>
 
@@ -197,7 +297,7 @@ const Signup = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 bg-gradient-to-br from-primary/10 to-primary/5">
+      <section className="py-20 px-4">
         <div className="container mx-auto max-w-4xl text-center">
           <h2 className="text-3xl md:text-5xl font-black mb-8 font-display">
             <span className="text-foreground">Ready to Transform</span>{" "}

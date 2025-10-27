@@ -7,8 +7,58 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Mail, Phone, MapPin, MessageCircle } from "lucide-react";
+import { useState } from "react";
+
+interface ContactFormData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  subject: string;
+  message: string;
+}
 
 const Contact = () => {
+  const [formData, setFormData] = useState<ContactFormData>({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleSubmit = async () => {
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+
+    try {
+      const formDataToSend = new FormData();
+      Object.entries(formData).forEach(([key, value]) => {
+        formDataToSend.append(key, value);
+      });
+
+      const response = await fetch("https://formspree.io/f/xanlqojz", {
+        method: "POST",
+        body: formDataToSend,
+        headers: { Accept: "application/json" },
+      });
+
+      if (response.ok) {
+        setIsSubmitted(true);
+        setFormData({ firstName: "", lastName: "", email: "", phone: "", subject: "", message: "" });
+      } else {
+        throw new Error("Form submission failed");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("Villa kom upp. Reyndu aftur síðar.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   const faqs = [
     {
       question: "How do I get started with GF Training?",
@@ -77,68 +127,92 @@ const Contact = () => {
                 <CardHeader>
                   <CardTitle className="text-xl text-foreground">Get in Touch</CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-4">
+                {isSubmitted ? (
+                  <CardContent className="space-y-6">
+                    <div className="text-center">
+                      <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span className="text-primary-foreground text-2xl">✓</span>
+                      </div>
+                      <h3 className="text-2xl font-bold text-foreground mb-2">Thanks for reaching out!</h3>
+                      <p className="text-foreground/70">We'll get back to you within 24 hours.</p>
+                    </div>
+                  </CardContent>
+                ) : (
+                  <CardContent className="space-y-6">
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="firstName" className="text-foreground">First Name</Label>
+                        <Input 
+                          id="firstName" 
+                          placeholder="Your first name" 
+                          className="bg-background/50 border-border/20"
+                          value={formData.firstName}
+                          onChange={(e) => setFormData((p) => ({ ...p, firstName: e.target.value }))}
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="lastName" className="text-foreground">Last Name</Label>
+                        <Input 
+                          id="lastName" 
+                          placeholder="Your last name" 
+                          className="bg-background/50 border-border/20"
+                          value={formData.lastName}
+                          onChange={(e) => setFormData((p) => ({ ...p, lastName: e.target.value }))}
+                        />
+                      </div>
+                    </div>
+                    
                     <div className="space-y-2">
-                      <Label htmlFor="firstName" className="text-foreground">First Name</Label>
+                      <Label htmlFor="email" className="text-foreground">Email</Label>
                       <Input 
-                        id="firstName" 
-                        placeholder="Your first name" 
+                        id="email" 
+                        type="email" 
+                        placeholder="your.email@example.com" 
                         className="bg-background/50 border-border/20"
+                        value={formData.email}
+                        onChange={(e) => setFormData((p) => ({ ...p, email: e.target.value }))}
                       />
                     </div>
+                    
                     <div className="space-y-2">
-                      <Label htmlFor="lastName" className="text-foreground">Last Name</Label>
+                      <Label htmlFor="phone" className="text-foreground">Phone (Optional)</Label>
                       <Input 
-                        id="lastName" 
-                        placeholder="Your last name" 
+                        id="phone" 
+                        type="tel" 
+                        placeholder="+1 (555) 123-4567" 
                         className="bg-background/50 border-border/20"
+                        value={formData.phone}
+                        onChange={(e) => setFormData((p) => ({ ...p, phone: e.target.value }))}
                       />
                     </div>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="email" className="text-foreground">Email</Label>
-                    <Input 
-                      id="email" 
-                      type="email" 
-                      placeholder="your.email@example.com" 
-                      className="bg-background/50 border-border/20"
-                    />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="phone" className="text-foreground">Phone (Optional)</Label>
-                    <Input 
-                      id="phone" 
-                      type="tel" 
-                      placeholder="+1 (555) 123-4567" 
-                      className="bg-background/50 border-border/20"
-                    />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="subject" className="text-foreground">Subject</Label>
-                    <Input 
-                      id="subject" 
-                      placeholder="What can we help you with?" 
-                      className="bg-background/50 border-border/20"
-                    />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Label htmlFor="message" className="text-foreground">Message</Label>
-                    <Textarea 
-                      id="message" 
-                      placeholder="Tell us about your goals and how we can help you..."
-                      className="bg-background/50 border-border/20 min-h-[120px]"
-                    />
-                  </div>
-                  
-                  <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-6 rounded-full text-lg">
-                    Send Message
-                  </Button>
-                </CardContent>
+                    
+                    <div className="space-y-2">
+                      <Label htmlFor="subject" className="text-foreground">Subject</Label>
+                      <Input 
+                        id="subject" 
+                        placeholder="What can we help you with?" 
+                        className="bg-background/50 border-border/20"
+                        value={formData.subject}
+                        onChange={(e) => setFormData((p) => ({ ...p, subject: e.target.value }))}
+                      />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <Label htmlFor="message" className="text-foreground">Message</Label>
+                      <Textarea 
+                        id="message" 
+                        placeholder="Tell us about your goals and how we can help you..."
+                        className="bg-background/50 border-border/20 min-h-[120px]"
+                        value={formData.message}
+                        onChange={(e) => setFormData((p) => ({ ...p, message: e.target.value }))}
+                      />
+                    </div>
+                    
+                    <Button onClick={handleSubmit} disabled={isSubmitting} className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-6 rounded-full text-lg">
+                      {isSubmitting ? "Sending..." : "Send Message"}
+                    </Button>
+                  </CardContent>
+                )}
               </Card>
             </div>
 
@@ -221,7 +295,7 @@ const Contact = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 px-4 bg-gradient-to-br from-primary/10 to-primary/5">
+      <section className="py-20 px-4">
         <div className="container mx-auto max-w-4xl">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-black mb-6 font-display">

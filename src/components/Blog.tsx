@@ -25,7 +25,7 @@ const Blog = () => {
   ];
 
   return (
-    <section className="py-20 px-4 bg-secondary/30">
+    <section className="py-20 px-4">
       <div className="container mx-auto max-w-6xl">
         <div className="flex items-center justify-between mb-12">
           <h2 className="text-4xl md:text-5xl font-black font-display">

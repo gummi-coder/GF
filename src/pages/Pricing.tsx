@@ -217,7 +217,7 @@ const Pricing = () => {
       </section>
 
       {/* 3️⃣ What's Included Section */}
-      <section className="py-20 px-4 bg-gradient-to-br from-primary/10 to-primary/5">
+      <section className="py-20 px-4">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-black mb-6 font-display">
@@ -307,7 +307,7 @@ const Pricing = () => {
       </section>
 
       {/* 5️⃣ Call to Action */}
-      <section className="py-20 px-4 bg-gradient-to-br from-primary/10 to-primary/5">
+      <section className="py-20 px-4">
         <div className="container mx-auto max-w-6xl">
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Left CTA */}
