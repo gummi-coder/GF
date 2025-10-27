@@ -5,11 +5,8 @@
       .text { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; font-weight: 900; }
     </style>
   </defs>
-  <!-- Black background -->
-  <rect width="512" height="512" fill="#000"/>
-
-  <!-- Centered GF monogram -->
-  <text x="256" y="256" fill="#fff" class="text" font-size="300" text-anchor="middle" dominant-baseline="central" letter-spacing="4">GF</text>
+  <!-- Centered GF monogram on transparent background -->
+  <text x="256" y="256" fill="#000" class="text" font-size="300" text-anchor="middle" dominant-baseline="central" letter-spacing="4">GF</text>
 </svg>
 
 
