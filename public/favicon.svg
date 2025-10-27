@@ -8,16 +8,8 @@
   <!-- Black background -->
   <rect width="512" height="512" fill="#000"/>
 
-  <!-- White pill for Training word -->
-  <g transform="translate(96,300)">
-    <rect x="120" y="-64" rx="36" ry="36" width="300" height="110" fill="#fff"/>
-  </g>
-
-  <!-- GF text (white) -->
-  <text x="120" y="300" fill="#fff" class="text" font-size="120" letter-spacing="2">GF</text>
-
-  <!-- Training text (black) inside pill -->
-  <text x="245" y="300" fill="#000" class="text" font-size="88">Training</text>
+  <!-- Centered GF monogram -->
+  <text x="256" y="256" fill="#fff" class="text" font-size="300" text-anchor="middle" dominant-baseline="central" letter-spacing="4">GF</text>
 </svg>
 
 
