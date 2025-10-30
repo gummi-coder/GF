@@ -12,26 +12,21 @@ const Hero = () => {
             <Star key={i} className="w-6 h-6 fill-star text-star drop-shadow-sm" />
           ))}
           <span className="text-foreground/90 ml-3 text-lg font-medium">
-            Based on <span className="font-bold text-primary">1,500+</span> Reviews
+            Með yfir <span className="font-bold text-primary">150+</span> Meðmæli
           </span>
         </div>
 
         {/* Main Headline */}
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-black leading-tight mb-6 animate-fade-in font-display">
-          <span className="text-primary">GET IN CONTROL</span>{" "}
-          <span className="text-foreground">OF YOUR BODY</span>
-          <br />
-          <span className="text-foreground">& THE WAY IT LOOKS</span>
-          <br />
-          <span className="text-foreground">FOR THE REST OF YOUR LIFE</span>
+          <span className="text-primary">Taktu stjórn á þínu lífi og</span>{" "}
+          <span className="text-foreground">vertu sá maður sem þú veist að þú getur verið</span>
         </h1>
 
         {/* Subheadline */}
         <p className="text-lg md:text-xl text-foreground/80 max-w-4xl mx-auto mb-12 animate-fade-in leading-relaxed font-sans">
-          Get Toned & Feel Confident In Your Skin Once & For All. No Gimmicks. No Fad Diets. No BS.
+          Ekkert bull. Engar afsakanir. Bara árangur sem endist.
           <br />
-          Long Term, Sustainable Results, That{" "}
-          <span className="text-foreground font-bold">Display Your Strength, & Showcase Your Self Respect.</span>
+          Við erum hér til að hjálpa körlum eins og þér að taka stjórnina aftur.
         </p>
 
         {/* Video Section */}
@@ -58,12 +53,12 @@ const Hero = () => {
         </div>
 
         {/* CTA Button */}
-        <Link to="/apply">
+        <Link to="/pricing">
           <Button 
             size="lg"
             className="bg-primary hover:bg-primary/90 text-primary-foreground font-black text-lg px-12 py-7 rounded-full animate-fade-in shadow-lg hover:shadow-primary/50 transition-all hover:scale-105"
           >
-            APPLY NOW
+            Skrá mig núna!
           </Button>
         </Link>
       </div>

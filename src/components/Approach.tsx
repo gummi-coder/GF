@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Play } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Approach = () => {
   return (
@@ -9,36 +10,29 @@ const Approach = () => {
           {/* Content */}
           <div>
             <h2 className="text-4xl md:text-5xl font-black mb-6 font-display">
-              A New Way To Get{" "}
-              <span className="text-primary">Healthy And Fit 1:1 Online</span>
+              <span className="text-primary">VIP fjarþjálfun fyrir karlmenn</span> sem vilja raunverlagar breytingar
             </h2>
             <p className="text-xl font-semibold text-foreground/90 mb-6 font-sans">
-              There is nothing Worse than Feeling uncomfortable In your skin...
+              Það er fátt verra en að líða illa í eigin líkama...
             </p>
             <div className="space-y-4 text-lg text-foreground/80">
               <p className="font-sans">
-                👉 1:1 Online health and fitness coaching is so effective because it helps men{" "}
-                <span className="font-bold text-foreground">
-                  change their behaviors, beliefs, and habits through time.
-                </span>
+                👉 Fjárþjálfun í heilsu og líkamsrækt er svo áhrifarík vegna þess að hún hjálpar körlum að
+                <span className="font-bold text-foreground"> breyta hegðun, hugsunarhætti og venjum — með tímanum.</span>
               </p>
               <p className="font-sans">
-                👉 Nothing else accomplishes this with even remotely the same level of effectiveness.
+                👉 Engin önnur aðferð nær jafn djúpum og varanlegum árangri.
               </p>
               <p className="font-sans">
-                👉{" "}
-                <span className="font-bold text-foreground">
-                  It's your lifestyle and how you live your life that we help you change..
-                </span>
+                👉 <span className="font-bold text-foreground">Við hjálpum þér að breyta lífsstílnum — ekki bara líkamanum.</span>
               </p>
             </div>
             <div className="mt-8">
-              <Button 
-                className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-12 py-7 rounded-full text-lg"
-                onClick={() => window.location.href = 'http://localhost:8082/apply'}
-              >
-                APPLY NOW
-              </Button>
+              <Link to="/apply">
+                <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-12 py-7 rounded-full text-lg">
+                  Sækja um
+                </Button>
+              </Link>
             </div>
           </div>
 

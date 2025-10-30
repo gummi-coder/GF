@@ -3,28 +3,28 @@ import { Button } from "@/components/ui/button";
 
 const Method = () => {
   const benefits = [
-    "Transform Their Bodies",
-    "So You Can Display Your Strength",
-    "Showcase Your Self Respect",
-    "Live As An Example To Your Family",
+    "að umbreyta líkamanum sínum",
+    "sýna styrk sinn",
+    "sýna sjálfsvirðingu sína",
+    "vera fyrirmynd fyrir fjölskylduna sína",
   ];
 
   const avoids = [
-    "Not Settle For Unhealthy, Not Confident, Not Feeling Good About Yourself",
-    "Not Allow You To Say 'Your Best Is Behind You...'",
+    "Við viljum ekki sjá þig sætta þig við að vera óheilbrigður, án sjálfstrausts eða óánægður með sjálfan þig.",
+    "Við leyfum þér ekki að trúa því að ‘bestu árin séu að baki.’",
   ];
 
   return (
     <section className="py-20 px-4">
       <div className="container mx-auto max-w-5xl">
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-black mb-6 font-display">
-            No gimmicks. No Fad Diets. No bs.
+          <h2 className="text-4xl md:text-5xl font-black mb-6 font-display leading-tight md:leading-tight tracking-tight max-w-4xl mx-auto" style={{ textWrap: "balance" }}>
+            Engar skyndilausnir. Ekkert Kjaftæði. Ekkert bull.
             <br />
-            <span className="text-primary">Long Term Real Results that last.</span>
+            <span className="text-primary">Raunverulegur árangur sem endist</span>
           </h2>
           <p className="text-xl text-foreground/80 font-bold font-sans">
-            We're In The business of helping men like YOU
+            Við erum í þeim bransa að hjálpa körlum eins og þér að
           </p>
         </div>
 
@@ -52,14 +52,13 @@ const Method = () => {
           <div className="flex items-start gap-4">
             <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
             <p className="text-lg md:text-xl font-sans">
-              We will help you regain your personal power & feel confident in your skin.
+              Við hjálpum þér að endurheimta þína persónulegu krafta og finna sjálfstraustið aftur.
             </p>
           </div>
           <div className="flex items-start gap-4">
             <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
             <p className="text-lg md:text-xl font-sans">
-              With <span className="font-bold">long term, sustainable approaches</span> to health and fitness 
-              that will leave you in <span className="font-bold">control of your body and the way it looks for the rest of your life.</span>
+              Með <span className="font-bold">langtíma, sjálfbærri nálgun</span> á heilsu og líkamsrækt sem færir þér <span className="font-bold">stjórn á líkamanum og hvernig hann lítur út</span>.
             </p>
           </div>
         </div>
@@ -67,9 +66,9 @@ const Method = () => {
         <div className="text-center">
           <Button 
             className="bg-primary hover:bg-primary/90 text-primary-foreground font-black px-12 py-7 rounded-full text-lg"
-            onClick={() => window.location.href = 'http://localhost:8082/apply'}
+            onClick={() => window.location.href = 'http://localhost:8082/pricing'}
           >
-            APPLY NOW
+            Skrá mig
           </Button>
         </div>
       </div>

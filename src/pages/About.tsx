@@ -12,47 +12,47 @@ const About = () => {
 
   const timeline = [
     {
-      year: "2016",
+      year: "2021",
       title: "The Garage Gym Era",
       description: "A bold vision started. While working in the ER and training for a pro bodybuilding show, GF started coaching coworkers out of a garage. This early hands-on experience laid the foundation for what would become a transformative approach to men's fitness — rooted in strength, science, and empowerment."
     },
     {
-      year: "2017",
+      year: "2022",
       title: "Blending Online and In-Person Expertise",
       description: "As demand grew, GF evolved into a hybrid model, combining in-person coaching with an online presence. This marked the start of delivering expert-level fitness and nutrition strategies on a larger scale, helping more men achieve their goals with proven results."
     },
     {
-      year: "2018",
+      year: "2023",
       title: "The Birth of GF Training",
       description: "The GF Training Blueprint was born, setting a new standard in fitness education. This program empowered men with the tools and knowledge to transform their health for life. The establishment of GF Training signaled the start of a movement, establishing expertise in personalized fitness solutions for men."
     },
     {
-      year: "2019",
+      year: "2024",
       title: "Innovation and Experimentation",
       description: "GF Training solidified its position as a leader in fitness education, testing and refining new programs to ensure the best client outcomes with unmatched support in the space. Through strategic innovation, the company expanded its reach and impact while maintaining its core commitment to delivering unmatched expertise."
     },
     {
-      year: "2020",
+      year: "2025",
       title: "Thriving Through Adversity",
       description: "As the world faced unprecedented challenges, GF Training stepped up to deliver strength and stability to its growing community. The release of version 2 of the GF Training Blueprint provided men with actionable strategies to stay consistent and healthy, even at home. This year solidified the GF Method as an essential resource for men navigating their health journeys."
     },
     {
-      year: "2021",
+      year: "2026",
       title: "Elevating the Client Experience",
       description: "This year, GF Training introduced its VIP Coaching Program, providing an elite 1:1 coaching experience based on the GF Method. We started to welcome the best of the best personal trainers to our team. The program expanded the brand's ability to deliver tailored solutions for men navigating life transitions."
     },
     {
-      year: "2022",
+      year: "2027",
       title: "Redefining Fitness Education",
       description: "The release of GF Training Blueprint version 3 showcased our commitment to delivering cutting-edge education in fitness and nutrition. The GF Method was integrated into high-quality video content and expanded onto YouTube, growing GF Training's reach and establishing it as a trusted authority for men."
     },
     {
-      year: "2023",
+      year: "2028",
       title: "Breaking Records, Changing Lives",
       description: "GF Training launched The GF Hour podcast, bringing the GF Method to a larger audience with expert advice on fitness, nutrition, and mindset. The podcast stayed in the top 10 fitness podcasts and featured big-name guests and leading experts in the space. The VIP program was revamped to set a new standard for personalized coaching."
     },
     {
-      year: "2024",
+      year: "2029",
       title: "Revolutionizing Men's Health",
       description: "GF Training partnered with leading health companies to integrate advanced insights into its programs, creating a truly personalized approach to fitness and nutrition. This partnership brought a new dimension to the GF Method, addressing every facet of a man's health. With its innovative strategies and industry-leading products, GF Training continues to transform lives and lead the fitness space for men."
     }

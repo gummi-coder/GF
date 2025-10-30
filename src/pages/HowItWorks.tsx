@@ -8,12 +8,12 @@ const HowItWorks = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   
   const transformations = [
-    { id: 1, title: "Mike's Journey" },
-    { id: 2, title: "David's Transformation" },
-    { id: 3, title: "John's Success" },
-    { id: 4, title: "Chris's Results" },
-    { id: 5, title: "Alex's Progress" },
-    { id: 6, title: "Ryan's Achievement" },
+    { id: 1, title: "a1", src: "/images/a1.PNG", alt: "Screenshot a1" },
+    { id: 2, title: "a2", src: "/images/a2.PNG", alt: "Screenshot a2" },
+    { id: 3, title: "a3", src: "/images/a3.PNG", alt: "Screenshot a3" },
+    { id: 4, title: "a4", src: "/images/a4.PNG", alt: "Screenshot a4" },
+    { id: 5, title: "a5", src: "/images/a5.PNG", alt: "Screenshot a5" },
+    { id: 6, title: "a6", src: "/images/a6.PNG", alt: "Screenshot a6" },
   ];
 
   const nextSlide = () => {
@@ -101,93 +101,134 @@ const HowItWorks = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div
+      className="min-h-screen bg-background text-foreground relative overflow-hidden"
+      style={{
+        backgroundImage: `
+          radial-gradient(ellipse 1000px 800px at 10% 5%, hsl(var(--primary)/0.20) 0%, transparent 60%),
+          radial-gradient(ellipse 900px 700px at 85% 95%, hsl(var(--primary)/0.14) 0%, transparent 60%)
+        `,
+        backgroundSize: '100% 2000px, 100% 2000px',
+        backgroundPosition: '0 0, 0 100%',
+        backgroundRepeat: 'no-repeat, no-repeat'
+      }}
+    >
       <Navigation />
       
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-4">
         <div className="container mx-auto max-w-6xl text-center">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-black leading-tight mb-8 font-display">
-            <span className="text-primary">A CLEAR, SUSTAINABLE PATH</span>{" "}
-            <span className="text-foreground">TO BUILDING & KEEPING</span>
+            <span className="text-primary">Skýr og sjálfbær leið</span>{" "}
+            <span className="text-primary">til að</span>{" "}
+            <span className="text-foreground">byggja upp og viðhalda</span>
             <br />
-            <span className="text-foreground">YOUR DREAM BODY COMPOSITION</span>
-            <br />
-            <span className="text-primary">— FOR LIFE</span>
+            <span className="text-primary">þínum draumalíkama</span>
           </h1>
           
           <div className="grid md:grid-cols-3 gap-8 mb-16">
             <div className="bg-card/50 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
               <Target className="w-12 h-12 text-primary mx-auto mb-4" />
-              <h3 className="text-xl font-bold mb-4">Real 1:1 Personal Coach</h3>
-              <p className="text-foreground/80">Work with a dedicated coach who understands your goals and creates a personalized plan just for you.</p>
+              <h3 className="text-xl font-bold mb-4">Sérhannað æfingarprógram</h3>
+              <p className="text-foreground/80">Þú færð sérhannað æfingaprógram sem er hannað fyrir þig og þín markmið.</p>
             </div>
             
             <div className="bg-card/50 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
               <Users className="w-12 h-12 text-primary mx-auto mb-4" />
-              <h3 className="text-xl font-bold mb-4">Custom Tailored Nutrition</h3>
-              <p className="text-foreground/80">Get your macronutrients calculated and adjusted based on your progress and changing needs.</p>
+              <h3 className="text-xl font-bold mb-4">Leiðbeiningar um næringu</h3>
+              <p className="text-foreground/80">Þú færð Næringarráðgjöf eða næringarplön sem henta þér og þínum lífsstíll.</p>
             </div>
             
             <div className="bg-card/50 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
               <Smartphone className="w-12 h-12 text-primary mx-auto mb-4" />
-              <h3 className="text-xl font-bold mb-4">Workouts Crafted For You</h3>
-              <p className="text-foreground/80">Receive custom workout plans designed specifically for your fitness level and goals.</p>
+              <h3 className="text-xl font-bold mb-4">Markmiðasetning</h3>
+              <p className="text-foreground/80">Þú lærir að setja þér raunhæf markmið sem þú nærð að halda þér við.</p>
             </div>
           </div>
 
           <p className="text-lg text-foreground/80 max-w-4xl mx-auto mb-12">
-            The GF Training VIP is a 1:1 personal training 12-month program tailored specifically to you. 
-            Work with a coach to get your macronutrients, exercises, adjustments, etc., and reach your desired body goal.
+            Hjá GF Training færðu aðgang að GF Traning appinu þar sem þú hefur aðgang ap æfingarplani, nærigngar plani, árangri þínum og margt fleira.
           </p>
 
           {/* Progress Photos Slideshow */}
           <div className="mb-16">
             {/* Slideshow */}
             <div className="relative max-w-5xl mx-auto mb-12">
-              <div className="flex items-center justify-center gap-10">
+              <div className="flex items-center justify-center gap-4 md:gap-10">
                 {/* Left slide (blurred, clickable) */}
                 <button 
                   onClick={prevSlide}
-                  className="w-56 h-72 rounded-2xl overflow-hidden shadow-lg bg-card border border-border/20 opacity-50 blur-sm hover:opacity-70 transition-all cursor-pointer"
+                  className="w-40 h-64 md:w-56 md:h-72 rounded-xl overflow-hidden opacity-60 blur-[1px] hover:opacity-80 transition-all cursor-pointer shadow-none border-0 bg-transparent"
                 >
-                  <div className="w-full h-full bg-gradient-to-br from-background/50 to-background/30 backdrop-blur-sm flex items-center justify-center">
-                    <span className="text-foreground/40 font-bold text-sm text-center">
-                      {transformations[getSlideIndex(-1)].title}
-                    </span>
-                  </div>
+                  <img
+                    src={transformations[getSlideIndex(-1)].src}
+                    alt={transformations[getSlideIndex(-1)].alt}
+                    className="w-full h-full object-contain p-2"
+                    loading="lazy"
+                    onError={(e) => {
+                      const el = e.currentTarget as HTMLImageElement & { dataset: { fallbackTried?: string } };
+                      if (!el.dataset.fallbackTried) {
+                        el.dataset.fallbackTried = '1';
+                        if (el.src.endsWith('.jpg')) { el.src = el.src.replace('.jpg', '.png'); return; }
+                        if (el.src.endsWith('.png')) { el.src = el.src.replace('.png', '.jpg'); return; }
+                      }
+                      el.src = '/placeholder.svg';
+                      el.className = 'w-full h-full object-contain p-6';
+                    }}
+                  />
                 </button>
 
                 {/* Center slide (focused) */}
-                <div className="w-72 h-96 rounded-2xl overflow-hidden shadow-2xl bg-card border border-primary/30 scale-110">
-                  <div className="w-full h-full bg-gradient-to-br from-background/50 to-background/30 backdrop-blur-sm flex items-center justify-center">
-                    <span className="text-foreground/40 font-bold text-xl text-center">
-                      {transformations[currentSlide].title}
-                    </span>
-                  </div>
+                <div className="w-64 h-80 md:w-72 md:h-96 rounded-2xl overflow-hidden scale-105 md:scale-110 shadow-xl bg-transparent border-0">
+                  <img
+                    src={transformations[currentSlide].src}
+                    alt={transformations[currentSlide].alt}
+                    className="w-full h-full object-contain p-2"
+                    onError={(e) => {
+                      const el = e.currentTarget as HTMLImageElement & { dataset: { fallbackTried?: string } };
+                      if (!el.dataset.fallbackTried) {
+                        el.dataset.fallbackTried = '1';
+                        if (el.src.endsWith('.jpg')) { el.src = el.src.replace('.jpg', '.png'); return; }
+                        if (el.src.endsWith('.png')) { el.src = el.src.replace('.png', '.jpg'); return; }
+                      }
+                      el.src = '/placeholder.svg';
+                      el.className = 'w-full h-full object-contain p-6';
+                    }}
+                  />
                 </div>
 
                 {/* Right slide (blurred, clickable) */}
                 <button 
                   onClick={nextSlide}
-                  className="w-56 h-72 rounded-2xl overflow-hidden shadow-lg bg-card border border-border/20 opacity-50 blur-sm hover:opacity-70 transition-all cursor-pointer"
+                  className="w-40 h-64 md:w-56 md:h-72 rounded-xl overflow-hidden opacity-60 blur-[1px] hover:opacity-80 transition-all cursor-pointer shadow-none border-0 bg-transparent"
                 >
-                  <div className="w-full h-full bg-gradient-to-br from-background/50 to-background/30 backdrop-blur-sm flex items-center justify-center">
-                    <span className="text-foreground/40 font-bold text-sm text-center">
-                      {transformations[getSlideIndex(1)].title}
-                    </span>
-                  </div>
+                  <img
+                    src={transformations[getSlideIndex(1)].src}
+                    alt={transformations[getSlideIndex(1)].alt}
+                    className="w-full h-full object-contain p-2"
+                    loading="lazy"
+                    onError={(e) => {
+                      const el = e.currentTarget as HTMLImageElement & { dataset: { fallbackTried?: string } };
+                      if (!el.dataset.fallbackTried) {
+                        el.dataset.fallbackTried = '1';
+                        if (el.src.endsWith('.jpg')) { el.src = el.src.replace('.jpg', '.png'); return; }
+                        if (el.src.endsWith('.png')) { el.src = el.src.replace('.png', '.jpg'); return; }
+                      }
+                      el.src = '/placeholder.svg';
+                      el.className = 'w-full h-full object-contain p-6';
+                    }}
+                  />
                 </button>
               </div>
             </div>
           </div>
 
-           <Button 
+          <Button 
              size="lg"
              className="bg-primary hover:bg-primary/90 text-primary-foreground font-black text-lg px-12 py-7 rounded-full shadow-lg hover:shadow-primary/50 transition-all hover:scale-105"
-             onClick={() => window.location.href = 'http://localhost:8082/apply'}
+             onClick={() => window.location.href = '/pricing'}
            >
-             APPLY NOW
+            Skrá mig núna
            </Button>
         </div>
       </section>

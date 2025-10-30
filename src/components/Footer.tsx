@@ -69,10 +69,9 @@ const Footer = () => {
           <div>
             <h4 className="font-bold mb-3 text-sm text-white">Quick Links</h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-white/60 hover:text-primary transition-colors text-xs">Home</a></li>
-              <li><a href="#how-it-works" className="text-white/60 hover:text-primary transition-colors text-xs">How It Works</a></li>
-              <li><a href="#" className="text-white/60 hover:text-primary transition-colors text-xs">Coaches</a></li>
-              <li><a href="#success" className="text-white/60 hover:text-primary transition-colors text-xs">Success</a></li>
+              <li><a href="/" className="text-white/60 hover:text-primary transition-colors text-xs">Home</a></li>
+              <li><a href="/how-it-works" className="text-white/60 hover:text-primary transition-colors text-xs">How It Works</a></li>
+              <li><a href="/fjarthjalfun" className="text-white/60 hover:text-primary transition-colors text-xs">Fjarþjálfun</a></li>
             </ul>
           </div>
 
@@ -80,10 +79,9 @@ const Footer = () => {
           <div>
             <h4 className="font-bold mb-3 text-sm text-white">Resources</h4>
             <ul className="space-y-2">
-              <li><a href="#blog" className="text-white/60 hover:text-primary transition-colors text-xs">Blog</a></li>
-              <li><a href="#about" className="text-white/60 hover:text-primary transition-colors text-xs">About Us</a></li>
-              <li><a href="#" className="text-white/60 hover:text-primary transition-colors text-xs">Careers</a></li>
-              <li><a href="#contact" className="text-white/60 hover:text-primary transition-colors text-xs">Contact Us</a></li>
+              <li><a href="/apply" className="text-white/60 hover:text-primary transition-colors text-xs">VIP umsókn</a></li>
+              <li><a href="/about" className="text-white/60 hover:text-primary transition-colors text-xs">Um okkur</a></li>
+              <li><a href="/contact" className="text-white/60 hover:text-primary transition-colors text-xs">Hafa samband</a></li>
             </ul>
           </div>
 
@@ -91,10 +89,9 @@ const Footer = () => {
           <div>
             <h4 className="font-bold mb-3 text-sm text-white">Legal</h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-white/60 hover:text-primary transition-colors text-xs">Terms of Service</a></li>
-              <li><a href="#" className="text-white/60 hover:text-primary transition-colors text-xs">Privacy Policy</a></li>
-              <li><a href="mailto:support@gftraining.com" className="text-white/60 hover:text-primary transition-colors text-xs">Customer Support</a></li>
-              <li><a href="#" className="text-white/60 hover:text-primary transition-colors text-xs">Refund Policy</a></li>
+              <li><a href="/terms" className="text-white/60 hover:text-primary transition-colors text-xs">Skilmálar</a></li>
+              <li><a href="/terms" className="text-white/60 hover:text-primary transition-colors text-xs">Persónuverndarstefna</a></li>
+              <li><a href="/contact" className="text-white/60 hover:text-primary transition-colors text-xs">Þjónustuver</a></li>
             </ul>
           </div>
         </div>

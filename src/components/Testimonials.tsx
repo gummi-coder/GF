@@ -103,17 +103,17 @@ const Testimonials = () => {
         {/* Bottom testimonial */}
         <div className="text-center py-16 mt-20">
           <p className="text-3xl md:text-4xl lg:text-5xl font-bold mb-8 font-display leading-tight max-w-5xl mx-auto">
-            "joining GF Training has been the best gift to me, and everyone around me. 
+            "Að byrja í GF Training var besta ákvörðunin sem ég hef tekið.
             <br />
-            <span className="text-primary">I feel so much younger, energetic & stronger"</span>
+            <span className="text-primary">Ég hef aldrei verið jafn orkumikll og sterka."</span>
           </p>
-          <p className="text-foreground/70 font-sans text-2xl mb-8">- GF Training Member Jill</p>
+          <p className="text-foreground/70 font-sans text-2xl mb-8">- GF Training meðlimur, Gunnar</p>
           
           <Button 
             className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-12 py-7 rounded-full text-xl shadow-lg hover:shadow-primary/25 transition-all hover:scale-105"
-            onClick={() => window.location.href = 'http://localhost:8082/apply'}
+            onClick={() => window.location.href = 'http://localhost:8082/pricing'}
           >
-            APPLY NOW
+            skrá mig núna
           </Button>
         </div>
       </div>

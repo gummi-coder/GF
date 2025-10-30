@@ -14,6 +14,9 @@ import Apply from "./pages/Apply";
 import Signup from "./pages/Signup";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "@/components/ScrollToTop";
+import Terms from "./pages/Terms";
+import Askorun from "./pages/Askorun";
+import AskorunSignup from "./pages/AskorunSignup";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +37,9 @@ const App = () => (
                  <Route path="/email2" element={<EmailSignup2 />} />
                  <Route path="/apply" element={<Apply />} />
                  <Route path="/signup" element={<Signup />} />
+                 <Route path="/terms" element={<Terms />} />
+                 <Route path="/askorun" element={<Askorun />} />
+                 <Route path="/askorun-signup" element={<AskorunSignup />} />
                  {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                  <Route path="*" element={<NotFound />} />
                </Routes>

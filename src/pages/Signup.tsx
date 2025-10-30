@@ -36,9 +36,23 @@ const Signup = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const isFormValid =
+    formData.fullName.trim() !== "" &&
+    formData.email.trim() !== "" &&
+    formData.phone.trim() !== "" &&
+    formData.kennitala.trim() !== "" &&
+    formData.about.trim() !== "" &&
+    formData.fitnessLevel.trim() !== "" &&
+    formData.goals.trim() !== "" &&
+    formData.program.trim() !== "" &&
+    formData.terms === true;
 
   const handleSubmit = async () => {
     if (isSubmitting) return;
+    if (!isFormValid) {
+      alert("Vinsamlegast fylltu út alla reiti og samþykktu skilmála áður en þú heldur áfram.");
+      return;
+    }
     setIsSubmitting(true);
 
     try {
@@ -234,7 +248,7 @@ const Signup = () => {
                       </Label>
                     </div>
                     
-                    <Button onClick={handleSubmit} disabled={isSubmitting} className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-6 rounded-full text-lg">
+                    <Button onClick={handleSubmit} disabled={isSubmitting || !isFormValid} className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-6 rounded-full text-lg disabled:opacity-50 disabled:cursor-not-allowed">
                       {isSubmitting ? "Sendi..." : "Byrjaðu umbreytinguna"}
                     </Button>
                   </CardContent>

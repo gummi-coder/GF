@@ -1,7 +1,7 @@
-import { useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,8 +13,8 @@ const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
-    { name: "How it Works", href: "/how-it-works" },
-    { name: "Company", href: "#company", hasDropdown: true },
+    { name: "Hvernig þjálfun virkar", href: "/how-it-works" },
+    { name: "Fyrirtækið", href: "#company", hasDropdown: true },
     { name: "Fjarþjálfun", href: "/pricing" },
   ];
 
@@ -37,7 +37,7 @@ const Navigation = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
-              link.name === "Company" ? (
+              link.hasDropdown ? (
                 <DropdownMenu key={link.name}>
                   <DropdownMenuTrigger className="text-white/90 hover:text-white transition-colors font-medium text-sm flex items-center gap-1 font-sans">
                     {link.name}
@@ -82,7 +82,7 @@ const Navigation = () => {
               <Button 
                 className="bg-primary hover:bg-primary/90 text-white font-bold px-8 py-3 rounded-md uppercase text-sm tracking-wide"
               >
-                APPLY NOW
+                VIP Umsókn
               </Button>
             </Link>
           </div>
@@ -101,7 +101,7 @@ const Navigation = () => {
         {isMenuOpen && (
           <div className="md:hidden pb-6 space-y-4 animate-fade-in">
             {navLinks.map((link) => (
-              link.name === "Company" ? (
+              link.hasDropdown ? (
                 <div key={link.name} className="space-y-2">
                   <div className="text-white/90 font-medium py-2 font-sans">
                     {link.name}
