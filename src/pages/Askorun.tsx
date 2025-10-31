@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Check, Target, Clock, Dumbbell, Facebook, Youtube, Instagram, Linkedin, MessageCircle, Users, Gift, CalendarDays, ShoppingCart, Mail } from "lucide-react";
+import { Check, Target, Clock, Dumbbell, Facebook, Youtube, Instagram, Linkedin, Users, Gift, CalendarDays, ShoppingCart, Mail } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
@@ -138,19 +138,17 @@ const Askorun = () => {
             Byrjum 10. Nóv - Takmarkað pláss
           </p>
 
-          {/* Centered video placeholder */}
+          {/* Video */}
           <div className="max-w-3xl mx-auto mb-6">
             <div className="relative aspect-video rounded-2xl overflow-hidden border-4 border-primary/10 shadow-2xl bg-card/40">
-              <div className="absolute inset-0 bg-gradient-to-br from-background/40 to-background/20 flex items-center justify-center">
-                <div className="relative">
-                  <div className="absolute inset-0 bg-primary/20 blur-3xl rounded-full" />
-                  <Button size="lg" className="relative bg-primary hover:bg-primary/90 text-primary-foreground rounded-full w-24 h-24">
-                    <MessageCircle className="w-12 h-12" />
-                  </Button>
-                </div>
-              </div>
+              <iframe
+                className="w-full h-full"
+                src="https://www.youtube.com/embed/NUXl4kFLd78?rel=0&modestbranding=1"
+                title="Askorun Introduction Video"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
             </div>
-            <p className="text-xs text-foreground/50 mt-2">Replace with a 30‑second intro video for higher trust</p>
           </div>
 
           {timeLeft && (
