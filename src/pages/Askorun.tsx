@@ -24,20 +24,61 @@ const Askorun = () => {
     return () => clearInterval(id);
   }, []);
 
-  // Exit-intent capture (desktop): show once per session
+  // Exit-intent capture: show once per session
   useEffect(() => {
     const key = "askorun-exit-shown";
-    const onMouseOut = (e: MouseEvent) => {
-      const to = (e as MouseEvent & { relatedTarget: EventTarget | null }).relatedTarget;
-      if (!to && e.clientY <= 0) {
-        if (!sessionStorage.getItem(key)) {
-          sessionStorage.setItem(key, "1");
-          setExitOpen(true);
-        }
+    
+    const showExitDialog = () => {
+      if (!sessionStorage.getItem(key)) {
+        sessionStorage.setItem(key, "1");
+        setExitOpen(true);
       }
     };
+    
+    let lastY = 0;
+    let lastTime = Date.now();
+    
+    // Improved mouse exit-intent detection
+    const onMouseMove = (e: MouseEvent) => {
+      const now = Date.now();
+      const currentY = e.clientY;
+      
+      // Track mouse movement - if moving upward quickly toward top
+      if (currentY < lastY && currentY <= 10) {
+        // Mouse is moving up and near top edge
+        showExitDialog();
+      }
+      
+      lastY = currentY;
+      lastTime = now;
+    };
+
+    // Mouse leaving window at top (original method)
+    const onMouseOut = (e: MouseEvent) => {
+      const to = (e as MouseEvent & { relatedTarget: EventTarget | null }).relatedTarget;
+      // When mouse leaves and no related target, and it's at the top
+      if (!to && e.clientY <= 0) {
+        showExitDialog();
+      }
+    };
+
+    // Additional detection: when mouse leaves body at top
+    const onBodyMouseLeave = (e: MouseEvent) => {
+      if ((e as any).clientY <= 5) {
+        showExitDialog();
+      }
+    };
+    
+    document.body.addEventListener("mouseleave", onBodyMouseLeave);
+
+    window.addEventListener("mousemove", onMouseMove);
     window.addEventListener("mouseout", onMouseOut);
-    return () => window.removeEventListener("mouseout", onMouseOut);
+    
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseout", onMouseOut);
+      document.body.removeEventListener("mouseleave", onBodyMouseLeave);
+    };
   }, []);
 
   const submitReminder = async () => {
