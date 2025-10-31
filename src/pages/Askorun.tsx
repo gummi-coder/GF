@@ -358,9 +358,9 @@ const Askorun = () => {
             <a href="#" aria-label="LinkedIn" className="text-white/60 hover:text-primary transition-colors"><Linkedin className="w-4 h-4" /></a>
           </div>
           <div className="flex items-center justify-center gap-3 text-xs">
-            <a href="/terms" className="text-white/60 hover:text-primary transition-colors">Skilmálar</a>
+            <a href="/terms?context=askorun" className="text-white/60 hover:text-primary transition-colors">Skilmálar</a>
             <span className="text-white/20">•</span>
-            <a href="/terms" className="text-white/60 hover:text-primary transition-colors">Persónuverndarstefna</a>
+            <a href="/terms?context=askorun" className="text-white/60 hover:text-primary transition-colors">Persónuverndarstefna</a>
           </div>
           <div className="mt-3 text-white/40 text-xs">© 2025 GF Training</div>
         </div>

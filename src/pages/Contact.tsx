@@ -61,36 +61,36 @@ const Contact = () => {
   };
   const faqs = [
     {
-      question: "How do I get started with GF Training?",
-      answer: "Getting started is easy! Simply click the 'APPLY NOW' button on our website, fill out the application form, and our team will contact you within 24 hours to discuss your goals and match you with the perfect coach."
+      question: "Hvernig byrja ég hjá GF Training?",
+      answer: "Það er einfalt! Smelltu á ‘SÆKJA UM NÚNA’ hnappinn á vefsíðunni, fylltu út stutta umsókn, og við höfum samband innan 24 klukkustunda til að ræða markmið þín."
     },
     {
-      question: "What makes GF Training different from other fitness programs?",
-      answer: "GF Training offers personalized 1-on-1 coaching, custom nutrition plans, and a supportive community. Our coaches are certified professionals who work with you to create a sustainable plan that fits your lifestyle and goals."
+      question: "Hvað gerir GF Training öðruvísi en æfingaraðferðir?",
+      answer: "GF Training býður upp á persónulega 1:1 þjálfun, sérsniðna næringaráætlun og stuðningsríkt samfélag. Þjálfararnir okkar eru vottaðir sérfræðingar sem vinna með þér að því að búa til sjálfbæra áætlun sem passar við þinn lífsstíl og markmið."
     },
     {
-      question: "How much does the program cost?",
-      answer: "Our pricing varies depending on the program you choose. We offer different packages to fit various budgets and goals. Contact us for a personalized quote based on your specific needs."
+      question: "Hvað kostar prógrammið?",
+      answer: "Verðið fer eftir því hvaða prógram þú velur. Við bjóðum upp á mismunandi pakka sem henta bæði mismunandi fjárhagsáætlunum og markmiðum."
     },
     {
-      question: "Do I need any special equipment?",
-      answer: "No special equipment is required! Our programs are designed to work with whatever you have available, whether that's a full gym, home equipment, or just bodyweight exercises. Your coach will adapt your workouts to your available resources."
+      question: "Þarf ég sérstök tæki eða búnað?",
+      answer: "Nei, enginn sérstakur búnaður er nauðsynlegur! Prógrömin okkar eru hönnuð til að virka með því sem þú hefur til ráðstöfunar — hvort sem það er heilsurækt, heimabúnaður eða bara líkamsþyngdaræfingar. Þjálfarinn þinn aðlagar æfingarnar að þínum aðstæðum."
     },
     {
-      question: "How often will I communicate with my coach?",
-      answer: "You'll have regular check-ins with your coach, typically weekly or bi-weekly depending on your program. Plus, you'll have 24/7 support through our app, so you can ask questions anytime."
+      question: "Hversu oft hef ég samskipti við þjálfarann minn?",
+      answer: "Þú færð reglulegar eftirfylgnir með þjálfaranum þínum, yfirleitt vikulega eða á tveggja vikna fresti eftir prógrami. Auk þess hefurðu 24/7 stuðning í gegnum appið okkar, þannig að þú getur spurt spurninga hvenær sem er."
     },
     {
-      question: "What if I'm a complete beginner?",
-      answer: "Perfect! Our programs are designed for all fitness levels, from complete beginners to advanced athletes. Your coach will start where you are and progress you at the right pace for your body and goals."
+      question: "Hvað ef ég er algjör byrjandi?",
+      answer: "Frábært! Prógrömin okkar henta öllum — frá byrjendum til lengra kominna. Þjálfarinn þinn byrjar þar sem þú ert staddur og hjálpar þér að taka framförum í réttu tempói fyrir líkama þinn og markmið."
     },
     {
-      question: "Can I pause or cancel my membership?",
-      answer: "Yes, we offer flexible membership options. You can pause your membership for up to 3 months or cancel with 30 days notice. We want you to succeed, so we'll work with you to find the best solution."
+      question: "Get ég sett áskriftina á pásu eða hætt við hana?",
+      answer: "Nei, eftir að þú hefur valið prógram og undirritað samninginn er ekki hægt að hætta við fyrr en samningstímanum lýkur. Þetta tryggir að þú skuldbindir þig til ferlisins og nærð þeim árangri sem þú ert að stefna að."
     },
     {
-      question: "Do you offer nutrition coaching?",
-      answer: "Absolutely! Nutrition is a core part of our program. Your coach will create a personalized nutrition plan based on your goals, preferences, and lifestyle. We focus on sustainable habits that you can maintain long-term."
+      question: "Bjóðið þið upp á næringarráðgjöf?",
+      answer: "Algjörlega! Næringin er lykilhluti af okkar prógrami. Þjálfarinn þinn útbýr sérsniðna næringaráætlun út frá markmiðum þínum, smekk og lífsstíl. Við leggjum áherslu á sjálfbærar venjur sem þú getur viðhaldið til lengri tíma."
     }
   ];
 
@@ -106,9 +106,8 @@ const Contact = () => {
             <span className="text-foreground">við okkur</span>
           </h1>
           
-          <p className="text-xl text-foreground/80 max-w-4xl mx-auto mb-12 leading-relaxed">
-            Ready to start your transformation journey? We're here to help you every step of the way. 
-            Get in touch with our team and let's discuss how we can help you achieve your goals.
+          <p className="text-xl text-foreground/80 max-w-3xl mx-auto mb-12 leading-relaxed">
+            Ert þú tilbúinn að taka fyrsta skrefið? Við erum hér til að hjálpa þér á hverju skrefi. Hafðu samband við teymið okkar og ræðum hvernig við getum hjálpað þér að ná markmiðum þínum.
           </p>
         </div>
       </section>
@@ -120,12 +119,12 @@ const Contact = () => {
             {/* Contact Form */}
             <div>
               <h2 className="text-3xl md:text-4xl font-black mb-8 font-display">
-                <span className="text-foreground">Send us a message</span>
+                <span className="text-foreground">Sendu okkur skilaboð</span>
               </h2>
               
               <Card className="bg-card/50 backdrop-blur-sm border border-white/10">
                 <CardHeader>
-                  <CardTitle className="text-xl text-foreground">Get in Touch</CardTitle>
+                  <CardTitle className="text-xl text-foreground">Hafðu samband</CardTitle>
                 </CardHeader>
                 {isSubmitted ? (
                   <CardContent className="space-y-6">
@@ -133,28 +132,28 @@ const Contact = () => {
                       <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
                         <span className="text-primary-foreground text-2xl">✓</span>
                       </div>
-                      <h3 className="text-2xl font-bold text-foreground mb-2">Thanks for reaching out!</h3>
-                      <p className="text-foreground/70">We'll get back to you within 24 hours.</p>
+                      <h3 className="text-2xl font-bold text-foreground mb-2">Takk fyrir að hafa samband!</h3>
+                      <p className="text-foreground/70">Við svörum innan 24 klukkustunda.</p>
                     </div>
                   </CardContent>
                 ) : (
                   <CardContent className="space-y-6">
                     <div className="grid md:grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label htmlFor="firstName" className="text-foreground">First Name</Label>
+                        <Label htmlFor="firstName" className="text-foreground">Fornafn</Label>
                         <Input 
                           id="firstName" 
-                          placeholder="Your first name" 
+                          placeholder="Fornafn" 
                           className="bg-background/50 border-border/20"
                           value={formData.firstName}
                           onChange={(e) => setFormData((p) => ({ ...p, firstName: e.target.value }))}
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="lastName" className="text-foreground">Last Name</Label>
+                        <Label htmlFor="lastName" className="text-foreground">Eftirnafn</Label>
                         <Input 
                           id="lastName" 
-                          placeholder="Your last name" 
+                          placeholder="Eftirnafn" 
                           className="bg-background/50 border-border/20"
                           value={formData.lastName}
                           onChange={(e) => setFormData((p) => ({ ...p, lastName: e.target.value }))}
@@ -163,11 +162,11 @@ const Contact = () => {
                     </div>
                     
                     <div className="space-y-2">
-                      <Label htmlFor="email" className="text-foreground">Email</Label>
+                      <Label htmlFor="email" className="text-foreground">Netfang</Label>
                       <Input 
                         id="email" 
                         type="email" 
-                        placeholder="your.email@example.com" 
+                        placeholder="netfang@dæmi.is" 
                         className="bg-background/50 border-border/20"
                         value={formData.email}
                         onChange={(e) => setFormData((p) => ({ ...p, email: e.target.value }))}
@@ -175,11 +174,11 @@ const Contact = () => {
                     </div>
                     
                     <div className="space-y-2">
-                      <Label htmlFor="phone" className="text-foreground">Phone (Optional)</Label>
+                      <Label htmlFor="phone" className="text-foreground">Sími</Label>
                       <Input 
                         id="phone" 
                         type="tel" 
-                        placeholder="+1 (555) 123-4567" 
+                        placeholder="+354 555 1234" 
                         className="bg-background/50 border-border/20"
                         value={formData.phone}
                         onChange={(e) => setFormData((p) => ({ ...p, phone: e.target.value }))}
@@ -187,10 +186,10 @@ const Contact = () => {
                     </div>
                     
                     <div className="space-y-2">
-                      <Label htmlFor="subject" className="text-foreground">Subject</Label>
+                      <Label htmlFor="subject" className="text-foreground">Efni</Label>
                       <Input 
                         id="subject" 
-                        placeholder="What can we help you with?" 
+                        placeholder="Hvernig getum við hjálpað?" 
                         className="bg-background/50 border-border/20"
                         value={formData.subject}
                         onChange={(e) => setFormData((p) => ({ ...p, subject: e.target.value }))}
@@ -198,10 +197,10 @@ const Contact = () => {
                     </div>
                     
                     <div className="space-y-2">
-                      <Label htmlFor="message" className="text-foreground">Message</Label>
+                      <Label htmlFor="message" className="text-foreground">Skilaboð</Label>
                       <Textarea 
                         id="message" 
-                        placeholder="Tell us about your goals and how we can help you..."
+                        placeholder="Segðu okkur frá markmiðum þínum og hvernig við getum hjálpað..."
                         className="bg-background/50 border-border/20 min-h-[120px]"
                         value={formData.message}
                         onChange={(e) => setFormData((p) => ({ ...p, message: e.target.value }))}
@@ -209,7 +208,7 @@ const Contact = () => {
                     </div>
                     
                     <Button onClick={handleSubmit} disabled={isSubmitting} className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-6 rounded-full text-lg">
-                      {isSubmitting ? "Sending..." : "Send Message"}
+                      {isSubmitting ? "Senda..." : "Senda skilaboð"}
                     </Button>
                   </CardContent>
                 )}
@@ -219,7 +218,7 @@ const Contact = () => {
             {/* Contact Information */}
             <div>
               <h2 className="text-3xl md:text-4xl font-black mb-8 font-display">
-                <span className="text-foreground">Contact Information</span>
+                <span className="text-foreground">Upplýsingar um samskipti</span>
               </h2>
               
               <div className="space-y-8">
@@ -228,31 +227,22 @@ const Contact = () => {
                     <Mail className="w-6 h-6" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-foreground mb-2">Email</h3>
+                    <h3 className="text-lg font-bold text-foreground mb-2">Netfang</h3>
                     <p className="text-foreground/80">support@gftraining.com</p>
-                    <p className="text-foreground/60 text-sm">We'll respond within 24 hours</p>
+                    <p className="text-foreground/60 text-sm">Við svörum innan 24 klst.</p>
                   </div>
                 </div>
                 
-                <div className="flex items-start gap-4">
-                  <div className="text-primary mt-1">
-                    <Phone className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-foreground mb-2">Phone</h3>
-                    <p className="text-foreground/80">+1 (555) 123-4567</p>
-                    <p className="text-foreground/60 text-sm">Mon-Fri 9AM-6PM EST</p>
-                  </div>
-                </div>
+                
                 
                 <div className="flex items-start gap-4">
                   <div className="text-primary mt-1">
                     <MapPin className="w-6 h-6" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-foreground mb-2">Location</h3>
-                    <p className="text-foreground/80">Online Worldwide</p>
-                    <p className="text-foreground/60 text-sm">Serving clients globally</p>
+                    <h3 className="text-lg font-bold text-foreground mb-2">Staðsetning</h3>
+                    <p className="text-foreground/80">Á netinu — um allan heim</p>
+                    <p className="text-foreground/60 text-sm">Þjónustum Íslendinga um allan heim</p>
                   </div>
                 </div>
                 
@@ -261,31 +251,31 @@ const Contact = () => {
                     <MessageCircle className="w-6 h-6" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-foreground mb-2">Live Chat</h3>
-                    <p className="text-foreground/80">Available on our website</p>
-                    <p className="text-foreground/60 text-sm">Get instant answers to your questions</p>
+                    <h3 className="text-lg font-bold text-foreground mb-2">Spjall</h3>
+                    <p className="text-foreground/80">Aðgengilegt á vefnum okkar</p>
+                    <p className="text-foreground/60 text-sm">Fáðu skjót svör við spurningum</p>
                   </div>
                 </div>
               </div>
               
               <div className="mt-12 bg-card/30 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
-                <h3 className="text-xl font-bold text-foreground mb-4">Why Choose GF Training?</h3>
+                <h3 className="text-xl font-bold text-foreground mb-4">Af hverju að velja GF Training?</h3>
                 <ul className="space-y-3 text-foreground/80">
                   <li className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                    <span>Personalized 1-on-1 coaching</span>
+                    <span>Persónuleg þjálfun</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                    <span>Custom nutrition plans</span>
+                    <span>Sérsniðin næringaráætlanir</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                    <span>24/7 support and accountability</span>
+                    <span>Stuðningur og eftirfylgni allan sólarhringinn</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                    <span>Proven results with thousands of clients</span>
+                    <span>Sannaður árangur hjá tugum meðlima</span>
                   </li>
                 </ul>
               </div>
@@ -299,11 +289,11 @@ const Contact = () => {
         <div className="container mx-auto max-w-4xl">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-black mb-6 font-display">
-              <span className="text-foreground">Frequently Asked</span>{" "}
-              <span className="text-primary">Questions</span>
+              <span className="text-foreground">Algengar</span>{" "}
+              <span className="text-primary">spurningar</span>
             </h2>
             <p className="text-lg text-foreground/80">
-              Find answers to the most common questions about GF Training programs and services.
+              Finndu svör við algengustu spurningunum um GF Training og þjónustuna okkar.
             </p>
           </div>
 
@@ -326,21 +316,22 @@ const Contact = () => {
       <section className="py-20 px-4">
         <div className="container mx-auto max-w-4xl text-center">
           <h2 className="text-3xl md:text-5xl font-black mb-8 font-display">
-            <span className="text-foreground">Ready to Start Your</span>{" "}
-            <span className="text-primary">Transformation?</span>
+            <span className="text-foreground">Ert þú tilbúinn að taka</span>
+            <br />
+            <span className="text-primary">fyrsta skrefið?</span>
           </h2>
           
           <p className="text-lg text-foreground/80 mb-12 leading-relaxed">
-            Don't wait another day to start your journey to a stronger, more confident you. 
-            Our team is ready to help you achieve your goals.
+            Byrjaðu ferðina að sterkari og sjálfsöruggari útgáfu af sjálfum þér. 
+            Liðið okkar er tilbúið að hjálpa þér að ná markmiðum þínum.
           </p>
 
           <Button 
             size="lg"
             className="bg-primary hover:bg-primary/90 text-primary-foreground font-black text-xl px-16 py-8 rounded-full shadow-lg hover:shadow-primary/50 transition-all hover:scale-105"
-            onClick={() => window.location.href = 'http://localhost:8082/apply'}
+            onClick={() => window.location.href = '/pricing'}
           >
-            APPLY NOW
+            Skrá mig núna
           </Button>
         </div>
       </section>

@@ -1,7 +1,12 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import { useLocation } from "react-router-dom";
 
 const Terms = () => {
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const isAskorunContext = params.get("context") === "askorun";
+
   return (
     <div
       className="min-h-screen bg-background text-foreground relative overflow-hidden"
@@ -15,7 +20,21 @@ const Terms = () => {
         backgroundRepeat: 'no-repeat, no-repeat'
       }}
     >
-      <Navigation />
+      {isAskorunContext ? (
+        <nav className="fixed top-6 left-8 right-8 z-50">
+          <div className="bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl px-8 max-w-[1200px] mx-auto">
+            <div className="flex items-center justify-between h-20">
+              <div className="flex items-center select-none">
+                <span className="text-2xl font-black tracking-tight uppercase font-display">
+                  GF<span className="text-primary">Training</span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </nav>
+      ) : (
+        <Navigation />
+      )}
 
       <section className="pt-32 pb-8 px-4">
         <div className="container mx-auto max-w-6xl">
@@ -137,7 +156,20 @@ const Terms = () => {
         </div>
       </section>
 
-      <Footer />
+      {isAskorunContext ? (
+        <footer className="pb-12 px-8">
+          <div className="bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl px-8 py-8 max-w-[1200px] mx-auto text-center">
+            <div className="mb-3">
+              <span className="text-lg font-black">
+                GF<span className="text-primary">TRAINING</span>
+              </span>
+            </div>
+            <div className="text-white/40 text-xs">© 2025 GF Training</div>
+          </div>
+        </footer>
+      ) : (
+        <Footer />
+      )}
     </div>
   );
 };

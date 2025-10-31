@@ -40,62 +40,62 @@ const HowItWorks = () => {
   const features = [
     {
       icon: <Users className="w-8 h-8" />,
-      title: "Dedicated 1-on-1 Coach",
-      description: "Every GF Training member gets a personal coach certified in both nutrition and fitness, ensuring you receive expert guidance tailored to your goals.",
+      title: "Sérstakur þjálfari",
+      description: "Hver meðlimur í GF Training fær þjálfara sem er vottaður í bæði næringu og líkamsrækt, þannig færðu sérfræðiþekkingu sem er sniðin að þér og þínum markmiðum.",
       benefits: [
-        "Your coach monitors your progress, adjusts your plan as needed, and helps you stay accountable throughout your fitness journey.",
-        "Whether you're aiming for fat loss, strength gains, or overall health improvements, your coach creates a roadmap designed just for you.",
-        "Monthly check-ins allow you to refine your strategy with your coach, ensuring your plan evolves with your progress."
+        "Þjálfarinn fylgist með árangrinum þínum, stillir planið eftir þörfum og hjálpar þér að halda þér á réttri braut í gegnum allt ferlið.",
+        "Hvort sem markmið þitt er fitutap, aukinn styrkur eða betri heildarheilsa, þá mótar þjálfarinn þinn áætlun sem hentar nákvæmlega þér.",
+        "Vikuleg check-ins tryggja að áætlunin þróist með þér og árangrinum sem þú nærð."
       ]
     },
     {
       icon: <MessageCircle className="w-8 h-8" />,
       title: "1-on-1 Coaching",
-      description: "Monthly check-ins allow you to refine your strategy with your coach, ensuring your plan evolves with your progress.",
+      description: "Vikulegar check-ins gera þér kleift að fínstilla áætlunina með þjálfaranum þínum, þannig þróast planið með árangrinum þínum.",
       benefits: [
-        "Adjust your macros, workouts, and habits to match your changing needs and keep your results on track.",
-        "Celebrate milestones, tackle challenges, and get personalized feedback to maintain momentum.",
-        "Biweekly group calls with your coach and a small group of members provide support and accountability."
+        "Stilltu næringuna, æfingarnar og daglegu venjurnar í takt við breyttar þarfir, svo þú haldir áfram að ná árangri.",
+        "Fagnaðu áföngum, taktu á móti áskorunum og fáðu persónulega endurgjöf til að viðhalda hvatningu og framförum.",
+        "Á tveggja vikna fresti eru myndsímtal með þjálfaranum, sem veitir stuðning og aukna ábyrgð."
       ]
     },
     {
       icon: <Users className="w-8 h-8" />,
       title: "Team Huddles",
-      description: "Biweekly group calls with your coach and a small group of members provide support and accountability.",
+      description: "Þjálfarinn þinn hjálpar þér að skilja makró næringuna, byggja upp einfalt matarplan og taka ákvarðanir sem passa inn í þinn lífsstíl.",
       benefits: [
-        "Share your victories, ask questions, and get tips to stay aligned with your macros, workouts, and mindset.",
-        "Learn from others' experiences and feel inspired by a community of like-minded men pursuing similar goals.",
-        "Join three mindset-focused calls each month, where GF Training founder shares strategies to simplify and enhance your fitness journey."
+        "Þú færð persónulegar aðlögun út frá árangri og óskum — engar skyndilausnir, engar óraunhæfar takmarkanir.",
+        "Lærðu að næra líkamann fyrir orku, bata og langtíma árangur — án þess að hætta að njóta matarins sem þú elskar.",
+        "Þú munt loksins fá stjórn á næringunni og finna sjálfstraustið í hvernig þú borðar fyrir markmiðin þín."
       ]
     },
     {
       icon: <Clock className="w-8 h-8" />,
       title: "Weekly Community Calls",
-      description: "Join three mindset-focused calls each month, where GF Training founder shares strategies to simplify and enhance your fitness journey.",
+      description: "GF Training hjálpar þér að móta venjur, rútínu og hugarfar sem halda þér stöðugum — jafnvel þegar lífið verður erfitt.",
       benefits: [
-        "Once a month, participate in a roundtable call centered on mastering advanced macro techniques for optimal results.",
-        "These calls help you stay motivated, develop new skills, and deepen your understanding of fitness and nutrition.",
-        "Have a question or need guidance? Your coach is just a message away."
+        "Þú setur skýr markmið með þjálfaranum þínum og lærir að vinna í gegnum stöðnun, viðhalda hvatningu og taka aðgerðir á hverjum degi.",
+        "Þú þróar með þér andlegan styrk til að fylgja eftir — ekki bara í nokkrar vikur, heldur til frambúðar.",
+        "Ef þú þarft stuðning eða leiðsögn er þjálfarinn þinn alltaf aðeins ein skilaboð í burtu."
       ]
     },
     {
       icon: <MessageCircle className="w-8 h-8" />,
       title: "24/7 Support",
-      description: "Have a question or need guidance? Your coach is just a message away.",
+      description: "Ef þú ert með einhverjar spurningar þá er þjálfarinn þinn alltaf aðeins ein skilaboð í burtu.",
       benefits: [
-        "Send private questions anytime and receive a reply within 24 hours to stay on track.",
-        "Your communication with your coach is confidential, so you can feel comfortable discussing anything.",
-        "Log your workouts, track weights and reps, and measure your progress—all in one place."
+        "Sendu persónulegar spurningar hvenær sem er og fáðu svör innan 24 klukkustunda til að halda þér á réttri braut.",
+        "Samskiptin þín við þjálfarann eru trúnaðarmál, svo þú getur verið fullkomlega rólegur með að ræða HVAÐ sem er.",
+        "Skráðu æfingarnar þínar, fylgstu með þyngdum og endurtekningum, og sjáðu árangurinn þinn — allt á einum stað."
       ]
     },
     {
       icon: <Smartphone className="w-8 h-8" />,
       title: "GF Training App",
-      description: "Log your workouts, track weights and reps, and measure your progress—all in one place.",
+      description: "Öll okkar þjálfun fer fram i GF Training appinu þar sem þú getur fylgst með  þyngdum, næringu og árangurinn þínum — allt á einum stað.",
       benefits: [
-        "Access a library of exercise demo videos to ensure proper form and maximize results.",
-        "Your coach updates your plans directly through the app, keeping everything streamlined and easy to follow.",
-        "Track your macros, workouts, and progress with our comprehensive tracking system."
+        "Fáðu aðgang að æfingasafni með myndböndum sem sýna rétta framkvæmd til að hámarka árangur og forðast meiðsli.",
+        "Þjálfarinn þinn uppfærir áætlanirnar beint í appinu, þannig að allt er einfalt, skipulagt og auðvelt að fylgja eftir.",
+        "Fylgstu með næringu, æfingum og framförum með okkar fullkomna skráningarkerfi."
       ]
     }
   ];
@@ -237,13 +237,13 @@ const HowItWorks = () => {
       <section className="py-20 px-4">
         <div className="container mx-auto max-w-7xl">
           <div className="text-center mb-16">
-            <p className="text-primary text-lg font-bold mb-4 font-sans">How It Works</p>
+            <p className="text-primary text-lg font-bold mb-4 font-sans">GF Training</p>
             <h2 className="text-3xl md:text-5xl font-black mb-6 font-display">
-              <span className="text-foreground">Here's How It Works</span>
+              <span className="text-foreground">Svona virkar GF Training</span>
             </h2>
             <p className="text-lg text-foreground/80 max-w-4xl mx-auto">
-              To change your body composition and change your life, education is not enough, you need an immersive environment. 
-              GF Training VIP provides proven process, mental reprogramming, community and expert mentorship that make transformation inevitable...
+              Raunveruleg breyting krefst meira en fræðslu — hún krefst umhverfis sem styður þig til að breyta lífinu þínu nægir ekki bara að vita hvað á að gera.
+              GF Training gefur þér allt sem þú þarft til að ná varanlegum árangri — prófað ferli, hugarfarsvinnu, sérfræðilega leiðsögn og umhverfi sem gerir breytinguna óumflýjanlega.
             </p>
           </div>
 
@@ -258,17 +258,20 @@ const HowItWorks = () => {
                 </div>
                 
                 <h2 className="text-5xl md:text-6xl font-black mb-6 font-display">
-                  <span className="text-primary">Proven</span>
+                  <span className="text-primary">Sönnuð</span>
                   <br />
-                  <span className="text-foreground">Method</span>
+                  <span className="text-foreground">Aðferð</span>
                 </h2>
                 
                 <p className="text-xl text-foreground/80 font-sans mb-8 leading-relaxed">
-                  Our step-by-step process has helped thousands of men achieve their dream body composition and maintain it for life.
+                  Skref-fyrir-skref ferlið okkar hefur hjálpað fjölda karla að ná draumalíkama og viðhalda honum til lengri tíma.
                 </p>
 
-                <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-12 py-6 rounded-full text-lg shadow-lg hover:shadow-primary/25 transition-all hover:scale-105">
-                  Start Your Journey
+                <Button 
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-12 py-6 rounded-full text-lg shadow-lg hover:shadow-primary/25 transition-all hover:scale-105"
+                  onClick={() => (window.location.href = '/pricing')}
+                >
+                  Byrja þína ferð
                 </Button>
               </div>
             </div>
@@ -313,11 +316,11 @@ const HowItWorks = () => {
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-black mb-6 font-display">
-              <span className="text-foreground">GF Training Has</span>{" "}
-              <span className="text-primary">Proven Results</span>
+              <span className="text-foreground">GF Training hefur</span>{" "}
+              <span className="text-primary">sannaðan árangur</span>
             </h2>
             <p className="text-lg text-foreground/80 max-w-4xl mx-auto">
-              Does GF Training work? There's only one way to find out, by seeing whether our students actually had success.
+              Virkar GF Training? Það er bara ein leið til að komast að því: að sjá hvort meðlimirnir okkar hafi náð raunverulegum árangri.
             </p>
           </div>
 
@@ -346,7 +349,7 @@ const HowItWorks = () => {
 
           <div className="text-center">
             <p className="text-lg text-foreground/80 mb-8">
-              <span className="font-bold text-foreground">Based on 1,500+ Reviews</span> from real clients who have transformed their lives
+              <span className="font-bold text-foreground">Með yfir <span className="text-primary">150+</span> meðmæli</span>
             </p>
           </div>
         </div>
@@ -356,32 +359,28 @@ const HowItWorks = () => {
       <section className="py-20 px-4">
         <div className="container mx-auto max-w-4xl text-center">
           <h2 className="text-3xl md:text-5xl font-black mb-8 font-display">
-            <span className="text-foreground">Are You Ready To</span>{" "}
-            <span className="text-primary">Get In Control Of Your Body</span>{" "}
-            <span className="text-foreground">& The Way It Looks</span>
-            <br />
-            <span className="text-foreground">For The Rest Of Your Life?</span>
+            <span className="text-primary">Taktu stjórn á þínu lífi</span>{" "}
+            <span className="text-foreground">og vertu sá maður sem þú veist að þú getur verið</span>
           </h2>
           
           <p className="text-lg text-foreground/80 mb-8 leading-relaxed">
-            Because of our strict requirements for hiring new world class, overqualified coaches,{" "}
-            <span className="font-bold text-foreground">we only have so many openings available at any given time.</span>
+            Við tökum aðeins við takmörkuðum fjölda skjólstæðinga og höfum strangar kröfur þegar kemur að gæðum og þjálfurum,
+            <span className="font-bold text-foreground"> þannig að sæti í GF Training VIP eru alltaf takmörkuð.</span>
           </p>
           
           <p className="text-lg text-foreground/80 mb-12 leading-relaxed">
-            If you're ready to see if you qualify, just fill out the short 2 to 3-minute application below and book a time to chat with someone from our team.
+            Ef þú ert tilbúinn að sjá hvort þú eigir rétt á plássi, fylltu út stutt umsóknareyðublað (2–3 mínútur) og bókaðu símtal við okkur.
             <br />
             <br />
-            A new future you, is waiting for you...{" "}
-            <span className="font-bold text-primary">Step into him today.</span>
+            Framtíðar þú mun þakka þér, <span className="font-bold">svo eftir hverju ertu að bíða?</span>
           </p>
 
           <Button 
             size="lg"
             className="bg-primary hover:bg-primary/90 text-primary-foreground font-black text-xl px-16 py-8 rounded-full shadow-lg hover:shadow-primary/50 transition-all hover:scale-105"
-            onClick={() => window.location.href = 'http://localhost:8082/apply'}
+            onClick={() => window.location.href = '/apply'}
           >
-            APPLY NOW
+            Sækja um í VIP
           </Button>
         </div>
       </section>

@@ -12,11 +12,6 @@ const About = () => {
 
   const timeline = [
     {
-      year: "2021",
-      title: "The Garage Gym Era",
-      description: "A bold vision started. While working in the ER and training for a pro bodybuilding show, GF started coaching coworkers out of a garage. This early hands-on experience laid the foundation for what would become a transformative approach to men's fitness — rooted in strength, science, and empowerment."
-    },
-    {
       year: "2022",
       title: "Blending Online and In-Person Expertise",
       description: "As demand grew, GF evolved into a hybrid model, combining in-person coaching with an online presence. This marked the start of delivering expert-level fitness and nutrition strategies on a larger scale, helping more men achieve their goals with proven results."
@@ -55,6 +50,11 @@ const About = () => {
       year: "2029",
       title: "Revolutionizing Men's Health",
       description: "GF Training partnered with leading health companies to integrate advanced insights into its programs, creating a truly personalized approach to fitness and nutrition. This partnership brought a new dimension to the GF Method, addressing every facet of a man's health. With its innovative strategies and industry-leading products, GF Training continues to transform lives and lead the fitness space for men."
+    },
+    {
+      year: "2030",
+      title: "Global Impact and Next Chapter",
+      description: "GF Training enters a new decade focused on global impact, scaled mentorship, and continual innovation — expanding programs while staying true to the core mission of helping men build strength, confidence, and lasting results."
     }
   ];
 

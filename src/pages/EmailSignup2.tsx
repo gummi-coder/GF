@@ -1,28 +1,86 @@
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Check } from "lucide-react";
 
 const EmailSignup2 = () => {
-  useEffect(() => {
-    // Load Gummi script
-    const script = document.createElement('script');
-    script.async = true;
-    script.setAttribute('data-uid', 'c71d9827c7');
-    script.src = 'https://gummi.kit.com/c71d9827c7/index.js';
-    document.head.appendChild(script);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [showFallback, setShowFallback] = useState(false);
+  const scriptLoadedRef = useRef(false);
 
-    // Also try to trigger Gummi form loading
-    setTimeout(() => {
-      if (window.gummi) {
-        window.gummi.load();
+  useEffect(() => {
+    // Load Gummi script in both containers - the script can inject forms where it's placed
+    if (!scriptLoadedRef.current) {
+      scriptLoadedRef.current = true;
+      
+      // Load it in the first container (only if not already there)
+      const container1 = document.getElementById('gummi-form-container');
+      if (container1 && !container1.querySelector('script[data-uid="c71d9827c7"]')) {
+        const script1 = document.createElement('script');
+        script1.async = true;
+        script1.setAttribute('data-uid', 'c71d9827c7');
+        script1.src = 'https://gummi.kit.com/c71d9827c7/index.js';
+        container1.appendChild(script1);
       }
-    }, 1000);
+
+      // Also load it in the second container (below testimonials) - only if not already there
+      const container2 = document.getElementById('gummi-form-container-2');
+      if (container2 && !container2.querySelector('script[data-uid="c71d9827c7"]')) {
+        const script2 = document.createElement('script');
+        script2.async = true;
+        script2.setAttribute('data-uid', 'c71d9827c7');
+        script2.src = 'https://gummi.kit.com/c71d9827c7/index.js';
+        container2.appendChild(script2);
+      }
+
+      // Check if form loaded after a delay
+      setTimeout(() => {
+        const hasForm1 = container1?.querySelector('form') || container1?.querySelector('iframe');
+        if (!hasForm1) {
+          setShowFallback(true);
+        }
+      }, 2000);
+    }
+
+    // Listen for successful form submissions from Gummi
+    // Don't intercept - let Gummi handle validation first
+    // Check for success indicators after Gummi processes the form
+    const checkForSuccess = () => {
+      // Look for Gummi success indicators (they might add classes or change content)
+      const containers = document.querySelectorAll('#gummi-form-container, #gummi-form-container-2');
+      containers.forEach(container => {
+        // Gummi typically shows a success message or hides the form on success
+        const successIndicator = container.querySelector('[class*="success"], [class*="thank"], .form-success, .form-submitted');
+        if (successIndicator) {
+          setIsSubmitted(true);
+        }
+      });
+    };
+
+    // Watch for changes in the form containers (when Gummi updates after submission)
+    const observer = new MutationObserver(() => {
+      checkForSuccess();
+    });
+
+    const containers = document.querySelectorAll('#gummi-form-container, #gummi-form-container-2');
+    containers.forEach(container => {
+      observer.observe(container, { childList: true, subtree: true, attributes: true });
+    });
+    
+    // Also listen for submit events but don't prevent default - let Gummi handle it
+    const handleSubmit = (e: Event) => {
+      // Don't do anything here - just let Gummi process it
+      // We'll check for success after a delay
+      setTimeout(() => {
+        checkForSuccess();
+      }, 1000);
+    };
+    
+    document.addEventListener('submit', handleSubmit, false); // Use false, not true
 
     return () => {
-      // Cleanup script on unmount
-      const existingScript = document.querySelector('script[data-uid="c71d9827c7"]');
-      if (existingScript) {
-        existingScript.remove();
-      }
+      document.removeEventListener('submit', handleSubmit, false);
+      observer.disconnect();
+      const existingScripts = document.querySelectorAll('script[data-uid="c71d9827c7"]');
+      existingScripts.forEach(script => script.remove());
     };
   }, []);
 
@@ -54,31 +112,22 @@ const EmailSignup2 = () => {
 
         {/* Email Form */}
         <div className="bg-card/50 backdrop-blur-sm border border-white/10 rounded-2xl p-6 mb-8">
-          <div id="gummi-form-container">
-            {/* Fallback form in case Gummi doesn't load */}
-            <form className="space-y-4">
-              <div>
-                <input 
-                  type="text" 
-                  placeholder="Nafn" 
-                  className="w-full px-4 py-3 bg-background/50 border border-white/20 rounded-lg text-foreground placeholder-foreground/60 focus:outline-none focus:border-primary"
-                />
-              </div>
-              <div>
-                <input 
-                  type="email" 
-                  placeholder="Netfang" 
-                  className="w-full px-4 py-3 bg-background/50 border border-white/20 rounded-lg text-foreground placeholder-foreground/60 focus:outline-none focus:border-primary"
-                />
-              </div>
-              <button 
-                type="submit" 
-                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 px-6 rounded-lg transition-all"
-              >
-                Ég er til! byrjum núna.
-              </button>
-            </form>
-          </div>
+          {isSubmitted ? (
+            <div className="text-center">
+              <h2 className="text-2xl font-bold text-foreground">
+                Takk fyrir!
+              </h2>
+            </div>
+          ) : (
+            <div id="gummi-form-container">
+              {/* Gummi script will inject the form here */}
+              {showFallback && (
+                <div className="text-center text-sm text-foreground/70">
+                  Loading form...
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
         {/* Benefits Section */}
@@ -160,31 +209,17 @@ const EmailSignup2 = () => {
 
         {/* Second Email Form */}
         <div className="bg-card/50 backdrop-blur-sm border border-white/10 rounded-2xl p-6 mb-8">
-          <div id="gummi-form-container-2">
-            {/* Fallback form in case Gummi doesn't load */}
-            <form className="space-y-4">
-              <div>
-                <input 
-                  type="text" 
-                  placeholder="Nafn" 
-                  className="w-full px-4 py-3 bg-background/50 border border-white/20 rounded-lg text-foreground placeholder-foreground/60 focus:outline-none focus:border-primary"
-                />
-              </div>
-              <div>
-                <input 
-                  type="email" 
-                  placeholder="Netfang" 
-                  className="w-full px-4 py-3 bg-background/50 border border-white/20 rounded-lg text-foreground placeholder-foreground/60 focus:outline-none focus:border-primary"
-                />
-              </div>
-              <button 
-                type="submit" 
-                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 px-6 rounded-lg transition-all"
-              >
-                Ég er til! byrjum núna.
-              </button>
-            </form>
-          </div>
+          {isSubmitted ? (
+            <div className="text-center">
+              <h2 className="text-2xl font-bold text-foreground">
+                Takk fyrir!
+              </h2>
+            </div>
+          ) : (
+            <div id="gummi-form-container-2">
+              {/* Gummi script will inject the form here */}
+            </div>
+          )}
         </div>
 
         {/* Footer */}
