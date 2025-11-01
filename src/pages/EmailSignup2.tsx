@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { Check } from "lucide-react";
+import { trackFacebookEvent } from "@/components/FacebookPixel";
 
 const EmailSignup2 = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -51,6 +52,11 @@ const EmailSignup2 = () => {
         const successIndicator = container.querySelector('[class*="success"], [class*="thank"], .form-success, .form-submitted');
         if (successIndicator) {
           setIsSubmitted(true);
+          // Track Facebook conversion event
+          trackFacebookEvent('Lead', {
+            content_name: 'Email Signup',
+            content_category: 'Newsletter',
+          });
         }
       });
     };

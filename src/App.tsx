@@ -17,6 +17,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import Terms from "./pages/Terms";
 import Askorun from "./pages/Askorun";
 import AskorunSignup from "./pages/AskorunSignup";
+import FacebookPixel from "@/components/FacebookPixel";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
                <ScrollToTop />
+               <FacebookPixel />
                <Routes>
                  <Route path="/" element={<Index />} />
                  <Route path="/how-it-works" element={<HowItWorks />} />
