@@ -113,11 +113,11 @@ const Askorun = () => {
       <nav className="fixed top-6 left-8 right-8 z-50">
         <div className="bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl px-8 max-w-[1200px] mx-auto">
           <div className="flex items-center justify-between h-20">
-            <a href="/" className="flex items-center">
+            <div className="flex items-center">
               <span className="text-2xl font-black tracking-tight uppercase font-display">
                 GF<span className="text-primary">Training</span>
               </span>
-            </a>
+            </div>
             <div>
               <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-6 py-2 rounded-full text-sm" onClick={() => (window.location.href = '/askorun-signup')}>
                 Skrá mig núna

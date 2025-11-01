@@ -77,6 +77,9 @@ const Terms = () => {
                   Kahunas. Öll samskipti fara fram í gegnum appið, tölvupóst eða SMS. Greiðsla fer fram með reikningi í
                   heimabanka.
                 </p>
+                <p className="text-foreground/80 mt-3">
+                  Með samþykki samþykkir þú einnig að vera settur á tölvupóstlista GF Training og fá reglubundið markaðsefni, uppfærslur og fréttir í tölvupósti.
+                </p>
               </div>
 
               <div id="service" className="bg-card/40 backdrop-blur-sm border border-white/10 rounded-2xl p-6">
@@ -144,6 +147,7 @@ const Terms = () => {
               <div id="consent" className="bg-card/40 backdrop-blur-sm border border-white/10 rounded-2xl p-6">
                 <h3 className="text-xl font-bold mb-2">7. Samþykki</h3>
                 <p className="text-foreground/80">Með því að haka við „Ég samþykki skilmála og persónuverndarstefnu" samþykkir notandi þessa stefnu.</p>
+                <p className="text-foreground/80 mt-3">Með samþykki samþykkir notandi einnig að vera settur á tölvupóstlista GF Training og fá reglubundið markaðsefni, uppfærslur og fréttir í tölvupósti.</p>
               </div>
 
               <div id="contact" className="bg-card/40 backdrop-blur-sm border border-white/10 rounded-2xl p-6">
