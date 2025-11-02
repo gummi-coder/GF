@@ -266,7 +266,7 @@ const Askorun = () => {
               <div className="md:col-start-1 text-center md:text-right px-6 md:px-0 md:pr-16">
                 <div className="inline-flex items-center gap-2 justify-center md:justify-end mb-2">
                   <Dumbbell className="w-6 h-6 text-primary" />
-                  <h4 className="text-xl font-bold">Byjrum 10. Nóv</h4>
+                  <h4 className="text-xl font-bold">Byrjum 10. Nóv</h4>
                 </div>
                 <p className="text-foreground/70">Fylgdu planinu, Vikuleg check-ins og sjáðu árangurinn</p>
               </div>
