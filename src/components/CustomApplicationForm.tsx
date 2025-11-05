@@ -277,8 +277,8 @@ const CustomApplicationForm = () => {
   return (
     <div className="bg-card/30 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
       <div className="text-center mb-6">
-        <h2 className="text-2xl font-bold text-foreground mb-2">Application Form</h2>
-        <p className="text-foreground/60">Fill out the form below to get started</p>
+        <h2 className="text-2xl font-bold text-foreground mb-2">Umsóknarform</h2>
+        <p className="text-foreground/60">Fylltu út formið hér að neðan til að byrja</p>
       </div>
       
       <div className="space-y-6">

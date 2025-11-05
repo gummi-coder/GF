@@ -95,8 +95,13 @@ const EmailSignup2 = () => {
       <div className="max-w-md mx-auto px-4 py-8">
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
-            <span className="text-3xl font-black text-primary-foreground">G</span>
+          <div className="w-20 h-20 rounded-full overflow-hidden mx-auto mb-4">
+            <img 
+              src="/images/DSC02226 copy.JPG" 
+              alt="Gudmundur Fridgeirsson" 
+              className="w-full h-full object-cover scale-125"
+              style={{ objectPosition: 'center center' }}
+            />
           </div>
           <h1 className="text-2xl font-bold text-foreground">Gudmundur Fridgeirsson</h1>
           <p className="text-foreground/70">GF Training Coach</p>
@@ -193,7 +198,6 @@ const EmailSignup2 = () => {
 
         {/* Testimonial */}
         <div className="bg-card/30 backdrop-blur-sm border border-white/10 rounded-2xl p-6 mb-8">
-          <h3 className="text-lg font-bold text-foreground mb-4">Meðmæli:</h3>
           <blockquote className="text-sm text-foreground/90 italic leading-relaxed mb-4">
             "Ég hjálpa fólki að hætta að giska og ná loksins árangri. Engir skyndikúrar, engin töfralausn — bara skýrt kerfi sem þú getur fylgt. Þessi 30 daga sería eru sömu verkfæri og ég nota með viðskiptavinum mínum til að sjá raunverulegar breytingar á nokkrum vikum."
           </blockquote>
@@ -205,11 +209,12 @@ const EmailSignup2 = () => {
 
         {/* Client Testimonial */}
         <div className="bg-card/30 backdrop-blur-sm border border-white/10 rounded-2xl p-6 mb-8">
+          <h3 className="text-lg font-bold text-foreground mb-4">Meðmæli:</h3>
           <blockquote className="text-sm text-foreground/90 italic leading-relaxed mb-4">
             "Ég var búin að prófa mjög mikið til þess að koma mér af stað því mér fannst ræktin svo leiðinleg EN það breyttist algerlega þegar ég byrjaði í þjálfun hjá GFtraining. Kom mér af stað og er loksins að ná að halda mig við ræktina"
           </blockquote>
           <div className="text-sm text-primary font-medium">
-            - Viðskiptavinur GF Training
+            - Sigurgeir, meðlimur GF Training
           </div>
         </div>
 

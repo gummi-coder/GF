@@ -39,11 +39,11 @@ const EmailSignup1 = () => {
         {/* Main Content */}
         <div className="space-y-8">
           <h2 className="text-3xl md:text-5xl font-black text-foreground leading-tight font-display">
-            Weekly value to transform your body
+            <span className="text-primary">Vikuleg</span> ráð til að verða sterkari og til að halda þér í <span className="text-primary">þínu besta formi</span>
           </h2>
           
           <p className="text-xl text-foreground/80 leading-relaxed">
-            Your weekly fitness newsletter. Unsubscribe anytime.
+            Einn tölvupóstur á viku - raunhæf þjálfunarráð sem virka í alvöru.
           </p>
 
           {/* Gummi Form Container */}
@@ -54,14 +54,14 @@ const EmailSignup1 = () => {
           </div>
 
           <p className="text-sm text-foreground/60">
-            Join fitness enthusiasts staying ahead
+            Vertu með líkamsræktar áhugamönnum sem halda sér áfram
           </p>
         </div>
 
         {/* Footer */}
         <div className="mt-16 pt-8 border-t border-white/10">
           <p className="text-sm text-foreground/40">
-            © 2025 GF Training. All rights reserved.
+            © 2025 GF Training. Öll réttindi áskilin.
           </p>
         </div>
       </div>

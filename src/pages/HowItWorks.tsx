@@ -50,7 +50,7 @@ const HowItWorks = () => {
     },
     {
       icon: <MessageCircle className="w-8 h-8" />,
-      title: "1-on-1 Coaching",
+      title: "Vikuleg Check-ins",
       description: "Vikulegar check-ins gera þér kleift að fínstilla áætlunina með þjálfaranum þínum, þannig þróast planið með árangrinum þínum.",
       benefits: [
         "Stilltu næringuna, æfingarnar og daglegu venjurnar í takt við breyttar þarfir, svo þú haldir áfram að ná árangri.",
@@ -60,7 +60,7 @@ const HowItWorks = () => {
     },
     {
       icon: <Users className="w-8 h-8" />,
-      title: "Team Huddles",
+      title: "Næringar þjálfun",
       description: "Þjálfarinn þinn hjálpar þér að skilja makró næringuna, byggja upp einfalt matarplan og taka ákvarðanir sem passa inn í þinn lífsstíl.",
       benefits: [
         "Þú færð persónulegar aðlögun út frá árangri og óskum — engar skyndilausnir, engar óraunhæfar takmarkanir.",
@@ -70,7 +70,7 @@ const HowItWorks = () => {
     },
     {
       icon: <Clock className="w-8 h-8" />,
-      title: "Weekly Community Calls",
+      title: "Markmiðasetning",
       description: "GF Training hjálpar þér að móta venjur, rútínu og hugarfar sem halda þér stöðugum — jafnvel þegar lífið verður erfitt.",
       benefits: [
         "Þú setur skýr markmið með þjálfaranum þínum og lærir að vinna í gegnum stöðnun, viðhalda hvatningu og taka aðgerðir á hverjum degi.",
@@ -80,7 +80,7 @@ const HowItWorks = () => {
     },
     {
       icon: <MessageCircle className="w-8 h-8" />,
-      title: "24/7 Support",
+      title: "24/7 aðgengi í þjálfara",
       description: "Ef þú ert með einhverjar spurningar þá er þjálfarinn þinn alltaf aðeins ein skilaboð í burtu.",
       benefits: [
         "Sendu persónulegar spurningar hvenær sem er og fáðu svör innan 24 klukkustunda til að halda þér á réttri braut.",

@@ -8,22 +8,19 @@ import { Link } from "react-router-dom";
 const Pricing = () => {
   const testimonials = [
     {
-      name: "Jón Þór",
-      age: "34",
-      result: "Lost 15kg in 3 months",
-      text: "The 3-month program was perfect for my goals. My coach understood exactly what I needed to achieve my dream physique."
-    },
-    {
       name: "Einar",
       age: "28", 
-      result: "Gained 8kg muscle in 6 months",
-      text: "The 6-month program gave me the time and support I needed to build lasting habits and see real results."
+      text: "Sex mánaða prógrammið gaf mér tímann og stuðninginn sem ég þurfti til að byggja upp varanlegar venjur og sjá raunverulegan árangur."
     },
     {
       name: "Guðmundur",
       age: "41",
-      result: "Transformed his body composition",
-      text: "At 41, I thought it was too late to get in shape. GF Training proved me wrong - I'm in the best shape of my life."
+      text: "41 árs hélt ég að það væri of seint að koma mér í form, GF Training sannaði fyrir mér að ég gæti það ennþá. Ég er í besta formi lífs míns."
+    },
+    {
+      name: "Jón Þór",
+      age: "34",
+      text: "Þriggja mánaða prógrammið var fullkomið fyrir mín markmið. Þjálfarinn minn skildi nákvæmlega hvað ég þurfti til að ná líkamanum sem ég hef alltaf viljað."
     }
   ];
 
@@ -35,16 +32,16 @@ const Pricing = () => {
       <section className="pt-32 pb-20 px-4">
         <div className="container mx-auto max-w-6xl text-center">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-black leading-tight mb-8 font-display">
-            <span className="text-foreground">Choose Your</span>{" "}
-            <span className="text-primary">Coaching Path</span>
+            <span className="text-foreground">Veldu þinn</span>{" "}
+            <span className="text-primary">þjálfunarpakka</span>
           </h1>
           
           <p className="text-xl text-foreground/80 max-w-4xl mx-auto mb-8 leading-relaxed">
-            Whether you want a complete transformation or long-term guidance, there's a plan built for you.
+            Hvort sem þú ert að byrja upp á nýtt eða vilt taka æfingarnar þínar á næsta stig, þá er til plan sem hjálpar þér að ná markmiðunum þínum.
           </p>
 
           <p className="text-lg text-foreground/70 max-w-3xl mx-auto">
-            All coaching plans include app access, personalized training, and nutrition support.
+            Allir þjálfunarpakkar innihalda aðgang að appinu, einstaklingsmiðaða þjálfun og næringar stuðning.
           </p>
         </div>
       </section>
@@ -59,35 +56,35 @@ const Pricing = () => {
                 <CardTitle className="text-xl font-bold text-foreground/80 mb-2">
                   Basic
                 </CardTitle>
-                <p className="text-foreground/60 text-sm">3-Month Transformation</p>
+                <p className="text-foreground/60 text-sm">3 Mánaða binditími</p>
               </CardHeader>
               
               <CardContent className="space-y-8">
                 <div className="text-center">
                   <div className="text-4xl font-black text-foreground mb-2">40,000 ISK</div>
-                  <div className="text-foreground/60 text-sm">per month</div>
+                  <div className="text-foreground/60 text-sm">á mánuði</div>
                 </div>
 
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">
                     <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                    <span className="text-foreground/80">Personalized training plan</span>
+                    <span className="text-foreground/80">Einstaklingsmiðað æfingaplan</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                    <span className="text-foreground/80">Nutrition guidance</span>
+                    <span className="text-foreground/80">Næringarráðgjöf</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                    <span className="text-foreground/80">Bi-weekly check-ins</span>
+                    <span className="text-foreground/80">Tveggja vikna eftirfylgni</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                    <span className="text-foreground/80">App access</span>
+                    <span className="text-foreground/80">Aðgangur að appinu</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                    <span className="text-foreground/80">Goal review call</span>
+                    <span className="text-foreground/80">Stanslaus samskipti við þjálfara</span>
                   </div>
                 </div>
 
@@ -96,7 +93,7 @@ const Pricing = () => {
                    <Button 
                      className="w-full bg-secondary/20 hover:bg-secondary/30 text-secondary-foreground font-bold py-4 rounded-lg border border-secondary/30 transition-all"
                    >
-                     Get Started
+                     Byrjaðu núna
                    </Button>
                  </Link>
                 </div>
@@ -107,7 +104,7 @@ const Pricing = () => {
             <Card className="bg-gradient-to-br from-primary/20 to-primary/10 border-2 border-primary/50 relative scale-105">
               <div className="absolute -top-6 left-1/2 transform -translate-x-1/2">
                 <div className="bg-primary text-primary-foreground px-6 py-2 rounded-full text-sm font-bold">
-                  Most Popular
+                  Vinsælasta
                 </div>
               </div>
               
@@ -115,36 +112,36 @@ const Pricing = () => {
                 <CardTitle className="text-xl font-bold text-foreground mb-2">
                   Pro
                 </CardTitle>
-                <p className="text-foreground/60 text-sm">6-Month Coaching</p>
+                <p className="text-foreground/60 text-sm">6 Mánaða binditími</p>
               </CardHeader>
               
               <CardContent className="space-y-8">
                 <div className="text-center">
                   <div className="text-4xl font-black text-primary mb-2">33,000 ISK</div>
-                  <div className="text-foreground/60 text-sm">per month</div>
-                  <div className="text-primary text-sm font-medium mt-1">Save 10% with 6-month commitment</div>
+                  <div className="text-foreground/60 text-sm">á mánuði</div>
+                  <div className="text-primary text-sm font-medium mt-1">Sparar 10% með 6 mánaða skuldbindingu</div>
                 </div>
 
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">
                     <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                    <span className="text-foreground/80">Everything in Basic</span>
+                    <span className="text-foreground/80">Allt í Basic, auk:</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                    <span className="text-foreground/80">Long-term habit building</span>
+                    <span className="text-foreground/80">Byggja upp langtíma ávana</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                    <span className="text-foreground/80">Standard chat support</span>
+                    <span className="text-foreground/80">Markmiða endurskoðun</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                    <span className="text-foreground/80">Lifestyle tracker</span>
+                    <span className="text-foreground/80">Lífsstíls eftirfylgni</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                    <span className="text-foreground/80">Monthly progress reviews</span>
+                    <span className="text-foreground/80">Mánaðarleg endurskoðun</span>
                   </div>
                 </div>
 
@@ -153,7 +150,7 @@ const Pricing = () => {
                    <Button 
                      className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-4 rounded-lg transition-all hover:scale-105"
                    >
-                     Get Started
+                     Byrjaðu núna
                    </Button>
                  </Link>
                 </div>
@@ -166,38 +163,38 @@ const Pricing = () => {
                 <CardTitle className="text-xl font-bold text-foreground mb-2">
                   VIP
                 </CardTitle>
-                <p className="text-foreground/60 text-sm">Premium Coaching</p>
+                <p className="text-foreground/60 text-sm">Premium þjálfun</p>
                 <div className="bg-primary/20 text-primary px-3 py-1 rounded-full text-xs font-bold mt-2">
-                  Limited Spots
+                  Takmarkað pláss
                 </div>
               </CardHeader>
               
               <CardContent className="space-y-8">
                 <div className="text-center">
-                  <div className="text-4xl font-black text-primary mb-2">Application</div>
-                  <div className="text-foreground/60 text-sm">Only</div>
+                  <div className="text-4xl font-black text-primary mb-2">Umsókn</div>
+                  <div className="text-foreground/60 text-sm">Aðeins</div>
                 </div>
 
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">
                     <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                    <span className="text-foreground/80">Everything in Pro</span>
+                    <span className="text-foreground/80">Allt í Pro, auk:</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                    <span className="text-foreground/80">Weekly video calls</span>
+                    <span className="text-foreground/80">Vikuleg myndsímtöl</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                    <span className="text-foreground/80">Unlimited priority support</span>
+                    <span className="text-foreground/80">forgangs stuðningur</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                    <span className="text-foreground/80">1:1 Kickstart call</span>
+                    <span className="text-foreground/80">Byrjunar inntöku símtal</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                    <span className="text-foreground/80">Mindset coaching</span>
+                    <span className="text-foreground/80">Hugarfarsþjálfun</span>
                   </div>
                 </div>
 
@@ -206,7 +203,7 @@ const Pricing = () => {
                   <Button 
                     className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-4 rounded-lg transition-all hover:scale-105"
                   >
-                    Apply Now
+                    Sækja um núna
                   </Button>
                 </Link>
                 </div>
@@ -221,12 +218,9 @@ const Pricing = () => {
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-black mb-6 font-display">
-              <span className="text-foreground">What's Included in</span>{" "}
-              <span className="text-primary">Every Plan</span>
+              <span className="text-foreground">Hvað er innifalið í</span>{" "}
+              <span className="text-primary">hverjum pakka</span>
             </h2>
-            <p className="text-lg text-foreground/80">
-              This builds perceived value before people judge the price.
-            </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-8">
@@ -234,35 +228,35 @@ const Pricing = () => {
               <div className="text-primary mb-4 flex justify-center">
                 <Target className="w-8 h-8" />
               </div>
-              <h3 className="font-bold text-foreground mb-2">Training plan tailored to your goal</h3>
+              <h3 className="font-bold text-foreground mb-2">Æfingaplan sérsniðinn að markmiðum þínum</h3>
             </div>
             
             <div className="text-center">
               <div className="text-primary mb-4 flex justify-center">
                 <Utensils className="w-8 h-8" />
               </div>
-              <h3 className="font-bold text-foreground mb-2">Meal plan or macro guidance</h3>
+              <h3 className="font-bold text-foreground mb-2">Matarplan eða makró leiðbeiningar</h3>
             </div>
             
             <div className="text-center">
               <div className="text-primary mb-4 flex justify-center">
                 <Smartphone className="w-8 h-8" />
               </div>
-              <h3 className="font-bold text-foreground mb-2">App access with exercise demos</h3>
+              <h3 className="font-bold text-foreground mb-2">Aðgangur að appinu{'\u00A0'}með kennslumyndböndum</h3>
             </div>
             
             <div className="text-center">
               <div className="text-primary mb-4 flex justify-center">
                 <Brain className="w-8 h-8" />
               </div>
-              <h3 className="font-bold text-foreground mb-2">Accountability check-ins</h3>
+              <h3 className="font-bold text-foreground mb-2">Ábyrgðar eftirfylgni til að halda þér á réttu brautinni</h3>
             </div>
             
             <div className="text-center">
               <div className="text-primary mb-4 flex justify-center">
                 <BarChart3 className="w-8 h-8" />
               </div>
-              <h3 className="font-bold text-foreground mb-2">Progress tracking & habit system</h3>
+              <h3 className="font-bold text-foreground mb-2">Framvinda eftirfylgni og vana kerfi</h3>
             </div>
           </div>
         </div>
@@ -273,11 +267,11 @@ const Pricing = () => {
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-black mb-6 font-display">
-              <span className="text-foreground">Real Results From</span>{" "}
-              <span className="text-primary">Real Clients</span>
+              <span className="text-foreground">Árangur frá</span>{" "}
+              <span className="text-primary">viðskiptavinum</span>
             </h2>
             <p className="text-lg text-foreground/80">
-              These are everyday people who decided to commit — just like you can.
+              Þetta er venjulegt fólk sem ákvað að taka fyrsta skrefið, rétt eins og þú getur.
             </p>
           </div>
 
@@ -297,7 +291,6 @@ const Pricing = () => {
                   
                   <div className="border-t border-border/20 pt-4">
                     <div className="font-bold text-foreground">{testimonial.name}, {testimonial.age}</div>
-                    <div className="text-primary text-sm font-medium">{testimonial.result}</div>
                   </div>
                 </CardContent>
               </Card>
@@ -313,21 +306,21 @@ const Pricing = () => {
             {/* Left CTA */}
             <div className="text-center lg:text-left">
               <h3 className="text-2xl md:text-3xl font-black mb-4 font-display">
-                <span className="text-foreground">Ready to start your</span>{" "}
-                <span className="text-primary">coaching journey?</span>
+                <span className="text-foreground">Tilbúinn að byrja</span>{" "}
+                <span className="text-primary">þjálfunarferðina?</span>
               </h3>
               <p className="text-lg text-foreground/80 mb-8">
-                Choose the program that fits your timeline and goals.
+                Veldu þann pakka sem hentar þér og þínum markmiðum.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <Link to="/signup">
                   <Button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-bold px-8 py-4 rounded-full">
-                    Start 3-Month Coaching
+                    Byrja 3 mánaða þjálfun
                   </Button>
                 </Link>
                 <Link to="/signup">
                   <Button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-bold px-8 py-4 rounded-full">
-                    Start 6-Month Coaching
+                    Byrja 6 mánaða þjálfun
                   </Button>
                 </Link>
               </div>
@@ -336,15 +329,15 @@ const Pricing = () => {
             {/* Right CTA */}
             <div className="text-center lg:text-left">
               <h3 className="text-2xl md:text-3xl font-black mb-4 font-display">
-                <span className="text-foreground">Want the full</span>{" "}
-                <span className="text-primary">VIP experience?</span>
+                <span className="text-foreground">Viltu fulla</span>{" "}
+                <span className="text-primary">VIP upplifun?</span>
               </h3>
               <p className="text-lg text-foreground/80 mb-8">
-                Apply for our most exclusive coaching program with limited spots available.
+                Sæktu um okkar einkaréttasta þjálfunarprogram með takmarkað pláss.
               </p>
               <Link to="/apply">
                 <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-black px-12 py-6 rounded-full text-lg shadow-lg hover:shadow-primary/50 transition-all hover:scale-105">
-                  Apply for VIP Coaching
+                  Sækja um VIP þjálfun
                 </Button>
               </Link>
             </div>

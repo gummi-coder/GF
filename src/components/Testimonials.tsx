@@ -4,34 +4,34 @@ import { Button } from "@/components/ui/button";
 const Testimonials = () => {
   const testimonials = [
     {
-      text: "GF Training has taken the guesswork out weight loss and strength building. Instead of taking time to build my own workouts and learn how to adjust my diet, I instead have a coach who helps me, provides feedback, and keeps me accountable. The results have been incredible in just my first 4 months. I am consistently building muscle, losing weight, increasing my endurance, and regaining energy. The program is sustainable, I am eating my favorite foods, and the amount of time spent in workouts easily fits into my schedule.",
-      author: "Karen C.",
-      highlight: "GF Training took out the guesswork",
+      text: "GF Training fjarlægði alla óvissu úr þjálfuninni. Í stað þess að eyða tíma í að finna út æfingar og mataræði sjálfur, er ég með þjálfara sem leiðbeinir mér, fylgist með mér og heldur mér ábyrgan. Á aðeins fjórum mánuðum hef ég séð frábæran árangur, ég byggi upp vöðva, léttist, bæti úthald og finn orku sem ég hef ekki fundið í mörg ár. Þetta prógramm er raunhæft, ég get borðað uppáhaldsmatinn minn og æfingarnar passa fullkomlega inn í dagskrána mína.",
+      author: "Einar",
+      highlight: "GF Training tók óvissuna úr ferlinu",
     },
     {
-      text: "They follow through on what they promise—education, nutrition and workout program to create a healthy and sustainable lifestyle. As a man with hormone changes they knew exactly what to focus on, what coach to match me with and I started seeing results almost immediately. The support you receive is unsurpassed. Educated coaches and a community to help support you as well. Highly recommend!",
-      author: "Melisa S.",
-      highlight: "Outstanding and solid program",
+      text: "Ég er 50 ára og þetta er fyrsta prógrammið sem hefur raunverulega hjálpað mér að sjá breytingar í mörg ár. Þeir koma fram við mann eins og fjölskyldu. Maður hefur dagleg samskipti við þjálfarann sinn og mataræðið er einfalt, þú lærir að velja réttu matinn byggt á vísindum. Þetta er ekkert kjaftæði bara árangur.",
+      author: "Simon",
+      highlight: "Þetta prógramm virkar – líka eftir fertugt",
     },
     {
-      text: "You have actual one-on-one sessions with your coach, your workouts are tailored to you, and you are supported and encouraged the whole journey. It teaches you reasonable expectations, it heals your metabolism, and makes you stronger. If you are consistent and do the work, it works.",
-      author: "Layla S.",
-      highlight: "Real 1:1 coaching, real results",
+      text: "Þeir standa við allt sem þeir lofa, fræðslu, næringar leiðsögn og æfingakerfi sem skapa heilbrigðan og sjálfbæran lífsstíl. Ég er karl á miðjum aldri með hormónabreytingar og þeir vissu nákvæmlega hvað átti að leggja áherslu á og hvaða þjálfari myndi henta mér. Ég sá árangur nánast strax. Stuðningurinn er frábær – fagmennskan og samfélagið gera allan muninn. Mæli 100% með.",
+      author: "Heiðar",
+      highlight: "Frábært og traust prógramm",
     },
     {
-      text: "I'm 60 years old and this is the first program that has really helped me make changes since menopause. They treat their clients like family. You're able to communicate with your coach daily, and the diet is just counting macros. You pick what goes into your body based on the science.",
-      author: "Yvonne R.",
-      highlight: "This program really works, even post-menopause",
+      text: "Að fá þjálfara sem leiðbeinir mér í gegnum æfingar og kennir mér að fylgja makróum var það sem ég hafði saknað. Líkamsbyggingin mín, útlit og sjálfstraust hafa breyst stórkostlega – en það mikilvægasta er að ég hef breytt lífsstílnum mínum og matarvenjum til frambúðar.",
+      author: "Andri",
+      highlight: "GF Training bætti upp það sem vantaði – næringu, þjálfun og aga",
     },
     {
-      text: "Adding GF Training to my life added the missing piece(s)—nutrition, coaching, and accountability. Having a coach to guide me through workouts and teach me how to follow macronutrients has been the missing link. My body composition, appearance and confidence have improved significantly, and most importantly, my overall lifestyle and eating habits have changed in a way that I can maintain for life.",
-      author: "Lisa F.",
-      highlight: "Life-changing results I can maintain",
+      text: "Að fá þjálfara í þessu prógrammi og breyta líkamanum mínum þegar ég hélt að það væri orðið of seint, hefur bókstaflega breytt lífi mínu. Stuðningurinn, sérsniðna nálgunin og ferðalagið í heild sinni hafa verið algjörlega lífsbreytandi.",
+      author: "Bjarki",
+      highlight: "Besta ákvörðunin sem ég hef tekið fyrir sjálfan mig",
     },
     {
-      text: "This has been the most incredible journey! Best decision I ever made, for myself was to get a coach inside this program and completely transform my body in perimenopause when I didn't think it was possible. The support, the customization, and overall the entire journey has been life-changing!",
-      author: "Shannon P.",
-      highlight: "Best decision I ever made",
+      text: "Þú færð raunverulega einstaklingsmiðaða þjálfun. Æfingarnar eru hannaðar fyrir þig, og þú færð stuðning og hvatningu allan tímann. Prógrammið kennir þér raunhæfar væntingar, hjálpar líkamanum að jafna efnaskipti og gerir þig sterkari. Ef þú ert stöðugur og vinnur verkið – þetta virkar.",
+      author: "Kristján",
+      highlight: "Alvöru árangur",
     },
   ];
 
@@ -39,7 +39,7 @@ const Testimonials = () => {
     <section className="py-20 px-4">
       <div className="container mx-auto max-w-7xl">
         <div className="text-center mb-16">
-          <p className="text-primary text-lg font-bold mb-4 font-sans">Read Client Stories</p>
+          <p className="text-primary text-lg font-bold mb-4 font-sans">Lestu sögur viðskiptavina</p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-16 items-start">
@@ -53,19 +53,19 @@ const Testimonials = () => {
               </div>
               
               <h2 className="text-5xl md:text-6xl font-black mb-6 font-display">
-                <span className="text-primary">4.9/5 Stars</span>
+                <span className="text-primary">4.9/5 stjörnur</span>
                 <br />
-                <span className="text-foreground">from</span>
+                <span className="text-foreground">frá</span>
                 <br />
-                <span className="text-primary">1,500+ reviews</span>
+                <span className="text-primary">150+ meðmæli</span>
               </h2>
               
               <p className="text-xl text-foreground/80 font-sans mb-8 leading-relaxed">
-                Read why thousands of clients love GF Training and how it helped them get toned & feel confident in their skin!
+                Lestu hvers vegna hundruðir viðskiptavina elska GF Training og hvernig það hjálpaði þeim að verða sterkari og líða betur með sjálfan sig!
               </p>
 
               <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-12 py-6 rounded-full text-lg shadow-lg hover:shadow-primary/25 transition-all hover:scale-105">
-                See all success stories
+                skrá mig í dag
               </Button>
             </div>
           </div>
@@ -105,7 +105,7 @@ const Testimonials = () => {
           <p className="text-3xl md:text-4xl lg:text-5xl font-bold mb-8 font-display leading-tight max-w-5xl mx-auto">
             "Að byrja í GF Training var besta ákvörðunin sem ég hef tekið.
             <br />
-            <span className="text-primary">Ég hef aldrei verið jafn orkumikll og sterka."</span>
+            <span className="text-primary">Ég hef aldrei verið jafn orkumikll og sterkari."</span>
           </p>
           <p className="text-foreground/70 font-sans text-2xl mb-8">- GF Training meðlimur, Gunnar</p>
           

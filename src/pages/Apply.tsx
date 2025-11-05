@@ -33,25 +33,25 @@ const Apply = () => {
           {/* Header */}
           <div className="text-center mb-12">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
-              Apply for your <span className="text-primary font-black">1:1 body Transformation</span> assessment Right now
+              Sæktu um <span className="text-primary font-black">VIP Þjálfun</span> hjá GF Training
             </h1>
             
             <div className="space-y-6 max-w-3xl mx-auto text-left">
               <div className="text-lg leading-relaxed">
                 <p className="mb-4">
-                  <strong>✅ Break Free From Frustration 👉</strong> Uncover what's really holding you back from getting toned after 40, and <strong>finally feel at home in your own skin!</strong>
+                  <strong>✅ Vertu sá maður sem þú veist að þú getur verið 👉</strong> Komumst að rót vandans sem hefur haldið þér frá því að komast í þitt drauma form
                 </p>
               </div>
 
               <div className="text-lg leading-relaxed">
                 <p className="mb-4">
-                  <strong>✅ Find Your Inner Warrior 👉</strong> Transform your body, reclaim your power, and prove that <strong>your strongest, most confident self is still ahead of you!</strong>
+                  <strong>✅ Taktu stjórnina aftur 👉</strong> Umbreyttu líkamanum, endurheimtu sjálfstraustið og sýndu að <strong>þú ert bara rétt að byrja!</strong>
                 </p>
               </div>
 
               <div className="text-lg leading-relaxed">
                 <p className="mb-4">
-                  <strong>✅ Take the First Step Toward a Confident, Healthier You 👉</strong> Apply now to see if you qualify...
+                  <strong>✅ Taktu fyrsta skrefið í átt að sterkari og heilbrigðari þér 👉</strong> Sæktu um núna til að sjá hvort VIP þjálfun hendi þér...
                 </p>
               </div>
             </div>
@@ -60,7 +60,7 @@ const Apply = () => {
           {/* Custom Application Form */}
           <div className="mb-8">
             <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold text-foreground mb-2">Umsókn um líkamsbreytingu</h2>
+              <h2 className="text-2xl font-bold text-foreground mb-2">Umsókn í VIP Þjálfun</h2>
               <p className="text-foreground/60">Fylltu út formið hér að neðan til að byrja</p>
             </div>
             
@@ -75,13 +75,13 @@ const Apply = () => {
         <div className="container mx-auto max-w-4xl px-4">
           <div className="text-center space-y-4">
             <div className="text-sm text-foreground/60">
-              <a href="#" className="hover:text-primary transition-colors mr-4">Privacy Policy</a>
-              <a href="#" className="hover:text-primary transition-colors">Terms and Conditions</a>
+              <a href="#" className="hover:text-primary transition-colors mr-4">Persónuverndarstefna</a>
+              <a href="#" className="hover:text-primary transition-colors">Skilmálar</a>
             </div>
             
             
             <div className="text-sm text-foreground/60">
-              Contact GF Training<br />
+              Hafa samband við GF Training<br />
               <a href="mailto:support@gftraining.com" className="text-primary hover:text-primary/80">
                 support@gftraining.com
               </a>

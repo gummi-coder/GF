@@ -5,94 +5,74 @@ import { Users, Target, Award, TrendingUp } from "lucide-react";
 
 const About = () => {
   const stats = [
-    { number: "5,000+", label: "Men Transformed", icon: <Users className="w-8 h-8" /> },
+    { number: "150+", label: "Meðmæli", icon: <Users className="w-8 h-8" /> },
     { number: "15+", label: "GF Ambassadors", icon: <Award className="w-8 h-8" /> },
-    { number: "50+", label: "GF Team Members", icon: <Users className="w-8 h-8" /> },
+    { number: "2", label: "GF Training strafsmenn", icon: <Users className="w-8 h-8" /> },
   ];
 
   const timeline = [
     {
       year: "2022",
-      title: "Blending Online and In-Person Expertise",
-      description: "As demand grew, GF evolved into a hybrid model, combining in-person coaching with an online presence. This marked the start of delivering expert-level fitness and nutrition strategies on a larger scale, helping more men achieve their goals with proven results."
+      title: "Byrjunin",
+      description: "Ég byrjaði að þjálfa vini og fjölskyldu, fannst mér mjög gaman og gefandi að hjálpa fólki og sjá það ná árangri og líða betur með sjálfan sig, það sem byrjaði sem áhuga mál breyttist fljótt í ástríðu, að sjá aðra styrkja, bæta sjálfstraustið og bæta vellíðan"
     },
     {
       year: "2023",
-      title: "The Birth of GF Training",
-      description: "The GF Training Blueprint was born, setting a new standard in fitness education. This program empowered men with the tools and knowledge to transform their health for life. The establishment of GF Training signaled the start of a movement, establishing expertise in personalized fitness solutions for men."
+      title: "Útskrifaðist frá ISSA og byrjaði að þjálfa ókunnuga",
+      description: "Eftir að hafa útskrifast sem löggiltur einkaþjálfari frá ISSA hóf ég fjarþjálfun hjá GF Training. Þetta var fyrsta skrefið í að byggja upp raunverulegt fyrirtæki og breyta áhuga áhugamáli yfir í faglegt starf, með markmiðið að hjálpa sem flestum að breyta lífi sínu í gegnum þjálfun og næringu."
     },
     {
       year: "2024",
-      title: "Innovation and Experimentation",
-      description: "GF Training solidified its position as a leader in fitness education, testing and refining new programs to ensure the best client outcomes with unmatched support in the space. Through strategic innovation, the company expanded its reach and impact while maintaining its core commitment to delivering unmatched expertise."
+      title: "GF Training Appið verður til",
+      description: "Ég þróaði mitt eigið app og flutti allt yfir á einn stað, það gerði mér kleift að þjálfa fleiri á einstaklingsmiðaðan hátt, með sérsniðnum æfingum, næringar plönum og stuðningi, hvar sem fólk er statt í heiminum."
     },
     {
       year: "2025",
-      title: "Thriving Through Adversity",
-      description: "As the world faced unprecedented challenges, GF Training stepped up to deliver strength and stability to its growing community. The release of version 2 of the GF Training Blueprint provided men with actionable strategies to stay consistent and healthy, even at home. This year solidified the GF Method as an essential resource for men navigating their health journeys."
+      title: "VIP Programið fæðist",
+      description: "Til að hjálpa fólki sem vildi taka þetta lengra setti ég af stað GF VIP Programið, háþróað kerfi fyrir þá sem vilja alvöru breytingu. Þetta varð lykilþáttur í að auka árangur og tryggja langtíma niðurstöður hjá viðskiptavinum."
     },
     {
       year: "2026",
-      title: "Elevating the Client Experience",
-      description: "This year, GF Training introduced its VIP Coaching Program, providing an elite 1:1 coaching experience based on the GF Method. We started to welcome the best of the best personal trainers to our team. The program expanded the brand's ability to deliver tailored solutions for men navigating life transitions."
+      title: "Stækkun og samfélag",
+      description: "GF Training stækkar teymið og opnar fyrir fleiri þjálfara. Við byrjum að halda áskoranir og viðburði sem tengja saman fólk sem er að vinna að markmiðum sínum. Fyrirtækið fer úr einstaklingsþjónustu í samfélag og hreyfingu."
     },
     {
       year: "2027",
-      title: "Redefining Fitness Education",
-      description: "The release of GF Training Blueprint version 3 showcased our commitment to delivering cutting-edge education in fitness and nutrition. The GF Method was integrated into high-quality video content and expanded onto YouTube, growing GF Training's reach and establishing it as a trusted authority for men."
-    },
-    {
-      year: "2028",
-      title: "Breaking Records, Changing Lives",
-      description: "GF Training launched The GF Hour podcast, bringing the GF Method to a larger audience with expert advice on fitness, nutrition, and mindset. The podcast stayed in the top 10 fitness podcasts and featured big-name guests and leading experts in the space. The VIP program was revamped to set a new standard for personalized coaching."
-    },
-    {
-      year: "2029",
-      title: "Revolutionizing Men's Health",
-      description: "GF Training partnered with leading health companies to integrate advanced insights into its programs, creating a truly personalized approach to fitness and nutrition. This partnership brought a new dimension to the GF Method, addressing every facet of a man's health. With its innovative strategies and industry-leading products, GF Training continues to transform lives and lead the fitness space for men."
-    },
-    {
-      year: "2030",
-      title: "Global Impact and Next Chapter",
-      description: "GF Training enters a new decade focused on global impact, scaled mentorship, and continual innovation — expanding programs while staying true to the core mission of helping men build strength, confidence, and lasting results."
+      title: "Nýtt stig af þjónustu",
+      description: "Appið og kerfið verða uppfærð í næstu útgáfu. Við bætum við nýjum lausnum fyrir næringu, endurheimt og heildræna heilsu, GF Training verður fullkomið umhverfi fyrir langtíma árangur."
     }
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div 
+      className="min-h-screen bg-background"
+      style={{
+        backgroundImage: `
+          radial-gradient(ellipse 1000px 800px at 10% 5%, hsl(var(--primary)/0.20) 0%, transparent 60%),
+          radial-gradient(ellipse 900px 700px at 85% 95%, hsl(var(--primary)/0.14) 0%, transparent 60%)
+        `,
+        backgroundSize: '100% 2000px, 100% 2000px',
+        backgroundPosition: '0 0, 0 100%',
+        backgroundRepeat: 'no-repeat, no-repeat'
+      }}
+    >
       <Navigation />
       
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-4">
         <div className="container mx-auto max-w-6xl text-center">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-black leading-tight mb-8 font-display">
-            <span className="text-primary">About</span>{" "}
+            <span className="text-primary">Um</span>{" "}
             <span className="text-foreground">GF Training</span>
           </h1>
           
           <p className="text-xl text-foreground/80 max-w-4xl mx-auto mb-12 leading-relaxed">
-            GF Training is a results-driven company empowering men through personalized fitness, nutrition, and education. 
-            With online programs, world-class coaching, and community support, we help men take control of their health 
-            and achieve life-changing transformations.
+            GF Training er árangursdrifin fjarþjálfun sem styrkir karla með einstaklingsmiðaðri þjálfun, næringu og fræðslu. Með fjarþjálfun, faglegum þjálfar sem styður þig alla leið og vill hjálpa körlum að taka stjórn á eigin heilsu og ná árangri
           </p>
 
           <p className="text-lg text-foreground/70 max-w-4xl mx-auto mb-16 leading-relaxed">
-            Founded by GF and later joined by partners, GF Training has grown into a movement trusted by thousands of men worldwide. 
-            We are on a mission to help men regain their personal power and feel confident in their skin.
+            Guðmundur Friðgeirsson stofnaði GF Training. Í dag hefur GF Training vaxið í hreyfingu sem hundruðir karla treysta. Markmið mitt er að hjálpa körlum að endurheimta sjálfstraust sitt, styrk og vellíðan – og líða betur í eigin líkama.
           </p>
-
-          {/* Stats */}
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
-            {stats.map((stat, index) => (
-              <div key={index} className="bg-card/50 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
-                <div className="text-primary mb-4 flex justify-center">
-                  {stat.icon}
-                </div>
-                <div className="text-3xl font-black text-primary mb-2">{stat.number}</div>
-                <div className="text-foreground/80 font-medium">{stat.label}</div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -102,26 +82,26 @@ const About = () => {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
               <h2 className="text-3xl md:text-5xl font-black mb-6 font-display">
-                <span className="text-foreground">Our Mission</span>
+                <span className="text-foreground">Markmið mitt</span>
               </h2>
               <p className="text-lg text-foreground/80 mb-8 leading-relaxed">
-                Since we started in 2016, our mission has been to transform lives.
+                Frá því að ég byrjaði árið 2022 hefur markmið mitt verið að breyta lífum.
               </p>
               <p className="text-xl text-foreground/90 font-bold mb-8">
-                <span className="text-primary">Our goal is to empower men</span>{" "}
-                <span className="text-foreground">to build strength, confidence, and</span>{" "}
-                <span className="text-foreground">a body they love at any</span>{" "}
-                <span className="text-foreground">stage of life.</span>
+                <span className="text-primary">Ég vill styrkja karla</span>{" "}
+                <span className="text-foreground">til að byggja upp styrk, sjálfstraust og</span>{" "}
+                <span className="text-foreground">líkama sem þeir eru stoltir af,</span>{" "}
+                <span className="text-foreground">á hvaða aldri sem er.</span>
               </p>
             </div>
             
             <div className="bg-card/30 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
-              <h3 className="text-2xl font-bold mb-4 text-primary">Our Vision</h3>
+              <h3 className="text-2xl font-bold mb-4 text-primary">Framtíðarsýn mitt</h3>
               <p className="text-lg text-foreground/80 leading-relaxed">
-                <span className="font-bold text-foreground">To become the ultimate solution for men seeking strength, confidence, and lasting transformation.</span>
+                <span className="font-bold text-foreground">Að verða fullkomna lausnin fyrir karla sem leita eftir styrk, sjálfstrausti og varanlegri umbreytingu.</span>
               </p>
               <p className="text-foreground/70 mt-4">
-                Imagine everything you need — fitness, nutrition, education, and support — under one roof, tailored just for you.
+                Hugsaðu þér allt sem þú þarft, þjálfun, næringu, fræðslu og stuðning, allt á einum stað, sniðið sérstaklega að þér.
               </p>
             </div>
           </div>
@@ -133,10 +113,10 @@ const About = () => {
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-black mb-6 font-display">
-              <span className="text-foreground">Our Story</span>
+              <span className="text-foreground">Sagan mín</span>
             </h2>
             <p className="text-lg text-foreground/80 max-w-4xl mx-auto">
-              A journey of transformation, innovation, and helping men achieve their best selves.
+              Ferð breytinga, nýsköpunar og hjálpar til þess að karlar nái bestu útgáfu af sjálfum sér.
             </p>
           </div>
 
@@ -160,20 +140,19 @@ const About = () => {
       <section className="py-20 px-4">
         <div className="container mx-auto max-w-4xl text-center">
           <h2 className="text-3xl md:text-5xl font-black mb-8 font-display">
-            <span className="text-foreground">Ready to Start Your</span>{" "}
-            <span className="text-primary">Transformation Journey?</span>
+            <span className="text-foreground">Ert þú tilbúinn að taka </span>
+            <span className="text-primary">fyrsta skrefið?</span>
           </h2>
           
           <p className="text-lg text-foreground/80 mb-12 leading-relaxed">
-            Join thousands of men who have already transformed their lives with GF Training. 
-            Your journey to a stronger, more confident you starts today.
+            Byrjaðu ferðina að sterkari og sjálfsöruggari útgáfu af sjálfum þér. Liðið okkar er tilbúið að hjálpa þér að ná markmiðum þínum.
           </p>
 
           <Button 
             size="lg"
             className="bg-primary hover:bg-primary/90 text-primary-foreground font-black text-xl px-16 py-8 rounded-full shadow-lg hover:shadow-primary/50 transition-all hover:scale-105"
           >
-            START YOUR JOURNEY
+            Skrá mig núna
           </Button>
         </div>
       </section>
