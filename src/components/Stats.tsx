@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { Play } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Stats = () => {
@@ -17,15 +16,14 @@ const Stats = () => {
 
         {/* Video Section */}
         <div className="max-w-4xl mx-auto mb-16">
-          <div className="relative aspect-video rounded-2xl overflow-hidden border-2 border-primary/10 group cursor-pointer">
-            <div className="absolute inset-0 bg-gradient-to-br from-background/50 to-background/30 backdrop-blur-sm flex items-center justify-center">
-              <Button
-                size="lg"
-                className="relative bg-primary hover:bg-primary/90 text-primary-foreground rounded-full w-20 h-20 group-hover:scale-110 transition-transform"
-              >
-                <Play className="w-10 h-10 fill-current" />
-              </Button>
-            </div>
+          <div className="relative aspect-video rounded-2xl overflow-hidden border-2 border-primary/10">
+            <iframe
+              className="w-full h-full"
+              src="https://www.youtube.com/embed/aH849lDG6zQ"
+              title="GF Training Video"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
           </div>
         </div>
 

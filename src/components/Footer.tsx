@@ -1,5 +1,5 @@
 import { Facebook, Instagram, Linkedin } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 // X (Twitter) Icon
 const XIcon = ({ className }: { className?: string }) => (
@@ -26,21 +26,28 @@ const TikTokIcon = ({ className }: { className?: string }) => (
 );
 
 const Footer = () => {
-  useEffect(() => {
-    // Load Gummi script for footer
-    const script = document.createElement('script');
-    script.async = true;
-    script.setAttribute('data-uid', '887ca30a1c');
-    script.src = 'https://gummi.kit.com/887ca30a1c/index.js';
-    document.head.appendChild(script);
+  const formContainerRef = useRef<HTMLDivElement>(null);
 
-    return () => {
-      // Cleanup script on unmount
-      const existingScript = document.querySelector('script[data-uid="887ca30a1c"]');
-      if (existingScript) {
-        existingScript.remove();
+  useEffect(() => {
+    // Wait for ConvertKit form to load and move it to our container
+    const checkForForm = setInterval(() => {
+      if (formContainerRef.current) {
+        // Look for ConvertKit form elements
+        const convertKitForm = document.querySelector('form[data-sv-form]') || 
+                               document.querySelector('.ck_form') ||
+                               document.querySelector('[id*="ck"]');
+        
+        if (convertKitForm && formContainerRef.current && !formContainerRef.current.contains(convertKitForm)) {
+          formContainerRef.current.appendChild(convertKitForm as Node);
+          clearInterval(checkForForm);
+        }
       }
-    };
+    }, 100);
+
+    // Stop checking after 10 seconds
+    setTimeout(() => clearInterval(checkForForm), 10000);
+
+    return () => clearInterval(checkForForm);
   }, []);
 
   return (
@@ -115,20 +122,8 @@ const Footer = () => {
             <p className="text-white/60 text-xs">Nýjustu ráðin um heilsu og þjálfun</p>
           </div>
           
-          <div className="max-w-sm mx-auto">
-            <form className="flex gap-2">
-              <input 
-                type="email" 
-                placeholder="Netfangið þitt" 
-                className="flex-1 px-3 py-2 bg-white/10 border border-white/20 rounded text-white placeholder-white/60 focus:outline-none focus:border-primary text-sm"
-              />
-              <button 
-                type="submit" 
-                className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-4 py-2 rounded text-sm transition-all"
-              >
-                Gerast áskrifandi
-              </button>
-            </form>
+          <div className="max-w-sm mx-auto" ref={formContainerRef}>
+            {/* ConvertKit form will be injected here */}
           </div>
         </div>
 

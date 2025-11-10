@@ -1,5 +1,4 @@
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
+import { Facebook, Instagram, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -8,7 +7,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Check } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 interface SignupFormData {
   fullName: string;
@@ -36,6 +36,21 @@ const Signup = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  // Remove any ConvertKit email signup forms from this page
+  useEffect(() => {
+    const removeConvertKitForms = () => {
+      // Remove ConvertKit forms that might be injected
+      const convertKitForms = document.querySelectorAll('form[data-sv-form], .ck_form, [id*="ck"], [class*="convertkit"]');
+      convertKitForms.forEach(form => form.remove());
+    };
+
+    // Remove immediately and set up interval to catch any that load later
+    removeConvertKitForms();
+    const interval = setInterval(removeConvertKitForms, 500);
+
+    return () => clearInterval(interval);
+  }, []);
   const isFormValid =
     formData.fullName.trim() !== "" &&
     formData.email.trim() !== "" &&
@@ -102,25 +117,31 @@ const Signup = () => {
       backgroundPosition: '0 0, 0 100%',
       backgroundRepeat: 'no-repeat, no-repeat'
     }}>
-      <Navigation />
-      
-      {/* Hero Section */}
-      <section className="pt-32 pb-8 px-4">
-        <div className="container mx-auto max-w-6xl text-center">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-black leading-tight mb-6 font-display">
-            <span className="text-primary">Byrjaðu</span>{" "}
-            <span className="text-foreground">með GF Training</span>
-          </h1>
-          
-          <p className="text-xl text-foreground/80 max-w-4xl mx-auto mb-8 leading-relaxed">
-            Tilbúinn til að umbreyta líkamanum þínum og ná markmiðum þínum? 
-            Taktu þátt með þúsundum karla sem hafa þegar byrjað ferð sína með GF Training.
-          </p>
+      {/* Minimal Header - logo and VIP button only */}
+      <nav className="fixed top-6 left-8 right-8 z-50">
+        <div className="bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl px-8 max-w-[1200px] mx-auto">
+          <div className="flex items-center justify-between h-20">
+            <div className="flex items-center">
+              <Link to="/" className="cursor-pointer hover:opacity-80 transition-opacity">
+                <span className="text-2xl font-black tracking-tight uppercase font-display">
+                  GF<span className="text-primary">Training</span>
+                </span>
+              </Link>
+            </div>
+            <div>
+              <Button 
+                className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-6 py-2 rounded-full text-sm"
+                onClick={() => (window.location.href = '/apply')}
+              >
+                VIP umsókn
+              </Button>
+            </div>
+          </div>
         </div>
-      </section>
+      </nav>
 
       {/* Signup Form Section */}
-      <section className="pt-8 pb-20 px-4">
+      <section className="pt-32 pb-20 px-4">
         <div className="container mx-auto max-w-2xl">
           <div>
             {/* Signup Form */}
@@ -259,7 +280,33 @@ const Signup = () => {
         </div>
       </section>
 
-      <Footer />
+      {/* Minimal Footer */}
+      <footer className="pb-12 px-8">
+        <div className="bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl px-8 py-8 max-w-[1200px] mx-auto text-center">
+          <div className="mb-3">
+            <span className="text-lg font-black">
+              GF<span className="text-primary">TRAINING</span>
+            </span>
+          </div>
+          <div className="flex items-center justify-center gap-4 mb-4">
+            <a href="#" aria-label="Facebook" className="text-white/60 hover:text-primary transition-colors">
+              <Facebook className="w-4 h-4" />
+            </a>
+            <a href="#" aria-label="Instagram" className="text-white/60 hover:text-primary transition-colors">
+              <Instagram className="w-4 h-4" />
+            </a>
+            <a href="#" aria-label="LinkedIn" className="text-white/60 hover:text-primary transition-colors">
+              <Linkedin className="w-4 h-4" />
+            </a>
+          </div>
+          <div className="flex items-center justify-center gap-3 text-xs">
+            <a href="/terms" className="text-white/60 hover:text-primary transition-colors">Skilmálar</a>
+            <span className="text-white/20">•</span>
+            <a href="/terms" className="text-white/60 hover:text-primary transition-colors">Persónuverndarstefna</a>
+          </div>
+          <div className="mt-3 text-white/40 text-xs">© 2025 GF Training</div>
+        </div>
+      </footer>
     </div>
   );
 };
