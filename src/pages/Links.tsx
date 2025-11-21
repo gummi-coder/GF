@@ -19,7 +19,7 @@ const links = [
   },
   {
     title: "VIP Umsókn",
-    url: "/apply",
+    url: "https://www.gftraining.is/apply",
     icon: LinkIcon,
     color: "bg-primary hover:bg-primary/90",
     isVip: true
