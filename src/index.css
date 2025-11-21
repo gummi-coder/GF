@@ -74,3 +74,23 @@ All colors MUST be HSL.
     background-repeat: repeat, repeat, no-repeat, no-repeat, no-repeat, no-repeat;
   }
 }
+
+@keyframes thunder {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  25% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  75% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+

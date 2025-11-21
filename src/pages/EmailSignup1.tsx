@@ -1,6 +1,38 @@
 import { useEffect } from "react";
 
 const EmailSignup1 = () => {
+  // Remove any ConvertKit email signup forms from the bottom corner (injected by global script)
+  useEffect(() => {
+    const removeBottomCornerForms = () => {
+      // Remove ConvertKit forms that might be injected by the global script from index.html
+      // Target forms that are NOT in our designated container
+      const allForms = document.querySelectorAll('form[data-sv-form], .ck_form, [id*="ck"], [class*="convertkit"]');
+      allForms.forEach(form => {
+        // Only remove if it's not in our designated container
+        const isInContainer = form.closest('#gummi-form-container');
+        if (!isInContainer) {
+          form.remove();
+        }
+      });
+      
+      // Also check for Gummi forms that might be injected elsewhere
+      const allGummiForms = document.querySelectorAll('[id*="gummi"]');
+      allGummiForms.forEach(form => {
+        const isInContainer = form.closest('#gummi-form-container');
+        const isContainer = form.id === 'gummi-form-container';
+        if (!isInContainer && !isContainer) {
+          form.remove();
+        }
+      });
+    };
+
+    // Remove immediately and set up interval to catch any that load later
+    removeBottomCornerForms();
+    const interval = setInterval(removeBottomCornerForms, 500);
+
+    return () => clearInterval(interval);
+  }, []);
+
   useEffect(() => {
     // Load Gummi script
     const script = document.createElement('script');
@@ -48,7 +80,7 @@ const EmailSignup1 = () => {
 
           {/* Gummi Form Container */}
           <div className="max-w-md mx-auto">
-            <div className="bg-card/50 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
+            <div id="gummi-form-container" className="bg-card/50 backdrop-blur-sm border border-white/10 rounded-2xl p-8">
               <script async data-uid="887ca30a1c" src="https://gummi.kit.com/887ca30a1c/index.js"></script>
             </div>
           </div>

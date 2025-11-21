@@ -7,6 +7,38 @@ const EmailSignup2 = () => {
   const [showFallback, setShowFallback] = useState(false);
   const scriptLoadedRef = useRef(false);
 
+  // Remove any ConvertKit email signup forms from the bottom corner (injected by global script)
+  useEffect(() => {
+    const removeBottomCornerForms = () => {
+      // Remove ConvertKit forms that might be injected by the global script from index.html
+      // Target forms that are NOT in our designated containers
+      const allForms = document.querySelectorAll('form[data-sv-form], .ck_form, [id*="ck"], [class*="convertkit"]');
+      allForms.forEach(form => {
+        // Only remove if it's not in our designated containers
+        const isInContainer = form.closest('#gummi-form-container, #gummi-form-container-2');
+        if (!isInContainer) {
+          form.remove();
+        }
+      });
+      
+      // Also check for Gummi forms that might be injected elsewhere
+      const allGummiForms = document.querySelectorAll('[id*="gummi"]');
+      allGummiForms.forEach(form => {
+        const isInContainer = form.closest('#gummi-form-container, #gummi-form-container-2');
+        const isContainer = form.id === 'gummi-form-container' || form.id === 'gummi-form-container-2';
+        if (!isInContainer && !isContainer) {
+          form.remove();
+        }
+      });
+    };
+
+    // Remove immediately and set up interval to catch any that load later
+    removeBottomCornerForms();
+    const interval = setInterval(removeBottomCornerForms, 500);
+
+    return () => clearInterval(interval);
+  }, []);
+
   useEffect(() => {
     // Load Gummi script in both containers - the script can inject forms where it's placed
     if (!scriptLoadedRef.current) {
@@ -31,6 +63,7 @@ const EmailSignup2 = () => {
         script2.src = 'https://gummi.kit.com/c71d9827c7/index.js';
         container2.appendChild(script2);
       }
+
 
       // Check if form loaded after a delay
       setTimeout(() => {
@@ -177,7 +210,7 @@ const EmailSignup2 = () => {
             <div className="flex items-start gap-3">
               <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
               <span className="text-sm text-foreground/90">
-                Næring án öfga: prótein, kolvetni, fita — einfaldar formúlur
+                Næring án öfga: prótein, kolvetni, fita - einfaldar formúlur
               </span>
             </div>
             
@@ -192,14 +225,18 @@ const EmailSignup2 = () => {
 
         {/* Trust Indicators */}
         <div className="text-center mb-8 space-y-2">
-          <p className="text-sm text-foreground/80">100% ókeypis — getur hætt hvenær sem er</p>
-          <p className="text-sm text-foreground/80">Enginn ruslpóstur — bara aðferðir sem virka raunverulega</p>
+          <p className="text-sm text-foreground/80">
+            100% ókeypis - getur hætt hvenær sem er
+          </p>
+          <p className="text-sm text-foreground/80">
+            Enginn ruslpóstur - bara aðferðir sem virka raunverulega
+          </p>
         </div>
 
         {/* Testimonial */}
         <div className="bg-card/30 backdrop-blur-sm border border-white/10 rounded-2xl p-6 mb-8">
           <blockquote className="text-sm text-foreground/90 italic leading-relaxed mb-4">
-            "Ég hjálpa fólki að hætta að giska og ná loksins árangri. Engir skyndikúrar, engin töfralausn — bara skýrt kerfi sem þú getur fylgt. Þessi 30 daga sería eru sömu verkfæri og ég nota með viðskiptavinum mínum til að sjá raunverulegar breytingar á nokkrum vikum."
+            "Ég hjálpa fólki að hætta að giska og ná loksins árangri. Engir skyndikúrar, engin töfralausn, bara skýrt kerfi sem þú getur fylgt. Þessi 30 daga sería eru sömu verkfæri og ég nota með viðskiptavinum mínum til að sjá raunverulegar breytingar á nokkrum vikum."
           </blockquote>
           <div className="text-sm">
             <div className="font-bold text-foreground">Gudmundur Fridgeirsson</div>

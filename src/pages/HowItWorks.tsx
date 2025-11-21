@@ -102,7 +102,7 @@ const HowItWorks = () => {
 
   return (
     <div
-      className="min-h-screen bg-background text-foreground relative overflow-hidden"
+      className="min-h-screen bg-background text-foreground relative"
       style={{
         backgroundImage: `
           radial-gradient(ellipse 1000px 800px at 10% 5%, hsl(var(--primary)/0.20) 0%, transparent 60%),
@@ -234,7 +234,7 @@ const HowItWorks = () => {
       </section>
 
       {/* How It Works Section - Similar to Testimonials Layout */}
-      <section className="py-20 px-4">
+      <section className="py-20 px-4 relative">
         <div className="container mx-auto max-w-7xl">
           <div className="text-center mb-16">
             <p className="text-primary text-lg font-bold mb-4 font-sans">GF Training</p>
@@ -249,7 +249,7 @@ const HowItWorks = () => {
 
           <div className="grid lg:grid-cols-2 gap-16 items-start">
             {/* Left side - Photo/Content that scrolls */}
-            <div className="lg:sticky lg:top-24 pt-8">
+            <div className="lg:sticky lg:top-24 lg:self-start pt-8">
               <div className="text-center">
                 <div className="flex justify-center gap-2 mb-8">
                   {[...Array(5)].map((_, j) => (
