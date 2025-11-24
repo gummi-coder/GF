@@ -44,198 +44,33 @@ const Apply = () => {
     };
   }, []);
 
-  // Remove any ConvertKit email signup forms from the bottom corner (injected by global script)
+  // Remove Gummi email signup form from bottom
   useEffect(() => {
-    const removeBottomCornerForms = () => {
-      // Remove ALL ConvertKit/Gummi forms - be very aggressive
-      const selectors = [
-        'form[data-sv-form]',
-        '.ck_form',
-        '[id*="ck"]',
-        '[class*="convertkit"]',
-        '[class*="formkit"]',
-        '[data-sv-form]',
-        '[id*="gummi"]',
-        '[class*="gummi"]',
-        'form[action*="convertkit"]',
-        'form[action*="gummi"]',
-        '[data-uid="887ca30a1c"]',
-        'iframe[src*="convertkit"]',
-        'iframe[src*="gummi"]',
-        '[data-uid*="887ca30a1c"]',
-        'div[data-uid*="887ca30a1c"]'
-      ];
-
-      selectors.forEach(selector => {
-        try {
-          const elements = document.querySelectorAll(selector);
-          elements.forEach(element => {
-            // Only keep if it's inside our application form
-            const isInApplicationForm = element.closest('form, [class*="application"], [id*="application"], [class*="CustomApplication"], [class*="custom-application"]');
-            if (!isInApplicationForm) {
-              element.remove();
-            }
-          });
-        } catch (e) {
-          // Ignore selector errors
-        }
-      });
-
-      // Remove any divs that contain forms (ConvertKit/Gummi often wraps forms in divs)
-      const allDivs = document.querySelectorAll('div');
-      allDivs.forEach(div => {
-        const hasForm = div.querySelector('form[data-sv-form], .ck_form, [id*="ck"], [class*="convertkit"], [id*="gummi"]');
-        if (hasForm) {
-          const isInApplicationForm = div.closest('form, [class*="application"], [id*="application"], [class*="CustomApplication"]');
-          if (!isInApplicationForm) {
-            // Check if this div is at the bottom of the page (likely the floating form)
-            const rect = div.getBoundingClientRect();
-            const isAtBottom = rect.bottom > window.innerHeight - 100 || rect.top > window.innerHeight * 0.7;
-            const isFixed = window.getComputedStyle(div).position === 'fixed';
-            if (isAtBottom || isFixed) {
-              div.remove();
-            }
-          }
-        }
-      });
-
-      // Remove any forms in the footer (this page's footer)
-      const footer = document.querySelector('footer');
-      if (footer) {
-        const allFooterElements = footer.querySelectorAll('*');
-        allFooterElements.forEach(element => {
-          if (element.tagName === 'FORM' || 
-              element.id?.includes('ck') || 
-              element.id?.includes('gummi') ||
-              element.className?.toString().includes('convertkit') ||
-              element.className?.toString().includes('gummi') ||
-              element.className?.toString().includes('formkit')) {
-            element.remove();
-          }
-        });
-      }
-
-      // Remove any fixed/floating elements that look like forms
-      const allFixedElements = Array.from(document.querySelectorAll('*')).filter(el => {
-        const style = window.getComputedStyle(el);
-        return (style.position === 'fixed' || style.position === 'absolute') && (
-          el.tagName === 'FORM' ||
-          el.id?.includes('ck') ||
-          el.id?.includes('gummi') ||
-          el.className?.toString().includes('convertkit') ||
-          el.className?.toString().includes('gummi') ||
-          el.className?.toString().includes('formkit') ||
-          el.querySelector('form[data-sv-form]') ||
-          el.querySelector('.ck_form') ||
-          el.querySelector('[id*="ck"]') ||
-          el.querySelector('[id*="gummi"]')
-        );
-      });
-      allFixedElements.forEach(el => {
-        const isInApplicationForm = el.closest('form, [class*="application"], [id*="application"]');
+    const removeGummiForm = () => {
+      // Only target Gummi forms with specific identifiers
+      const gummiForms = document.querySelectorAll(
+        '[data-uid="887ca30a1c"], [data-uid*="887ca30a1c"], form[data-sv-form], [id*="gummi"]:not([class*="CustomApplication"])'
+      );
+      
+      gummiForms.forEach(form => {
+        // Make absolutely sure it's NOT in our application form
+        const isInApplicationForm = form.closest('.CustomApplication, .application-form');
         if (!isInApplicationForm) {
-          el.remove();
-        }
-      });
-
-      // Remove any elements directly in body that look like forms
-      const bodyChildren = Array.from(document.body.children);
-      bodyChildren.forEach(child => {
-        if (child.tagName === 'FORM' || 
-            child.id?.includes('ck') || 
-            child.id?.includes('gummi') ||
-            child.className?.toString().includes('convertkit') ||
-            child.className?.toString().includes('gummi')) {
-          const isInApplicationForm = child.closest('form, [class*="application"], [id*="application"]');
-          if (!isInApplicationForm && child.id !== 'root') {
-            child.remove();
-          }
-        }
-      });
-
-      // Remove any elements with email input fields that aren't in our form
-      const emailInputs = document.querySelectorAll('input[type="email"], input[placeholder*="Email"], input[placeholder*="email"]');
-      emailInputs.forEach(input => {
-        const isInApplicationForm = input.closest('form, [class*="application"], [id*="application"], [class*="CustomApplication"]');
-        if (!isInApplicationForm) {
-          // Remove the form containing this input
-          const form = input.closest('form, div, section');
-          if (form && form !== document.body && form.id !== 'root') {
-            form.remove();
-          }
-        }
-      });
-
-      // Remove any buttons with "Skrá mig" or similar text that aren't in our form
-      const allButtons = document.querySelectorAll('button, [role="button"], input[type="submit"], a[role="button"]');
-      allButtons.forEach(button => {
-        const buttonText = button.textContent?.toLowerCase() || button.innerText?.toLowerCase() || '';
-        if ((buttonText.includes('skrá') || buttonText.includes('sign up') || buttonText.includes('subscribe')) && 
-            buttonText.length < 50) { // Short text suggests it's a signup button
-          const isInApplicationForm = button.closest('form, [class*="application"], [id*="application"], [class*="CustomApplication"]');
-          if (!isInApplicationForm) {
-            // Remove the entire parent container
-            let parent = button.parentElement;
-            while (parent && parent !== document.body && parent.id !== 'root') {
-              const parentText = parent.textContent?.toLowerCase() || '';
-              if (parentText.includes('email') || parentText.includes('skrá') || parent.tagName === 'FORM' || parent.tagName === 'DIV') {
-                parent.remove();
-                break;
-              }
-              parent = parent.parentElement;
-            }
-          }
-        }
-      });
-
-      // Specifically target "Skrá mig" button text
-      const allElements = document.querySelectorAll('*');
-      allElements.forEach(el => {
-        const text = el.textContent || el.innerText || '';
-        if (text.includes('Skrá mig') || text.includes('Skrá mig.') || text.includes('skrá mig')) {
-          const isInApplicationForm = el.closest('form, [class*="application"], [id*="application"], [class*="CustomApplication"]');
-          if (!isInApplicationForm && el.tagName !== 'BODY' && el.id !== 'root') {
-            // Check if this element or its parent has an email input
-            const hasEmailInput = el.querySelector('input[type="email"]') || el.closest('[class*="email"]');
-            if (hasEmailInput) {
-              let toRemove = el;
-              // Try to find the form/container
-              while (toRemove && toRemove !== document.body && toRemove.id !== 'root') {
-                if (toRemove.tagName === 'FORM' || toRemove.querySelector('input[type="email"]')) {
-                  toRemove.remove();
-                  break;
-                }
-                toRemove = toRemove.parentElement;
-              }
-            }
-          }
+          form.remove();
         }
       });
     };
 
-    // Remove immediately multiple times to catch forms that load quickly
-    removeBottomCornerForms();
-    setTimeout(removeBottomCornerForms, 50);
-    setTimeout(removeBottomCornerForms, 100);
-    setTimeout(removeBottomCornerForms, 200);
-    setTimeout(removeBottomCornerForms, 500);
-    setTimeout(removeBottomCornerForms, 1000);
-    setTimeout(removeBottomCornerForms, 2000);
+    removeGummiForm();
+    const interval = setInterval(removeGummiForm, 500);
     
-    const interval = setInterval(removeBottomCornerForms, 100);
-
-    // Also use MutationObserver to catch forms as they're added
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach(() => {
-        removeBottomCornerForms();
-      });
+    const observer = new MutationObserver(() => {
+      removeGummiForm();
     });
-
+    
     observer.observe(document.body, {
       childList: true,
-      subtree: true,
-      attributes: true,
-      attributeFilter: ['class', 'id', 'style']
+      subtree: true
     });
 
     return () => {
@@ -247,21 +82,12 @@ const Apply = () => {
   return (
     <>
       <style>{`
-        /* Hide any ConvertKit/Gummi forms */
-        form[data-sv-form],
-        .ck_form,
-        [id*="ck"]:not([id*="application"]):not([id*="root"]),
-        [class*="convertkit"],
-        [class*="gummi"]:not([id*="gummi-form-container"]),
+        /* Hide only Gummi forms with specific identifiers */
         [data-uid="887ca30a1c"],
-        div:has(input[type="email"]):not(form):not([class*="application"]):not([id*="application"]),
-        div:has(button:contains("Skrá mig")):not([class*="application"]):not([id*="application"]) {
+        [data-uid*="887ca30a1c"],
+        form[data-sv-form]:not(.CustomApplication *),
+        [id*="gummi"]:not(.CustomApplication *):not(.application-form *) {
           display: none !important;
-          visibility: hidden !important;
-          opacity: 0 !important;
-          height: 0 !important;
-          width: 0 !important;
-          overflow: hidden !important;
         }
       `}</style>
     <div className="min-h-screen bg-background text-foreground relative overflow-hidden" style={{
@@ -341,8 +167,8 @@ const Apply = () => {
             
             <div className="text-sm text-foreground/60">
               Hafa samband við GF Training<br />
-              <a href="mailto:support@gftraining.com" className="text-primary hover:text-primary/80">
-                support@gftraining.com
+              <a href="mailto:gummi@gftraining.is" className="text-primary hover:text-primary/80">
+                gummi@gftraining.is
               </a>
             </div>
           </div>

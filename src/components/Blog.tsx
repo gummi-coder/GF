@@ -6,7 +6,7 @@ const Blog = () => {
   const articles = [
     {
       title: "How to *Guarantee* You'll Never Change Your Body Composition",
-      excerpt: "In these articles, we talk a lot about what you can do to transform your body composition — this time, we're talking about 3 things that will ensure you never build...",
+      excerpt: "In these articles, we talk a lot about what you can do to transform your body composition - this time, we're talking about 3 things that will ensure you never build...",
       category: "Muscles",
       readTime: "3 min read",
     },

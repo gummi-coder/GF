@@ -74,7 +74,7 @@ const Contact = () => {
     },
     {
       question: "Þarf ég sérstök tæki eða búnað?",
-      answer: "Nei, enginn sérstakur búnaður er nauðsynlegur! Prógrömin okkar eru hönnuð til að virka með því sem þú hefur til ráðstöfunar — hvort sem það er heilsurækt, heimabúnaður eða bara líkamsþyngdaræfingar. Þjálfarinn þinn aðlagar æfingarnar að þínum aðstæðum."
+      answer: "Nei, enginn sérstakur búnaður er nauðsynlegur! Prógrömin okkar eru hönnuð til að virka með því sem þú hefur til ráðstöfunar - hvort sem það er heilsurækt, heimabúnaður eða bara líkamsþyngdaræfingar. Þjálfarinn þinn aðlagar æfingarnar að þínum aðstæðum."
     },
     {
       question: "Hversu oft hef ég samskipti við þjálfarann minn?",
@@ -82,7 +82,7 @@ const Contact = () => {
     },
     {
       question: "Hvað ef ég er algjör byrjandi?",
-      answer: "Frábært! Prógrömin okkar henta öllum — frá byrjendum til lengra kominna. Þjálfarinn þinn byrjar þar sem þú ert staddur og hjálpar þér að taka framförum í réttu tempói fyrir líkama þinn og markmið."
+      answer: "Frábært! Prógrömin okkar henta öllum - frá byrjendum til lengra kominna. Þjálfarinn þinn byrjar þar sem þú ert staddur og hjálpar þér að taka framförum í réttu tempói fyrir líkama þinn og markmið."
     },
     {
       question: "Get ég sett áskriftina á pásu eða hætt við hana?",
@@ -228,7 +228,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="text-lg font-bold text-foreground mb-2">Netfang</h3>
-                    <p className="text-foreground/80">support@gftraining.com</p>
+                    <p className="text-foreground/80">gummi@gftraining.is</p>
                     <p className="text-foreground/60 text-sm">Við svörum innan 24 klst.</p>
                   </div>
                 </div>
@@ -241,7 +241,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="text-lg font-bold text-foreground mb-2">Staðsetning</h3>
-                    <p className="text-foreground/80">Á netinu — um allan heim</p>
+                    <p className="text-foreground/80">Á netinu - um allan heim</p>
                     <p className="text-foreground/60 text-sm">Þjónustum Íslendinga um allan heim</p>
                   </div>
                 </div>

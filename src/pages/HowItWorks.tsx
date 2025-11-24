@@ -63,18 +63,18 @@ const HowItWorks = () => {
       title: "Næringar þjálfun",
       description: "Þjálfarinn þinn hjálpar þér að skilja makró næringuna, byggja upp einfalt matarplan og taka ákvarðanir sem passa inn í þinn lífsstíl.",
       benefits: [
-        "Þú færð persónulegar aðlögun út frá árangri og óskum — engar skyndilausnir, engar óraunhæfar takmarkanir.",
-        "Lærðu að næra líkamann fyrir orku, bata og langtíma árangur — án þess að hætta að njóta matarins sem þú elskar.",
+        "Þú færð persónulegar aðlögun út frá árangri og óskum - engar skyndilausnir, engar óraunhæfar takmarkanir.",
+        "Lærðu að næra líkamann fyrir orku, bata og langtíma árangur - án þess að hætta að njóta matarins sem þú elskar.",
         "Þú munt loksins fá stjórn á næringunni og finna sjálfstraustið í hvernig þú borðar fyrir markmiðin þín."
       ]
     },
     {
       icon: <Clock className="w-8 h-8" />,
       title: "Markmiðasetning",
-      description: "GF Training hjálpar þér að móta venjur, rútínu og hugarfar sem halda þér stöðugum — jafnvel þegar lífið verður erfitt.",
+      description: "GF Training hjálpar þér að móta venjur, rútínu og hugarfar sem halda þér stöðugum - jafnvel þegar lífið verður erfitt.",
       benefits: [
         "Þú setur skýr markmið með þjálfaranum þínum og lærir að vinna í gegnum stöðnun, viðhalda hvatningu og taka aðgerðir á hverjum degi.",
-        "Þú þróar með þér andlegan styrk til að fylgja eftir — ekki bara í nokkrar vikur, heldur til frambúðar.",
+        "Þú þróar með þér andlegan styrk til að fylgja eftir - ekki bara í nokkrar vikur, heldur til frambúðar.",
         "Ef þú þarft stuðning eða leiðsögn er þjálfarinn þinn alltaf aðeins ein skilaboð í burtu."
       ]
     },
@@ -85,13 +85,13 @@ const HowItWorks = () => {
       benefits: [
         "Sendu persónulegar spurningar hvenær sem er og fáðu svör innan 24 klukkustunda til að halda þér á réttri braut.",
         "Samskiptin þín við þjálfarann eru trúnaðarmál, svo þú getur verið fullkomlega rólegur með að ræða HVAÐ sem er.",
-        "Skráðu æfingarnar þínar, fylgstu með þyngdum og endurtekningum, og sjáðu árangurinn þinn — allt á einum stað."
+        "Skráðu æfingarnar þínar, fylgstu með þyngdum og endurtekningum, og sjáðu árangurinn þinn - allt á einum stað."
       ]
     },
     {
       icon: <Smartphone className="w-8 h-8" />,
       title: "GF Training App",
-      description: "Öll okkar þjálfun fer fram i GF Training appinu þar sem þú getur fylgst með  þyngdum, næringu og árangurinn þínum — allt á einum stað.",
+      description: "Öll okkar þjálfun fer fram i GF Training appinu þar sem þú getur fylgst með  þyngdum, næringu og árangurinn þínum - allt á einum stað.",
       benefits: [
         "Fáðu aðgang að æfingasafni með myndböndum sem sýna rétta framkvæmd til að hámarka árangur og forðast meiðsli.",
         "Þjálfarinn þinn uppfærir áætlanirnar beint í appinu, þannig að allt er einfalt, skipulagt og auðvelt að fylgja eftir.",
@@ -242,8 +242,8 @@ const HowItWorks = () => {
               <span className="text-foreground">Svona virkar GF Training</span>
             </h2>
             <p className="text-lg text-foreground/80 max-w-4xl mx-auto">
-              Raunveruleg breyting krefst meira en fræðslu — hún krefst umhverfis sem styður þig til að breyta lífinu þínu nægir ekki bara að vita hvað á að gera.
-              GF Training gefur þér allt sem þú þarft til að ná varanlegum árangri — prófað ferli, hugarfarsvinnu, sérfræðilega leiðsögn og umhverfi sem gerir breytinguna óumflýjanlega.
+              Raunveruleg breyting krefst meira en fræðslu - hún krefst umhverfis sem styður þig til að breyta lífinu þínu nægir ekki bara að vita hvað á að gera.
+              GF Training gefur þér allt sem þú þarft til að ná varanlegum árangri - prófað ferli, hugarfarsvinnu, sérfræðilega leiðsögn og umhverfi sem gerir breytinguna óumflýjanlega.
             </p>
           </div>
 
@@ -369,7 +369,7 @@ const HowItWorks = () => {
           </p>
           
           <p className="text-lg text-foreground/80 mb-12 leading-relaxed">
-            Ef þú ert tilbúinn að sjá hvort þú eigir rétt á plássi, fylltu út stutt umsóknareyðublað (2–3 mínútur) og bókaðu símtal við okkur.
+            Ef þú ert tilbúinn að sjá hvort þú eigir rétt á plássi, fylltu út stutt umsóknareyðublað (2-3 mínútur) og bókaðu símtal við okkur.
             <br />
             <br />
             Framtíðar þú mun þakka þér, <span className="font-bold">svo eftir hverju ertu að bíða?</span>

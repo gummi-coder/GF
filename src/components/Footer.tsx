@@ -99,7 +99,7 @@ const Footer = () => {
             <h4 className="font-bold mb-3 text-sm text-white">Efni</h4>
             <ul className="space-y-2">
               <li><a href="/apply" className="text-white/60 hover:text-primary transition-colors text-xs">VIP umsókn</a></li>
-              <li><a href="/about" className="text-white/60 hover:text-primary transition-colors text-xs">Um okkur</a></li>
+              <li><a href="/about" className="text-white/60 hover:text-primary transition-colors text-xs">Um GF Training</a></li>
               <li><a href="/contact" className="text-white/60 hover:text-primary transition-colors text-xs">Hafa samband</a></li>
             </ul>
           </div>

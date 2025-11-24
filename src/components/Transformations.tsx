@@ -44,7 +44,7 @@ const Transformations = () => {
             Menn eins og þú, að ná árangri með <span className="text-primary">GF Training</span>.
           </h2>
           <p className="text-xl text-foreground/80 font-sans">
-            Við höfum hjálpað fjölda karla að móta líkamann og finna sjálfstraustið aftur.
+            Ég hef hjálpað fjölda karla að móta líkamann og finna sjálfstraustið aftur.
           </p>
         </div>
 

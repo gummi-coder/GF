@@ -10,7 +10,7 @@ const Stats = () => {
             Taktu fyrsta skrefið og vertu hluti af ört vaxandi hópi karla sem eru að <span className="text-primary">breyta lífi sínu með GF Training.</span>
           </h2>
           <p className="text-xl text-foreground/80 font-sans">
-            GF Training er hraðast vaxandi netþjálfunarfyrirtæki fyrir karla á Íslandi.
+            GF Training er vaxandi netþjálfunarfyrirtæki fyrir karla á Íslandi.
           </p>
         </div>
 

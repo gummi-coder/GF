@@ -26,7 +26,7 @@ const Hero = () => {
         <p className="text-lg md:text-xl text-foreground/80 max-w-4xl mx-auto mb-12 animate-fade-in leading-relaxed font-sans">
           Ekkert bull. Engar afsakanir. Bara árangur sem endist.
           <br />
-          Við erum hér til að hjálpa körlum eins og þér að taka stjórnina aftur.
+          Ég er hér til að hjálpa körlum eins og þér að taka stjórnina aftur.
         </p>
 
         {/* Video Section */}
