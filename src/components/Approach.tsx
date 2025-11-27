@@ -17,11 +17,10 @@ const Approach = () => {
             </p>
             <div className="space-y-4 text-lg text-foreground/80">
               <p className="font-sans">
-                👉 Fjárþjálfun í heilsu og líkamsrækt er svo áhrifarík vegna þess að hún hjálpar körlum að
-                <span className="font-bold text-foreground"> breyta hegðun, hugsunarhætti og venjum - með tímanum.</span>
+                👉 Fjárþjálfun hjálpar körlum að breyta hugarfari, hegðun og venjum
               </p>
               <p className="font-sans">
-                👉 Engin önnur aðferð nær jafn djúpum og varanlegum árangri.
+                👉 Engin önnur aðferð skilar þér jafn djúpum og varanlegum árangri.
               </p>
               <p className="font-sans">
                 👉 <span className="font-bold text-foreground">Ég hjálpa þér að breyta lífsstílnum - ekki bara líkamanum.</span>

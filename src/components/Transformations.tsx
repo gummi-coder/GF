@@ -41,7 +41,7 @@ const Transformations = () => {
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-black mb-4 font-display md:whitespace-nowrap">
-            Menn eins og þú, að ná árangri með <span className="text-primary">GF Training</span>.
+            Fjarþjálfun fer fram í <span className="text-primary">GF Training</span> appinu.
           </h2>
           <p className="text-xl text-foreground/80 font-sans">
             Ég hef hjálpað fjölda karla að móta líkamann og finna sjálfstraustið aftur.

@@ -229,7 +229,7 @@ const Contact = () => {
                   <div>
                     <h3 className="text-lg font-bold text-foreground mb-2">Netfang</h3>
                     <p className="text-foreground/80">gummi@gftraining.is</p>
-                    <p className="text-foreground/60 text-sm">Við svörum innan 24 klst.</p>
+                    <p className="text-foreground/60 text-sm">Ég svara þér innan 24 klst.</p>
                   </div>
                 </div>
                 

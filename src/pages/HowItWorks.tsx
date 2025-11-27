@@ -147,7 +147,7 @@ const HowItWorks = () => {
           </div>
 
           <p className="text-lg text-foreground/80 max-w-4xl mx-auto mb-12">
-            Hjá GF Training færðu aðgang að GF Traning appinu þar sem þú hefur aðgang ap æfingarplani, nærigngar plani, árangri þínum og margt fleira.
+            Hjá GF Training færðu aðgang að GF Traning appinu þar sem þú hefur aðgang að æfingarplani, nærigngar plani, árangri þínum og margt fleira.
           </p>
 
           {/* Progress Photos Slideshow */}

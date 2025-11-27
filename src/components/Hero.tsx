@@ -44,11 +44,6 @@ const Hero = () => {
                 </Button>
               </div>
             </div>
-            
-            {/* Coach Label */}
-            <div className="absolute bottom-6 left-6 bg-primary text-primary-foreground px-6 py-3 rounded-lg font-bold text-lg">
-              COACH GF
-            </div>
           </div>
         </div>
 

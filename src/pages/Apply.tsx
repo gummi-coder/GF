@@ -130,7 +130,7 @@ const Apply = () => {
 
               <div className="text-lg leading-relaxed">
                 <p className="mb-4">
-                  <strong>✅ Taktu stjórnina aftur 👉</strong> Umbreyttu líkamanum, endurheimtu sjálfstraustið og sýndu að <strong>þú ert bara rétt að byrja!</strong>
+                  <strong>✅ Taktu stjórnina aftur 👉</strong> Breyttu líkamanum, endurheimtu sjálfstraustið og sýndu að <strong>þú ert bara rétt að byrja!</strong>
                 </p>
               </div>
 

@@ -3,15 +3,15 @@ import { Button } from "@/components/ui/button";
 
 const Method = () => {
   const benefits = [
-    "að breyta líkamanum sínum",
-    "sýna styrk sinn",
-    "sýna sjálfsvirðingu sína",
-    "vera fyrirmynd fyrir fjölskylduni",
+    "Breyta líkamanum sínum.",
+    "Byggja upp styrk styrk sinn.",
+    "Bera virðingu fyrir sjálfum sér.",
+    "Verða fyrirmynd fjölskyldunar.",
   ];
 
   const avoids = [
-    "Ég vill ekki sjá þig sætta þig við að vera óheilbrigður, án sjálfstrausts eða óánægður með sjálfan þig.",
-    "Ég vill ekki leyfa þér að trúa að þín \"Bestu ár\" sér búin",
+    "Sætta sig við að vera óheilgrigður, með litið sjálfstraust eða óánægður með sjálfan þig.",
+    "Leyfa þér að trúa því að þín \"bestu ár\" séu búin.",
   ];
 
   return (
@@ -52,13 +52,13 @@ const Method = () => {
           <div className="flex items-start gap-4">
             <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
             <p className="text-lg md:text-xl font-sans">
-              Ég hjálpa þér að vera sterkari og finna sjálfstraustið aftur.
+              Verða sterkari og finna sjálfstraustið aftur.
             </p>
           </div>
           <div className="flex items-start gap-4">
             <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
             <p className="text-lg md:text-xl font-sans">
-              Með <span className="font-bold">langtíma, sjálfbærri nálgun</span> á heilsu og líkamsrækt sem færir þér <span className="font-bold">stjórn á líkamanum og hvernig hann lítur út</span>.
+              Ná sýnum markmiðium og líða vel í sýni eigin líkama.
             </p>
           </div>
         </div>

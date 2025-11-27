@@ -63,7 +63,7 @@ const Footer = () => {
               </span>
             </div>
             <p className="text-white/60 text-xs mb-4 leading-relaxed">
-              Við hjálpum körlum að verða sterkari og finna sjálfstraust.
+              Ég hjálpa körlum að verða sterkari og finna sjálfstraust.
             </p>
             <div className="flex gap-3">
               <a href="#" className="text-white/60 hover:text-primary transition-colors">
