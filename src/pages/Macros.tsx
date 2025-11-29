@@ -355,7 +355,7 @@ const Macros = () => {
 
     const presetLabels: { [key: string]: string } = {
       balanced: 'Jafnvægi',
-      fat_loss: 'Fituhægð',
+      fat_loss: 'Fitu brennsla',
       athlete: 'Íþróttamaður',
       high_protein: 'Háprótein',
       low_fat: 'Lág fita',
@@ -435,7 +435,7 @@ const Macros = () => {
                   </div>
 
                   <div>
-                    <Label htmlFor="age">Aldur (ár) *</Label>
+                    <Label htmlFor="age">Aldur í árum *</Label>
                     <Input
                       id="age"
                       type="number"
