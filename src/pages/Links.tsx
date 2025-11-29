@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Facebook, Instagram, Linkedin, Youtube, Mail, ExternalLink, Link as LinkIcon, Twitter, CalendarDays, Globe, Dumbbell } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Youtube, Mail, ExternalLink, Link as LinkIcon, Twitter, CalendarDays, Globe, Dumbbell, Calculator } from "lucide-react";
 
 // Customize your links here - easy to add, remove, or modify
 const links = [
@@ -7,6 +7,13 @@ const links = [
     title: "Frír líkamsræktar grunnur",
     url: "/email2",
     icon: CalendarDays,
+    color: "bg-primary/90 hover:bg-primary",
+    isVip: false
+  },
+  {
+    title: "Macros Reiknivél",
+    url: "/macros",
+    icon: Calculator,
     color: "bg-primary/90 hover:bg-primary",
     isVip: false
   },
@@ -22,7 +29,7 @@ const links = [
     url: "https://www.gftraining.is/apply",
     icon: LinkIcon,
     color: "bg-primary hover:bg-primary/90",
-    isVip: true
+    isVip: false
   },
   {
     title: "Skráðu þig á póstlistann minn",
@@ -35,13 +42,6 @@ const links = [
     title: "GF Training heimasíða",
     url: "https://gftraining.is",
     icon: ExternalLink,
-    color: "bg-primary/85 hover:bg-primary/95",
-    isVip: false
-  },
-  {
-    title: "Vafra.is - Vantar þig vefsíðu?",
-    url: "https://www.vafra.is/",
-    icon: Globe,
     color: "bg-primary/85 hover:bg-primary/95",
     isVip: false
   },
@@ -122,33 +122,16 @@ const Links = () => {
           {links.map((link, index) => {
             const Icon = link.icon;
             return (
-              <div key={index} className={link.isVip ? "relative" : ""}>
-                {link.isVip && (
-                  <>
-                    <div 
-                      className="absolute -inset-0.5 rounded-2xl bg-white opacity-30 blur-sm"
-                      style={{
-                        animation: 'thunder 4s ease-in-out infinite'
-                      }}
-                    ></div>
-                    <div 
-                      className="absolute -inset-0.25 rounded-2xl bg-white opacity-20 blur-xs"
-                      style={{
-                        animation: 'thunder 5s ease-in-out infinite 1s'
-                      }}
-                    ></div>
-                  </>
-                )}
-                <a
-                  href={link.url}
-                  target={link.url.startsWith('http') ? '_blank' : '_self'}
-                  rel={link.url.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className={`${link.color} ${link.isVip ? 'relative z-10' : ''} text-white font-bold py-4 px-6 rounded-2xl flex items-center justify-center gap-3 transition-all hover:scale-105 hover:shadow-lg active:scale-95`}
-                >
-                  <Icon className="w-5 h-5" />
-                  <span>{link.title}</span>
-                </a>
-              </div>
+              <a
+                key={index}
+                href={link.url}
+                target={link.url.startsWith('http') ? '_blank' : '_self'}
+                rel={link.url.startsWith('http') ? 'noopener noreferrer' : undefined}
+                className={`${link.color} text-white font-bold py-4 px-6 rounded-2xl flex items-center justify-center gap-3 transition-all hover:scale-105 hover:shadow-lg active:scale-95`}
+              >
+                <Icon className="w-5 h-5" />
+                <span>{link.title}</span>
+              </a>
             );
           })}
         </div>

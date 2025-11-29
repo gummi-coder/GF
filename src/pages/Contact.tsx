@@ -1,5 +1,6 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -95,7 +96,14 @@ const Contact = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <>
+      <SEO
+        title="Hafðu samband - Fjarþjálfun og Einkaþjálfun | GF Training"
+        description="Hafðu samband við GF Training. Spurtu um fjarþjálfun, einkaþjálfun eða nærgangsþjálfun. Við svörum öllum fyrirspurnum."
+        keywords="hafðu samband, GF Training samband, fjarþjálfun samband, einkaþjálfun samband, spurtu um þjálfun"
+        canonical="https://gftraining.is/contact"
+      />
+      <div className="min-h-screen bg-background">
       <Navigation />
       
       {/* Hero Section */}
@@ -337,7 +345,8 @@ const Contact = () => {
       </section>
 
       <Footer />
-    </div>
+      </div>
+    </>
   );
 };
 

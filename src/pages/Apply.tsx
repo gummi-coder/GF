@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import CustomApplicationForm from "@/components/CustomApplicationForm";
+import SEO from "@/components/SEO";
 
 const Apply = () => {
   // Block the ConvertKit script from loading on this page
@@ -81,6 +82,12 @@ const Apply = () => {
 
   return (
     <>
+      <SEO
+        title="VIP Umsókn - Einkaþjálfun með takmarkaðu plássi | GF Training"
+        description="Sæktu um VIP þjálfun með takmarkaðu plássi. Premium einkaþjálfun fyrir karla sem vilja ná bestum árangri. Sérsniðin þjálfun og næringarráðleggingar."
+        keywords="VIP þjálfun, VIP umsókn, einkaþjálfun VIP, premium þjálfun, einkaþjálfun með takmarkaðu plássi, GF Training VIP"
+        canonical="https://gftraining.is/apply"
+      />
       <style>{`
         /* Hide only Gummi forms with specific identifiers */
         [data-uid="887ca30a1c"],

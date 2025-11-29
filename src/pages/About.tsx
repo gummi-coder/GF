@@ -1,5 +1,6 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Users, Target, Award, TrendingUp } from "lucide-react";
 
@@ -44,7 +45,14 @@ const About = () => {
   ];
 
   return (
-    <div 
+    <>
+      <SEO
+        title="Um okkur - GF Training | Fjarþjálfun og Einkaþjálfun fyrir karla"
+        description="Kynnstu GF Training og Guðmundi Friðgeirssyni. Við hjálpum körlum að ná markmiðum sínum með fjarþjálfun, einkaþjálfun og nærgangsþjálfun."
+        keywords="um GF Training, Guðmundur Friðgeirsson, fjarþjálfun, einkaþjálfun, líkamsrækt fyrir karla, þjálfun fyrir karla"
+        canonical="https://gftraining.is/about"
+      />
+      <div 
       className="min-h-screen bg-background"
       style={{
         backgroundImage: `
@@ -158,7 +166,8 @@ const About = () => {
       </section>
 
       <Footer />
-    </div>
+      </div>
+    </>
   );
 };
 

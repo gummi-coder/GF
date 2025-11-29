@@ -1,5 +1,6 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Check, Users, MessageCircle, Clock, Smartphone, Target, Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -101,18 +102,25 @@ const HowItWorks = () => {
   ];
 
   return (
-    <div
-      className="min-h-screen bg-background text-foreground relative"
-      style={{
-        backgroundImage: `
-          radial-gradient(ellipse 1000px 800px at 10% 5%, hsl(var(--primary)/0.20) 0%, transparent 60%),
-          radial-gradient(ellipse 900px 700px at 85% 95%, hsl(var(--primary)/0.14) 0%, transparent 60%)
-        `,
-        backgroundSize: '100% 2000px, 100% 2000px',
-        backgroundPosition: '0 0, 0 100%',
-        backgroundRepeat: 'no-repeat, no-repeat'
-      }}
-    >
+    <>
+      <SEO
+        title="Hvernig virkar þetta? - Fjarþjálfun og Einkaþjálfun | GF Training"
+        description="Lærðu hvernig fjarþjálfun og einkaþjálfun virkar hjá GF Training. Skoðaðu ferlið frá upphafi til enda og hvernig við hjálpum körlum að ná markmiðum sínum."
+        keywords="hvernig virkar fjarþjálfun, hvernig virkar einkaþjálfun, þjálfun ferli, GF Training ferli, líkamsrækt ferli"
+        canonical="https://gftraining.is/how-it-works"
+      />
+      <div
+        className="min-h-screen bg-background text-foreground relative"
+        style={{
+          backgroundImage: `
+            radial-gradient(ellipse 1000px 800px at 10% 5%, hsl(var(--primary)/0.20) 0%, transparent 60%),
+            radial-gradient(ellipse 900px 700px at 85% 95%, hsl(var(--primary)/0.14) 0%, transparent 60%)
+          `,
+          backgroundSize: '100% 2000px, 100% 2000px',
+          backgroundPosition: '0 0, 0 100%',
+          backgroundRepeat: 'no-repeat, no-repeat'
+        }}
+      >
       <Navigation />
       
       {/* Hero Section */}
@@ -386,7 +394,8 @@ const HowItWorks = () => {
       </section>
 
       <Footer />
-    </div>
+      </div>
+    </>
   );
 };
 

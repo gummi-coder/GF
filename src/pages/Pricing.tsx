@@ -1,5 +1,6 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Check, Star, Users, Clock, Target, Award, Lock, Smartphone, Utensils, Brain, BarChart3 } from "lucide-react";
@@ -25,7 +26,14 @@ const Pricing = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <>
+      <SEO
+        title="Verðskrá - Fjarþjálfun og Einkaþjálfun | GF Training"
+        description="Skoðaðu verðskrá okkar fyrir fjarþjálfun og einkaþjálfun. Sérsniðin þjálfun fyrir karla. Frá grunni til VIP þjálfunar. Byrjaðu ferilinn þinn í dag."
+        keywords="fjarþjálfun verð, einkaþjálfun verð, þjálfun verð, fjarþjálfun fyrir karla verð, einkaþjálfun fyrir karla verð, líkamsrækt verð, GF Training verð"
+        canonical="https://gftraining.is/pricing"
+      />
+      <div className="min-h-screen bg-background">
       <Navigation />
       
       {/* 1️⃣ Hero Section */}
@@ -346,7 +354,8 @@ const Pricing = () => {
       </section>
 
       <Footer />
-    </div>
+      </div>
+    </>
   );
 };
 
