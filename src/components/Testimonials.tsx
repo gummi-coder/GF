@@ -4,32 +4,32 @@ import { Button } from "@/components/ui/button";
 const Testimonials = () => {
   const testimonials = [
     {
-      text: "GF Training fjarlægði alla óvissu úr þjálfuninni. Í stað þess að eyða tíma í að finna út æfingar og mataræði sjálfur, er ég með þjálfara sem leiðbeinir mér, fylgist með mér og heldur mér ábyrgan. Á aðeins fjórum mánuðum hef ég séð frábæran árangur, ég byggi upp vöðva, léttist, bæti úthald og finn orku sem ég hef ekki fundið í mörg ár. Þetta prógramm er raunhæft, ég get borðað uppáhaldsmatinn minn og æfingarnar passa fullkomlega inn í dagskrána mína.",
+      text: "Þjálfunin er alveg frábær og akkúrat það sem ég þurfti til að byrja að koma mér af stað. Ég var alveg hættur að nenna þessu þegar ég var að mæta í ræktina með ekkert plan og ég vissi ekkert hvað ég ætti að borða eða neitt. Gummi lét mig hafa gott prógram og ég fékk næringaraðstoð sem kenndi mér að laga mitt eigið mataræði án þess að þurfa að borða bara kjúkling og hrísgrjón alla daga. Er mjög ánægður",
       author: "Einar",
       highlight: "GF Training tók óvissuna úr ferlinu",
     },
     {
-      text: "Ég er 50 ára og þetta er fyrsta prógrammið sem hefur raunverulega hjálpað mér að sjá breytingar í mörg ár. Þeir koma fram við mann eins og fjölskyldu. Maður hefur dagleg samskipti við þjálfarann sinn og mataræðið er einfalt, þú lærir að velja réttu matinn byggt á vísindum. Þetta er ekkert kjaftæði bara árangur.",
+      text: "Ég er 50 ára og þetta er fyrsta þjálfunin sem hefur raunverulega hjálpað mér að sjá breytingar í mörg ár. Gummi veit alveg hvað hann er að tala um. Maður hefur dagleg samskipti við hann og appið er einfalt og þæginlegt til notkunar.",
       author: "Simon",
       highlight: "Þetta prógramm virkar – líka eftir fertugt",
     },
     {
-      text: "Þeir standa við allt sem þeir lofa, fræðslu, næringar leiðsögn og æfingakerfi sem skapa heilbrigðan og sjálfbæran lífsstíl. Ég er karl á miðjum aldri með hormónabreytingar og þeir vissu nákvæmlega hvað átti að leggja áherslu á og hvaða þjálfari myndi henta mér. Ég sá árangur nánast strax. Stuðningurinn er frábær – fagmennskan og samfélagið gera allan muninn. Mæli 100% með.",
+      text: "GF training veitti mér frábæra fræðslu, gott æfingarplan og leiðsögn í næringu. Gummi vill hjálpa manni að ná árangri og það hvetur mann áfram. Ég fékk þjálfun sem hentaði mér og sá árangur nánast strax. Stuðningurinn er frábær og ég mæli 100% með þjálfun hjá honum Gumma.”",
       author: "Heiðar",
       highlight: "Frábært og traust prógramm",
     },
     {
-      text: "Að fá þjálfara sem leiðbeinir mér í gegnum æfingar og kennir mér að fylgja makróum var það sem ég hafði saknað. Líkamsbyggingin mín, útlit og sjálfstraust hafa breyst stórkostlega – en það mikilvægasta er að ég hef breytt lífsstílnum mínum og matarvenjum til frambúðar.",
+      text: "Ég lærði vel inn á að telja kaloríur og macros sem hjálpaði mér að ná loksins árangrinum mínum. Ég missti yfir 10kg og náði að byggja þau aftur upp í vöðva! Daglegu venjurnar mínar eru orðnar miklu heilbrigðari og mér líður mun betur með sjálfann mig”",
       author: "Andri",
       highlight: "GF Training bætti upp það sem vantaði – næringu, þjálfun og aga",
     },
     {
-      text: "Að fá þjálfara í þessu prógrammi og breyta líkamanum mínum þegar ég hélt að það væri orðið of seint, hefur bókstaflega breytt lífi mínu. Stuðningurinn, sérsniðna nálgunin og ferðalagið í heild sinni hafa verið algjörlega lífsbreytandi.",
+      text: "Gummi er alger snillingur. Skemmtilegar æfingar og geggjaðar til að byggja upp vöðva.",
       author: "Bjarki",
       highlight: "Besta ákvörðunin sem ég hef tekið fyrir sjálfan mig",
     },
     {
-      text: "Þú færð raunverulega einstaklingsmiðaða þjálfun. Æfingarnar eru hannaðar fyrir þig, og þú færð stuðning og hvatningu allan tímann. Prógrammið kennir þér raunhæfar væntingar, hjálpar líkamanum að jafna efnaskipti og gerir þig sterkari. Ef þú ert stöðugur og vinnur verkið – þetta virkar.",
+      text: "Mjög góð og einstaklingsmiðuð þjálfun! Allt svo vel sett saman í appinu. Mjög þægilegt að geta haldið utan um allt á sama stað og sjá árangurinn. Ég fékk mikinn stuðning því mér þótti ræktin ekki skemmtileg en Gummi breytti því alveg hjá mér! Takk",
       author: "Kristján",
       highlight: "Alvöru árangur",
     },

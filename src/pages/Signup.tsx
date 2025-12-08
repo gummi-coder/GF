@@ -1,4 +1,3 @@
-import { Facebook, Instagram, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -8,7 +7,9 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Check } from "lucide-react";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 
 interface SignupFormData {
   fullName: string;
@@ -23,6 +24,9 @@ interface SignupFormData {
 }
 
 const Signup = () => {
+  const [searchParams] = useSearchParams();
+  const planParam = searchParams.get('plan');
+  
   const [formData, setFormData] = useState<SignupFormData>({
     fullName: "",
     email: "",
@@ -31,11 +35,18 @@ const Signup = () => {
     about: "",
     fitnessLevel: "",
     goals: "",
-    program: "",
+    program: planParam || "",
     terms: false,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  // Update program when plan parameter changes
+  useEffect(() => {
+    if (planParam && (planParam === 'basic' || planParam === 'pro')) {
+      setFormData((prev) => ({ ...prev, program: planParam }));
+    }
+  }, [planParam]);
 
   // Remove any ConvertKit email signup forms from this page
   useEffect(() => {
@@ -117,28 +128,7 @@ const Signup = () => {
       backgroundPosition: '0 0, 0 100%',
       backgroundRepeat: 'no-repeat, no-repeat'
     }}>
-      {/* Minimal Header - logo and VIP button only */}
-      <nav className="fixed top-6 left-8 right-8 z-50">
-        <div className="bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl px-8 max-w-[1200px] mx-auto">
-          <div className="flex items-center justify-between h-20">
-            <div className="flex items-center">
-              <Link to="/" className="cursor-pointer hover:opacity-80 transition-opacity">
-                <span className="text-2xl font-black tracking-tight uppercase font-display">
-                  GF<span className="text-primary">Training</span>
-                </span>
-              </Link>
-            </div>
-            <div>
-              <Button 
-                className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-6 py-2 rounded-full text-sm"
-                onClick={() => (window.location.href = '/apply')}
-              >
-                VIP umsókn
-              </Button>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navigation />
 
       {/* Signup Form Section */}
       <section className="pt-32 pb-20 px-4">
@@ -280,33 +270,7 @@ const Signup = () => {
         </div>
       </section>
 
-      {/* Minimal Footer */}
-      <footer className="pb-12 px-8">
-        <div className="bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl px-8 py-8 max-w-[1200px] mx-auto text-center">
-          <div className="mb-3">
-            <span className="text-lg font-black">
-              GF<span className="text-primary">TRAINING</span>
-            </span>
-          </div>
-          <div className="flex items-center justify-center gap-4 mb-4">
-            <a href="#" aria-label="Facebook" className="text-white/60 hover:text-primary transition-colors">
-              <Facebook className="w-4 h-4" />
-            </a>
-            <a href="#" aria-label="Instagram" className="text-white/60 hover:text-primary transition-colors">
-              <Instagram className="w-4 h-4" />
-            </a>
-            <a href="#" aria-label="LinkedIn" className="text-white/60 hover:text-primary transition-colors">
-              <Linkedin className="w-4 h-4" />
-            </a>
-          </div>
-          <div className="flex items-center justify-center gap-3 text-xs">
-            <a href="/terms" className="text-white/60 hover:text-primary transition-colors">Skilmálar</a>
-            <span className="text-white/20">•</span>
-            <a href="/terms" className="text-white/60 hover:text-primary transition-colors">Persónuverndarstefna</a>
-          </div>
-          <div className="mt-3 text-white/40 text-xs">© 2025 GF Training</div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

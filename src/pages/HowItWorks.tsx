@@ -328,30 +328,21 @@ const HowItWorks = () => {
               <span className="text-primary">sannaðan árangur</span>
             </h2>
             <p className="text-lg text-foreground/80 max-w-4xl mx-auto">
-              Virkar GF Training? Það er bara ein leið til að komast að því: að sjá hvort meðlimirnir okkar hafi náð raunverulegum árangri.
+              Taktu fyrsta skrefið og vertu hluti af ört vaxandi hópi karla sem<br />
+              eru að breyta lífi sínu með GF Training.
             </p>
           </div>
 
-          {/* Video Placeholder */}
+          {/* Video */}
           <div className="max-w-4xl mx-auto mb-12">
-            <div className="relative aspect-video rounded-2xl overflow-hidden border-4 border-primary/10 shadow-2xl group cursor-pointer">
-              {/* Video Thumbnail Placeholder */}
-              <div className="absolute inset-0 bg-gradient-to-br from-background/50 to-background/30 backdrop-blur-sm flex items-center justify-center">
-                <div className="relative">
-                  <div className="absolute inset-0 bg-primary/20 blur-3xl rounded-full animate-pulse" />
-                  <Button
-                    size="lg"
-                    className="relative bg-primary hover:bg-primary/90 text-primary-foreground rounded-full w-24 h-24 group-hover:scale-110 transition-transform"
-                  >
-                    <Target className="w-12 h-12 fill-current" />
-                  </Button>
-                </div>
-              </div>
-              
-              {/* Video Label */}
-              <div className="absolute bottom-6 left-6 bg-primary text-primary-foreground px-6 py-3 rounded-lg font-bold text-lg">
-                GF TRAINING RESULTS
-              </div>
+            <div className="relative aspect-video rounded-2xl overflow-hidden border-4 border-primary/10 shadow-2xl bg-card/40">
+              <iframe
+                className="w-full h-full"
+                src="https://www.youtube.com/embed/C4x-xCEcg2k?rel=0&modestbranding=1"
+                title="Hvernig þjálfun virkar - GF Training"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
             </div>
           </div>
 

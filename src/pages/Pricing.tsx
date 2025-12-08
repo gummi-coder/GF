@@ -11,17 +11,17 @@ const Pricing = () => {
     {
       name: "Einar",
       age: "28", 
-      text: "Sex mánaða prógrammið gaf mér tímann og stuðninginn sem ég þurfti til að byggja upp varanlegar venjur og sjá raunverulegan árangur."
+      text: "Mjög ánægður. Fékk plan sem hentaði mér mjög vel og þurfti ekki að mæta oftar en ég komst í ræktina."
     },
     {
       name: "Guðmundur",
       age: "41",
-      text: "41 árs hélt ég að það væri of seint að koma mér í form, GF Training sannaði fyrir mér að ég gæti það ennþá. Ég er í besta formi lífs míns."
+      text: "Gummi kom mér í besta form lífs míns! Ég vissi ekki hvað góður þjálfari gat gert mikið fyrir heilsuna þar til ég skráði mig hjá Gumma."
     },
     {
       name: "Jón Þór",
       age: "34",
-      text: "Þriggja mánaða prógrammið var fullkomið fyrir mín markmið. Þjálfarinn minn skildi nákvæmlega hvað ég þurfti til að ná líkamanum sem ég hef alltaf viljað."
+      text: "Það finnst hvað Gummi vill hjálpa manni að ná markmiðum. Það er ekkert kjaftæði og bara skýrar leiðbeiningar hvað maður þarf að gera til að sjá framfarir."
     }
   ];
 
@@ -69,7 +69,7 @@ const Pricing = () => {
               
               <CardContent className="space-y-8">
                 <div className="text-center">
-                  <div className="text-4xl font-black text-foreground mb-2">40,000 ISK</div>
+                  <div className="text-4xl font-black text-foreground mb-2">35,000 ISK</div>
                   <div className="text-foreground/60 text-sm">á mánuði</div>
                 </div>
 
@@ -97,7 +97,7 @@ const Pricing = () => {
                 </div>
 
                 <div className="mt-8">
-                 <Link to="/signup">
+                 <Link to="/signup?plan=basic">
                    <Button 
                      className="w-full bg-secondary/20 hover:bg-secondary/30 text-secondary-foreground font-bold py-4 rounded-lg border border-secondary/30 transition-all"
                    >
@@ -125,9 +125,9 @@ const Pricing = () => {
               
               <CardContent className="space-y-8">
                 <div className="text-center">
-                  <div className="text-4xl font-black text-primary mb-2">33,000 ISK</div>
+                  <div className="text-4xl font-black text-primary mb-2">29,000 ISK</div>
                   <div className="text-foreground/60 text-sm">á mánuði</div>
-                  <div className="text-primary text-sm font-medium mt-1">Sparar 10% með 6 mánaða skuldbindingu</div>
+                  <div className="text-primary text-sm font-medium mt-1">Sparar 17% með 6 mánaða skuldbindingu</div>
                 </div>
 
                 <div className="space-y-4">
@@ -154,7 +154,7 @@ const Pricing = () => {
                 </div>
 
                 <div className="mt-8">
-                 <Link to="/signup">
+                 <Link to="/signup?plan=pro">
                    <Button 
                      className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-4 rounded-lg transition-all hover:scale-105"
                    >
@@ -171,7 +171,7 @@ const Pricing = () => {
                 <CardTitle className="text-xl font-bold text-foreground mb-2">
                   VIP
                 </CardTitle>
-                <p className="text-foreground/60 text-sm">Premium þjálfun</p>
+                <p className="text-foreground/60 text-sm">3 Mánaða binditími</p>
                 <div className="bg-primary/20 text-primary px-3 py-1 rounded-full text-xs font-bold mt-2">
                   Takmarkað pláss
                 </div>
@@ -179,8 +179,8 @@ const Pricing = () => {
               
               <CardContent className="space-y-8">
                 <div className="text-center">
-                  <div className="text-4xl font-black text-primary mb-2">Umsókn</div>
-                  <div className="text-foreground/60 text-sm">Aðeins</div>
+                  <div className="text-4xl font-black text-primary mb-2">50,000 ISK</div>
+                  <div className="text-foreground/60 text-sm">á mánuði</div>
                 </div>
 
                 <div className="space-y-4">
@@ -321,12 +321,12 @@ const Pricing = () => {
                 Veldu þann pakka sem hentar þér og þínum markmiðum.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <Link to="/signup">
+                <Link to="/signup?plan=basic">
                   <Button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-bold px-8 py-4 rounded-full">
                     Byrja 3 mánaða þjálfun
                   </Button>
                 </Link>
-                <Link to="/signup">
+                <Link to="/signup?plan=pro">
                   <Button className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-bold px-8 py-4 rounded-full">
                     Byrja 6 mánaða þjálfun
                   </Button>
