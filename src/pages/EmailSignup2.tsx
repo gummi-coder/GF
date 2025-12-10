@@ -145,7 +145,7 @@ const EmailSignup2 = () => {
           <h2 className="text-xl font-bold text-foreground leading-relaxed mb-4">
             Næstu 30 daga ætla ég að kenna þér allt sem þú þarft að vita um{" "}
             <span className="text-primary">líkamsrækt, næringu og hugarfar</span>{" "}
-            til að lifa heilbrigðri og hollari lífstíl
+            til að lifa heilbrigðari og hollari lífstíl
           </h2>
           
           <p className="text-sm text-foreground/80 leading-relaxed">
