@@ -69,7 +69,7 @@ const Pricing = () => {
               
               <CardContent className="space-y-8">
                 <div className="text-center">
-                  <div className="text-4xl font-black text-foreground mb-2">35,000 ISK</div>
+                  <div className="text-4xl font-black text-foreground mb-2">24,990 ISK</div>
                   <div className="text-foreground/60 text-sm">á mánuði</div>
                 </div>
 
@@ -125,9 +125,9 @@ const Pricing = () => {
               
               <CardContent className="space-y-8">
                 <div className="text-center">
-                  <div className="text-4xl font-black text-primary mb-2">29,000 ISK</div>
+                  <div className="text-4xl font-black text-primary mb-2">19,990 ISK</div>
                   <div className="text-foreground/60 text-sm">á mánuði</div>
-                  <div className="text-primary text-sm font-medium mt-1">Sparar 17% með 6 mánaða skuldbindingu</div>
+                  <div className="text-primary text-sm font-medium mt-1">Sparar 20% með 6 mánaða skuldbindingu</div>
                 </div>
 
                 <div className="space-y-4">
@@ -179,7 +179,7 @@ const Pricing = () => {
               
               <CardContent className="space-y-8">
                 <div className="text-center">
-                  <div className="text-4xl font-black text-primary mb-2">50,000 ISK</div>
+                  <div className="text-4xl font-black text-primary mb-2">40,000 ISK</div>
                   <div className="text-foreground/60 text-sm">á mánuði</div>
                 </div>
 
