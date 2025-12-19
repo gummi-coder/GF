@@ -78,11 +78,11 @@ const Navigation = () => {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Link to="/apply">
+            <Link to="/pricing">
               <Button 
                 className="bg-primary hover:bg-primary/90 text-white font-bold px-8 py-3 rounded-md uppercase text-sm tracking-wide"
               >
-                VIP Umsókn
+                SKRÁ MIG
               </Button>
             </Link>
           </div>
@@ -139,12 +139,14 @@ const Navigation = () => {
                 </a>
               )
             ))}
-            <Button 
-              className="w-full bg-primary hover:bg-primary/90 text-white font-bold py-6 rounded-md uppercase"
-              onClick={() => window.location.href = 'http://localhost:8082/apply'}
-            >
-              APPLY NOW
-            </Button>
+            <Link to="/pricing">
+              <Button 
+                className="w-full bg-primary hover:bg-primary/90 text-white font-bold py-6 rounded-md uppercase"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                SKRÁ MIG
+              </Button>
+            </Link>
           </div>
         )}
       </div>
