@@ -4,8 +4,8 @@ import { Facebook, Instagram, Linkedin, Mail, ExternalLink, Link as LinkIcon, Tw
 // Customize your links here - easy to add, remove, or modify
 const links = [
   {
-    title: "Frír líkamsræktar grunnur",
-    url: "/email2",
+    title: "Ókeypis 30 daga líkamsræktarplan",
+    url: "/email4",
     icon: CalendarDays,
     color: "bg-primary/90 hover:bg-primary",
     isVip: false
@@ -29,13 +29,6 @@ const links = [
     url: "https://www.gftraining.is/apply",
     icon: LinkIcon,
     color: "bg-primary hover:bg-primary/90",
-    isVip: false
-  },
-  {
-    title: "Skráðu þig á póstlistann minn",
-    url: "/email1",
-    icon: Mail,
-    color: "bg-primary/80 hover:bg-primary/90",
     isVip: false
   },
   {
