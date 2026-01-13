@@ -104,13 +104,13 @@ const EmailSignup4 = () => {
         <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[120px] opacity-30" />
       </div>
 
-      <div className="relative z-10 max-w-lg mx-auto px-6 py-12 md:py-20">
+      <div className="relative z-10 max-w-lg mx-auto px-6 py-6 md:py-12">
         
         {/* Brand / Logo Area */}
-        <div className="flex flex-col items-center mb-12 animate-fade-in">
-          <div className="relative mb-6 group">
+        <div className="flex flex-col items-center mb-6 animate-fade-in">
+          <div className="relative mb-4 group">
             <div className="absolute -inset-1 bg-gradient-to-r from-primary/50 to-primary/20 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
-            <div className="relative w-24 h-24 rounded-full overflow-hidden border-2 border-white/10 ring-2 ring-primary/20 shadow-2xl">
+            <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-white/10 ring-2 ring-primary/20 shadow-2xl">
               <img 
                 src="/images/DSC02226 copy.JPG" 
                 alt="Gudmundur Fridgeirsson" 
@@ -119,32 +119,35 @@ const EmailSignup4 = () => {
               />
             </div>
           </div>
-          <div className="text-center space-y-1">
-            <h3 className="text-lg font-bold tracking-tight text-white">Guðmundur Friðgeirsson</h3>
-            <p className="text-primary/90 text-sm font-medium tracking-wide uppercase">GF Training Coach</p>
+          <div className="text-center space-y-0.5">
+            <h3 className="text-base font-bold tracking-tight text-white">Guðmundur Friðgeirsson</h3>
+            <p className="text-primary/90 text-xs font-medium tracking-wide uppercase">GF Training Coach</p>
           </div>
         </div>
 
         {/* Hero Headline */}
-        <div className="text-center mb-10 space-y-6 animate-fade-in" style={{ animationDelay: '0.1s' }}>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider mb-2">
+        <div className="text-center mb-6 space-y-3 animate-fade-in" style={{ animationDelay: '0.1s' }}>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-bold uppercase tracking-wider mb-1">
             <Star className="w-3 h-3 fill-current" />
             100% Ókeypis 30 Daga Plan
           </div>
           
-          <h1 className="text-4xl md:text-5xl font-black text-white leading-[1.1] font-display tracking-tight drop-shadow-lg">
+          <h1 className="text-3xl md:text-5xl font-black text-white leading-[1.1] font-display tracking-tight drop-shadow-lg">
             30 daga <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/60">líkamsræktar- og næringarplan</span> sem virkar í alvöru
           </h1>
           
-          <p className="text-lg text-white/70 leading-relaxed max-w-sm mx-auto">
+          <p className="text-base text-white/70 leading-relaxed max-w-sm mx-auto hidden md:block">
             Dagleg einföld skref í tölvupósti. Engin öfgar, engin gisk – bara skýrt kerfi sem hjálpar þér að byrja og halda áfram.
+          </p>
+          <p className="text-sm text-white/70 leading-relaxed max-w-sm mx-auto md:hidden">
+            Dagleg einföld skref í tölvupósti. Skýrt kerfi sem hjálpar þér að byrja.
           </p>
         </div>
 
         {/* Primary Form Container */}
-        <div className="relative mb-16 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+        <div className="relative mb-10 animate-fade-in" style={{ animationDelay: '0.2s' }}>
           <div className="absolute -inset-0.5 bg-gradient-to-b from-primary/30 to-transparent rounded-2xl blur opacity-30" />
-          <div className="relative bg-card/40 backdrop-blur-xl border border-white/10 rounded-2xl p-6 md:p-8 shadow-2xl ring-1 ring-white/5">
+          <div className="relative bg-card/40 backdrop-blur-xl border border-white/10 rounded-2xl p-4 md:p-8 shadow-2xl ring-1 ring-white/5">
             
             {isSubmitted ? (
               <div className="text-center py-12 space-y-4">
