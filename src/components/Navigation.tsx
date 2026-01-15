@@ -140,12 +140,12 @@ const Navigation = () => {
               )
             ))}
             <Link to="/pricing">
-              <Button 
-                className="w-full bg-primary hover:bg-primary/90 text-white font-bold py-6 rounded-md uppercase"
+            <Button 
+              className="w-full bg-primary hover:bg-primary/90 text-white font-bold py-6 rounded-md uppercase"
                 onClick={() => setIsMenuOpen(false)}
-              >
+            >
                 SKRÁ MIG
-              </Button>
+            </Button>
             </Link>
           </div>
         )}

@@ -12,6 +12,9 @@ import EmailSignup1 from "./pages/EmailSignup1";
 import EmailSignup2 from "./pages/EmailSignup2";
 import EmailSignup4 from "./pages/EmailSignup4";
 import Email3 from "./pages/Email3";
+import AppLanding from "./pages/AppLanding";
+import AppRedirect from "./pages/AppRedirect";
+import GetApp from "./pages/GetApp";
 import Macros from "./pages/Macros";
 import Apply from "./pages/Apply";
 import Signup from "./pages/Signup";
@@ -43,6 +46,9 @@ const App = () => (
                  <Route path="/email2" element={<EmailSignup2 />} />
                  <Route path="/email3" element={<Email3 />} />
                  <Route path="/email4" element={<EmailSignup4 />} />
+                 <Route path="/app" element={<AppLanding />} />
+                 <Route path="/app-download" element={<AppRedirect />} />
+                 <Route path="/get-app" element={<GetApp />} />
                  <Route path="/macros" element={<Macros />} />
                  <Route path="/apply" element={<Apply />} />
                  <Route path="/signup" element={<Signup />} />
