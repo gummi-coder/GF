@@ -21,23 +21,67 @@ const AppLanding = () => {
     const redirectUrl = `https://gftraining.is/app-download`;
     setQrCodeUrl(`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(redirectUrl)}`);
     
-    // Hide any email signup forms that might be injected globally
-    const hideEmailForms = () => {
-      const emailForms = document.querySelectorAll('form[action*="email"], form[action*="subscribe"], form[action*="newsletter"], input[type="email"][placeholder*="Email"], input[type="email"][placeholder*="email"]');
-      emailForms.forEach(form => {
-        const parent = form.closest('div, section, footer');
-        if (parent && window.location.pathname === '/app') {
-          (parent as HTMLElement).style.display = 'none';
+    // Disable ConvertKit/Gummi forms on this page
+    const removeConvertKitForms = () => {
+      if (window.location.pathname !== '/app') return;
+      
+      // Only target forms that are NOT inside the app landing component
+      const gummiForms = document.querySelectorAll(
+        'body > .gummi-form-container, ' +
+        'body > [id*="gummi-form"], ' +
+        'body > form[data-sv-form], ' +
+        'body > .ck_form'
+      );
+      gummiForms.forEach(form => {
+        // Only remove if not inside our app landing component
+        if (!form.closest('[data-app-landing]')) {
+          (form as HTMLElement).style.display = 'none';
+          (form as HTMLElement).remove();
         }
       });
     };
     
-    // Check immediately and then periodically
-    hideEmailForms();
-    const interval = setInterval(hideEmailForms, 500);
-    setTimeout(() => clearInterval(interval), 5000);
+    // Remove forms after a short delay to let page render first
+    const timeoutId = setTimeout(() => {
+      removeConvertKitForms();
+      const intervalId = setInterval(removeConvertKitForms, 500);
+      
+      // Use MutationObserver to catch dynamically added forms
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          mutation.addedNodes.forEach((node) => {
+            if (node.nodeType === 1) { // Element node
+              const el = node as HTMLElement;
+              if (el.matches && (
+                el.matches('.gummi-form-container') ||
+                el.matches('form[data-sv-form]') ||
+                el.matches('.ck_form') ||
+                el.querySelector('.gummi-form-container, form[data-sv-form], .ck_form')
+              )) {
+                if (!el.closest('[data-app-landing]')) {
+                  removeConvertKitForms();
+                }
+              }
+            }
+          });
+        });
+      });
+      
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+      });
+      
+      // Stop after 10 seconds
+      setTimeout(() => {
+        clearInterval(intervalId);
+        observer.disconnect();
+      }, 10000);
+    }, 100);
     
-    return () => clearInterval(interval);
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }, []);
 
   // Handle scroll detection for navigation
@@ -158,7 +202,16 @@ const AppLanding = () => {
         canonical="https://gftraining.is/app"
       />
 
-      <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/30">
+      <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/30" data-app-landing>
+        {/* Hide any Gummi/ConvertKit forms that aren't inside app landing */}
+        <style>{`
+          body > .gummi-form-container,
+          body > form[data-sv-form],
+          body > .ck_form { 
+            display: none !important; 
+            visibility: hidden !important; 
+          }
+        `}</style>
         
         {/* Navigation - OWNU Style */}
         <nav className={`z-50 fixed top-0 left-0 right-0 transition-all duration-300 ${
@@ -294,13 +347,13 @@ const AppLanding = () => {
         </nav>
 
         {/* Hero Section with Background Image */}
-        <section className="relative pt-24 pb-0 px-6 sm:px-6 lg:px-4 overflow-hidden lg:pt-32 lg:pb-0 min-h-[70vh] sm:min-h-[75vh] lg:min-h-screen flex items-end lg:items-center">
-          {/* Background Image - Smaller on mobile */}
+        <section className="relative pt-24 pb-0 px-6 sm:px-6 lg:px-4 overflow-hidden lg:pt-32 lg:pb-0 min-h-screen sm:min-h-[75vh] lg:min-h-screen flex items-end lg:items-center">
+          {/* Background Image - Full height on mobile */}
           <div className="absolute inset-0 z-0">
             <img 
               src="/images/2 3.png" 
               alt="Background" 
-              className="w-full h-[60vh] sm:h-[70vh] lg:h-full object-cover object-center"
+              className="w-full h-full sm:h-[70vh] lg:h-full object-cover object-center"
             />
             {/* Dark overlay for text readability - less dark on mobile */}
             <div className="absolute inset-0 bg-black/40 lg:bg-black/50"></div>
@@ -309,8 +362,8 @@ const AppLanding = () => {
           <div className="max-w-7xl mx-auto relative z-10 w-full pb-6 sm:pb-8 lg:pb-12">
             <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-20 items-center">
               
-              {/* Left: Content */}
-              <div className="space-y-4 sm:space-y-5 lg:space-y-8 text-center lg:text-left max-w-2xl mx-auto lg:max-w-none lg:mx-0 px-2 sm:px-0">
+              {/* Left: Content - Below fold on mobile */}
+              <div className="space-y-4 sm:space-y-5 lg:space-y-8 text-center lg:text-left max-w-2xl mx-auto lg:max-w-none lg:mx-0 px-2 sm:px-0 pt-[100vh] sm:pt-0 -mt-[90vh] sm:mt-0">
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black leading-[1.05] font-display tracking-tight text-white">
                   Styrktarþjálfunar appið <br className="hidden lg:block"/>
                   <span className="text-primary">fyrir karla</span>
@@ -356,7 +409,7 @@ const AppLanding = () => {
         </section>
 
         {/* Social Proof / Download Section (OWNU Style) */}
-        <section className="pt-8 sm:pt-12 lg:pt-16 pb-8 sm:pb-12 lg:pb-16 px-6 sm:px-6 lg:px-4 relative overflow-hidden bg-[#1a1a1a]">
+        <section className="pt-0 sm:pt-12 lg:pt-16 pb-8 sm:pb-12 lg:pb-16 px-6 sm:px-6 lg:px-4 relative overflow-hidden bg-[#1a1a1a]">
            {/* Background Glow Effect */}
            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[100px] opacity-50 pointer-events-none"></div>
 
@@ -379,19 +432,19 @@ const AppLanding = () => {
                  </p>
                </div>
 
-               {/* Main Headline (Center) */}
-               <div className="lg:col-span-6 text-center mb-6 sm:mb-8 lg:mb-0">
+               {/* Main Headline (Center) - Below fold on mobile */}
+               <div className="lg:col-span-6 text-center mb-6 sm:mb-8 lg:mb-0 pt-[90vh] lg:pt-0 -mt-[85vh] lg:mt-0">
                  <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black font-display leading-[0.95]">
                    Einfalt allt-í-einu þjálfunarapp.<br/>
                    <span className="text-primary">Elskað af fólki.</span>
                  </h2>
                </div>
 
-               {/* Store Badges (Right) */}
-               <div className="lg:col-span-3 flex flex-col items-center lg:items-end gap-4 sm:gap-5 lg:gap-8">
+               {/* Store Badges (Right) - Below fold on mobile */}
+               <div className="lg:col-span-3 flex flex-col items-center lg:items-end gap-4 sm:gap-5 lg:gap-8 pt-[90vh] lg:pt-0 -mt-[85vh] lg:mt-0">
                  {/* App Store */}
                  <div className="flex flex-col items-center lg:items-end gap-2">
-                    <a href="https://apps.apple.com/es/app/gf-training/id6499074966" target="_blank" rel="noopener noreferrer" className="h-10 hover:opacity-80 transition-opacity">
+                    <a href="https://apps.apple.com/es/app/gf-training/id6499074966" target="_blank" rel="noopener noreferrer" className="h-10 w-[190px] hover:opacity-80 transition-opacity flex items-center justify-center">
                       <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="App Store" className="h-full w-auto" />
                     </a>
                     <div className="flex items-center gap-1">
@@ -404,8 +457,8 @@ const AppLanding = () => {
 
                  {/* Google Play */}
                  <div className="flex flex-col items-center lg:items-end gap-2">
-                    <a href="https://play.google.com/store/apps/details?id=com.kahunas.io.GFTraining&hl=en" target="_blank" rel="noopener noreferrer" className="h-10 hover:opacity-80 transition-opacity">
-                       <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Google Play" className="h-full w-auto scale-[1.1]" />
+                    <a href="https://play.google.com/store/apps/details?id=com.kahunas.io.GFTraining&hl=en" target="_blank" rel="noopener noreferrer" className="h-10 hover:opacity-80 transition-opacity w-[190px] flex items-center justify-center">
+                       <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Google Play" className="h-full w-auto scale-[1.15]" />
                     </a>
                     <div className="flex items-center gap-1">
                       <div className="flex">
@@ -965,7 +1018,7 @@ const AppLanding = () => {
         </section>
 
         {/* Footer - OWNU Style */}
-        <footer className="bg-background text-primary pt-16 pb-8 px-6 sm:px-8 lg:px-12 overflow-hidden relative border-t border-white/10">
+        <footer data-app-footer className="bg-background text-primary pt-16 pb-8 px-6 sm:px-8 lg:px-12 overflow-hidden relative border-t border-white/10">
           <div className="max-w-7xl mx-auto relative z-10">
             {/* Top Section */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 mb-16 sm:mb-24 lg:mb-32">
@@ -975,8 +1028,8 @@ const AppLanding = () => {
                   <a href="#" className="hover:opacity-80 transition-opacity">
                     <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" className="h-10 border border-white/20 rounded-lg" alt="App Store" />
                   </a>
-                  <a href="#" className="hover:opacity-80 transition-opacity">
-                    <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" className="h-10 scale-[1.1] border border-white/20 rounded-lg" alt="Google Play" />
+                  <a href="#" className="hover:opacity-80 transition-opacity w-[190px] h-10 flex items-center justify-center">
+                    <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" className="h-full w-auto scale-[1.15] border border-white/20 rounded-lg" alt="Google Play" />
                   </a>
                 </div>
                 
