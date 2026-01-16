@@ -20,68 +20,6 @@ const AppLanding = () => {
     // Use production URL for QR code so it works when scanned from any device
     const redirectUrl = `https://gftraining.is/app-download`;
     setQrCodeUrl(`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(redirectUrl)}`);
-    
-    // Disable ConvertKit/Gummi forms on this page
-    const removeConvertKitForms = () => {
-      if (window.location.pathname !== '/app') return;
-      
-      // Only target forms that are NOT inside the app landing component
-      const gummiForms = document.querySelectorAll(
-        'body > .gummi-form-container, ' +
-        'body > [id*="gummi-form"], ' +
-        'body > form[data-sv-form], ' +
-        'body > .ck_form'
-      );
-      gummiForms.forEach(form => {
-        // Only remove if not inside our app landing component
-        if (!form.closest('[data-app-landing]')) {
-          (form as HTMLElement).style.display = 'none';
-          (form as HTMLElement).remove();
-        }
-      });
-    };
-    
-    // Remove forms after a short delay to let page render first
-    const timeoutId = setTimeout(() => {
-      removeConvertKitForms();
-      const intervalId = setInterval(removeConvertKitForms, 500);
-      
-      // Use MutationObserver to catch dynamically added forms
-      const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-          mutation.addedNodes.forEach((node) => {
-            if (node.nodeType === 1) { // Element node
-              const el = node as HTMLElement;
-              if (el.matches && (
-                el.matches('.gummi-form-container') ||
-                el.matches('form[data-sv-form]') ||
-                el.matches('.ck_form') ||
-                el.querySelector('.gummi-form-container, form[data-sv-form], .ck_form')
-              )) {
-                if (!el.closest('[data-app-landing]')) {
-                  removeConvertKitForms();
-                }
-              }
-            }
-          });
-        });
-      });
-      
-      observer.observe(document.body, {
-        childList: true,
-        subtree: true,
-      });
-      
-      // Stop after 10 seconds
-      setTimeout(() => {
-        clearInterval(intervalId);
-        observer.disconnect();
-      }, 10000);
-    }, 100);
-    
-    return () => {
-      clearTimeout(timeoutId);
-    };
   }, []);
 
   // Handle scroll detection for navigation
@@ -199,19 +137,10 @@ const AppLanding = () => {
         title="GF Training App - Styrktarþjálfun fyrir karla"
         description="Allt sem þú þarft til að ná árangri. Æfingar, næring og eftirfylgni í einu appi fyrir aðeins 3.990 kr."
         keywords="online pt app, æfinga app, þjálfunar app, gf training"
-        canonical="https://gftraining.is/app"
+        canonical="https://gftraining.is/"
       />
 
       <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/30" data-app-landing>
-        {/* Hide any Gummi/ConvertKit forms that aren't inside app landing */}
-        <style>{`
-          body > .gummi-form-container,
-          body > form[data-sv-form],
-          body > .ck_form { 
-            display: none !important; 
-            visibility: hidden !important; 
-          }
-        `}</style>
         
         {/* Navigation - OWNU Style */}
         <nav className={`z-50 fixed top-0 left-0 right-0 transition-all duration-300 ${
@@ -266,9 +195,9 @@ const AppLanding = () => {
             </div>
 
             <div className="flex items-center gap-2 md:gap-4">
-              <Link to="/signup?plan=app" className="hidden md:block">
+              <Link to="/app-signup" className="hidden md:block">
                 <Button className="bg-primary hover:bg-primary/90 text-black font-medium px-5 md:px-6 py-2 md:py-2.5 rounded-full text-xs md:text-sm shadow-lg">
-                  Byrjaðu ókeypis prófun
+                  Byrja núna
                 </Button>
               </Link>
               
@@ -336,9 +265,9 @@ const AppLanding = () => {
                 >
                   Spurningar
                 </a>
-                <Link to="/signup?plan=app" onClick={() => setIsMobileMenuOpen(false)}>
+                <Link to="/app-signup" onClick={() => setIsMobileMenuOpen(false)}>
                   <Button className="w-full bg-primary hover:bg-primary/90 text-black font-medium px-6 py-2.5 rounded-full text-sm mt-2">
-                    Byrjaðu ókeypis prófun
+                    Byrja núna
                   </Button>
                 </Link>
               </div>
@@ -374,9 +303,9 @@ const AppLanding = () => {
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
-                  <Link to="/signup?plan=app" className="w-full sm:w-auto">
+                  <Link to="/app-signup" className="w-full sm:w-auto">
                     <Button className="h-12 sm:h-14 px-6 sm:px-8 rounded-full bg-primary hover:bg-primary/90 text-black font-bold text-base sm:text-lg shadow-lg hover:shadow-xl transition-all w-full sm:w-auto">
-                      Byrjaðu ókeypis prófun
+                      Byrja núna
                     </Button>
                   </Link>
                 </div>
@@ -477,13 +406,13 @@ const AppLanding = () => {
           <div className="max-w-7xl mx-auto">
              <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
                {/* Left: Dual Phones */}
-               <div className="relative h-[600px] flex items-center justify-center lg:justify-start">
+               <div className="relative h-[400px] sm:h-[500px] lg:h-[600px] flex items-center justify-center lg:justify-start">
                   {/* Phone 1 */}
-                  <div className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-[280px] -rotate-6 transform hover:rotate-0 transition-transform duration-500">
+                  <div className="absolute left-1/2 -translate-x-[90px] sm:-translate-x-[100px] lg:left-0 lg:translate-x-0 top-1/2 -translate-y-1/2 z-20 w-[180px] sm:w-[220px] lg:w-[280px] -rotate-6 transform hover:rotate-0 transition-transform duration-500">
                     <img src="/images/a3.PNG" alt="Nutrition Tracking" className="rounded-[2.5rem] shadow-2xl border-4 border-black/40" />
                   </div>
                   {/* Phone 2 */}
-                  <div className="absolute left-[180px] top-1/2 -translate-y-1/2 z-10 w-[280px] rotate-6 transform hover:rotate-0 transition-transform duration-500 scale-90 opacity-80 lg:opacity-100">
+                  <div className="absolute left-1/2 -translate-x-[10px] sm:translate-x-0 lg:left-[180px] lg:translate-x-0 top-1/2 -translate-y-1/2 z-10 w-[180px] sm:w-[220px] lg:w-[280px] rotate-6 transform hover:rotate-0 transition-transform duration-500 scale-90 opacity-80 lg:opacity-100">
                     <img src="/images/a4.PNG" alt="Calendar View" className="rounded-[2.5rem] shadow-2xl border-4 border-black/40" />
                   </div>
                </div>
@@ -503,9 +432,9 @@ const AppLanding = () => {
                    </p>
                  </div>
 
-                 <Link to="/signup?plan=app" className="inline-block">
+                 <Link to="/app-signup" className="inline-block">
                     <Button className="h-14 px-8 rounded-full bg-blue-500 text-white hover:bg-blue-600 font-bold text-lg">
-                      Byrjaðu ókeypis prófun
+                      Byrja núna
                     </Button>
                  </Link>
                </div>
@@ -673,9 +602,9 @@ const AppLanding = () => {
                   Taktu stutt próf og við finnum fullkomið plan fyrir þín markmið, reynslu og lífsstíl.
                 </p>
                 <div className="pt-2">
-                  <Link to="/signup?plan=app">
+                  <Link to="/app-signup">
                     <Button className="h-11 px-8 rounded-full bg-primary hover:bg-primary/90 text-black font-bold text-sm inline-flex items-center gap-2 shadow-xl hover:shadow-2xl hover:scale-105 transition-all">
-                      Taktu prófið
+                      Byrja núna
                       <ArrowRight size={16} />
                     </Button>
                   </Link>
@@ -695,9 +624,9 @@ const AppLanding = () => {
                   Taktu stutt próf og við finnum fullkomið plan fyrir þín markmið, reynslu og lífsstíl.
                 </p>
                 <div>
-                  <Link to="/signup?plan=app">
+                  <Link to="/app-signup">
                     <Button className="h-12 md:h-14 px-6 md:px-8 rounded-full bg-primary hover:bg-primary/90 text-white font-bold text-base md:text-lg inline-flex items-center gap-2 md:gap-3 shadow-xl hover:shadow-2xl hover:scale-105 transition-all">
-                      Taktu prófið
+                      Byrja núna
                       <ArrowRight size={18} className="md:w-5 md:h-5" />
                     </Button>
                   </Link>
@@ -920,7 +849,7 @@ const AppLanding = () => {
                   ))}
                 </ul>
 
-                <Link to={`/signup?plan=app&period=${pricingPeriod}`} className="block">
+                <Link to={`/app-signup?period=${pricingPeriod}`} className="block">
                   <Button className="w-full h-12 rounded-full bg-primary hover:bg-primary/90 text-white font-bold text-base shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all">
                     Byrja núna
                   </Button>

@@ -94,3 +94,19 @@ All colors MUST be HSL.
   }
 }
 
+/* Disable all ConvertKit/Gummi forms globally - can be re-enabled later by removing this block */
+body > .gummi-form-container,
+body > [id*="gummi-form"],
+body > form[data-sv-form],
+body > .ck_form,
+body > [class*="convertkit"],
+body > [class*="gummi"],
+body > [data-sv-form] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  position: absolute !important;
+  left: -9999px !important;
+  pointer-events: none !important;
+}
+

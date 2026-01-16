@@ -24,7 +24,7 @@ const AppRedirect = () => {
       window.location.href = playStoreUrl;
     } else {
       // Desktop or unknown device - show options or redirect to app landing page
-      navigate("/app");
+      navigate("/");
     }
   }, [navigate]);
 

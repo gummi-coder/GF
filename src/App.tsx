@@ -14,6 +14,7 @@ import EmailSignup4 from "./pages/EmailSignup4";
 import Email3 from "./pages/Email3";
 import AppLanding from "./pages/AppLanding";
 import AppRedirect from "./pages/AppRedirect";
+import AppSignup from "./pages/AppSignup";
 import GetApp from "./pages/GetApp";
 import Macros from "./pages/Macros";
 import Apply from "./pages/Apply";
@@ -25,19 +26,58 @@ import Askorun from "./pages/Askorun";
 import AskorunSignup from "./pages/AskorunSignup";
 import Links from "./pages/Links";
 import FacebookPixel from "@/components/FacebookPixel";
+import { useEffect } from "react";
 
 const queryClient = new QueryClient();
+
+// Global disable for ConvertKit/Gummi forms - can be re-enabled later
+const DisableKitForms = () => {
+  useEffect(() => {
+    // Override gummi function to prevent form creation
+    const disableGummi = () => {
+      if (typeof (window as any).gummi === 'function') {
+        (window as any).gummi = function() {
+          // Disabled - do nothing
+          return;
+        };
+      }
+    };
+
+    // Run immediately
+    disableGummi();
+
+    // Keep checking in case script loads later
+    const interval = setInterval(disableGummi, 500);
+    
+    // Also use MutationObserver to catch when gummi gets defined
+    const observer = new MutationObserver(disableGummi);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      childList: true,
+      subtree: true,
+    });
+
+    return () => {
+      clearInterval(interval);
+      observer.disconnect();
+    };
+  }, []);
+
+  return null;
+};
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <DisableKitForms />
       <BrowserRouter>
                <ScrollToTop />
                <FacebookPixel />
                <Routes>
-                 <Route path="/" element={<Index />} />
+                 <Route path="/" element={<AppLanding />} />
+                 <Route path="/home" element={<Index />} />
                  <Route path="/how-it-works" element={<HowItWorks />} />
                  <Route path="/about" element={<About />} />
                  <Route path="/contact" element={<Contact />} />
@@ -46,8 +86,8 @@ const App = () => (
                  <Route path="/email2" element={<EmailSignup2 />} />
                  <Route path="/email3" element={<Email3 />} />
                  <Route path="/email4" element={<EmailSignup4 />} />
-                 <Route path="/app" element={<AppLanding />} />
                  <Route path="/app-download" element={<AppRedirect />} />
+                 <Route path="/app-signup" element={<AppSignup />} />
                  <Route path="/get-app" element={<GetApp />} />
                  <Route path="/macros" element={<Macros />} />
                  <Route path="/apply" element={<Apply />} />
