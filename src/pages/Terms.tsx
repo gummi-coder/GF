@@ -1,11 +1,13 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 
 const Terms = () => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const isAskorunContext = params.get("context") === "askorun";
+  const isPrivacyHash = location.hash === "#privacy" || location.hash === "#terms";
 
   return (
     <div
@@ -20,7 +22,18 @@ const Terms = () => {
         backgroundRepeat: 'no-repeat, no-repeat'
       }}
     >
-      {isAskorunContext ? (
+      {isPrivacyHash ? (
+        <nav className="fixed top-6 left-4 right-4 z-50">
+          <div className="bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl px-6 max-w-[1200px] mx-auto">
+            <div className="flex items-center h-16">
+              <Link to="/" className="flex items-center gap-2 text-white hover:text-primary transition-colors">
+                <ArrowLeft size={20} />
+                <span className="text-sm font-medium">Tilbaka</span>
+              </Link>
+            </div>
+          </div>
+        </nav>
+      ) : isAskorunContext ? (
         <nav className="fixed top-6 left-8 right-8 z-50">
           <div className="bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl px-8 max-w-[1200px] mx-auto">
             <div className="flex items-center justify-between h-20">
@@ -36,7 +49,7 @@ const Terms = () => {
         <Navigation />
       )}
 
-      <section className="pt-32 pb-8 px-4">
+      <section className={`pb-8 px-4 ${isPrivacyHash ? 'pt-28' : 'pt-32'}`}>
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-10">
             <h1 className="text-4xl md:text-6xl font-black font-display mb-4">Skilmálar & Persónuvernd</h1>
@@ -160,19 +173,21 @@ const Terms = () => {
         </div>
       </section>
 
-      {isAskorunContext ? (
-        <footer className="pb-12 px-8">
-          <div className="bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl px-8 py-8 max-w-[1200px] mx-auto text-center">
-            <div className="mb-3">
-              <span className="text-lg font-black">
-                GF<span className="text-primary">TRAINING</span>
-              </span>
+      {!isPrivacyHash && (
+        isAskorunContext ? (
+          <footer className="pb-12 px-8">
+            <div className="bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl px-8 py-8 max-w-[1200px] mx-auto text-center">
+              <div className="mb-3">
+                <span className="text-lg font-black">
+                  GF<span className="text-primary">TRAINING</span>
+                </span>
+              </div>
+              <div className="text-white/40 text-xs">© 2025 GF Training</div>
             </div>
-            <div className="text-white/40 text-xs">© 2025 GF Training</div>
-          </div>
-        </footer>
-      ) : (
-        <Footer />
+          </footer>
+        ) : (
+          <Footer />
+        )
       )}
     </div>
   );

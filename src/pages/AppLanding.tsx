@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
-import { Check, Star, ChevronDown, ChevronUp, ChevronLeft, ChevronRight, ArrowRight, Smartphone, BarChart3, CalendarDays, Dumbbell, Zap, Video, Utensils, PlayCircle, Trophy, Timer, Menu, X } from "lucide-react";
+import { Check, Star, ChevronDown, ChevronUp, ChevronLeft, ChevronRight, ArrowRight, Smartphone, BarChart3, CalendarDays, Dumbbell, Zap, Video, PlayCircle, Trophy, Timer, Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const AppLanding = () => {
@@ -39,7 +39,7 @@ const AppLanding = () => {
     {
       id: 1,
       title: "Vöðvauppbygging",
-      image: "/images/a2.PNG",
+      image: "/images/IMG_3234.jpg",
       description: "Vinsælasta planið, hannað til að byggja sterkar, skreyttar fætur og rass. Notar stigvaxandi álag og krefst þess að þú ýtir nálægt bilun í hverju setti fyrir hámarks árangur.",
       duration: "8 vikur",
       sessions: "4",
@@ -48,7 +48,7 @@ const AppLanding = () => {
     {
       id: 2,
       title: "Fitubrennsla",
-      image: "/images/a5.PNG",
+      image: "/images/IMG_3236.jpg",
       description: "Æfingaplan fyrir allan líkamann sem inniheldur kardíó, hannað til að skora á allan líkamann með innbyggðum hvíldardögum annan hvern dag.",
       duration: "8 vikur",
       sessions: "4",
@@ -57,7 +57,7 @@ const AppLanding = () => {
     {
       id: 3,
       title: "Styrktarþjálfun",
-      image: "/images/a4.PNG",
+      image: "/images/IMG_3238.jpg",
       description: "Hannað fyrir þá sem vilja auka styrk og byggja upp grunnstyrk. Fókusar á grunngripum og stigvaxandi álagi til að ná hámarks árangri.",
       duration: "12 vikur",
       sessions: "3-4",
@@ -66,7 +66,7 @@ const AppLanding = () => {
     {
       id: 4,
       title: "Heimaæfingar",
-      image: "/images/a6.PNG",
+      image: "/images/IMG_3237.jpg",
       description: "Fullkomið plan fyrir þá sem vilja æfa heima án tækja. Notar líkamansþyngd og einföld verkfæri til að byggja styrk og vöðva.",
       duration: "6 vikur",
       sessions: "4-5",
@@ -294,12 +294,11 @@ const AppLanding = () => {
               {/* Left: Content - Below fold on mobile */}
               <div className="space-y-4 sm:space-y-5 lg:space-y-8 text-center lg:text-left max-w-2xl mx-auto lg:max-w-none lg:mx-0 px-2 sm:px-0 pt-[100vh] sm:pt-0 -mt-[90vh] sm:mt-0">
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black leading-[1.05] font-display tracking-tight text-white">
-                  Styrktarþjálfunar appið <br className="hidden lg:block"/>
-                  <span className="text-primary">fyrir karla</span>
+                  Byggðu upp styrk, vöðva og sjálfstraust - <span className="text-primary">allt á einum stað</span>
                 </h1>
                 
                 <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 leading-relaxed">
-                  GF Training er appið sem hjálpar þér að byggja vöðva, brenna fitu og komast í þitt besta form - í ræktinni eða heima.
+                  GF Training appið hjálpar þér að byggja vöðva, brenna fitu og komast í þitt besta form - í ræktinni eða heima.
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
@@ -314,7 +313,7 @@ const AppLanding = () => {
                   <div className="flex items-center gap-1">
                     <Star className="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400" />
                     <span className="text-white">4.9</span>
-                    <span>(300+ umsagnir)</span>
+                    <span>(150+ umsagnir)</span>
                   </div>
                   <div className="hidden sm:block">•</div>
                   <div>15k+ æfingar kláraðar</div>
@@ -364,8 +363,7 @@ const AppLanding = () => {
                {/* Main Headline (Center) - Below fold on mobile */}
                <div className="lg:col-span-6 text-center mb-6 sm:mb-8 lg:mb-0 pt-[90vh] lg:pt-0 -mt-[85vh] lg:mt-0">
                  <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black font-display leading-[0.95]">
-                   Einfalt allt-í-einu þjálfunarapp.<br/>
-                   <span className="text-primary">Elskað af fólki.</span>
+                   Allt sem þú þarft til að ná <span className="text-primary">alvöru árangri!</span>
                  </h2>
                </div>
 
@@ -381,7 +379,7 @@ const AppLanding = () => {
                         {[1,2,3,4,5].map(i => <Star key={i} size={16} className="fill-white text-white" />)}
                       </div>
                     </div>
-                    <div className="text-xs font-bold text-white/80">4.9 • 300+ einkunnir</div>
+                    <div className="text-xs font-bold text-white/80">4.9 • 150+ einkunnir</div>
                  </div>
 
                  {/* Google Play */}
@@ -441,13 +439,12 @@ const AppLanding = () => {
              </div>
 
              {/* Bottom Icons */}
-             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6 border-t border-white/10 pt-12">
+             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 border-t border-white/10 pt-12">
                {[
                  { icon: Dumbbell, label: "30+ Plön" },
                  { icon: PlayCircle, label: "Myndbönd" },
                  { icon: BarChart3, label: "Mælingar" },
                  { icon: Zap, label: "Ákefð" },
-                 { icon: Utensils, label: "Uppskriftir" },
                  { icon: Trophy, label: "Markmið" },
                  { icon: Timer, label: "Hvíld" },
                ].map((item, i) => (
@@ -836,7 +833,7 @@ const AppLanding = () => {
                   {[
                     "Aðgangur að 30+ æfingaplömum",
                     "Myndbönd við hverja æfingu",
-                    "Mataræði og uppskriftir",
+                    "Mataræði",
                     "Skráning á framförum",
                     "Aðgangur að samfélagi",
                   ].map((feature, i) => (
@@ -977,17 +974,49 @@ const AppLanding = () => {
                 <div>
                   <h3 className="font-bold text-white mb-6">Navigation</h3>
                   <ul className="space-y-4 text-sm font-medium opacity-90">
-                    <li><Link to="/about" className="hover:text-white transition-colors text-white/70">Um okkur</Link></li>
-                    <li><Link to="/pricing" className="hover:text-white transition-colors text-white/70">Verð</Link></li>
-                    <li><Link to="/contact" className="hover:text-white transition-colors text-white/70">Hafa samband</Link></li>
+                    <li>
+                      <a 
+                        href="#features" 
+                        onClick={(e) => {
+                          e.preventDefault();
+                          document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' });
+                        }}
+                        className="hover:text-white transition-colors text-white/70 cursor-pointer"
+                      >
+                        Eiginleikar
+                      </a>
+                    </li>
+                    <li>
+                      <a 
+                        href="#plans" 
+                        onClick={(e) => {
+                          e.preventDefault();
+                          document.getElementById('plans')?.scrollIntoView({ behavior: 'smooth' });
+                        }}
+                        className="hover:text-white transition-colors text-white/70 cursor-pointer"
+                      >
+                        Plön
+                      </a>
+                    </li>
+                    <li>
+                      <a 
+                        href="#pricing" 
+                        onClick={(e) => {
+                          e.preventDefault();
+                          document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
+                        }}
+                        className="hover:text-white transition-colors text-white/70 cursor-pointer"
+                      >
+                        Verð
+                      </a>
+                    </li>
                   </ul>
                 </div>
                 <div>
                   <h3 className="font-bold text-white mb-6">Support</h3>
                   <ul className="space-y-4 text-sm font-medium opacity-90">
-                    <li><Link to="/contact" className="hover:text-white transition-colors text-white/70">Hjálp</Link></li>
-                    <li><Link to="/terms" className="hover:text-white transition-colors text-white/70">Skilmálar</Link></li>
-                    <li><Link to="/privacy" className="hover:text-white transition-colors text-white/70">Persónuvernd</Link></li>
+                    <li><Link to="/terms#terms" className="hover:text-white transition-colors text-white/70">Skilmálar</Link></li>
+                    <li><Link to="/terms#privacy" className="hover:text-white transition-colors text-white/70">Persónuvernd</Link></li>
                   </ul>
                 </div>
               </div>
