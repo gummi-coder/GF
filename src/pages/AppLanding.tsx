@@ -368,31 +368,31 @@ const AppLanding = () => {
                </div>
 
                {/* Store Badges (Right) - Below fold on mobile */}
-               <div className="lg:col-span-3 flex flex-col items-center lg:items-end gap-4 sm:gap-5 lg:gap-8 pt-[90vh] lg:pt-0 -mt-[85vh] lg:mt-0">
+               <div className="lg:col-span-3 flex flex-row sm:flex-row lg:flex-col items-center justify-center lg:items-end gap-3 sm:gap-4 lg:gap-8 pt-[90vh] lg:pt-0 -mt-[85vh] lg:mt-0">
                  {/* App Store */}
                  <div className="flex flex-col items-center lg:items-end gap-2">
-                    <a href="https://apps.apple.com/es/app/gf-training/id6499074966" target="_blank" rel="noopener noreferrer" className="h-10 w-[190px] hover:opacity-80 transition-opacity flex items-center justify-center">
+                    <a href="https://apps.apple.com/es/app/gf-training/id6499074966" target="_blank" rel="noopener noreferrer" className="h-8 sm:h-10 w-[140px] sm:w-[190px] hover:opacity-80 transition-opacity flex items-center justify-center">
                       <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="App Store" className="h-full w-auto" />
                     </a>
-                    <div className="flex items-center gap-1">
+                    <div className="hidden sm:flex items-center gap-1">
                       <div className="flex">
                         {[1,2,3,4,5].map(i => <Star key={i} size={16} className="fill-white text-white" />)}
                       </div>
                     </div>
-                    <div className="text-xs font-bold text-white/80">4.9 • 150+ einkunnir</div>
+                    <div className="hidden sm:block text-xs font-bold text-white/80">4.9 • 150+ einkunnir</div>
                  </div>
 
                  {/* Google Play */}
                  <div className="flex flex-col items-center lg:items-end gap-2">
-                    <a href="https://play.google.com/store/apps/details?id=com.kahunas.io.GFTraining&hl=en" target="_blank" rel="noopener noreferrer" className="h-10 hover:opacity-80 transition-opacity w-[190px] flex items-center justify-center">
+                    <a href="https://play.google.com/store/apps/details?id=com.kahunas.io.GFTraining&hl=en" target="_blank" rel="noopener noreferrer" className="h-8 sm:h-10 hover:opacity-80 transition-opacity w-[140px] sm:w-[190px] flex items-center justify-center">
                        <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Google Play" className="h-full w-auto scale-[1.15]" />
                     </a>
-                    <div className="flex items-center gap-1">
+                    <div className="hidden sm:flex items-center gap-1">
                       <div className="flex">
                          {[1,2,3,4,5].map(i => <Star key={i} size={16} className="fill-white text-white" />)}
                       </div>
                     </div>
-                    <div className="text-xs font-bold text-foreground/80">5.0 • 100+ einkunnir</div>
+                    <div className="hidden sm:block text-xs font-bold text-foreground/80">5.0 • 100+ einkunnir</div>
                  </div>
                </div>
              </div>
