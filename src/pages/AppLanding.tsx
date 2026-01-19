@@ -418,15 +418,15 @@ const AppLanding = () => {
                {/* Right: Content */}
                <div className="space-y-8 relative z-30">
                  <h2 className="text-4xl md:text-5xl lg:text-6xl font-black font-display leading-[0.95] text-[#e8e8e3]">
-                   Styrktarþjálfun sem passar <span className="text-blue-500">þínu lífi</span>
+                   Líkamsræktar app sem <span className="text-blue-500">skila þér árangri</span>
                  </h2>
                  
                  <div className="space-y-6 text-lg text-[#e8e8e3]/80 leading-relaxed">
                    <p>
-                     GF Training er allt-í-einu styrktarþjálfunar app hannað til að hjálpa þér að æfa skynsamlegar, byggja upp varanlegar venjur og ná raunverulegum árangri.
+                     GF Training er allt-í-einu líkamsræktar app með tilbúnum æfinga plönum, skýrri framvindu mælingu og einföldu næringarstuðningi og notað af yfir en 14.000 þjálfurum um allan heim og af öllum helstu einkaþjálfurun landsins.
                    </p>
                    <p>
-                     Með sérfræðihönnuðum æfingaplömum, framvindumælingum og uppskriftasafni tekur appið giskið út úr jöfnunni. Svo þú getir einbeitt þér að því að mæta, verða sterkari og finna sjálfstraustið.
+                     Þú færð aðgang að æfinga plöntum sem leiða þig skref fyrir skref, mælingum sem sýna framfarir og hjálp að telja macros svo þú náir markmiðunum þínum. Engin giskið - bara app sem hjálpar þér að mæta reglulega og verða besta útgáfan af sjálfum þér.
                    </p>
                  </div>
 
@@ -467,7 +467,7 @@ const AppLanding = () => {
             <div className="lg:hidden space-y-8">
               {/* Heading */}
               <h2 className="text-3xl md:text-4xl font-black font-display leading-[0.95] text-white text-center">
-                Finndu plan sem hentar þér
+                Finndu plan sem <span className="text-primary">hentar þér</span>
               </h2>
 
               {/* Featured Plan Card - Large, Full Width */}
@@ -593,10 +593,10 @@ const AppLanding = () => {
               {/* Content Below */}
               <div className="space-y-4 text-center">
                 <div className="text-xs font-bold text-primary uppercase tracking-wider">
-                  30+ Æfingaplön til að velja úr
+                  30+ Æfingaplön
                 </div>
                 <p className="text-sm text-foreground/70 leading-relaxed">
-                  Taktu stutt próf og við finnum fullkomið plan fyrir þín markmið, reynslu og lífsstíl.
+                  Þú svarar nokkrum spurningum og við finnum plan sem hentar þér og þínum markmiðum.
                 </p>
                 <div className="pt-2">
                   <Link to="/app-signup">
@@ -615,10 +615,10 @@ const AppLanding = () => {
               {/* Left: Content */}
               <div className="space-y-6 lg:space-y-8">
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-black font-display leading-[0.95] text-white">
-                  Finndu plan sem hentar þér
+                  Finndu plan sem <span className="text-primary">hentar þér</span>
                 </h2>
                 <p className="text-base md:text-lg text-foreground/70 leading-relaxed max-w-xl">
-                  Taktu stutt próf og við finnum fullkomið plan fyrir þín markmið, reynslu og lífsstíl.
+                  Þú svarar nokkrum spurningum og við finnum plan sem hentar þér og þínum markmiðum.
                 </p>
                 <div>
                   <Link to="/app-signup">
@@ -633,7 +633,7 @@ const AppLanding = () => {
               {/* Right: Plan Cards */}
               <div className="space-y-6">
                 <div className="text-sm font-bold text-primary uppercase tracking-wider mb-8">
-                  30+ Æfingaplön til að velja úr
+                  30+ Æfingaplön
                 </div>
                 
                 <div className="relative overflow-hidden">
@@ -763,7 +763,7 @@ const AppLanding = () => {
               Einfalt verð. <span className="text-primary">Allt innifalið.</span>
             </h2>
             <p className="text-lg text-foreground/70 mb-8 max-w-2xl mx-auto">
-              Engin binding, engin falin gjöld. Aðgangur að öllum plönum, öllum uppskriftum og öllum eiginleikum.
+              Engin binding, engin falin gjöld. Aðgangur að öllum plönum og öllum eiginleikum.
             </p>
 
             {/* Improved Pricing Toggle Switch */}
@@ -835,7 +835,7 @@ const AppLanding = () => {
                     "Myndbönd við hverja æfingu",
                     "Mataræði",
                     "Skráning á framförum",
-                    "Aðgangur að samfélagi",
+                    "Regluleg Check-ins",
                   ].map((feature, i) => (
                     <li key={i} className="flex items-center gap-2.5">
                       <div className="w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0">
@@ -869,9 +869,9 @@ const AppLanding = () => {
               <div className="hidden md:block absolute top-12 left-[16%] right-[16%] h-0.5 bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
 
               {[
-                { step: "01", title: "Veldu áskrift", desc: "Einföld skráning, engin binding." },
-                { step: "02", title: "Sæktu appið", desc: "Fáðu aðgang strax í símann." },
-                { step: "03", title: "Byrjaðu að æfa", desc: "Veldu plan og taktu fyrstu æfinguna." }
+                { step: "01", title: "Sækja GF Training appið", desc: "Í App Store eða Google Play" },
+                { step: "02", title: "Svara nokkrum spurningum", desc: "Svara nokkrum spurningum um markmið og reynslu" },
+                { step: "03", title: "Fá plan sem henter þínum markmiðum", desc: "Byrjaðu strax með plani sem passar þér" }
               ].map((item, i) => (
                 <div key={i} className="relative z-10 space-y-4">
                   <div className="w-24 h-24 rounded-full bg-card border border-white/10 flex items-center justify-center text-3xl font-black font-display mx-auto shadow-xl">
