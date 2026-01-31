@@ -7,7 +7,8 @@ const Terms = () => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const isAskorunContext = params.get("context") === "askorun";
-  const isPrivacyHash = location.hash === "#privacy" || location.hash === "#terms";
+  const fromSignup = params.get("from") === "signup";
+  const isPrivacyHash = (location.hash === "#privacy" || location.hash === "#terms") && !fromSignup;
 
   return (
     <div

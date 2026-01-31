@@ -758,7 +758,7 @@ const AppLanding = () => {
 
         {/* Pricing Section - Standalone */}
         <section id="pricing" className="py-12 px-4 bg-card/20 scroll-mt-20">
-          <div className="max-w-4xl mx-auto text-center">
+          <div className="max-w-5xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-black font-display mb-3">
               Einfalt verð. <span className="text-primary">Allt innifalið.</span>
             </h2>
@@ -766,92 +766,135 @@ const AppLanding = () => {
               Engin binding, engin falin gjöld. Aðgangur að öllum plönum og öllum eiginleikum.
             </p>
 
-            {/* Improved Pricing Toggle Switch */}
-            <div className="flex justify-center mb-8">
-              <div className="relative inline-flex bg-card/60 backdrop-blur-sm border border-white/20 rounded-full p-1.5 shadow-lg">
-                {/* Sliding Background */}
-                <div
-                  className={`absolute top-1.5 bottom-1.5 rounded-full bg-primary shadow-lg shadow-primary/50 transition-all duration-300 ease-out ${
-                    pricingPeriod === "monthly" 
-                      ? "left-1.5 w-[calc(50%-6px)]" 
-                      : "left-[calc(50%-3px)] w-[calc(50%-6px)]"
-                  }`}
-                ></div>
-                <button
-                  onClick={() => setPricingPeriod("monthly")}
-                  className={`relative px-8 py-3 rounded-full font-semibold text-base transition-all duration-300 z-10 min-w-[140px] ${
-                    pricingPeriod === "monthly"
-                      ? "text-white"
-                      : "text-foreground/70 hover:text-foreground"
-                  }`}
-                >
-                  Mánaðarleg
-                </button>
-                <button
-                  onClick={() => setPricingPeriod("annual")}
-                  className={`relative px-8 py-3 rounded-full font-semibold text-base transition-all duration-300 z-10 min-w-[140px] ${
-                    pricingPeriod === "annual"
-                      ? "text-white"
-                      : "text-foreground/70 hover:text-foreground"
-                  }`}
-                >
-                  Árleg
-                </button>
-              </div>
-            </div>
-
-            <div className="relative max-w-md mx-auto">
-              <div className="absolute inset-0 bg-primary/20 blur-[50px] rounded-full"></div>
-              
-              <div className="relative bg-background border-2 border-primary rounded-[2rem] p-6 md:p-8 shadow-2xl">
-                {pricingPeriod === "annual" && (
-                  <div className="inline-block bg-green-500/20 text-green-500 font-bold px-3 py-1 rounded-full text-xs mb-4">
-                    Sparar 20%
+            <div className="grid md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto">
+              {/* App Price - with Monthly/Annual toggle */}
+              <div className="space-y-6">
+                {/* Improved Pricing Toggle Switch */}
+                <div className="flex justify-center">
+                  <div className="relative inline-flex bg-card/60 backdrop-blur-sm border border-white/20 rounded-full p-1.5 shadow-lg">
+                    <div
+                      className={`absolute top-1.5 bottom-1.5 rounded-full bg-primary shadow-lg shadow-primary/50 transition-all duration-300 ease-out ${
+                        pricingPeriod === "monthly"
+                          ? "left-1.5 w-[calc(50%-6px)]"
+                          : "left-[calc(50%-3px)] w-[calc(50%-6px)]"
+                      }`}
+                    ></div>
+                    <button
+                      onClick={() => setPricingPeriod("monthly")}
+                      className={`relative px-8 py-3 rounded-full font-semibold text-base transition-all duration-300 z-10 min-w-[140px] ${
+                        pricingPeriod === "monthly"
+                          ? "text-white"
+                          : "text-foreground/70 hover:text-foreground"
+                      }`}
+                    >
+                      Mánaðarleg
+                    </button>
+                    <button
+                      onClick={() => setPricingPeriod("annual")}
+                      className={`relative px-8 py-3 rounded-full font-semibold text-base transition-all duration-300 z-10 min-w-[140px] ${
+                        pricingPeriod === "annual"
+                          ? "text-white"
+                          : "text-foreground/70 hover:text-foreground"
+                      }`}
+                    >
+                      Árleg
+                    </button>
                   </div>
-                )}
-                {pricingPeriod === "monthly" && (
-                  <div className="inline-block bg-primary/10 text-primary font-bold px-3 py-1 rounded-full text-xs mb-4">
-                    Vinsælast
-                  </div>
-                )}
-                
-                <div className="flex items-baseline justify-center gap-1 mb-1">
-                  <span className="text-5xl font-black font-display tracking-tight">
-                    {pricingPeriod === "annual" ? "3.192" : "3.990"}
-                  </span>
-                  <span className="text-xl font-bold text-foreground/50">kr.</span>
                 </div>
-                <div className="text-foreground/60 font-medium mb-1 text-sm">á mánuði</div>
-                {pricingPeriod === "annual" && (
-                  <div className="text-xs text-foreground/40 mb-6">38.304 kr. á ári</div>
-                )}
-                {pricingPeriod === "monthly" && (
-                  <div className="mb-6"></div>
-                )}
 
-                <ul className="space-y-2.5 text-left mb-6 pl-3">
-                  {[
-                    "Aðgangur að 30+ æfingaplömum",
-                    "Myndbönd við hverja æfingu",
-                    "Mataræði",
-                    "Skráning á framförum",
-                    "Regluleg Check-ins",
-                  ].map((feature, i) => (
-                    <li key={i} className="flex items-center gap-2.5">
-                      <div className="w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0">
-                        <Check className="w-3 h-3 text-green-500" />
+                <div className="relative">
+                  <div className="absolute inset-0 bg-primary/20 blur-[50px] rounded-full"></div>
+                  <div className="relative bg-background border-2 border-primary rounded-[2rem] p-6 md:p-8 shadow-2xl">
+                    {pricingPeriod === "annual" && (
+                      <div className="inline-block bg-green-500/20 text-green-500 font-bold px-3 py-1 rounded-full text-xs mb-4">
+                        Sparar 20%
                       </div>
-                      <span className="font-medium text-sm">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
+                    )}
+                    {pricingPeriod === "monthly" && (
+                      <div className="inline-block bg-primary/10 text-primary font-bold px-3 py-1 rounded-full text-xs mb-4">
+                        Vinsælast
+                      </div>
+                    )}
 
-                <Link to={`/app-signup?period=${pricingPeriod}`} className="block">
-                  <Button className="w-full h-12 rounded-full bg-primary hover:bg-primary/90 text-white font-bold text-base shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all">
-                    Byrja núna
-                  </Button>
-                </Link>
-                <p className="text-xs text-foreground/40 mt-4">Engin binding. Hættu hvenær sem er.</p>
+                    <div className="flex items-baseline justify-center gap-1 mb-1">
+                      <span className="text-5xl font-black font-display tracking-tight">
+                        {pricingPeriod === "annual" ? "3.192" : "3.990"}
+                      </span>
+                      <span className="text-xl font-bold text-foreground/50">kr.</span>
+                    </div>
+                    <div className="text-foreground/60 font-medium mb-1 text-sm">á mánuði</div>
+                    {pricingPeriod === "annual" && (
+                      <div className="text-xs text-foreground/40 mb-6">38.304 kr. á ári</div>
+                    )}
+                    {pricingPeriod === "monthly" && <div className="mb-6"></div>}
+
+                    <ul className="space-y-2.5 text-left mb-6 pl-3">
+                      {[
+                        "Aðgangur að GF Training appinu",
+                        "Æfingarplan",
+                        "Myndbönd við hverja æfingu",
+                        "Mataræði",
+                        "Skráning á framförum",
+                      ].map((feature, i) => (
+                        <li key={i} className="flex items-center gap-2.5">
+                          <div className="w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0">
+                            <Check className="w-3 h-3 text-green-500" />
+                          </div>
+                          <span className="font-medium text-sm">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <Link to={`/app-signup?period=${pricingPeriod}`} className="block">
+                      <Button className="w-full h-12 rounded-full bg-primary hover:bg-primary/90 text-white font-bold text-base shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all">
+                        Byrja núna
+                      </Button>
+                    </Link>
+                    <p className="text-xs text-foreground/40 mt-4">Engin binding. Hættu hvenær sem er.</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Fjarþjálfun Price - monthly only */}
+              <div className="relative flex flex-col">
+                <div className="absolute inset-0 bg-primary/10 blur-[50px] rounded-full"></div>
+                <div className="relative bg-background border-2 border-white/20 rounded-[2rem] p-6 md:p-8 shadow-2xl flex flex-col flex-1">
+                  <div className="inline-block bg-amber-500/20 text-amber-500 font-bold px-3 py-1 rounded-full text-xs mb-4 w-fit">
+                    Aðeins 3 plás
+                  </div>
+
+                  <h3 className="text-xl font-bold mb-2 text-left">Fjarþjálfun</h3>
+
+                  <div className="flex items-baseline justify-center gap-1 mb-1">
+                    <span className="text-5xl font-black font-display tracking-tight">24.990</span>
+                    <span className="text-xl font-bold text-foreground/50">kr.</span>
+                  </div>
+                  <div className="text-foreground/60 font-medium mb-6 text-sm">á mánuði</div>
+
+                  <ul className="space-y-2.5 text-left mb-6 pl-3 flex-1">
+                    {[
+                      "Einstaklingsmiðað æfingaplan",
+                      "Næringarráðgjöf",
+                      "Tveggja vikna eftirfylgni",
+                      "Aðgangur að appinu",
+                      "Stanslaus samskipti við þjálfara",
+                    ].map((feature, i) => (
+                      <li key={i} className="flex items-center gap-2.5">
+                        <div className="w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0">
+                          <Check className="w-3 h-3 text-green-500" />
+                        </div>
+                        <span className="font-medium text-sm">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <Link to="/app-signup?plan=fjarthjalfun" className="block mt-auto">
+                    <Button className="w-full h-12 rounded-full bg-white/10 hover:bg-white/20 text-white font-bold text-base border border-white/20 shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all">
+                      Hafðu samband
+                    </Button>
+                  </Link>
+                  <p className="text-xs text-foreground/40 mt-4">Engin árleg áskrift</p>
+                </div>
               </div>
             </div>
           </div>
@@ -869,9 +912,9 @@ const AppLanding = () => {
               <div className="hidden md:block absolute top-12 left-[16%] right-[16%] h-0.5 bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
 
               {[
-                { step: "01", title: "Sækja GF Training appið", desc: "Í App Store eða Google Play" },
-                { step: "02", title: "Svara nokkrum spurningum", desc: "Svara nokkrum spurningum um markmið og reynslu" },
-                { step: "03", title: "Fá plan sem henter þínum markmiðum", desc: "Byrjaðu strax með plani sem passar þér" }
+                { step: "01", title: "Þú sækir GF Training appið", desc: "Í App Store eða Google Play" },
+                { step: "02", title: "Þú svarar nokkrum spurningum", desc: "Svara nokkrum spurningum um markmið og reynslu" },
+                { step: "03", title: "Þú færð plan sem henter þínum markmiðum", desc: "Byrjaðu strax með plani sem passar þér" }
               ].map((item, i) => (
                 <div key={i} className="relative z-10 space-y-4">
                   <div className="w-24 h-24 rounded-full bg-card border border-white/10 flex items-center justify-center text-3xl font-black font-display mx-auto shadow-xl">

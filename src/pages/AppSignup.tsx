@@ -17,9 +17,11 @@ interface AppSignupFormData {
 
 const AppSignup = () => {
   const [searchParams] = useSearchParams();
+  const planType = searchParams.get('plan');
+  const isFjarthjalfun = planType === 'fjarthjalfun';
   const initialPeriod = searchParams.get('period') || 'monthly';
   
-  const [paymentPeriod, setPaymentPeriod] = useState<"monthly" | "annual">(initialPeriod as "monthly" | "annual" || "monthly");
+  const [paymentPeriod, setPaymentPeriod] = useState<"monthly" | "annual">(isFjarthjalfun ? 'monthly' : (initialPeriod as "monthly" | "annual" || "monthly"));
   const [formData, setFormData] = useState<AppSignupFormData>({
     fullName: "",
     kennitala: "",
@@ -30,8 +32,9 @@ const AppSignup = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  // Update payment period from URL parameter
+  // Update payment period from URL parameter (only for app plan, not fjarthjalfun)
   useEffect(() => {
+    if (searchParams.get('plan') === 'fjarthjalfun') return;
     const periodFromUrl = searchParams.get('period');
     if (periodFromUrl === 'annual' || periodFromUrl === 'monthly') {
       setPaymentPeriod(periodFromUrl as "monthly" | "annual");
@@ -66,9 +69,11 @@ const AppSignup = () => {
     formData.goal.trim() !== "" &&
     formData.terms === true;
 
-  const pricing = paymentPeriod === 'annual' 
-    ? { price: '3.192 kr.', period: 'á mánuði', total: '38.304 kr. á ári', savings: '20%' }
-    : { price: '3.990 kr.', period: 'á mánuði', total: '', savings: '' };
+  const pricing = isFjarthjalfun
+    ? { price: '24.990 kr.', period: 'á mánuði', total: '', savings: '', label: 'Fjarþjálfun' }
+    : paymentPeriod === 'annual'
+      ? { price: '3.192 kr.', period: 'á mánuði', total: '38.304 kr. á ári', savings: '20%', label: '' }
+      : { price: '3.990 kr.', period: 'á mánuði', total: '', savings: '', label: '' };
 
   const handleSubmit = async () => {
     if (isSubmitting) return;
@@ -84,14 +89,16 @@ const AppSignup = () => {
       formDataToSend.append('kennitala', formData.kennitala);
       formDataToSend.append('email', formData.email);
       formDataToSend.append('goal', formData.goal);
-      formDataToSend.append('plan', 'app');
+      formDataToSend.append('plan', isFjarthjalfun ? 'fjarthjalfun' : 'app');
       formDataToSend.append('period', paymentPeriod);
       formDataToSend.append('terms', formData.terms ? 'yes' : 'no');
 
-      // Use different form endpoints based on payment period
-      const formEndpoint = paymentPeriod === 'annual' 
-        ? "https://formspree.io/f/xlgggrjd"  // Árlegt
-        : "https://formspree.io/f/maqqqwew"; // Mánaðarlegt
+      // Use different form endpoints based on plan and payment period
+      const formEndpoint = isFjarthjalfun
+        ? "https://formspree.io/f/maqqqwew" // Fjarþjálfun - use monthly endpoint or add dedicated one
+        : paymentPeriod === 'annual'
+          ? "https://formspree.io/f/xlgggrjd"  // Árlegt
+          : "https://formspree.io/f/maqqqwew"; // Mánaðarlegt
 
       const response = await fetch(formEndpoint, {
         method: "POST",
@@ -155,52 +162,65 @@ const AppSignup = () => {
             {/* Header */}
             <div className="text-center space-y-4">
               <h1 className="text-4xl md:text-5xl font-black font-display">
-                Byrjaðu með <span className="text-primary">GF Training appinu</span>
+                {isFjarthjalfun ? (
+                  <>Byrjaðu með <span className="text-primary">Fjarþjálfun</span></>
+                ) : (
+                  <>Byrjaðu með <span className="text-primary">GF Training appinu</span></>
+                )}
               </h1>
               <p className="text-lg text-foreground/70 max-w-xl mx-auto">
-                Allt sem þú þarft til að ná árangri. Æfingar, næring og eftirfylgni í einu appi.
+                {isFjarthjalfun
+                  ? "Einstaklingsmiðað fjarþjálfun með persónulegum þjálfara. Aðeins 3 plás tiltæk."
+                  : "Allt sem þú þarft til að ná árangri. Æfingar, næring og eftirfylgni í einu appi."}
               </p>
             </div>
 
             {/* Pricing Card */}
             <Card className="bg-card/50 backdrop-blur-sm border border-white/10">
               <CardContent className="pt-6">
-                {/* Payment Period Toggle */}
-                <div className="flex justify-center mb-6">
-                  <div className="relative inline-flex bg-card/60 backdrop-blur-sm border border-white/20 rounded-full p-1.5 shadow-lg">
-                    {/* Sliding Background */}
-                    <div
-                      className={`absolute top-1.5 bottom-1.5 rounded-full bg-primary shadow-lg shadow-primary/50 transition-all duration-300 ease-out ${
-                        paymentPeriod === "monthly" 
-                          ? "left-1.5 w-[calc(50%-6px)]" 
-                          : "left-[calc(50%-3px)] w-[calc(50%-6px)]"
-                      }`}
-                    ></div>
-                    <button
-                      onClick={() => setPaymentPeriod("monthly")}
-                      className={`relative px-8 py-3 rounded-full font-semibold text-base transition-all duration-300 z-10 min-w-[140px] ${
-                        paymentPeriod === "monthly"
-                          ? "text-white"
-                          : "text-foreground/70 hover:text-foreground"
-                      }`}
-                    >
-                      Mánaðarleg
-                    </button>
-                    <button
-                      onClick={() => setPaymentPeriod("annual")}
-                      className={`relative px-8 py-3 rounded-full font-semibold text-base transition-all duration-300 z-10 min-w-[140px] ${
-                        paymentPeriod === "annual"
-                          ? "text-white"
-                          : "text-foreground/70 hover:text-foreground"
-                      }`}
-                    >
-                      Árleg
-                    </button>
+                {/* Payment Period Toggle - hidden for Fjarþjálfun */}
+                {!isFjarthjalfun && (
+                  <div className="flex justify-center mb-6">
+                    <div className="relative inline-flex bg-card/60 backdrop-blur-sm border border-white/20 rounded-full p-1.5 shadow-lg">
+                      {/* Sliding Background */}
+                      <div
+                        className={`absolute top-1.5 bottom-1.5 rounded-full bg-primary shadow-lg shadow-primary/50 transition-all duration-300 ease-out ${
+                          paymentPeriod === "monthly"
+                            ? "left-1.5 w-[calc(50%-6px)]"
+                            : "left-[calc(50%-3px)] w-[calc(50%-6px)]"
+                        }`}
+                      ></div>
+                      <button
+                        onClick={() => setPaymentPeriod("monthly")}
+                        className={`relative px-8 py-3 rounded-full font-semibold text-base transition-all duration-300 z-10 min-w-[140px] ${
+                          paymentPeriod === "monthly"
+                            ? "text-white"
+                            : "text-foreground/70 hover:text-foreground"
+                        }`}
+                      >
+                        Mánaðarleg
+                      </button>
+                      <button
+                        onClick={() => setPaymentPeriod("annual")}
+                        className={`relative px-8 py-3 rounded-full font-semibold text-base transition-all duration-300 z-10 min-w-[140px] ${
+                          paymentPeriod === "annual"
+                            ? "text-white"
+                            : "text-foreground/70 hover:text-foreground"
+                        }`}
+                      >
+                        Árleg
+                      </button>
+                    </div>
                   </div>
-                </div>
+                )}
 
                 <div className="text-center mb-6">
-                  {paymentPeriod === 'annual' && (
+                  {isFjarthjalfun && (
+                    <div className="inline-block bg-amber-500/20 text-amber-500 font-bold px-3 py-1 rounded-full text-xs mb-4">
+                      Aðeins 3 plás
+                    </div>
+                  )}
+                  {!isFjarthjalfun && paymentPeriod === 'annual' && (
                     <div className="inline-block bg-green-500/20 text-green-500 font-bold px-3 py-1 rounded-full text-xs mb-4">
                       Sparar {pricing.savings}
                     </div>
@@ -288,7 +308,7 @@ const AppSignup = () => {
                         className="mt-1"
                       />
                       <Label htmlFor="terms" className="text-sm text-foreground/80 leading-relaxed cursor-pointer">
-                        Ég samþykki <Link to="/terms" className="text-primary hover:underline">skilmála</Link> og <Link to="/terms" className="text-primary hover:underline">persónuverndarstefnu</Link> *
+                        Ég samþykki <Link to="/terms#terms" className="text-primary hover:underline">skilmála</Link> og <Link to="/terms#privacy" className="text-primary hover:underline">persónuverndarstefnu</Link> *
                       </Label>
                     </div>
                     
@@ -310,30 +330,28 @@ const AppSignup = () => {
 
             {/* Benefits */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-              <div className="flex items-start gap-3">
-                <div className="w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <Check className="w-3 h-3 text-green-500" />
+              {(isFjarthjalfun
+                ? [
+                    "Einstaklingsmiðað æfingaplan",
+                    "Næringarráðgjöf",
+                    "Tveggja vikna eftirfylgni",
+                    "Aðgangur að appinu",
+                    "Stanslaus samskipti við þjálfara",
+                  ]
+                : [
+                    "Aðgangur að 30+ æfingaplömum",
+                    "Myndbönd við hverja æfingu",
+                    "Mataræði og uppskriftir",
+                    "Skráning á framförum",
+                  ]
+              ).map((benefit, i) => (
+                <div key={i} className="flex items-start gap-3">
+                  <div className="w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Check className="w-3 h-3 text-green-500" />
+                  </div>
+                  <span className="text-foreground/80">{benefit}</span>
                 </div>
-                <span className="text-foreground/80">Aðgangur að 30+ æfingaplömum</span>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <Check className="w-3 h-3 text-green-500" />
-                </div>
-                <span className="text-foreground/80">Myndbönd við hverja æfingu</span>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <Check className="w-3 h-3 text-green-500" />
-                </div>
-                <span className="text-foreground/80">Mataræði og uppskriftir</span>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <Check className="w-3 h-3 text-green-500" />
-                </div>
-                <span className="text-foreground/80">Skráning á framförum</span>
-              </div>
+              ))}
             </div>
           </div>
         </div>
