@@ -170,7 +170,7 @@ const AppSignup = () => {
               </h1>
               <p className="text-lg text-foreground/70 max-w-xl mx-auto">
                 {isFjarthjalfun
-                  ? "Einstaklingsmiðað fjarþjálfun með persónulegum þjálfara. Aðeins 3 plás tiltæk."
+                  ? "Einstaklingsmiðað fjarþjálfun með persónulegum þjálfara."
                   : "Allt sem þú þarft til að ná árangri. Æfingar, næring og eftirfylgni í einu appi."}
               </p>
             </div>
@@ -215,11 +215,6 @@ const AppSignup = () => {
                 )}
 
                 <div className="text-center mb-6">
-                  {isFjarthjalfun && (
-                    <div className="inline-block bg-amber-500/20 text-amber-500 font-bold px-3 py-1 rounded-full text-xs mb-4">
-                      Aðeins 3 plás
-                    </div>
-                  )}
                   {!isFjarthjalfun && paymentPeriod === 'annual' && (
                     <div className="inline-block bg-green-500/20 text-green-500 font-bold px-3 py-1 rounded-full text-xs mb-4">
                       Sparar {pricing.savings}

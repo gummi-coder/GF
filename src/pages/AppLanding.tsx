@@ -859,10 +859,6 @@ const AppLanding = () => {
               <div className="relative flex flex-col">
                 <div className="absolute inset-0 bg-primary/10 blur-[50px] rounded-full"></div>
                 <div className="relative bg-background border-2 border-white/20 rounded-[2rem] p-6 md:p-8 shadow-2xl flex flex-col flex-1">
-                  <div className="inline-block bg-amber-500/20 text-amber-500 font-bold px-3 py-1 rounded-full text-xs mb-4 w-fit">
-                    Aðeins 3 plás
-                  </div>
-
                   <h3 className="text-xl font-bold mb-2 text-left">Fjarþjálfun</h3>
 
                   <div className="flex items-baseline justify-center gap-1 mb-1">
@@ -993,12 +989,12 @@ const AppLanding = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 mb-16 sm:mb-24 lg:mb-32">
               {/* Left: App Store & QR */}
               <div className="space-y-8">
-                <div className="flex flex-wrap gap-4">
-                  <a href="#" className="hover:opacity-80 transition-opacity">
-                    <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" className="h-10 border border-white/20 rounded-lg" alt="App Store" />
+                <div className="flex flex-wrap gap-4 items-center">
+                  <a href="https://apps.apple.com/es/app/gf-training/id6499074966" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity h-10 flex items-center">
+                    <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" className="h-10 w-auto" alt="App Store" />
                   </a>
-                  <a href="#" className="hover:opacity-80 transition-opacity w-[190px] h-10 flex items-center justify-center">
-                    <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" className="h-full w-auto scale-[1.15] border border-white/20 rounded-lg" alt="Google Play" />
+                  <a href="https://play.google.com/store/apps/details?id=com.kahunas.io.GFTraining&hl=en" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity h-12 flex items-center">
+                    <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" className="h-12 w-auto" alt="Google Play" />
                   </a>
                 </div>
                 
