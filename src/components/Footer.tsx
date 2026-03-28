@@ -110,7 +110,7 @@ const Footer = () => {
             <ul className="space-y-2">
               <li><a href="/terms" className="text-white/60 hover:text-primary transition-colors text-xs">Skilmálar</a></li>
               <li><a href="/terms" className="text-white/60 hover:text-primary transition-colors text-xs">Persónuverndarstefna</a></li>
-              <li><a href="/contact" className="text-white/60 hover:text-primary transition-colors text-xs">Þjónustuver</a></li>
+              <li><a href="/hjalp" className="text-white/60 hover:text-primary transition-colors text-xs">Hjálp</a></li>
             </ul>
           </div>
         </div>

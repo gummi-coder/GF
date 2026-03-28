@@ -14,16 +14,14 @@ const AppRedirect = () => {
     // Android detection
     const isAndroid = /android/i.test(userAgent);
 
-    // App Store URLs
     const appStoreUrl = "https://apps.apple.com/es/app/gf-training/id6499074966";
-    const playStoreUrl = "https://play.google.com/store/apps/details?id=com.kahunas.io.GFTraining&hl=en";
 
     if (isIOS) {
       window.location.href = appStoreUrl;
     } else if (isAndroid) {
-      window.location.href = playStoreUrl;
+      // Nýja appið er ekki á Google Play — sendum á forsíðu
+      navigate("/");
     } else {
-      // Desktop or unknown device - show options or redirect to app landing page
       navigate("/");
     }
   }, [navigate]);
@@ -32,7 +30,7 @@ const AppRedirect = () => {
     <div className="min-h-screen bg-background flex items-center justify-center">
       <div className="text-center space-y-4">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-        <p className="text-foreground/70">Beinum á appverslunina...</p>
+        <p className="text-foreground/70">Augnablik...</p>
       </div>
     </div>
   );

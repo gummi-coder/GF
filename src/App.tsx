@@ -25,6 +25,7 @@ import Terms from "./pages/Terms";
 import Askorun from "./pages/Askorun";
 import AskorunSignup from "./pages/AskorunSignup";
 import Links from "./pages/Links";
+import Hjalp from "./pages/Hjalp";
 import FacebookPixel from "@/components/FacebookPixel";
 import { useEffect } from "react";
 
@@ -96,6 +97,7 @@ const App = () => (
                 <Route path="/askorun" element={<Askorun />} />
                 <Route path="/askorun-signup" element={<AskorunSignup />} />
                 <Route path="/links" element={<Links />} />
+                <Route path="/hjalp" element={<Hjalp />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                  <Route path="*" element={<NotFound />} />
                </Routes>

@@ -80,7 +80,7 @@ const Navigation = () => {
           <div className="hidden md:block">
             <Link to="/pricing">
               <Button 
-                className="bg-primary hover:bg-primary/90 text-white font-bold px-8 py-3 rounded-md uppercase text-sm tracking-wide"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-8 py-3 rounded-md uppercase text-sm tracking-wide"
               >
                 SKRÁ MIG
               </Button>
@@ -141,7 +141,7 @@ const Navigation = () => {
             ))}
             <Link to="/pricing">
             <Button 
-              className="w-full bg-primary hover:bg-primary/90 text-white font-bold py-6 rounded-md uppercase"
+              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-6 rounded-md uppercase"
                 onClick={() => setIsMenuOpen(false)}
             >
                 SKRÁ MIG

@@ -19,9 +19,16 @@ const AppSignup = () => {
   const [searchParams] = useSearchParams();
   const planType = searchParams.get('plan');
   const isFjarthjalfun = planType === 'fjarthjalfun';
-  const initialPeriod = searchParams.get('period') || 'monthly';
-  
-  const [paymentPeriod, setPaymentPeriod] = useState<"monthly" | "annual">(isFjarthjalfun ? 'monthly' : (initialPeriod as "monthly" | "annual" || "monthly"));
+  const rawPeriod = searchParams.get("period") || "monthly";
+  const validAppPeriod =
+    rawPeriod === "annual" || rawPeriod === "quarterly" || rawPeriod === "monthly"
+      ? rawPeriod
+      : "monthly";
+  const initialPeriod = isFjarthjalfun ? "monthly" : validAppPeriod;
+
+  const [paymentPeriod, setPaymentPeriod] = useState<"monthly" | "quarterly" | "annual">(
+    initialPeriod as "monthly" | "quarterly" | "annual"
+  );
   const [formData, setFormData] = useState<AppSignupFormData>({
     fullName: "",
     kennitala: "",
@@ -32,12 +39,12 @@ const AppSignup = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  // Update payment period from URL parameter (only for app plan, not fjarthjalfun)
+  // Sync billing tier from URL (app plan only)
   useEffect(() => {
-    if (searchParams.get('plan') === 'fjarthjalfun') return;
-    const periodFromUrl = searchParams.get('period');
-    if (periodFromUrl === 'annual' || periodFromUrl === 'monthly') {
-      setPaymentPeriod(periodFromUrl as "monthly" | "annual");
+    if (searchParams.get("plan") === "fjarthjalfun") return;
+    const p = searchParams.get("period");
+    if (p === "annual" || p === "quarterly" || p === "monthly") {
+      setPaymentPeriod(p);
     }
   }, [searchParams]);
 
@@ -70,10 +77,12 @@ const AppSignup = () => {
     formData.terms === true;
 
   const pricing = isFjarthjalfun
-    ? { price: '24.990 kr.', period: 'á mánuði', total: '', savings: '', label: 'Fjarþjálfun' }
-    : paymentPeriod === 'annual'
-      ? { price: '3.192 kr.', period: 'á mánuði', total: '38.304 kr. á ári', savings: '20%', label: '' }
-      : { price: '3.990 kr.', period: 'á mánuði', total: '', savings: '', label: '' };
+    ? { price: "24.990 kr.", period: "á mánuði", total: "", label: "Fjarþjálfun" }
+    : paymentPeriod === "annual"
+      ? { price: "25.100 kr.", period: "á ári", total: "", label: "" }
+      : paymentPeriod === "quarterly"
+        ? { price: "7.990 kr.", period: "fyrir 3 mánuði", total: "", label: "" }
+        : { price: "2.990 kr.", period: "á mánuði", total: "", label: "" };
 
   const handleSubmit = async () => {
     if (isSubmitting) return;
@@ -93,12 +102,11 @@ const AppSignup = () => {
       formDataToSend.append('period', paymentPeriod);
       formDataToSend.append('terms', formData.terms ? 'yes' : 'no');
 
-      // Use different form endpoints based on plan and payment period
       const formEndpoint = isFjarthjalfun
-        ? "https://formspree.io/f/maqqqwew" // Fjarþjálfun - use monthly endpoint or add dedicated one
-        : paymentPeriod === 'annual'
-          ? "https://formspree.io/f/xlgggrjd"  // Árlegt
-          : "https://formspree.io/f/maqqqwew"; // Mánaðarlegt
+        ? "https://formspree.io/f/maqqqwew"
+        : paymentPeriod === "annual"
+          ? "https://formspree.io/f/xlgggrjd"
+          : "https://formspree.io/f/maqqqwew";
 
       const response = await fetch(formEndpoint, {
         method: "POST",
@@ -178,46 +186,15 @@ const AppSignup = () => {
             {/* Pricing Card */}
             <Card className="bg-card/50 backdrop-blur-sm border border-white/10">
               <CardContent className="pt-6">
-                {/* Payment Period Toggle - hidden for Fjarþjálfun */}
-                {!isFjarthjalfun && (
-                  <div className="flex justify-center mb-6">
-                    <div className="relative inline-flex bg-card/60 backdrop-blur-sm border border-white/20 rounded-full p-1.5 shadow-lg">
-                      {/* Sliding Background */}
-                      <div
-                        className={`absolute top-1.5 bottom-1.5 rounded-full bg-primary shadow-lg shadow-primary/50 transition-all duration-300 ease-out ${
-                          paymentPeriod === "monthly"
-                            ? "left-1.5 w-[calc(50%-6px)]"
-                            : "left-[calc(50%-3px)] w-[calc(50%-6px)]"
-                        }`}
-                      ></div>
-                      <button
-                        onClick={() => setPaymentPeriod("monthly")}
-                        className={`relative px-8 py-3 rounded-full font-semibold text-base transition-all duration-300 z-10 min-w-[140px] ${
-                          paymentPeriod === "monthly"
-                            ? "text-white"
-                            : "text-foreground/70 hover:text-foreground"
-                        }`}
-                      >
-                        Mánaðarleg
-                      </button>
-                      <button
-                        onClick={() => setPaymentPeriod("annual")}
-                        className={`relative px-8 py-3 rounded-full font-semibold text-base transition-all duration-300 z-10 min-w-[140px] ${
-                          paymentPeriod === "annual"
-                            ? "text-white"
-                            : "text-foreground/70 hover:text-foreground"
-                        }`}
-                      >
-                        Árleg
-                      </button>
-                    </div>
-                  </div>
-                )}
-
                 <div className="text-center mb-6">
-                  {!isFjarthjalfun && paymentPeriod === 'annual' && (
+                  {!isFjarthjalfun && paymentPeriod === "annual" && (
                     <div className="inline-block bg-green-500/20 text-green-500 font-bold px-3 py-1 rounded-full text-xs mb-4">
-                      Sparar {pricing.savings}
+                      30% afsláttur
+                    </div>
+                  )}
+                  {!isFjarthjalfun && paymentPeriod === "monthly" && (
+                    <div className="inline-block bg-primary/10 text-primary font-bold px-3 py-1 rounded-full text-xs mb-4">
+                      Vinsælast
                     </div>
                   )}
                   <div className="flex items-baseline justify-center gap-1 mb-1">
@@ -334,7 +311,7 @@ const AppSignup = () => {
                     "Stanslaus samskipti við þjálfara",
                   ]
                 : [
-                    "Aðgangur að 30+ æfingaplömum",
+                    "Aðgangur að 40+ æfingarplömum",
                     "Myndbönd við hverja æfingu",
                     "Mataræði og uppskriftir",
                     "Skráning á framförum",
