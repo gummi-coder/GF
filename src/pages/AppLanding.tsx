@@ -452,10 +452,10 @@ const AppLanding = () => {
                  
                  <div className="space-y-6 text-lg text-[#e8e8e3]/80 leading-relaxed">
                    <p>
-                     GF Training er allt-í-einu líkamsræktar app með tilbúnum æfinga plönum, skýrri framvindu mælingu og einföldu næringarstuðningi og notað af yfir en 14.000 þjálfurum um allan heim og af öllum helstu einkaþjálfurum landsins.
+                     GF Training er líkamsræktar app sem hjálpar þér að ná árangri með skýru og einföldu æfingaáætlunum, mælingum og næringarstuðningi sem leiðir þig áfram.
                    </p>
                    <p>
-                     Þú færð aðgang að æfinga plöntum sem leiða þig skref fyrir skref, mælingum sem sýna framfarir og hjálp að telja macros svo þú náir markmiðunum þínum. Engin giskið - bara app sem hjálpar þér að mæta reglulega og verða besta útgáfan af sjálfum þér.
+                     Þú færð aðgang að æfingaplönum sem segja þér nákvæmlega hvað á að gera, mælingum sem sýna framfarir og einföldu macro tracking sem heldur þér á réttri leið svo þú náir markmiðunum þínum. GF Training hjálpar þér að mæta reglulega og byggja upp árangur og góða ávana.
                    </p>
                  </div>
 
@@ -843,9 +843,6 @@ const AppLanding = () => {
                         Byrja núna
                       </Button>
                     </Link>
-                    <p className="text-xs text-foreground/40 mt-4 text-center">
-                      Engin binding. Hættu hvenær sem er.
-                    </p>
                   </div>
                 </div>
               ))}

@@ -292,9 +292,6 @@ const AppSignup = () => {
                       {isSubmitting ? "Sendi..." : "Byrja núna"}
                     </Button>
                     
-                    <p className="text-xs text-center text-foreground/40">
-                      Engin binding. Hættu hvenær sem er.
-                    </p>
                   </div>
                 )}
               </CardContent>
