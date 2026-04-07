@@ -14,7 +14,7 @@ const AppRedirect = () => {
     // Android detection
     const isAndroid = /android/i.test(userAgent);
 
-    const appStoreUrl = "https://apps.apple.com/es/app/gf-training/id6499074966";
+    const appStoreUrl = "https://apps.apple.com/is/app/gf-training/id6761101154";
 
     if (isIOS) {
       window.location.href = appStoreUrl;

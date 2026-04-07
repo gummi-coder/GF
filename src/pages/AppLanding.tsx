@@ -1,8 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
-import { Check, ChevronDown, ChevronUp, ChevronLeft, ChevronRight, ArrowRight, Smartphone, BarChart3, CalendarDays, Dumbbell, Zap, Video, PlayCircle, Trophy, Timer, Menu, X } from "lucide-react";
+import { Check, ChevronDown, ChevronUp, ChevronLeft, ChevronRight, ArrowRight, BarChart3, CalendarDays, Dumbbell, Zap, Video, PlayCircle, Trophy, Timer, Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
+
+/** Beinn hálfur á íslenska App Store síðu GF Training */
+const GF_TRAINING_APP_STORE_URL =
+  "https://apps.apple.com/is/app/gf-training/id6761101154";
 
 const AppLanding = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -16,9 +20,9 @@ const AppLanding = () => {
   const desktopCarouselRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Use production URL for QR code so it works when scanned from any device
-    const redirectUrl = `https://gftraining.is/app-download`;
-    setQrCodeUrl(`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(redirectUrl)}`);
+    setQrCodeUrl(
+      `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(GF_TRAINING_APP_STORE_URL)}`
+    );
   }, []);
 
   // Handle scroll detection for navigation
@@ -238,11 +242,11 @@ const AppLanding = () => {
             </div>
 
             <div className="flex items-center gap-2 md:gap-4">
-              <Link to="/app-signup" className="hidden md:block">
-                <Button className="bg-primary hover:bg-primary/90 text-black font-medium px-5 md:px-6 py-2 md:py-2.5 rounded-full text-xs md:text-sm shadow-lg">
+              <Button asChild className="hidden md:inline-flex bg-primary hover:bg-primary/90 text-black font-medium px-5 md:px-6 py-2 md:py-2.5 rounded-full text-xs md:text-sm shadow-lg">
+                <a href={GF_TRAINING_APP_STORE_URL} target="_blank" rel="noopener noreferrer">
                   Byrja núna
-                </Button>
-              </Link>
+                </a>
+              </Button>
               
               {/* Mobile Menu Button */}
               <button
@@ -308,11 +312,16 @@ const AppLanding = () => {
                 >
                   Spurningar
                 </a>
-                <Link to="/app-signup" onClick={() => setIsMobileMenuOpen(false)}>
-                  <Button className="w-full bg-primary hover:bg-primary/90 text-black font-medium px-6 py-2.5 rounded-full text-sm mt-2">
+                <Button asChild className="w-full bg-primary hover:bg-primary/90 text-black font-medium px-6 py-2.5 rounded-full text-sm mt-2">
+                  <a
+                    href={GF_TRAINING_APP_STORE_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
                     Byrja núna
-                  </Button>
-                </Link>
+                  </a>
+                </Button>
               </div>
             </div>
           )}
@@ -345,11 +354,14 @@ const AppLanding = () => {
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
-                  <Link to="/app-signup" className="w-full sm:w-auto">
-                    <Button className="h-12 sm:h-14 px-6 sm:px-8 rounded-full bg-primary hover:bg-primary/90 text-black font-bold text-base sm:text-lg shadow-lg hover:shadow-xl transition-all w-full sm:w-auto">
+                  <Button
+                    asChild
+                    className="h-12 sm:h-14 px-6 sm:px-8 rounded-full bg-primary hover:bg-primary/90 text-black font-bold text-base sm:text-lg shadow-lg hover:shadow-xl transition-all w-full sm:w-auto"
+                  >
+                    <a href={GF_TRAINING_APP_STORE_URL} target="_blank" rel="noopener noreferrer">
                       Byrja núna
-                    </Button>
-                  </Link>
+                    </a>
+                  </Button>
                 </div>
 
                 <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4 md:gap-5 pt-2 text-xs sm:text-sm font-medium text-white/80">
@@ -416,7 +428,7 @@ const AppLanding = () => {
                <div className="lg:col-span-3 flex flex-row sm:flex-row lg:flex-col items-center justify-center lg:items-end gap-3 sm:gap-4 lg:gap-8 pt-[90vh] lg:pt-0 -mt-[85vh] lg:mt-0">
                  {/* App Store */}
                  <div className="flex flex-col items-center lg:items-end gap-2">
-                    <a href="https://apps.apple.com/es/app/gf-training/id6499074966" target="_blank" rel="noopener noreferrer" className="h-8 sm:h-10 w-[140px] sm:w-[190px] hover:opacity-80 transition-opacity flex items-center justify-center">
+                    <a href={GF_TRAINING_APP_STORE_URL} target="_blank" rel="noopener noreferrer" className="h-8 sm:h-10 w-[140px] sm:w-[190px] hover:opacity-80 transition-opacity flex items-center justify-center">
                       <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="App Store" className="h-full w-auto" />
                     </a>
                     <div className="hidden sm:block text-xs font-bold text-white/80 text-center lg:text-right max-w-[190px]">
@@ -459,11 +471,11 @@ const AppLanding = () => {
                    </p>
                  </div>
 
-                 <Link to="/app-signup" className="inline-block">
-                    <Button className="h-14 px-8 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-lg">
+                 <Button asChild className="h-14 px-8 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-lg">
+                    <a href={GF_TRAINING_APP_STORE_URL} target="_blank" rel="noopener noreferrer">
                       Byrja núna
-                    </Button>
-                 </Link>
+                    </a>
+                 </Button>
                </div>
              </div>
 
@@ -628,12 +640,17 @@ const AppLanding = () => {
                   Þú svarar nokkrum spurningum og við finnum plan sem hentar þér og þínum markmiðum.
                 </p>
                 <div className="pt-2">
-                  <Link to="/app-signup">
-                    <Button className="h-11 px-8 rounded-full bg-primary hover:bg-primary/90 text-black font-bold text-sm inline-flex items-center gap-2 shadow-xl hover:shadow-2xl hover:scale-105 transition-all">
+                  <Button asChild className="h-11 px-8 rounded-full bg-primary hover:bg-primary/90 text-black font-bold text-sm shadow-xl hover:shadow-2xl hover:scale-105 transition-all">
+                    <a
+                      href={GF_TRAINING_APP_STORE_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2"
+                    >
                       Byrja núna
                       <ArrowRight size={16} />
-                    </Button>
-                  </Link>
+                    </a>
+                  </Button>
                 </div>
               </div>
             </div>
@@ -650,12 +667,17 @@ const AppLanding = () => {
                   Þú svarar nokkrum spurningum og við finnum plan sem hentar þér og þínum markmiðum.
                 </p>
                 <div>
-                  <Link to="/app-signup">
-                    <Button className="h-12 md:h-14 px-6 md:px-8 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base md:text-lg inline-flex items-center gap-2 md:gap-3 shadow-xl hover:shadow-2xl hover:scale-105 transition-all">
+                  <Button asChild className="h-12 md:h-14 px-6 md:px-8 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base md:text-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-all">
+                    <a
+                      href={GF_TRAINING_APP_STORE_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 md:gap-3"
+                    >
                       Byrja núna
                       <ArrowRight size={18} className="md:w-5 md:h-5" />
-                    </Button>
-                  </Link>
+                    </a>
+                  </Button>
                 </div>
               </div>
 
@@ -838,11 +860,11 @@ const AppLanding = () => {
                       ))}
                     </ul>
 
-                    <Link to={`/app-signup?period=${tier.period}`} className="block mt-auto">
-                      <Button className="w-full h-12 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all">
+                    <Button asChild className="mt-auto w-full h-12 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all">
+                      <a href={GF_TRAINING_APP_STORE_URL} target="_blank" rel="noopener noreferrer">
                         Byrja núna
-                      </Button>
-                    </Link>
+                      </a>
+                    </Button>
                   </div>
                 </div>
               ))}
@@ -944,7 +966,7 @@ const AppLanding = () => {
               {/* Left: App Store & QR */}
               <div className="space-y-8">
                 <div className="flex flex-wrap gap-4 items-center">
-                  <a href="https://apps.apple.com/es/app/gf-training/id6499074966" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity h-10 flex items-center">
+                  <a href={GF_TRAINING_APP_STORE_URL} target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity h-10 flex items-center">
                     <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" className="h-10 w-auto" alt="App Store" />
                   </a>
                 </div>

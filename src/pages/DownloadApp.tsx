@@ -6,7 +6,7 @@ const DownloadApp = () => {
 
     // iOS detection
     if (/iPad|iPhone|iPod/.test(userAgent) && !(window as any).MSStream) {
-      window.location.href = "https://apps.apple.com/es/app/gf-training/id6499074966";
+      window.location.href = "https://apps.apple.com/is/app/gf-training/id6761101154";
     } 
     // Android detection
     else if (/android/i.test(userAgent)) {
