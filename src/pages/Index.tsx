@@ -16,7 +16,7 @@ const Index = () => {
         title="GF Training - Fjarþjálfun, Einkaþjálfun og Nærgangsþjálfun fyrir karla"
         description="Fjarþjálfun, einkaþjálfun og nærgangsþjálfun fyrir karla. Sérsniðin líkamsrækt, næringarráðleggingar og stuðningur. Hjálpum körlum að ná markmiðum sínum og verða besta útgáfan af sjálfum sér."
         keywords="fjarþjálfun, einkaþjálfun, nærgangsþjálfun, fjarþjálfun fyrir karla, einkaþjálfun fyrir karla, líkamsrækt, þjálfun, líkamsrækt fyrir karla, næringarráðleggingar, GF Training, Guðmundur Friðgeirsson"
-        canonical="https://gftraining.is"
+        canonical="https://gftraining.is/home"
       />
       <div className="min-h-screen">
       <Navigation />

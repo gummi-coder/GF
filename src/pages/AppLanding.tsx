@@ -181,10 +181,11 @@ const AppLanding = () => {
   return (
     <>
       <SEO
-        title="GF Training App - Styrktarþjálfun fyrir karla"
-        description="Allt sem þú þarft til að ná árangri. Æfingar, næring og eftirfylgni í einu appi frá 2.990 kr. á mánuði."
-        keywords="online pt app, æfinga app, þjálfunar app, gf training"
+        title="GF Training app | Æfingaplön, makró og mælingar fyrir karla"
+        description="Sæktu GF Training á iPhone: sérhönnuð æfingaplön, myndbönd við hverja æfingu, mælingar og macro tracking — allt í einu appi. Verð frá 2.990 kr. á mánuði."
+        keywords="GF Training app, æfingaapp, líkamsræktar app, makró app, æfingaplan, iPhone, App Store, karlar, styrktarþjálfun, vöðvauppbygging, fitubrennsla, GF Training"
         canonical="https://gftraining.is/"
+        ogImage="/images/app-screenshot-home.png"
       />
 
       <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/30" data-app-landing>
