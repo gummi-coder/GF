@@ -9,7 +9,10 @@ import { useForm, ValidationError } from "@formspree/react";
 const GF_TRAINING_APP_STORE_URL =
   "https://apps.apple.com/is/app/gf-training/id6761101154";
 
+type Language = "is" | "en";
+
 const AppLanding = () => {
+  const [language, setLanguage] = useState<Language>("is");
   const [searchParams, setSearchParams] = useSearchParams();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [qrCodeUrl, setQrCodeUrl] = useState("");
@@ -18,11 +21,52 @@ const AppLanding = () => {
   const [disableTransition, setDisableTransition] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
   const [isAndroidModalOpen, setIsAndroidModalOpen] = useState(false);
   const [isDeviceChoiceOpen, setIsDeviceChoiceOpen] = useState(false);
   const mobileCarouselRef = useRef<HTMLDivElement>(null);
   const desktopCarouselRef = useRef<HTMLDivElement>(null);
   const [androidFormState, handleAndroidSubmit] = useForm("xnjlrwww");
+
+  const t = {
+    navFeatures: language === "is" ? "Eiginleikar" : "Features",
+    navPlans: language === "is" ? "Plön" : "Plans",
+    navPricing: language === "is" ? "Verð" : "Pricing",
+    navFaq: language === "is" ? "Spurningar" : "FAQ",
+    startNow: language === "is" ? "Byrja núna" : "Start now",
+    heroTitleLead: language === "is" ? "Byggðu upp styrk, vöðva og sjálfstraust -" : "Build strength, muscle and confidence -",
+    heroTitleHighlight: language === "is" ? "allt á einum stað" : "all in one place",
+    heroDescription:
+      language === "is"
+        ? "GF Training appið hjálpar þér að byggja vöðva, brenna fitu og komast í þitt besta form - í ræktinni eða heima."
+        : "The GF Training app helps you build muscle, burn fat and get in your best shape - at the gym or at home.",
+    heroFeature1: language === "is" ? "Sérhönnuð æfingaplön" : "Custom training plans",
+    heroFeature2: language === "is" ? "Myndbönd við hverja æfingu" : "Video guidance for every workout",
+    qrAlt: language === "is" ? "Sækja appið" : "Download the app",
+    qrLabel: language === "is" ? "Skannaðu kóðann til að sækja appið." : "Scan the code to open the app link.",
+    deviceTitle: language === "is" ? "Veldu tækið þitt" : "Choose your device",
+    deviceDesc:
+      language === "is"
+        ? "Við gátum ekki greint tækið sjálfkrafa. Veldu hér að neðan:"
+        : "We could not detect your device automatically. Choose one below:",
+    closeDevicePicker: language === "is" ? "Loka vali á tæki" : "Close device selection",
+    androidModalTitle: language === "is" ? "Skráning í Android prófanir" : "Android testing signup",
+    androidModalDesc:
+      language === "is"
+        ? "Fylltu út formið og við höfum samband þegar Android útgáfan er tilbúin í prófanir."
+        : "Fill out the form and we will contact you when Android testing opens.",
+    closeAndroidModal: language === "is" ? "Loka Android skráningu" : "Close Android signup",
+    thanks: language === "is" ? "Takk fyrir! Skráningin þín hefur borist." : "Thanks! Your signup has been received.",
+    close: language === "is" ? "Loka" : "Close",
+    fullName: language === "is" ? "Fullt nafn *" : "Full name *",
+    email: language === "is" ? "Netfang *" : "Email *",
+    phone: language === "is" ? "Símanúmer" : "Phone number",
+    deviceQuestion: language === "is" ? "Hvaða Android síma notar þú?" : "Which Android phone do you use?",
+    comments: language === "is" ? "Athugasemdir" : "Comments",
+    commentsPlaceholder: language === "is" ? "T.d. Samsung S24 / Pixel 8" : "e.g. Samsung S24 / Pixel 8",
+    androidCta: language === "is" ? "Skrá mig í Android prófanir" : "Sign me up for Android testing",
+    sending: language === "is" ? "Sendi..." : "Sending...",
+  };
 
   useEffect(() => {
     const appDownloadUrl = `${window.location.origin}/app-download`;
@@ -90,49 +134,65 @@ const AppLanding = () => {
   const plans = [
     {
       id: 1,
-      title: "Vöðvauppbygging",
+      title: language === "is" ? "Vöðvauppbygging" : "Muscle Building",
       image: "/images/IMG_3234.jpg",
-      description: "Vinsælasta planið, hannað til að byggja sterkar, skreyttar fætur og rass. Notar stigvaxandi álag og krefst þess að þú ýtir nálægt bilun í hverju setti fyrir hámarks árangur.",
-      duration: "8 vikur",
+      description: language === "is"
+        ? "Vinsælasta planið, hannað til að byggja sterkar, skreyttar fætur og rass. Notar stigvaxandi álag og krefst þess að þú ýtir nálægt bilun í hverju setti fyrir hámarks árangur."
+        : "Our most popular plan, designed to build strong legs and glutes. Uses progressive overload and high effort sets for maximum results.",
+      duration: language === "is" ? "8 vikur" : "8 weeks",
       sessions: "4",
       popular: true
     },
     {
       id: 2,
-      title: "Fitubrennsla",
+      title: language === "is" ? "Fitubrennsla" : "Fat Loss",
       image: "/images/IMG_3236.jpg",
-      description: "Æfingaplan fyrir allan líkamann sem inniheldur kardíó, hannað til að skora á allan líkamann með innbyggðum hvíldardögum annan hvern dag.",
-      duration: "8 vikur",
+      description: language === "is"
+        ? "Æfingaplan fyrir allan líkamann sem inniheldur kardíó, hannað til að skora á allan líkamann með innbyggðum hvíldardögum annan hvern dag."
+        : "A full-body training plan including cardio, designed to challenge your whole body with built-in rest days.",
+      duration: language === "is" ? "8 vikur" : "8 weeks",
       sessions: "4",
       popular: false
     },
     {
       id: 3,
-      title: "Styrktarþjálfun",
+      title: language === "is" ? "Styrktarþjálfun" : "Strength Training",
       image: "/images/IMG_3238.jpg",
-      description: "Hannað fyrir þá sem vilja auka styrk og byggja upp grunnstyrk. Fókusar á grunngripum og stigvaxandi álagi til að ná hámarks árangri.",
-      duration: "12 vikur",
+      description: language === "is"
+        ? "Hannað fyrir þá sem vilja auka styrk og byggja upp grunnstyrk. Fókusar á grunngripum og stigvaxandi álagi til að ná hámarks árangri."
+        : "Built for people who want to increase strength and a solid foundation. Focuses on core lifts and progressive overload.",
+      duration: language === "is" ? "12 vikur" : "12 weeks",
       sessions: "3-4",
       popular: false
     },
     {
       id: 4,
-      title: "Heimaæfingar",
+      title: language === "is" ? "Heimaæfingar" : "Home Workouts",
       image: "/images/IMG_3237.jpg",
-      description: "Fullkomið plan fyrir þá sem vilja æfa heima án tækja. Notar líkamansþyngd og einföld verkfæri til að byggja styrk og vöðva.",
-      duration: "6 vikur",
+      description: language === "is"
+        ? "Fullkomið plan fyrir þá sem vilja æfa heima án tækja. Notar líkamansþyngd og einföld verkfæri til að byggja styrk og vöðva."
+        : "Perfect for training at home without machines. Uses bodyweight and simple tools to build strength and muscle.",
+      duration: language === "is" ? "6 vikur" : "6 weeks",
       sessions: "4-5",
       popular: false
     }
   ];
 
-  const appPricingFeatures = [
-    "Aðgangur að GF Training appinu",
-    "Æfingarplan",
-    "Myndbönd við hverja æfingu",
-    "Mataræði",
-    "Skráning á framförum",
-  ];
+  const appPricingFeatures = language === "is"
+    ? [
+        "Aðgangur að GF Training appinu",
+        "Æfingarplan",
+        "Myndbönd við hverja æfingu",
+        "Mataræði",
+        "Skráning á framförum",
+      ]
+    : [
+        "Access to the GF Training app",
+        "Workout plan",
+        "Video guidance for each exercise",
+        "Nutrition guidance",
+        "Progress tracking",
+      ];
 
   type AppPricingBadge = { kind: "primary" | "discount"; text: string };
 
@@ -146,26 +206,26 @@ const AppLanding = () => {
   }[] = [
     {
       period: "monthly",
-      title: "Mánaðarlegt",
+      title: language === "is" ? "Mánaðarlegt" : "Monthly",
       price: "2.990",
-      subline: "á mánuði",
-      badge: { kind: "primary", text: "Vinsælast" },
+      subline: language === "is" ? "á mánuði" : "per month",
+      badge: { kind: "primary", text: language === "is" ? "Vinsælast" : "Most popular" },
       border: "border-primary",
     },
     {
       period: "quarterly",
-      title: "3 mánuðir",
+      title: language === "is" ? "3 mánuðir" : "3 months",
       price: "7.990",
-      subline: "fyrir 3 mánuði",
+      subline: language === "is" ? "fyrir 3 mánuði" : "for 3 months",
       badge: null,
       border: "border-white/20",
     },
     {
       period: "annual",
-      title: "Árlegt",
+      title: language === "is" ? "Árlegt" : "Yearly",
       price: "25.100",
-      subline: "á ári",
-      badge: { kind: "discount", text: "30% afsláttur" },
+      subline: language === "is" ? "á ári" : "per year",
+      badge: { kind: "discount", text: language === "is" ? "30% afsláttur" : "30% discount" },
       border: "border-white/20",
     },
   ];
@@ -230,9 +290,13 @@ const AppLanding = () => {
   return (
     <>
       <SEO
-        title="GF Training app | Æfingaplön, makró og mælingar fyrir karla"
-        description="Sæktu GF Training á iPhone: sérhönnuð æfingaplön, myndbönd við hverja æfingu, mælingar og macro tracking — allt í einu appi. Verð frá 2.990 kr. á mánuði."
-        keywords="GF Training app, æfingaapp, líkamsræktar app, makró app, æfingaplan, iPhone, App Store, karlar, styrktarþjálfun, vöðvauppbygging, fitubrennsla, GF Training"
+        title={language === "is" ? "GF Training app | Æfingaplön, makró og mælingar fyrir karla" : "GF Training app | Training plans, macros and progress tracking"}
+        description={
+          language === "is"
+            ? "Sæktu GF Training á iPhone: sérhönnuð æfingaplön, myndbönd við hverja æfingu, mælingar og macro tracking — allt í einu appi. Verð frá 2.990 kr. á mánuði."
+            : "Download GF Training on iPhone: custom workout plans, exercise videos, tracking and macro guidance - all in one app."
+        }
+        keywords="GF Training app, workout app, fitness app, macro tracking, training plan, iPhone, App Store, strength training"
         canonical="https://gftraining.is/"
         ogImage="/images/app-screenshot-home.png"
       />
@@ -258,7 +322,7 @@ const AppLanding = () => {
                 }}
                 className="text-white hover:text-white/70 transition-colors text-sm font-normal cursor-pointer"
               >
-                Eiginleikar
+                {t.navFeatures}
               </a>
               <a 
                 href="#plans" 
@@ -268,7 +332,7 @@ const AppLanding = () => {
                 }}
                 className="text-white hover:text-white/70 transition-colors text-sm font-normal cursor-pointer"
               >
-                Plön
+                {t.navPlans}
               </a>
               <a 
                 href="#pricing" 
@@ -278,7 +342,7 @@ const AppLanding = () => {
                 }}
                 className="text-white hover:text-white/70 transition-colors text-sm font-normal cursor-pointer"
               >
-                Verð
+                {t.navPricing}
               </a>
               <a 
                 href="#faq" 
@@ -288,13 +352,54 @@ const AppLanding = () => {
                 }}
                 className="text-white hover:text-white/70 transition-colors text-sm font-normal cursor-pointer"
               >
-                Spurningar
+                {t.navFaq}
               </a>
             </div>
 
             <div className="flex items-center gap-2 md:gap-4">
+              <div className="hidden md:block relative">
+                <button
+                  type="button"
+                  onClick={() => setIsLanguageMenuOpen((prev) => !prev)}
+                  aria-label={language === "is" ? "Icelandic selected" : "English selected"}
+                  className="w-8 h-8 rounded-full border border-white/30 overflow-hidden transition-all hover:border-primary"
+                >
+                  <img
+                    src={language === "is" ? "https://flagcdn.com/is.svg" : "https://flagcdn.com/gb.svg"}
+                    alt={language === "is" ? "Icelandic" : "English"}
+                    className="w-full h-full object-cover"
+                  />
+                </button>
+
+                {isLanguageMenuOpen && (
+                  <div className="absolute right-0 mt-2 w-44 rounded-xl border border-white/10 bg-background/95 backdrop-blur-md p-1.5 shadow-2xl">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setLanguage("is");
+                        setIsLanguageMenuOpen(false);
+                      }}
+                      className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-white/10 text-sm text-white"
+                    >
+                      <img src="https://flagcdn.com/is.svg" alt="Icelandic" className="w-5 h-5 rounded-full object-cover" />
+                      Icelandic
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setLanguage("en");
+                        setIsLanguageMenuOpen(false);
+                      }}
+                      className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-white/10 text-sm text-white"
+                    >
+                      <img src="https://flagcdn.com/gb.svg" alt="English" className="w-5 h-5 rounded-full object-cover" />
+                      English
+                    </button>
+                  </div>
+                )}
+              </div>
               <Button onClick={handleStartNowClick} className="hidden md:inline-flex bg-primary hover:bg-primary/90 text-black font-medium px-5 md:px-6 py-2 md:py-2.5 rounded-full text-xs md:text-sm shadow-lg">
-                Byrja núna
+                {t.startNow}
               </Button>
               
               {/* Mobile Menu Button */}
@@ -326,7 +431,7 @@ const AppLanding = () => {
                   }}
                   className="block text-white hover:text-white/70 transition-colors text-sm font-normal py-2 cursor-pointer"
                 >
-                  Eiginleikar
+                  {t.navFeatures}
                 </a>
                 <a 
                   href="#plans" 
@@ -337,7 +442,7 @@ const AppLanding = () => {
                   }}
                   className="block text-white hover:text-white/70 transition-colors text-sm font-normal py-2 cursor-pointer"
                 >
-                  Plön
+                  {t.navPlans}
                 </a>
                 <a 
                   href="#pricing" 
@@ -348,7 +453,7 @@ const AppLanding = () => {
                   }}
                   className="block text-white hover:text-white/70 transition-colors text-sm font-normal py-2 cursor-pointer"
                 >
-                  Verð
+                  {t.navPricing}
                 </a>
                 <a 
                   href="#faq" 
@@ -359,7 +464,7 @@ const AppLanding = () => {
                   }}
                   className="block text-white hover:text-white/70 transition-colors text-sm font-normal py-2 cursor-pointer"
                 >
-                  Spurningar
+                  {t.navFaq}
                 </a>
                 <Button
                   className="w-full bg-primary hover:bg-primary/90 text-black font-medium px-6 py-2.5 rounded-full text-sm mt-2"
@@ -368,7 +473,7 @@ const AppLanding = () => {
                     handleStartNowClick();
                   }}
                 >
-                  Byrja núna
+                  {t.startNow}
                 </Button>
               </div>
             </div>
@@ -394,11 +499,11 @@ const AppLanding = () => {
               {/* Left: Content - Below fold on mobile */}
               <div className="space-y-4 sm:space-y-5 lg:space-y-8 text-center lg:text-left max-w-2xl mx-auto lg:max-w-none lg:mx-0 px-2 sm:px-0 pt-[100vh] sm:pt-0 -mt-[90vh] sm:mt-0">
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black leading-[1.05] font-display tracking-tight text-white">
-                  Byggðu upp styrk, vöðva og sjálfstraust - <span className="text-primary">allt á einum stað</span>
+                  {t.heroTitleLead} <span className="text-primary">{t.heroTitleHighlight}</span>
                 </h1>
                 
                 <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 leading-relaxed">
-                  GF Training appið hjálpar þér að byggja vöðva, brenna fitu og komast í þitt besta form - í ræktinni eða heima.
+                  {t.heroDescription}
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
@@ -406,19 +511,19 @@ const AppLanding = () => {
                     onClick={handleStartNowClick}
                     className="h-12 sm:h-14 px-6 sm:px-8 rounded-full bg-primary hover:bg-primary/90 text-black font-bold text-base sm:text-lg shadow-lg hover:shadow-xl transition-all w-full sm:w-auto"
                   >
-                    Byrja núna
+                    {t.startNow}
                   </Button>
                 </div>
 
                 <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4 md:gap-5 pt-2 text-xs sm:text-sm font-medium text-white/80">
                   <div className="flex items-center gap-1.5">
                     <Check className="w-4 h-4 sm:w-5 sm:h-5 text-primary shrink-0" strokeWidth={2.5} />
-                    <span>Sérhönnuð æfingaplön</span>
+                    <span>{t.heroFeature1}</span>
                   </div>
                   <div className="hidden sm:block text-white/35">•</div>
                   <div className="flex items-center gap-1.5">
                     <Check className="w-4 h-4 sm:w-5 sm:h-5 text-primary shrink-0" strokeWidth={2.5} />
-                    <span>Myndbönd við hverja æfingu</span>
+                    <span>{t.heroFeature2}</span>
                   </div>
                 </div>
               </div>
@@ -453,20 +558,24 @@ const AppLanding = () => {
                     {qrCodeUrl && (
                       <img 
                         src={qrCodeUrl}
-                        alt="Sækja appið" 
+                        alt={t.qrAlt} 
                         className="w-full h-full" 
                       />
                     )}
                  </div>
                  <p className="text-sm font-medium text-center lg:text-left text-white/60 max-w-[150px]">
-                   Skannaðu kóðann til að sækja appið.
+                   {t.qrLabel}
                  </p>
                </div>
 
                {/* Main Headline (Center) - Below fold on mobile */}
                <div className="lg:col-span-6 text-center mb-6 sm:mb-8 lg:mb-0 pt-[90vh] lg:pt-0 -mt-[85vh] lg:mt-0">
                  <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black font-display leading-[0.95]">
-                   Allt sem þú þarft til að ná <span className="text-primary">alvöru árangri!</span>
+                  {language === "is" ? (
+                    <>Allt sem þú þarft til að ná <span className="text-primary">alvöru árangri!</span></>
+                  ) : (
+                    <>Everything you need for <span className="text-primary">real results!</span></>
+                  )}
                  </h2>
                </div>
 
@@ -478,7 +587,7 @@ const AppLanding = () => {
                       <img src="/images/app-store-badge.png" alt="App Store" className="w-[190px] h-auto" />
                     </button>
                     <div className="hidden sm:block text-xs font-bold text-white/80 text-center lg:text-right max-w-[190px]">
-                      Fáanlegt í App Store fyrir iPhone
+                      {language === "is" ? "Fáanlegt í App Store fyrir iPhone" : "Available on the App Store for iPhone"}
                     </div>
                  </div>
 
@@ -495,7 +604,7 @@ const AppLanding = () => {
                       <img src="/images/google-play-badge.png" alt="Google Play" className="w-[190px] h-auto" />
                     </button>
                     <div className="hidden sm:block text-xs font-bold text-white/80 text-center lg:text-right max-w-[190px]">
-                      Skráning í Android prófanir
+                      {language === "is" ? "Skráning í Android prófanir" : "Android testing signup"}
                     </div>
                  </div>
                </div>
@@ -511,45 +620,53 @@ const AppLanding = () => {
                <div className="relative h-[400px] sm:h-[500px] lg:h-[600px] flex items-center justify-center lg:justify-start">
                   {/* Phone 2 — Macros, back */}
                   <div className="absolute left-1/2 -translate-x-[10px] sm:translate-x-0 lg:left-[180px] lg:translate-x-0 top-1/2 -translate-y-1/2 z-10 w-[180px] sm:w-[220px] lg:w-[280px] rotate-6 transform hover:rotate-0 transition-transform duration-500 scale-90 opacity-80 lg:opacity-100">
-                    <img src="/images/app-screenshot-macros.png" alt="Macros í GF Training appinu" className="rounded-[2.5rem] shadow-2xl border-4 border-black/40" />
+                    <img src="/images/app-screenshot-macros.png" alt={language === "is" ? "Macros í GF Training appinu" : "Macros in the GF Training app"} className="rounded-[2.5rem] shadow-2xl border-4 border-black/40" />
                   </div>
                   {/* Phone 1 — Workout, front */}
                   <div className="absolute left-1/2 -translate-x-[90px] sm:-translate-x-[100px] lg:left-0 lg:translate-x-0 top-1/2 -translate-y-1/2 z-20 w-[180px] sm:w-[220px] lg:w-[280px] -rotate-6 transform hover:rotate-0 transition-transform duration-500">
-                    <img src="/images/app-screenshot-workout.png" alt="Æfingar í GF Training appinu" className="rounded-[2.5rem] shadow-2xl border-4 border-black/40" />
+                    <img src="/images/app-screenshot-workout.png" alt={language === "is" ? "Æfingar í GF Training appinu" : "Workouts in the GF Training app"} className="rounded-[2.5rem] shadow-2xl border-4 border-black/40" />
                   </div>
                </div>
 
                {/* Right: Content */}
                <div className="space-y-8 relative z-30">
                  <h2 className="text-4xl md:text-5xl lg:text-6xl font-black font-display leading-[0.95] text-[#e8e8e3]">
-                   Líkamsræktar app sem <span className="text-primary">skila þér árangri</span>
+                  {language === "is" ? (
+                    <>Líkamsræktar app sem <span className="text-primary">skila þér árangri</span></>
+                  ) : (
+                    <>A fitness app that <span className="text-primary">gets results</span></>
+                  )}
                  </h2>
                  
                  <div className="space-y-6 text-lg text-[#e8e8e3]/80 leading-relaxed">
                    <p>
-                     GF Training er líkamsræktar app sem hjálpar þér að ná árangri með skýru og einföldu æfingaáætlunum, mælingum og næringarstuðningi sem leiðir þig áfram.
+                     {language === "is"
+                       ? "GF Training er líkamsræktar app sem hjálpar þér að ná árangri með skýru og einföldu æfingaáætlunum, mælingum og næringarstuðningi sem leiðir þig áfram."
+                       : "GF Training is a fitness app that helps you get results with clear training plans, progress tracking and practical nutrition support."}
                    </p>
                    <p>
-                     Þú færð aðgang að æfingaplönum sem segja þér nákvæmlega hvað á að gera, mælingum sem sýna framfarir og einföldu macro tracking sem heldur þér á réttri leið svo þú náir markmiðunum þínum. GF Training hjálpar þér að mæta reglulega og byggja upp árangur og góða ávana.
+                     {language === "is"
+                       ? "Þú færð aðgang að æfingaplönum sem segja þér nákvæmlega hvað á að gera, mælingum sem sýna framfarir og einföldu macro tracking sem heldur þér á réttri leið svo þú náir markmiðunum þínum. GF Training hjálpar þér að mæta reglulega og byggja upp árangur og góða ávana."
+                       : "You get plans that tell you exactly what to do, tracking that shows progress, and simple macro support to keep you on track toward your goals."}
                    </p>
                  </div>
 
                 <Button onClick={handleStartNowClick} className="h-14 px-8 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-lg">
-                   Byrja núna
+                   {t.startNow}
                  </Button>
                </div>
              </div>
 
              {/* Bottom Icons */}
              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 border-t border-white/10 pt-12">
-               {[
-                 { icon: Dumbbell, label: "40+ Plön" },
-                 { icon: PlayCircle, label: "Myndbönd" },
-                 { icon: BarChart3, label: "Mælingar" },
-                 { icon: Zap, label: "Orka" },
-                 { icon: Trophy, label: "Markmið" },
-                 { icon: Timer, label: "Hvíld" },
-               ].map((item, i) => (
+              {[
+                { icon: Dumbbell, label: language === "is" ? "40+ Plön" : "40+ Plans" },
+                { icon: PlayCircle, label: language === "is" ? "Myndbönd" : "Videos" },
+                { icon: BarChart3, label: language === "is" ? "Mælingar" : "Tracking" },
+                { icon: Zap, label: language === "is" ? "Orka" : "Energy" },
+                { icon: Trophy, label: language === "is" ? "Markmið" : "Goals" },
+                { icon: Timer, label: language === "is" ? "Hvíld" : "Rest" },
+              ].map((item, i) => (
                  <div key={i} className="flex flex-col items-center gap-2 text-[#e8e8e3]/60 hover:text-primary transition-colors group cursor-default">
                     <item.icon className="w-6 h-6 group-hover:scale-110 transition-transform" />
                     <span className="text-sm font-medium whitespace-nowrap">{item.label}</span>
@@ -569,7 +686,11 @@ const AppLanding = () => {
             <div className="lg:hidden space-y-8">
               {/* Heading */}
               <h2 className="text-3xl md:text-4xl font-black font-display leading-[0.95] text-white text-center">
-                Finndu plan sem <span className="text-primary">hentar þér</span>
+                {language === "is" ? (
+                  <>Finndu plan sem <span className="text-primary">hentar þér</span></>
+                ) : (
+                  <>Find a plan that <span className="text-primary">fits you</span></>
+                )}
               </h2>
 
               {/* Featured Plan Card - Large, Full Width */}
@@ -605,7 +726,7 @@ const AppLanding = () => {
                               <div className="font-bold text-white">{plans[plans.length - 1].duration}</div>
                             </div>
                             <div>
-                              <div className="font-bold text-white/70 mb-1">ÆFINGAR/VIKU:</div>
+                              <div className="font-bold text-white/70 mb-1">{language === "is" ? "ÆFINGAR/VIKU:" : "SESSIONS/WEEK:"}</div>
                               <div className="font-bold text-white">{plans[plans.length - 1].sessions}</div>
                             </div>
                           </div>
@@ -635,7 +756,7 @@ const AppLanding = () => {
                                 <div className="font-bold text-white">{plan.duration}</div>
                               </div>
                               <div>
-                                <div className="font-bold text-white/70 mb-1">ÆFINGAR/VIKU:</div>
+                                <div className="font-bold text-white/70 mb-1">{language === "is" ? "ÆFINGAR/VIKU:" : "SESSIONS/WEEK:"}</div>
                                 <div className="font-bold text-white">{plan.sessions}</div>
                               </div>
                             </div>
@@ -665,7 +786,7 @@ const AppLanding = () => {
                               <div className="font-bold text-white">{plans[0].duration}</div>
                             </div>
                             <div>
-                              <div className="font-bold text-white/70 mb-1">ÆFINGAR/VIKU:</div>
+                              <div className="font-bold text-white/70 mb-1">{language === "is" ? "ÆFINGAR/VIKU:" : "SESSIONS/WEEK:"}</div>
                               <div className="font-bold text-white">{plans[0].sessions}</div>
                             </div>
                           </div>
@@ -695,15 +816,17 @@ const AppLanding = () => {
               {/* Content Below */}
               <div className="space-y-4 text-center">
                 <div className="text-xs font-bold text-primary uppercase tracking-wider">
-                  40+ æfingarplön
+                  {language === "is" ? "40+ æfingarplön" : "40+ training plans"}
                 </div>
                 <p className="text-sm text-foreground/70 leading-relaxed">
-                  Þú svarar nokkrum spurningum og við finnum plan sem hentar þér og þínum markmiðum.
+                  {language === "is"
+                    ? "Þú svarar nokkrum spurningum og við finnum plan sem hentar þér og þínum markmiðum."
+                    : "Answer a few questions and we will match you with a plan for your goals."}
                 </p>
                 <div className="pt-2">
                   <Button onClick={handleStartNowClick} className="h-11 px-8 rounded-full bg-primary hover:bg-primary/90 text-black font-bold text-sm shadow-xl hover:shadow-2xl hover:scale-105 transition-all">
                     <span className="inline-flex items-center gap-2">
-                      Byrja núna
+                      {t.startNow}
                       <ArrowRight size={16} />
                     </span>
                   </Button>
@@ -717,15 +840,21 @@ const AppLanding = () => {
               {/* Left: Content */}
               <div className="space-y-6 lg:space-y-8">
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-black font-display leading-[0.95] text-white">
-                  Finndu plan sem <span className="text-primary">hentar þér</span>
+                  {language === "is" ? (
+                    <>Finndu plan sem <span className="text-primary">hentar þér</span></>
+                  ) : (
+                    <>Find a plan that <span className="text-primary">fits you</span></>
+                  )}
                 </h2>
                 <p className="text-base md:text-lg text-foreground/70 leading-relaxed max-w-xl">
-                  Þú svarar nokkrum spurningum og við finnum plan sem hentar þér og þínum markmiðum.
+                  {language === "is"
+                    ? "Þú svarar nokkrum spurningum og við finnum plan sem hentar þér og þínum markmiðum."
+                    : "Answer a few questions and we will match you with a plan for your goals."}
                 </p>
                 <div>
                   <Button onClick={handleStartNowClick} className="h-12 md:h-14 px-6 md:px-8 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base md:text-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-all">
                     <span className="inline-flex items-center gap-2 md:gap-3">
-                      Byrja núna
+                      {t.startNow}
                       <ArrowRight size={18} className="md:w-5 md:h-5" />
                     </span>
                   </Button>
@@ -735,7 +864,7 @@ const AppLanding = () => {
               {/* Right: Plan Cards */}
               <div className="space-y-6">
                 <div className="text-sm font-bold text-primary uppercase tracking-wider mb-8">
-                  40+ æfingarplön
+                  {language === "is" ? "40+ æfingarplön" : "40+ training plans"}
                 </div>
                 
                 <div className="relative overflow-hidden">
@@ -766,7 +895,7 @@ const AppLanding = () => {
                             {plan.popular && (
                               <div className="absolute bottom-4 left-4 right-4">
                                 <div className="bg-primary/20 backdrop-blur-sm px-3 py-1.5 rounded-full inline-block mb-2 border border-primary/30">
-                                  <span className="text-xs font-bold text-primary">Vinsælast</span>
+                                  <span className="text-xs font-bold text-primary">{language === "is" ? "Vinsælast" : "Most popular"}</span>
                                 </div>
                               </div>
                             )}
@@ -781,7 +910,7 @@ const AppLanding = () => {
                                 <div className="text-foreground/60">{plan.duration}</div>
                               </div>
                               <div>
-                                <div className="font-bold text-primary mb-1">ÆFINGAR/VIKU:</div>
+                                <div className="font-bold text-primary mb-1">{language === "is" ? "ÆFINGAR/VIKU:" : "SESSIONS/WEEK:"}</div>
                                 <div className="text-foreground/60">{plan.sessions}</div>
                               </div>
                             </div>
@@ -810,7 +939,7 @@ const AppLanding = () => {
                             {plan.popular && (
                               <div className="absolute bottom-4 left-4 right-4">
                                 <div className="bg-primary/20 backdrop-blur-sm px-3 py-1.5 rounded-full inline-block mb-2 border border-primary/30">
-                                  <span className="text-xs font-bold text-primary">Vinsælast</span>
+                                  <span className="text-xs font-bold text-primary">{language === "is" ? "Vinsælast" : "Most popular"}</span>
                                 </div>
                               </div>
                             )}
@@ -825,7 +954,7 @@ const AppLanding = () => {
                                 <div className="text-foreground/60">{plan.duration}</div>
                               </div>
                               <div>
-                                <div className="font-bold text-primary mb-1">ÆFINGAR/VIKU:</div>
+                                <div className="font-bold text-primary mb-1">{language === "is" ? "ÆFINGAR/VIKU:" : "SESSIONS/WEEK:"}</div>
                                 <div className="text-foreground/60">{plan.sessions}</div>
                               </div>
                             </div>
@@ -862,10 +991,16 @@ const AppLanding = () => {
         <section id="pricing" className="py-12 px-4 bg-card/20 scroll-mt-20">
           <div className="max-w-6xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-black font-display mb-3">
-              Einfalt verð. <span className="text-primary">Allt innifalið.</span>
+              {language === "is" ? (
+                <>Einfalt verð. <span className="text-primary">Allt innifalið.</span></>
+              ) : (
+                <>Simple pricing. <span className="text-primary">Everything included.</span></>
+              )}
             </h2>
             <p className="text-lg text-foreground/70 mb-10 max-w-2xl mx-auto">
-              Engin binding, engin falin gjöld. Aðgangur að öllum plönum og öllum eiginleikum.
+              {language === "is"
+                ? "Engin binding, engin falin gjöld. Aðgangur að öllum plönum og öllum eiginleikum."
+                : "No lock-in, no hidden fees. Access to all plans and all features."}
             </p>
 
             <div className="grid md:grid-cols-3 gap-6 md:gap-5 lg:gap-8 items-stretch">
@@ -912,7 +1047,7 @@ const AppLanding = () => {
                     </ul>
 
                     <Button onClick={handleStartNowClick} className="mt-auto w-full h-12 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all">
-                      Byrja núna
+                      {t.startNow}
                     </Button>
                   </div>
                 </div>
@@ -925,7 +1060,7 @@ const AppLanding = () => {
         <section className="py-12 sm:py-16 lg:py-24 px-4">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-black font-display text-center mb-8 sm:mb-12 lg:mb-16">
-              Svona byrjar þú
+              {language === "is" ? "Svona byrjar þú" : "How to start"}
             </h2>
             
             <div className="grid md:grid-cols-3 gap-12 text-center relative">
@@ -933,9 +1068,21 @@ const AppLanding = () => {
               <div className="hidden md:block absolute top-12 left-[16%] right-[16%] h-0.5 bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
 
               {[
-                { step: "01", title: "Þú sækir GF Training appið", desc: "Í App Store fyrir iPhone" },
-                { step: "02", title: "Þú svarar nokkrum spurningum", desc: "Svara nokkrum spurningum um markmið og reynslu" },
-                { step: "03", title: "Þú færð plan sem henter þínum markmiðum", desc: "Byrjaðu strax með plani sem passar þér" }
+                {
+                  step: "01",
+                  title: language === "is" ? "Þú sækir GF Training appið" : "Download the GF Training app",
+                  desc: language === "is" ? "Í App Store fyrir iPhone" : "On the App Store for iPhone",
+                },
+                {
+                  step: "02",
+                  title: language === "is" ? "Þú svarar nokkrum spurningum" : "Answer a few questions",
+                  desc: language === "is" ? "Svara nokkrum spurningum um markmið og reynslu" : "Tell us about your goals and experience",
+                },
+                {
+                  step: "03",
+                  title: language === "is" ? "Þú færð plan sem henter þínum markmiðum" : "Get a plan that fits your goals",
+                  desc: language === "is" ? "Byrjaðu strax með plani sem passar þér" : "Start right away with a plan that suits you",
+                }
               ].map((item, i) => (
                 <div key={i} className="relative z-10 space-y-4">
                   <div className="w-24 h-24 rounded-full bg-card border border-white/10 flex items-center justify-center text-3xl font-black font-display mx-auto shadow-xl">
@@ -961,20 +1108,30 @@ const AppLanding = () => {
               {/* Left: Large FAQ Heading */}
               <div className="lg:sticky lg:top-24">
                 <h2 className="text-5xl sm:text-6xl lg:text-7xl font-black font-display leading-tight text-white">
-                  Algengar spurningar
+                  {language === "is" ? "Algengar spurningar" : "Frequently asked questions"}
                 </h2>
               </div>
 
               {/* Right: FAQ Items */}
               <div className="space-y-0">
-                {[
-                  { q: "Hvað kostar appið?", a: "Frá 2.990 kr. á mánuði. Einnig í boði 3 mánaða (7.990 kr.) og ársáskrift (25.100 kr. með 30% afslætti). Engin binding." },
-                  { q: "Hentar þetta byrjendum?", a: "Já, appið er með sérstök plön fyrir byrjendur og kennslumyndbönd við hverja einustu æfingu." },
-                  { q: "Þarf ég aðgang að rækt?", a: "Við erum bæði með plön fyrir ræktina og heimaæfingar. Þú velur það sem hentar þér." },
-                  { q: "Get ég hætt hvenær sem er?", a: "Já, það er enginn uppsagnarfrestur. Þú getur sagt upp áskriftinni hvenær sem er inni á þínu svæði." },
-                  { q: "Hvar er appið fáanlegt?", a: "Appið er komið í App Store fyrir iPhone. Android útgáfa er í undirbúningi og þú getur skráð þig á Android prófanir hér á síðunni." },
-                  { q: "Eru þetta sömu plönin og þú notar með viðskiptavinum?", a: "Já, þetta eru nákvæmlega sömu plönin og ég nota með viðskiptavinum mínum í fjarþjálfun." }
-                ].map((item, i, arr) => (
+                {(language === "is"
+                  ? [
+                      { q: "Hvað kostar appið?", a: "Frá 2.990 kr. á mánuði. Einnig í boði 3 mánaða (7.990 kr.) og ársáskrift (25.100 kr. með 30% afslætti). Engin binding." },
+                      { q: "Hentar þetta byrjendum?", a: "Já, appið er með sérstök plön fyrir byrjendur og kennslumyndbönd við hverja einustu æfingu." },
+                      { q: "Þarf ég aðgang að rækt?", a: "Við erum bæði með plön fyrir ræktina og heimaæfingar. Þú velur það sem hentar þér." },
+                      { q: "Get ég hætt hvenær sem er?", a: "Já, það er enginn uppsagnarfrestur. Þú getur sagt upp áskriftinni hvenær sem er inni á þínu svæði." },
+                      { q: "Hvar er appið fáanlegt?", a: "Appið er komið í App Store fyrir iPhone. Android útgáfa er í undirbúningi og þú getur skráð þig á Android prófanir hér á síðunni." },
+                      { q: "Eru þetta sömu plönin og þú notar með viðskiptavinum?", a: "Já, þetta eru nákvæmlega sömu plönin og ég nota með viðskiptavinum mínum í fjarþjálfun." }
+                    ]
+                  : [
+                      { q: "How much does the app cost?", a: "From 2,990 ISK per month. Also available as 3 months (7,990 ISK) and yearly (25,100 ISK with 30% discount). No commitment." },
+                      { q: "Is this suitable for beginners?", a: "Yes. The app includes beginner-friendly plans and video guidance for every exercise." },
+                      { q: "Do I need gym access?", a: "We provide both gym plans and home workout plans, so you can choose what fits you." },
+                      { q: "Can I cancel anytime?", a: "Yes. There is no cancellation notice period; you can cancel anytime." },
+                      { q: "Where is the app available?", a: "The app is available on the iPhone App Store. Android is in progress, and you can sign up for testing here." },
+                      { q: "Are these the same plans you use with coaching clients?", a: "Yes, these are the same core plans used in my online coaching." }
+                    ]
+                ).map((item, i, arr) => (
                   <div key={i}>
                     <button
                       onClick={() => toggleFaq(i)}
@@ -1035,7 +1192,7 @@ const AppLanding = () => {
                     <img src={qrCodeUrl} alt="QR Code" className="w-16 h-16" />
                   </div>
                   <div className="text-sm font-medium text-primary max-w-[150px] leading-tight">
-                    Skannaðu kóðann til að sækja appið.
+                    {t.qrLabel}
                   </div>
                 </div>
               </div>
@@ -1054,7 +1211,7 @@ const AppLanding = () => {
                         }}
                         className="hover:text-white transition-colors text-white/70 cursor-pointer"
                       >
-                        Eiginleikar
+                        {t.navFeatures}
                       </a>
                     </li>
                     <li>
@@ -1066,7 +1223,7 @@ const AppLanding = () => {
                         }}
                         className="hover:text-white transition-colors text-white/70 cursor-pointer"
                       >
-                        Plön
+                        {t.navPlans}
                       </a>
                     </li>
                     <li>
@@ -1078,23 +1235,23 @@ const AppLanding = () => {
                         }}
                         className="hover:text-white transition-colors text-white/70 cursor-pointer"
                       >
-                        Verð
+                        {t.navPricing}
                       </a>
                     </li>
                     <li>
                       <Link to="/app-signup?plan=fjarthjalfun" className="hover:text-white transition-colors text-white/70">
-                        Fjarþjálfun
+                        {language === "is" ? "Fjarþjálfun" : "Online coaching"}
                       </Link>
                     </li>
                   </ul>
                 </div>
 
                 <div>
-                  <h3 className="font-bold text-white mb-6">Support</h3>
+                  <h3 className="font-bold text-white mb-6">{language === "is" ? "Support" : "Support"}</h3>
                   <ul className="space-y-4 text-sm font-medium opacity-90">
-                    <li><Link to="/hjalp" className="hover:text-white transition-colors text-white/70">Hjálp</Link></li>
-                    <li><Link to="/terms#terms" className="hover:text-white transition-colors text-white/70">Skilmálar</Link></li>
-                    <li><Link to="/terms#privacy" className="hover:text-white transition-colors text-white/70">Persónuvernd</Link></li>
+                    <li><Link to="/hjalp" className="hover:text-white transition-colors text-white/70">{language === "is" ? "Hjálp" : "Help"}</Link></li>
+                    <li><Link to="/terms#terms" className="hover:text-white transition-colors text-white/70">{language === "is" ? "Skilmálar" : "Terms"}</Link></li>
+                    <li><Link to="/terms#privacy" className="hover:text-white transition-colors text-white/70">{language === "is" ? "Persónuvernd" : "Privacy"}</Link></li>
                   </ul>
                 </div>
               </div>
@@ -1132,16 +1289,20 @@ const AppLanding = () => {
                 type="button"
                 onClick={() => setIsDeviceChoiceOpen(false)}
                 className="absolute top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
-                aria-label="Loka vali á tæki"
+                aria-label={t.closeDevicePicker}
               >
                 <X className="w-5 h-5 text-white" />
               </button>
 
               <h3 className="text-2xl font-black font-display mb-2">
-                Veldu <span className="text-primary">tækið þitt</span>
+                {language === "is" ? (
+                  <>Veldu <span className="text-primary">tækið þitt</span></>
+                ) : (
+                  <>Choose <span className="text-primary">your device</span></>
+                )}
               </h3>
               <p className="text-foreground/70 mb-6">
-                Við gátum ekki greint tækið sjálfkrafa. Veldu hér að neðan:
+                {t.deviceDesc}
               </p>
 
               <div className="space-y-3">
@@ -1180,36 +1341,40 @@ const AppLanding = () => {
                 type="button"
                 onClick={() => setIsAndroidModalOpen(false)}
                 className="absolute top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
-                aria-label="Loka Android skráningu"
+                aria-label={t.closeAndroidModal}
               >
                 <X className="w-5 h-5 text-white" />
               </button>
 
               <h3 className="text-2xl sm:text-3xl font-black font-display mb-2">
-                Skráning í <span className="text-primary">Android prófanir</span>
+                {language === "is" ? (
+                  <>Skráning í <span className="text-primary">Android prófanir</span></>
+                ) : (
+                  <>Android <span className="text-primary">testing signup</span></>
+                )}
               </h3>
               <p className="text-foreground/70 mb-6">
-                Fylltu út formið og við höfum samband þegar Android útgáfan er tilbúin í prófanir.
+                {t.androidModalDesc}
               </p>
 
               {androidFormState.succeeded ? (
                 <div className="space-y-4">
                   <div className="rounded-2xl border border-green-500/30 bg-green-500/10 p-4 text-green-400 font-medium">
-                    Takk fyrir! Skráningin þín hefur borist.
+                    {t.thanks}
                   </div>
                   <Button
                     type="button"
                     onClick={() => setIsAndroidModalOpen(false)}
                     className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold rounded-full"
                   >
-                    Loka
+                    {t.close}
                   </Button>
                 </div>
               ) : (
                 <form onSubmit={handleAndroidSubmit} className="space-y-4">
                   <div>
                     <label htmlFor="android-name" className="block mb-2 text-sm font-medium text-white">
-                      Fullt nafn *
+                      {t.fullName}
                     </label>
                     <input
                       id="android-name"
@@ -1223,7 +1388,7 @@ const AppLanding = () => {
 
                   <div>
                     <label htmlFor="android-email" className="block mb-2 text-sm font-medium text-white">
-                      Netfang *
+                      {t.email}
                     </label>
                     <input
                       id="android-email"
@@ -1237,7 +1402,7 @@ const AppLanding = () => {
 
                   <div>
                     <label htmlFor="android-phone" className="block mb-2 text-sm font-medium text-white">
-                      Símanúmer
+                      {t.phone}
                     </label>
                     <input
                       id="android-phone"
@@ -1249,20 +1414,20 @@ const AppLanding = () => {
 
                   <div>
                     <label htmlFor="android-device" className="block mb-2 text-sm font-medium text-white">
-                      Hvaða Android síma notar þú?
+                      {t.deviceQuestion}
                     </label>
                     <input
                       id="android-device"
                       type="text"
                       name="android_device"
-                      placeholder="T.d. Samsung S24 / Pixel 8"
+                      placeholder={t.commentsPlaceholder}
                       className="w-full rounded-xl bg-card border border-white/10 px-4 py-3 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-primary/50"
                     />
                   </div>
 
                   <div>
                     <label htmlFor="android-message" className="block mb-2 text-sm font-medium text-white">
-                      Athugasemdir
+                      {t.comments}
                     </label>
                     <textarea
                       id="android-message"
@@ -1280,7 +1445,7 @@ const AppLanding = () => {
                     disabled={androidFormState.submitting}
                     className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-6 rounded-full text-lg"
                   >
-                    {androidFormState.submitting ? "Sendi..." : "Skrá mig í Android prófanir"}
+                    {androidFormState.submitting ? t.sending : t.androidCta}
                   </Button>
                 </form>
               )}
