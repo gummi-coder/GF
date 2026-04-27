@@ -19,10 +19,9 @@ const AppRedirect = () => {
     if (isIOS) {
       window.location.href = appStoreUrl;
     } else if (isAndroid) {
-      // Nýja appið er ekki á Google Play — sendum á forsíðu
-      navigate("/");
+      navigate("/?androidSignup=1", { replace: true });
     } else {
-      navigate("/");
+      navigate("/?deviceSelect=1", { replace: true });
     }
   }, [navigate]);
 

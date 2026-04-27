@@ -16,6 +16,7 @@ import AppLanding from "./pages/AppLanding";
 import AppRedirect from "./pages/AppRedirect";
 import AppSignup from "./pages/AppSignup";
 import GetApp from "./pages/GetApp";
+import AndroidBetaSignup from "./pages/AndroidBetaSignup";
 import Macros from "./pages/Macros";
 import Apply from "./pages/Apply";
 import Signup from "./pages/Signup";
@@ -89,6 +90,7 @@ const App = () => (
                  <Route path="/email4" element={<EmailSignup4 />} />
                  <Route path="/app-download" element={<AppRedirect />} />
                  <Route path="/app-signup" element={<AppSignup />} />
+                 <Route path="/android" element={<AndroidBetaSignup />} />
                  <Route path="/get-app" element={<GetApp />} />
                  <Route path="/macros" element={<Macros />} />
                  <Route path="/apply" element={<Apply />} />

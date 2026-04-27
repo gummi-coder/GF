@@ -2,13 +2,15 @@ import React, { useState, useEffect, useRef } from "react";
 import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Check, ChevronDown, ChevronUp, ChevronLeft, ChevronRight, ArrowRight, BarChart3, CalendarDays, Dumbbell, Zap, Video, PlayCircle, Trophy, Timer, Menu, X } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
+import { useForm, ValidationError } from "@formspree/react";
 
 /** Beinn hálfur á íslenska App Store síðu GF Training */
 const GF_TRAINING_APP_STORE_URL =
   "https://apps.apple.com/is/app/gf-training/id6761101154";
 
 const AppLanding = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [qrCodeUrl, setQrCodeUrl] = useState("");
   const [mobilePlanIndex, setMobilePlanIndex] = useState(1); // Mobile: cycles through individual plans (0-4 with clones)
@@ -16,14 +18,61 @@ const AppLanding = () => {
   const [disableTransition, setDisableTransition] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isAndroidModalOpen, setIsAndroidModalOpen] = useState(false);
+  const [isDeviceChoiceOpen, setIsDeviceChoiceOpen] = useState(false);
   const mobileCarouselRef = useRef<HTMLDivElement>(null);
   const desktopCarouselRef = useRef<HTMLDivElement>(null);
+  const [androidFormState, handleAndroidSubmit] = useForm("xnjlrwww");
 
   useEffect(() => {
+    const appDownloadUrl = `${window.location.origin}/app-download`;
     setQrCodeUrl(
-      `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(GF_TRAINING_APP_STORE_URL)}`
+      `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(appDownloadUrl)}`
     );
   }, []);
+
+  useEffect(() => {
+    if (isAndroidModalOpen || isDeviceChoiceOpen) {
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = "";
+      };
+    }
+    document.body.style.overflow = "";
+  }, [isAndroidModalOpen, isDeviceChoiceOpen]);
+
+  useEffect(() => {
+    if (searchParams.get("androidSignup") === "1") {
+      setIsAndroidModalOpen(true);
+      const nextParams = new URLSearchParams(searchParams);
+      nextParams.delete("androidSignup");
+      setSearchParams(nextParams, { replace: true });
+    }
+    if (searchParams.get("deviceSelect") === "1") {
+      setIsDeviceChoiceOpen(true);
+      const nextParams = new URLSearchParams(searchParams);
+      nextParams.delete("deviceSelect");
+      setSearchParams(nextParams, { replace: true });
+    }
+  }, [searchParams, setSearchParams]);
+
+  const handleStartNowClick = () => {
+    const userAgent = navigator.userAgent || navigator.vendor;
+    const isIOS = /iPad|iPhone|iPod/.test(userAgent);
+    const isAndroid = /android/i.test(userAgent);
+
+    if (isIOS) {
+      window.open(GF_TRAINING_APP_STORE_URL, "_blank", "noopener,noreferrer");
+      return;
+    }
+
+    if (isAndroid) {
+      setIsAndroidModalOpen(true);
+      return;
+    }
+
+    setIsDeviceChoiceOpen(true);
+  };
 
   // Handle scroll detection for navigation
   useEffect(() => {
@@ -189,6 +238,7 @@ const AppLanding = () => {
       />
 
       <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/30" data-app-landing>
+        <div className={isAndroidModalOpen || isDeviceChoiceOpen ? "blur-sm pointer-events-none select-none" : ""}>
         
         {/* Navigation - OWNU Style */}
         <nav className={`z-50 fixed top-0 left-0 right-0 transition-all duration-300 ${
@@ -243,10 +293,8 @@ const AppLanding = () => {
             </div>
 
             <div className="flex items-center gap-2 md:gap-4">
-              <Button asChild className="hidden md:inline-flex bg-primary hover:bg-primary/90 text-black font-medium px-5 md:px-6 py-2 md:py-2.5 rounded-full text-xs md:text-sm shadow-lg">
-                <a href={GF_TRAINING_APP_STORE_URL} target="_blank" rel="noopener noreferrer">
-                  Byrja núna
-                </a>
+              <Button onClick={handleStartNowClick} className="hidden md:inline-flex bg-primary hover:bg-primary/90 text-black font-medium px-5 md:px-6 py-2 md:py-2.5 rounded-full text-xs md:text-sm shadow-lg">
+                Byrja núna
               </Button>
               
               {/* Mobile Menu Button */}
@@ -313,15 +361,14 @@ const AppLanding = () => {
                 >
                   Spurningar
                 </a>
-                <Button asChild className="w-full bg-primary hover:bg-primary/90 text-black font-medium px-6 py-2.5 rounded-full text-sm mt-2">
-                  <a
-                    href={GF_TRAINING_APP_STORE_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    Byrja núna
-                  </a>
+                <Button
+                  className="w-full bg-primary hover:bg-primary/90 text-black font-medium px-6 py-2.5 rounded-full text-sm mt-2"
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    handleStartNowClick();
+                  }}
+                >
+                  Byrja núna
                 </Button>
               </div>
             </div>
@@ -356,12 +403,10 @@ const AppLanding = () => {
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
                   <Button
-                    asChild
+                    onClick={handleStartNowClick}
                     className="h-12 sm:h-14 px-6 sm:px-8 rounded-full bg-primary hover:bg-primary/90 text-black font-bold text-base sm:text-lg shadow-lg hover:shadow-xl transition-all w-full sm:w-auto"
                   >
-                    <a href={GF_TRAINING_APP_STORE_URL} target="_blank" rel="noopener noreferrer">
-                      Byrja núna
-                    </a>
+                    Byrja núna
                   </Button>
                 </div>
 
@@ -429,11 +474,28 @@ const AppLanding = () => {
                <div className="lg:col-span-3 flex flex-row sm:flex-row lg:flex-col items-center justify-center lg:items-end gap-3 sm:gap-4 lg:gap-8 pt-[90vh] lg:pt-0 -mt-[85vh] lg:mt-0">
                  {/* App Store */}
                  <div className="flex flex-col items-center lg:items-end gap-2">
-                    <a href={GF_TRAINING_APP_STORE_URL} target="_blank" rel="noopener noreferrer" className="h-8 sm:h-10 w-[140px] sm:w-[190px] hover:opacity-80 transition-opacity flex items-center justify-center">
-                      <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="App Store" className="h-full w-auto" />
-                    </a>
+                    <button type="button" onClick={handleStartNowClick} className="hover:opacity-80 transition-opacity flex items-center justify-center">
+                      <img src="/images/app-store-badge.png" alt="App Store" className="w-[190px] h-auto" />
+                    </button>
                     <div className="hidden sm:block text-xs font-bold text-white/80 text-center lg:text-right max-w-[190px]">
                       Fáanlegt í App Store fyrir iPhone
+                    </div>
+                 </div>
+
+                 {/* Google Play */}
+                 <div className="flex flex-col items-center lg:items-end gap-2">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsDeviceChoiceOpen(false);
+                        setIsAndroidModalOpen(true);
+                      }}
+                      className="hover:opacity-80 transition-opacity flex items-center justify-center"
+                    >
+                      <img src="/images/google-play-badge.png" alt="Google Play" className="w-[190px] h-auto" />
+                    </button>
+                    <div className="hidden sm:block text-xs font-bold text-white/80 text-center lg:text-right max-w-[190px]">
+                      Skráning í Android prófanir
                     </div>
                  </div>
                </div>
@@ -472,10 +534,8 @@ const AppLanding = () => {
                    </p>
                  </div>
 
-                 <Button asChild className="h-14 px-8 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-lg">
-                    <a href={GF_TRAINING_APP_STORE_URL} target="_blank" rel="noopener noreferrer">
-                      Byrja núna
-                    </a>
+                <Button onClick={handleStartNowClick} className="h-14 px-8 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-lg">
+                   Byrja núna
                  </Button>
                </div>
              </div>
@@ -641,16 +701,11 @@ const AppLanding = () => {
                   Þú svarar nokkrum spurningum og við finnum plan sem hentar þér og þínum markmiðum.
                 </p>
                 <div className="pt-2">
-                  <Button asChild className="h-11 px-8 rounded-full bg-primary hover:bg-primary/90 text-black font-bold text-sm shadow-xl hover:shadow-2xl hover:scale-105 transition-all">
-                    <a
-                      href={GF_TRAINING_APP_STORE_URL}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2"
-                    >
+                  <Button onClick={handleStartNowClick} className="h-11 px-8 rounded-full bg-primary hover:bg-primary/90 text-black font-bold text-sm shadow-xl hover:shadow-2xl hover:scale-105 transition-all">
+                    <span className="inline-flex items-center gap-2">
                       Byrja núna
                       <ArrowRight size={16} />
-                    </a>
+                    </span>
                   </Button>
                 </div>
               </div>
@@ -668,16 +723,11 @@ const AppLanding = () => {
                   Þú svarar nokkrum spurningum og við finnum plan sem hentar þér og þínum markmiðum.
                 </p>
                 <div>
-                  <Button asChild className="h-12 md:h-14 px-6 md:px-8 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base md:text-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-all">
-                    <a
-                      href={GF_TRAINING_APP_STORE_URL}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 md:gap-3"
-                    >
+                  <Button onClick={handleStartNowClick} className="h-12 md:h-14 px-6 md:px-8 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base md:text-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-all">
+                    <span className="inline-flex items-center gap-2 md:gap-3">
                       Byrja núna
                       <ArrowRight size={18} className="md:w-5 md:h-5" />
-                    </a>
+                    </span>
                   </Button>
                 </div>
               </div>
@@ -861,10 +911,8 @@ const AppLanding = () => {
                       ))}
                     </ul>
 
-                    <Button asChild className="mt-auto w-full h-12 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all">
-                      <a href={GF_TRAINING_APP_STORE_URL} target="_blank" rel="noopener noreferrer">
-                        Byrja núna
-                      </a>
+                    <Button onClick={handleStartNowClick} className="mt-auto w-full h-12 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all">
+                      Byrja núna
                     </Button>
                   </div>
                 </div>
@@ -924,7 +972,7 @@ const AppLanding = () => {
                   { q: "Hentar þetta byrjendum?", a: "Já, appið er með sérstök plön fyrir byrjendur og kennslumyndbönd við hverja einustu æfingu." },
                   { q: "Þarf ég aðgang að rækt?", a: "Við erum bæði með plön fyrir ræktina og heimaæfingar. Þú velur það sem hentar þér." },
                   { q: "Get ég hætt hvenær sem er?", a: "Já, það er enginn uppsagnarfrestur. Þú getur sagt upp áskriftinni hvenær sem er inni á þínu svæði." },
-                  { q: "Hvar er appið fáanlegt?", a: "Nýja appið er aðeins fáanlegt í App Store fyrir iPhone. Útgáfa fyrir Android (Google Play) er ekki í boði í augnablikinu." },
+                  { q: "Hvar er appið fáanlegt?", a: "Appið er komið í App Store fyrir iPhone. Android útgáfa er í undirbúningi og þú getur skráð þig á Android prófanir hér á síðunni." },
                   { q: "Eru þetta sömu plönin og þú notar með viðskiptavinum?", a: "Já, þetta eru nákvæmlega sömu plönin og ég nota með viðskiptavinum mínum í fjarþjálfun." }
                 ].map((item, i, arr) => (
                   <div key={i}>
@@ -967,9 +1015,19 @@ const AppLanding = () => {
               {/* Left: App Store & QR */}
               <div className="space-y-8">
                 <div className="flex flex-wrap gap-4 items-center">
-                  <a href={GF_TRAINING_APP_STORE_URL} target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity h-10 flex items-center">
-                    <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" className="h-10 w-auto" alt="App Store" />
-                  </a>
+                  <button type="button" onClick={handleStartNowClick} className="hover:opacity-80 transition-opacity flex items-center">
+                    <img src="/images/app-store-badge.png" className="w-[190px] h-auto" alt="App Store" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsDeviceChoiceOpen(false);
+                      setIsAndroidModalOpen(true);
+                    }}
+                    className="hover:opacity-80 transition-opacity flex items-center"
+                  >
+                    <img src="/images/google-play-badge.png" className="w-[190px] h-auto" alt="Google Play" />
+                  </button>
                 </div>
                 
                 <div className="flex items-center gap-4">
@@ -1030,6 +1088,7 @@ const AppLanding = () => {
                     </li>
                   </ul>
                 </div>
+
                 <div>
                   <h3 className="font-bold text-white mb-6">Support</h3>
                   <ul className="space-y-4 text-sm font-medium opacity-90">
@@ -1064,6 +1123,170 @@ const AppLanding = () => {
             </div>
           </div>
         </footer>
+        </div>
+
+        {isDeviceChoiceOpen && (
+          <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm p-4 flex items-center justify-center">
+            <div className="relative w-full max-w-md rounded-3xl border border-white/10 bg-background p-6 sm:p-8">
+              <button
+                type="button"
+                onClick={() => setIsDeviceChoiceOpen(false)}
+                className="absolute top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+                aria-label="Loka vali á tæki"
+              >
+                <X className="w-5 h-5 text-white" />
+              </button>
+
+              <h3 className="text-2xl font-black font-display mb-2">
+                Veldu <span className="text-primary">tækið þitt</span>
+              </h3>
+              <p className="text-foreground/70 mb-6">
+                Við gátum ekki greint tækið sjálfkrafa. Veldu hér að neðan:
+              </p>
+
+              <div className="space-y-3">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsDeviceChoiceOpen(false);
+                    window.open(GF_TRAINING_APP_STORE_URL, "_blank", "noopener,noreferrer");
+                  }}
+                  className="w-full rounded-xl border border-white/10 bg-card hover:bg-card/80 transition-colors p-4 flex items-center justify-between"
+                >
+                  <span className="font-semibold">iPhone (App Store)</span>
+                  <img src="/images/app-store-badge.png" alt="App Store" className="w-[110px] h-auto" />
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsDeviceChoiceOpen(false);
+                    setIsAndroidModalOpen(true);
+                  }}
+                  className="w-full rounded-xl border border-white/10 bg-card hover:bg-card/80 transition-colors p-4 flex items-center justify-between"
+                >
+                  <span className="font-semibold">Android</span>
+                  <img src="/images/google-play-badge.png" alt="Google Play" className="w-[110px] h-auto" />
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {isAndroidModalOpen && (
+          <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm p-4 flex items-center justify-center">
+            <div className="relative w-full max-w-xl max-h-[90vh] overflow-y-auto rounded-3xl border border-white/10 bg-background p-6 sm:p-8">
+              <button
+                type="button"
+                onClick={() => setIsAndroidModalOpen(false)}
+                className="absolute top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+                aria-label="Loka Android skráningu"
+              >
+                <X className="w-5 h-5 text-white" />
+              </button>
+
+              <h3 className="text-2xl sm:text-3xl font-black font-display mb-2">
+                Skráning í <span className="text-primary">Android prófanir</span>
+              </h3>
+              <p className="text-foreground/70 mb-6">
+                Fylltu út formið og við höfum samband þegar Android útgáfan er tilbúin í prófanir.
+              </p>
+
+              {androidFormState.succeeded ? (
+                <div className="space-y-4">
+                  <div className="rounded-2xl border border-green-500/30 bg-green-500/10 p-4 text-green-400 font-medium">
+                    Takk fyrir! Skráningin þín hefur borist.
+                  </div>
+                  <Button
+                    type="button"
+                    onClick={() => setIsAndroidModalOpen(false)}
+                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold rounded-full"
+                  >
+                    Loka
+                  </Button>
+                </div>
+              ) : (
+                <form onSubmit={handleAndroidSubmit} className="space-y-4">
+                  <div>
+                    <label htmlFor="android-name" className="block mb-2 text-sm font-medium text-white">
+                      Fullt nafn *
+                    </label>
+                    <input
+                      id="android-name"
+                      type="text"
+                      name="name"
+                      required
+                      className="w-full rounded-xl bg-card border border-white/10 px-4 py-3 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    />
+                    <ValidationError prefix="Name" field="name" errors={androidFormState.errors} />
+                  </div>
+
+                  <div>
+                    <label htmlFor="android-email" className="block mb-2 text-sm font-medium text-white">
+                      Netfang *
+                    </label>
+                    <input
+                      id="android-email"
+                      type="email"
+                      name="email"
+                      required
+                      className="w-full rounded-xl bg-card border border-white/10 px-4 py-3 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    />
+                    <ValidationError prefix="Email" field="email" errors={androidFormState.errors} />
+                  </div>
+
+                  <div>
+                    <label htmlFor="android-phone" className="block mb-2 text-sm font-medium text-white">
+                      Símanúmer
+                    </label>
+                    <input
+                      id="android-phone"
+                      type="tel"
+                      name="phone"
+                      className="w-full rounded-xl bg-card border border-white/10 px-4 py-3 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="android-device" className="block mb-2 text-sm font-medium text-white">
+                      Hvaða Android síma notar þú?
+                    </label>
+                    <input
+                      id="android-device"
+                      type="text"
+                      name="android_device"
+                      placeholder="T.d. Samsung S24 / Pixel 8"
+                      className="w-full rounded-xl bg-card border border-white/10 px-4 py-3 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="android-message" className="block mb-2 text-sm font-medium text-white">
+                      Athugasemdir
+                    </label>
+                    <textarea
+                      id="android-message"
+                      name="message"
+                      rows={4}
+                      className="w-full rounded-xl bg-card border border-white/10 px-4 py-3 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    />
+                    <ValidationError prefix="Message" field="message" errors={androidFormState.errors} />
+                  </div>
+
+                  <ValidationError errors={androidFormState.errors} />
+
+                  <Button
+                    type="submit"
+                    disabled={androidFormState.submitting}
+                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-6 rounded-full text-lg"
+                  >
+                    {androidFormState.submitting ? "Sendi..." : "Skrá mig í Android prófanir"}
+                  </Button>
+                </form>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
