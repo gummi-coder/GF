@@ -195,11 +195,12 @@ const AppLanding = () => {
       ];
 
   type AppPricingBadge = { kind: "primary" | "discount"; text: string };
+  const eurPerIsk = 1 / 150;
 
   const appPricingTiers: {
     period: "monthly" | "quarterly" | "annual";
     title: string;
-    price: string;
+    priceIsk: number;
     subline: string;
     badge: AppPricingBadge | null;
     border: string;
@@ -207,7 +208,7 @@ const AppLanding = () => {
     {
       period: "monthly",
       title: language === "is" ? "Mánaðarlegt" : "Monthly",
-      price: "2.990",
+      priceIsk: 2990,
       subline: language === "is" ? "á mánuði" : "per month",
       badge: { kind: "primary", text: language === "is" ? "Vinsælast" : "Most popular" },
       border: "border-primary",
@@ -215,7 +216,7 @@ const AppLanding = () => {
     {
       period: "quarterly",
       title: language === "is" ? "3 mánuðir" : "3 months",
-      price: "7.990",
+      priceIsk: 7990,
       subline: language === "is" ? "fyrir 3 mánuði" : "for 3 months",
       badge: null,
       border: "border-white/20",
@@ -223,7 +224,7 @@ const AppLanding = () => {
     {
       period: "annual",
       title: language === "is" ? "Árlegt" : "Yearly",
-      price: "25.100",
+      priceIsk: 25100,
       subline: language === "is" ? "á ári" : "per year",
       badge: { kind: "discount", text: language === "is" ? "30% afsláttur" : "30% discount" },
       border: "border-white/20",
@@ -1029,10 +1030,19 @@ const AppLanding = () => {
 
                     <div className="flex items-baseline justify-center gap-1 mb-1">
                       <span className="text-4xl sm:text-5xl font-black font-display tracking-tight">
-                        {tier.price}
+                        {new Intl.NumberFormat("is-IS").format(tier.priceIsk)}
                       </span>
                       <span className="text-lg font-bold text-foreground/50">kr.</span>
                     </div>
+                    {language === "en" && (
+                      <div className="text-primary/90 font-semibold mb-1 text-sm text-center">
+                        {new Intl.NumberFormat("en-IE", {
+                          style: "currency",
+                          currency: "EUR",
+                          maximumFractionDigits: 0,
+                        }).format(tier.priceIsk * eurPerIsk)}
+                      </div>
+                    )}
                     <div className="text-foreground/60 font-medium mb-6 text-sm text-center">{tier.subline}</div>
 
                     <ul className="space-y-2.5 mb-6 pl-1 flex-1">
