@@ -363,7 +363,7 @@ const AppLanding = () => {
                   type="button"
                   onClick={() => setIsLanguageMenuOpen((prev) => !prev)}
                   aria-label={language === "is" ? "Icelandic selected" : "English selected"}
-                  className="w-8 h-8 rounded-full border border-white/30 overflow-hidden transition-all hover:border-primary"
+                  className="w-7 h-7 rounded-full border border-white/30 overflow-hidden transition-all hover:border-primary"
                 >
                   <img
                     src={language === "is" ? "https://flagcdn.com/is.svg" : "https://flagcdn.com/gb.svg"}
