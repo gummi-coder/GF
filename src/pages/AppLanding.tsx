@@ -196,6 +196,8 @@ const AppLanding = () => {
 
   type AppPricingBadge = { kind: "primary" | "discount"; text: string };
   const eurPerIsk = 1 / 150;
+  const formatIskWithDots = (value: number) =>
+    new Intl.NumberFormat("en-US").format(value).replace(/,/g, ".");
 
   const appPricingTiers: {
     period: "monthly" | "quarterly" | "annual";
@@ -294,7 +296,7 @@ const AppLanding = () => {
         title={language === "is" ? "GF Training app | Æfingaplön, makró og mælingar fyrir karla" : "GF Training app | Training plans, macros and progress tracking"}
         description={
           language === "is"
-            ? "Sæktu GF Training á iPhone: sérhönnuð æfingaplön, myndbönd við hverja æfingu, mælingar og macro tracking — allt í einu appi. Verð frá 2.990 kr. á mánuði."
+            ? "Sæktu GF Training á iPhone: sérhönnuð æfingaplön, myndbönd við hverja æfingu, mælingar og macro tracking - allt í einu appi. Verð frá 2.990 kr. á mánuði."
             : "Download GF Training on iPhone: custom workout plans, exercise videos, tracking and macro guidance - all in one app."
         }
         keywords="GF Training app, workout app, fitness app, macro tracking, training plan, iPhone, App Store, strength training"
@@ -619,11 +621,11 @@ const AppLanding = () => {
              <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
                {/* Left: Workout (front), Macros (back) */}
                <div className="relative h-[400px] sm:h-[500px] lg:h-[600px] flex items-center justify-center lg:justify-start">
-                  {/* Phone 2 — Macros, back */}
+                  {/* Phone 2 - Macros, back */}
                   <div className="absolute left-1/2 -translate-x-[10px] sm:translate-x-0 lg:left-[180px] lg:translate-x-0 top-1/2 -translate-y-1/2 z-10 w-[180px] sm:w-[220px] lg:w-[280px] rotate-6 transform hover:rotate-0 transition-transform duration-500 scale-90 opacity-80 lg:opacity-100">
                     <img src="/images/app-screenshot-macros.png" alt={language === "is" ? "Macros í GF Training appinu" : "Macros in the GF Training app"} className="rounded-[2.5rem] shadow-2xl border-4 border-black/40" />
                   </div>
-                  {/* Phone 1 — Workout, front */}
+                  {/* Phone 1 - Workout, front */}
                   <div className="absolute left-1/2 -translate-x-[90px] sm:-translate-x-[100px] lg:left-0 lg:translate-x-0 top-1/2 -translate-y-1/2 z-20 w-[180px] sm:w-[220px] lg:w-[280px] -rotate-6 transform hover:rotate-0 transition-transform duration-500">
                     <img src="/images/app-screenshot-workout.png" alt={language === "is" ? "Æfingar í GF Training appinu" : "Workouts in the GF Training app"} className="rounded-[2.5rem] shadow-2xl border-4 border-black/40" />
                   </div>
@@ -1030,7 +1032,7 @@ const AppLanding = () => {
 
                     <div className="flex items-baseline justify-center gap-1 mb-1">
                       <span className="text-4xl sm:text-5xl font-black font-display tracking-tight">
-                        {new Intl.NumberFormat("is-IS").format(tier.priceIsk)}
+                        {formatIskWithDots(tier.priceIsk)}
                       </span>
                       <span className="text-lg font-bold text-foreground/50">kr.</span>
                     </div>
