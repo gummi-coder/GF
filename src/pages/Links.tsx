@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Facebook, Instagram, Linkedin, Mail, ExternalLink, Link as LinkIcon, Twitter, CalendarDays, Globe, Dumbbell, Calculator } from "lucide-react";
 
 // Customize your links here - easy to add, remove, or modify
@@ -49,21 +48,6 @@ const profile = {
 };
 
 const Links = () => {
-  // Remove any ConvertKit email signup forms from this page
-  useEffect(() => {
-    const removeConvertKitForms = () => {
-      // Remove ConvertKit forms that might be injected
-      const convertKitForms = document.querySelectorAll('form[data-sv-form], .ck_form, [id*="ck"], [class*="convertkit"], [id*="gummi"]');
-      convertKitForms.forEach(form => form.remove());
-    };
-
-    // Remove immediately and set up interval to catch any that load later
-    removeConvertKitForms();
-    const interval = setInterval(removeConvertKitForms, 500);
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <div
       className="min-h-screen bg-background text-foreground relative overflow-hidden flex items-center justify-center py-12 px-4"

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
-import { Check, ChevronDown, ChevronUp, ChevronLeft, ChevronRight, ArrowRight, BarChart3, CalendarDays, Dumbbell, Zap, Video, PlayCircle, Trophy, Timer, Menu, X } from "lucide-react";
+import { Check, ChevronDown, ChevronUp, ChevronLeft, ChevronRight, ArrowRight, BarChart3, CalendarDays, Dumbbell, Zap, Video, PlayCircle, Trophy, Timer, Menu, X, Sparkles } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useForm, ValidationError } from "@formspree/react";
 
@@ -16,8 +16,8 @@ const AppLanding = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [qrCodeUrl, setQrCodeUrl] = useState("");
-  const [mobilePlanIndex, setMobilePlanIndex] = useState(1); // Mobile: cycles through individual plans (0-4 with clones)
-  const [desktopPlanIndex, setDesktopPlanIndex] = useState(0); // Desktop: cycles through views (0-1, showing 2 plans each)
+  const [mobilePlanIndex, setMobilePlanIndex] = useState(1); // 0 = clone of last; 1–12 = families; 13 = clone of first
+  const [desktopPlanIndex, setDesktopPlanIndex] = useState(0); // Pairs of plan cards per view
   const [disableTransition, setDisableTransition] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -40,7 +40,7 @@ const AppLanding = () => {
       language === "is"
         ? "GF Training appið hjálpar þér að byggja vöðva, brenna fitu og komast í þitt besta form - í ræktinni eða heima."
         : "The GF Training app helps you build muscle, burn fat and get in your best shape - at the gym or at home.",
-    heroFeature1: language === "is" ? "Sérhönnuð æfingaplön" : "Custom training plans",
+    heroFeature1: language === "is" ? "40+ æfingarplön!" : "40+ training plans!",
     heroFeature2: language === "is" ? "Myndbönd við hverja æfingu" : "Video guidance for every workout",
     qrAlt: language === "is" ? "Sækja appið" : "Download the app",
     qrLabel: language === "is" ? "Skannaðu kóðann til að sækja appið." : "Scan the code to open the app link.",
@@ -50,13 +50,12 @@ const AppLanding = () => {
         ? "Við gátum ekki greint tækið sjálfkrafa. Veldu hér að neðan:"
         : "We could not detect your device automatically. Choose one below:",
     closeDevicePicker: language === "is" ? "Loka vali á tæki" : "Close device selection",
-    androidModalTitle: language === "is" ? "Skráning í Android prófanir" : "Android testing signup",
     androidModalDesc:
       language === "is"
-        ? "Fylltu út formið og við höfum samband þegar Android útgáfan er tilbúin í prófanir."
-        : "Fill out the form and we will contact you when Android testing opens.",
+        ? "Android-útgáfan er tilbúin og við opnum takmarkaðan beta-hóp."
+        : "The Android build is ready and we're opening a limited beta.",
     closeAndroidModal: language === "is" ? "Loka Android skráningu" : "Close Android signup",
-    thanks: language === "is" ? "Takk fyrir! Skráningin þín hefur borist." : "Thanks! Your signup has been received.",
+    thanks: language === "is" ? "Takk! Þú ert á listanum, við höfum samband fljótlega." : "You're on the list. We'll be in touch soon!",
     close: language === "is" ? "Loka" : "Close",
     fullName: language === "is" ? "Fullt nafn *" : "Full name *",
     email: language === "is" ? "Netfang *" : "Email *",
@@ -64,7 +63,7 @@ const AppLanding = () => {
     deviceQuestion: language === "is" ? "Hvaða Android síma notar þú?" : "Which Android phone do you use?",
     comments: language === "is" ? "Athugasemdir" : "Comments",
     commentsPlaceholder: language === "is" ? "T.d. Samsung S24 / Pixel 8" : "e.g. Samsung S24 / Pixel 8",
-    androidCta: language === "is" ? "Skrá mig í Android prófanir" : "Sign me up for Android testing",
+    androidCta: language === "is" ? "Já takk, skrá mig í beta" : "Yes, sign me up for beta",
     sending: language === "is" ? "Sendi..." : "Sending...",
   };
 
@@ -131,52 +130,158 @@ const AppLanding = () => {
     setOpenFaq(openFaq === index ? null : index);
   };
 
-  const plans = [
+  type PlanFamily = {
+    id: number;
+    image: string;
+    nameIs: string;
+    nameEn: string;
+    descIs: string;
+    descEn: string;
+    durationIs: string;
+    durationEn: string;
+    sessions: string;
+  };
+
+  const planFamilies: PlanFamily[] = [
     {
       id: 1,
-      title: language === "is" ? "Vöðvauppbygging" : "Muscle Building",
-      image: "/images/IMG_3234.jpg",
-      description: language === "is"
-        ? "Vinsælasta planið, hannað til að byggja sterkar, skreyttar fætur og rass. Notar stigvaxandi álag og krefst þess að þú ýtir nálægt bilun í hverju setti fyrir hámarks árangur."
-        : "Our most popular plan, designed to build strong legs and glutes. Uses progressive overload and high effort sets for maximum results.",
-      duration: language === "is" ? "8 vikur" : "8 weeks",
-      sessions: "4",
-      popular: true
+      image: "/images/plan-families/1.png",
+      nameIs: "Heimaæfingar",
+      nameEn: "Home Workout",
+      descIs: "Æfðu heima án ræktar: líkamansþyngd, einföld verkfæri og skýr framvinda.",
+      descEn: "Train at home without a gym: bodyweight, simple tools and clear progressions.",
+      durationIs: "6 vikur",
+      durationEn: "6 weeks",
+      sessions: "4–5",
     },
     {
       id: 2,
-      title: language === "is" ? "Fitubrennsla" : "Fat Loss",
-      image: "/images/IMG_3236.jpg",
-      description: language === "is"
-        ? "Æfingaplan fyrir allan líkamann sem inniheldur kardíó, hannað til að skora á allan líkamann með innbyggðum hvíldardögum annan hvern dag."
-        : "A full-body training plan including cardio, designed to challenge your whole body with built-in rest days.",
-      duration: language === "is" ? "8 vikur" : "8 weeks",
-      sessions: "4",
-      popular: false
+      image: "/images/plan-families/2.png",
+      nameIs: "Push / Pull / Legs",
+      nameEn: "Push / Pull / Legs",
+      descIs: "Klassísk skipting á ýtingi, togi og fótum – tilvalið fyrir ræktina.",
+      descEn: "Classic push, pull and legs split – a gym favourite for structure and volume.",
+      durationIs: "8 vikur",
+      durationEn: "8 weeks",
+      sessions: "5–6",
     },
     {
       id: 3,
-      title: language === "is" ? "Styrktarþjálfun" : "Strength Training",
-      image: "/images/IMG_3238.jpg",
-      description: language === "is"
-        ? "Hannað fyrir þá sem vilja auka styrk og byggja upp grunnstyrk. Fókusar á grunngripum og stigvaxandi álagi til að ná hámarks árangri."
-        : "Built for people who want to increase strength and a solid foundation. Focuses on core lifts and progressive overload.",
-      duration: language === "is" ? "12 vikur" : "12 weeks",
-      sessions: "3-4",
-      popular: false
+      image: "/images/plan-families/3.png",
+      nameIs: "Kraftlyftingar",
+      nameEn: "Powerlifting",
+      descIs: "Áhersla á kýptingu, bekkpressu og réttstöðu – styrkur og tækni í forgrunni.",
+      descEn: "Squat, bench and deadlift focused – strength and technique first.",
+      durationIs: "12 vikur",
+      durationEn: "12 weeks",
+      sessions: "3–4",
     },
     {
       id: 4,
-      title: language === "is" ? "Heimaæfingar" : "Home Workouts",
-      image: "/images/IMG_3237.jpg",
-      description: language === "is"
-        ? "Fullkomið plan fyrir þá sem vilja æfa heima án tækja. Notar líkamansþyngd og einföld verkfæri til að byggja styrk og vöðva."
-        : "Perfect for training at home without machines. Uses bodyweight and simple tools to build strength and muscle.",
-      duration: language === "is" ? "6 vikur" : "6 weeks",
-      sessions: "4-5",
-      popular: false
-    }
+      image: "/images/plan-families/4.png",
+      nameIs: "Vöðvauppbygging",
+      nameEn: "Bodybuilding",
+      descIs: "Vöðvauppbygging með stigvaxandi álagi, rúmmáli og áherslu á form og árangur.",
+      descEn: "Hypertrophy with progressive overload, volume and a sharp focus on execution.",
+      durationIs: "8 vikur",
+      durationEn: "8 weeks",
+      sessions: "4–5",
+    },
+    {
+      id: 5,
+      image: "/images/plan-families/5.png",
+      nameIs: "Byrjendaplan",
+      nameEn: "Beginner",
+      descIs: "Byrjendavænt: skýr skref, grunnhreyfingar og öruggt tempo til að byrja rétt.",
+      descEn: "Beginner-friendly: clear steps, foundational patterns and a safe pace to start right.",
+      durationIs: "6 vikur",
+      durationEn: "6 weeks",
+      sessions: "3",
+    },
+    {
+      id: 6,
+      image: "/images/plan-families/6.png",
+      nameIs: "Efri / neðri líkami",
+      nameEn: "Upper/Lower",
+      descIs: "Skipting milli efri og neðri líkama – gott jafnvægi milli álags og endurheimtar.",
+      descEn: "Upper and lower days – a strong balance of workload and recovery.",
+      durationIs: "8 vikur",
+      durationEn: "8 weeks",
+      sessions: "4",
+    },
+    {
+      id: 7,
+      image: "/images/plan-families/7.png",
+      nameIs: "Þolþjálfun",
+      nameEn: "Cardio Split",
+      descIs: "Blanda af þoli, kardíó og styrk – bættur líðan og úthald án þess að missa kraft.",
+      descEn: "Conditioning, cardio and strength combined – fitness and endurance without losing strength.",
+      durationIs: "8 vikur",
+      durationEn: "8 weeks",
+      sessions: "4–5",
+    },
+    {
+      id: 8,
+      image: "/images/plan-families/8.png",
+      nameIs: "Styrktaruppbygging",
+      nameEn: "Strength Builder",
+      descIs: "Byggir grunnstyrk með stórum lyftum, stigvaxandi álagi og skynsömum lotum.",
+      descEn: "Build baseline strength with big lifts, smart progression and quality sets.",
+      durationIs: "12 vikur",
+      durationEn: "12 weeks",
+      sessions: "3–4",
+    },
+    {
+      id: 9,
+      image: "/images/plan-families/9.png",
+      nameIs: "Hlaupaplan",
+      nameEn: "Runner",
+      descIs: "Sameinar hlaup og styrktarþjálfun til að styðja liði, hraða og endingu.",
+      descEn: "Blends running and strength work to support joints, speed and durability.",
+      durationIs: "8 vikur",
+      durationEn: "8 weeks",
+      sessions: "4–5",
+    },
+    {
+      id: 10,
+      image: "/images/plan-families/10.png",
+      nameIs: "GF Training Special",
+      nameEn: "GF Training Special",
+      descIs: "GF kerfið – skýr forgangur, harðar lotur og skipulag sem fylgir þér alla leið.",
+      descEn: "The GF system – clear priorities, hard sets and structure that carries you through.",
+      durationIs: "8 vikur",
+      durationEn: "8 weeks",
+      sessions: "4–5",
+    },
+    {
+      id: 11,
+      image: "/images/plan-families/11.png",
+      nameIs: "Fitubrennsla",
+      nameEn: "Fat Loss",
+      descIs: "Æfingar og magn sem styðja fitumissi án þess að gefa eftir styrk og vöðva.",
+      descEn: "Training and volume that support fat loss while keeping strength and muscle.",
+      durationIs: "8 vikur",
+      durationEn: "8 weeks",
+      sessions: "4–5",
+    },
+    {
+      id: 12,
+      image: "/images/plan-families/12.png",
+      nameIs: "Allur líkaminn",
+      nameEn: "Full Body",
+      descIs: "Allur líkaminn á hverjum degi – gott fyrir þéttan tíma og jafna þróun.",
+      descEn: "Full-body sessions – great for tight schedules and even development.",
+      durationIs: "6 vikur",
+      durationEn: "6 weeks",
+      sessions: "3–4",
+    },
   ];
+
+  const planFamilyCount = planFamilies.length;
+
+  const planTitle = (p: PlanFamily) => (language === "is" ? p.nameIs : p.nameEn);
+  const planDescription = (p: PlanFamily) => (language === "is" ? p.descIs : p.descEn);
+  const planDuration = (p: PlanFamily) => (language === "is" ? p.durationIs : p.durationEn);
 
   const appPricingFeatures = language === "is"
     ? [
@@ -233,17 +338,17 @@ const AppLanding = () => {
     },
   ];
 
-  // Mobile carousel: handle seamless jump from start clone (0) to end (4)
+  // Mobile carousel: seamless loop (clone slides at 0 and planFamilyCount + 1)
   useEffect(() => {
     if (mobilePlanIndex === 0) {
       const timer = setTimeout(() => {
         setDisableTransition(true);
-        setMobilePlanIndex(4);
+        setMobilePlanIndex(planFamilyCount);
         setTimeout(() => setDisableTransition(false), 10);
       }, 500);
       return () => clearTimeout(timer);
     }
-    if (mobilePlanIndex === 5) {
+    if (mobilePlanIndex === planFamilyCount + 1) {
       const timer = setTimeout(() => {
         setDisableTransition(true);
         setMobilePlanIndex(1);
@@ -251,10 +356,9 @@ const AppLanding = () => {
       }, 500);
       return () => clearTimeout(timer);
     }
-  }, [mobilePlanIndex]);
+  }, [mobilePlanIndex, planFamilyCount]);
 
-  // Desktop carousel: show 2 plans at a time, 2 views total (0 = plans 1-2, 1 = plans 3-4)
-  const maxDesktopIndex = 1; // Only 2 views (showing 2 plans each)
+  const maxDesktopIndex = Math.ceil(planFamilyCount / 2) - 1;
 
   const nextPlans = () => {
     // Desktop navigation
@@ -264,10 +368,9 @@ const AppLanding = () => {
       }
       return prev + 1;
     });
-    // Mobile navigation
     setMobilePlanIndex((prev) => {
-      if (prev >= 4) {
-        return 5; // Go to end clone, useEffect will jump to 1
+      if (prev >= planFamilyCount) {
+        return planFamilyCount + 1;
       }
       return prev + 1;
     });
@@ -284,7 +387,7 @@ const AppLanding = () => {
     // Mobile navigation
     setMobilePlanIndex((prev) => {
       if (prev <= 1) {
-        return 0; // Go to start clone, useEffect will jump to 4
+        return 0; // Go to start clone, useEffect jumps to last real slide
       }
       return prev - 1;
     });
@@ -572,7 +675,7 @@ const AppLanding = () => {
                </div>
 
                {/* Main Headline (Center) - Below fold on mobile */}
-               <div className="lg:col-span-6 text-center mb-6 sm:mb-8 lg:mb-0 pt-[90vh] lg:pt-0 -mt-[85vh] lg:mt-0">
+               <div className="lg:col-span-6 text-center mb-3 sm:mb-8 lg:mb-0 pt-[90vh] lg:pt-0 -mt-[85vh] lg:mt-0">
                  <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black font-display leading-[0.95]">
                   {language === "is" ? (
                     <>Allt sem þú þarft til að ná <span className="text-primary">alvöru árangri!</span></>
@@ -582,8 +685,8 @@ const AppLanding = () => {
                  </h2>
                </div>
 
-               {/* Store Badges (Right) - Below fold on mobile */}
-               <div className="lg:col-span-3 flex flex-row sm:flex-row lg:flex-col items-center justify-center lg:items-end gap-3 sm:gap-4 lg:gap-8 pt-[90vh] lg:pt-0 -mt-[85vh] lg:mt-0">
+               {/* Store Badges (Right) — on mobile, sit close under headline (no duplicate vh offset) */}
+               <div className="lg:col-span-3 flex flex-row sm:flex-row lg:flex-col items-center justify-center lg:items-end gap-3 sm:gap-4 lg:gap-8 pt-2 sm:pt-6 lg:pt-0 lg:mt-0">
                  {/* App Store */}
                  <div className="flex flex-col items-center lg:items-end gap-2">
                     <button type="button" onClick={handleStartNowClick} className="hover:opacity-80 transition-opacity flex items-center justify-center">
@@ -607,7 +710,7 @@ const AppLanding = () => {
                       <img src="/images/google-play-badge.png" alt="Google Play" className="w-[190px] h-auto" />
                     </button>
                     <div className="hidden sm:block text-xs font-bold text-white/80 text-center lg:text-right max-w-[190px]">
-                      {language === "is" ? "Skráning í Android prófanir" : "Android testing signup"}
+                      {language === "is" ? "Android beta – skráðu þig" : "Android beta signup"}
                     </div>
                  </div>
                </div>
@@ -635,7 +738,7 @@ const AppLanding = () => {
                <div className="space-y-8 relative z-30">
                  <h2 className="text-4xl md:text-5xl lg:text-6xl font-black font-display leading-[0.95] text-[#e8e8e3]">
                   {language === "is" ? (
-                    <>Líkamsræktar app sem <span className="text-primary">skila þér árangri</span></>
+                    <>Líkamsræktar app sem <span className="text-primary">skilar þér árangri</span></>
                   ) : (
                     <>A fitness app that <span className="text-primary">gets results</span></>
                   )}
@@ -707,91 +810,88 @@ const AppLanding = () => {
                       transform: `translateX(-${mobilePlanIndex * 100}%)`
                     }}
                   >
-                    {/* Duplicate last plan at beginning for seamless loop */}
+                    {/* Duplicate last family at beginning for seamless loop */}
                     <div className="flex-shrink-0 w-full h-full">
                       <div className="relative w-full h-full">
-                        <img 
-                          src={plans[plans.length - 1].image} 
-                          alt={plans[plans.length - 1].title} 
+                        <img
+                          src={planFamilies[planFamilyCount - 1].image}
+                          alt={planTitle(planFamilies[planFamilyCount - 1])}
                           className="w-full h-full object-cover"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/30"></div>
                         <div className="absolute inset-0 flex flex-col justify-end p-6">
-                          <h3 className="text-2xl font-black font-display text-white mb-3">
-                            {plans[plans.length - 1].title}
-                          </h3>
                           <p className="text-sm text-white/90 leading-relaxed mb-4">
-                            {plans[plans.length - 1].description}
+                            {planDescription(planFamilies[planFamilyCount - 1])}
                           </p>
-                          <div className="flex gap-6 text-xs">
+                          <div className="flex gap-6 text-xs mb-3">
                             <div>
                               <div className="font-bold text-white/70 mb-1">LENGD:</div>
-                              <div className="font-bold text-white">{plans[plans.length - 1].duration}</div>
+                              <div className="font-bold text-white">{planDuration(planFamilies[planFamilyCount - 1])}</div>
                             </div>
                             <div>
                               <div className="font-bold text-white/70 mb-1">{language === "is" ? "ÆFINGAR/VIKU:" : "SESSIONS/WEEK:"}</div>
-                              <div className="font-bold text-white">{plans[plans.length - 1].sessions}</div>
+                              <div className="font-bold text-white">{planFamilies[planFamilyCount - 1].sessions}</div>
                             </div>
+                          </div>
+                          <div className="self-start bg-primary px-4 py-2 rounded-full border border-primary/30 shadow-sm">
+                            <span className="text-sm font-bold text-primary-foreground leading-tight">
+                              {planTitle(planFamilies[planFamilyCount - 1])}
+                            </span>
                           </div>
                         </div>
                       </div>
                     </div>
-                    {/* All plans */}
-                    {plans.map((plan, index) => (
-                      <div key={`${plan.id}-${index}`} className="flex-shrink-0 w-full h-full">
+                    {planFamilies.map((family) => (
+                      <div key={family.id} className="flex-shrink-0 w-full h-full">
                         <div className="relative w-full h-full">
-                          <img 
-                            src={plan.image} 
-                            alt={plan.title} 
+                          <img
+                            src={family.image}
+                            alt={planTitle(family)}
                             className="w-full h-full object-cover"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/30"></div>
                           <div className="absolute inset-0 flex flex-col justify-end p-6">
-                            <h3 className="text-2xl font-black font-display text-white mb-3">
-                              {plan.title}
-                            </h3>
-                            <p className="text-sm text-white/90 leading-relaxed mb-4">
-                              {plan.description}
-                            </p>
-                            <div className="flex gap-6 text-xs">
+                            <p className="text-sm text-white/90 leading-relaxed mb-4">{planDescription(family)}</p>
+                            <div className="flex gap-6 text-xs mb-3">
                               <div>
                                 <div className="font-bold text-white/70 mb-1">LENGD:</div>
-                                <div className="font-bold text-white">{plan.duration}</div>
+                                <div className="font-bold text-white">{planDuration(family)}</div>
                               </div>
                               <div>
                                 <div className="font-bold text-white/70 mb-1">{language === "is" ? "ÆFINGAR/VIKU:" : "SESSIONS/WEEK:"}</div>
-                                <div className="font-bold text-white">{plan.sessions}</div>
+                                <div className="font-bold text-white">{family.sessions}</div>
                               </div>
+                            </div>
+                            <div className="self-start bg-primary px-4 py-2 rounded-full border border-primary/30 shadow-sm">
+                              <span className="text-sm font-bold text-primary-foreground leading-tight">{planTitle(family)}</span>
                             </div>
                           </div>
                         </div>
                       </div>
                     ))}
-                    {/* Duplicate first plan at end */}
+                    {/* Duplicate first family at end */}
                     <div className="flex-shrink-0 w-full h-full">
                       <div className="relative w-full h-full">
-                        <img 
-                          src={plans[0].image} 
-                          alt={plans[0].title} 
+                        <img
+                          src={planFamilies[0].image}
+                          alt={planTitle(planFamilies[0])}
                           className="w-full h-full object-cover"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/30"></div>
                         <div className="absolute inset-0 flex flex-col justify-end p-6">
-                          <h3 className="text-2xl font-black font-display text-white mb-3">
-                            {plans[0].title}
-                          </h3>
-                          <p className="text-sm text-white/90 leading-relaxed mb-4">
-                            {plans[0].description}
-                          </p>
-                          <div className="flex gap-6 text-xs">
+                          <p className="text-sm text-white/90 leading-relaxed mb-4">{planDescription(planFamilies[0])}</p>
+                          <div className="flex gap-6 text-xs mb-3">
                             <div>
                               <div className="font-bold text-white/70 mb-1">LENGD:</div>
-                              <div className="font-bold text-white">{plans[0].duration}</div>
+                              <div className="font-bold text-white">{planDuration(planFamilies[0])}</div>
                             </div>
                             <div>
                               <div className="font-bold text-white/70 mb-1">{language === "is" ? "ÆFINGAR/VIKU:" : "SESSIONS/WEEK:"}</div>
-                              <div className="font-bold text-white">{plans[0].sessions}</div>
+                              <div className="font-bold text-white">{planFamilies[0].sessions}</div>
                             </div>
+                          </div>
+                          <div className="self-start bg-primary px-4 py-2 rounded-full border border-primary/30 shadow-sm">
+                            <span className="text-sm font-bold text-primary-foreground leading-tight">{planTitle(planFamilies[0])}</span>
                           </div>
                         </div>
                       </div>
@@ -823,8 +923,8 @@ const AppLanding = () => {
                 </div>
                 <p className="text-sm text-foreground/70 leading-relaxed">
                   {language === "is"
-                    ? "Þú svarar nokkrum spurningum og við finnum plan sem hentar þér og þínum markmiðum."
-                    : "Answer a few questions and we will match you with a plan for your goals."}
+                    ? "Náðu í appið, svaraðu nokkrum spurningum og svo finnum við rétta planið fyrir þig og þín markmið."
+                    : "Open the app, answer a few questions, and we'll find the right plan for you and your goals."}
                 </p>
                 <div className="pt-2">
                   <Button onClick={handleStartNowClick} className="h-11 px-8 rounded-full bg-primary hover:bg-primary/90 text-black font-bold text-sm shadow-xl hover:shadow-2xl hover:scale-105 transition-all">
@@ -851,8 +951,8 @@ const AppLanding = () => {
                 </h2>
                 <p className="text-base md:text-lg text-foreground/70 leading-relaxed max-w-xl">
                   {language === "is"
-                    ? "Þú svarar nokkrum spurningum og við finnum plan sem hentar þér og þínum markmiðum."
-                    : "Answer a few questions and we will match you with a plan for your goals."}
+                    ? "Náðu í appið, svaraðu nokkrum spurningum og svo finnum við rétta planið fyrir þig og þín markmið."
+                    : "Open the app, answer a few questions, and we'll find the right plan for you and your goals."}
                 </p>
                 <div>
                   <Button onClick={handleStartNowClick} className="h-12 md:h-14 px-6 md:px-8 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base md:text-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-all">
@@ -871,100 +971,48 @@ const AppLanding = () => {
                 </div>
                 
                 <div className="relative overflow-hidden">
-                  <div 
+                  <div
                     ref={desktopCarouselRef}
                     className={`flex gap-6 transition-transform duration-500 ease-in-out`}
-                    style={{ 
-                      transform: `translateX(calc(-${desktopPlanIndex} * (100% + 1.5rem)))`
+                    style={{
+                      transform: `translateX(calc(-${desktopPlanIndex} * (100% + 1.5rem)))`,
                     }}
                   >
-                    {/* View 1: Plans 1-2 (index 0-1) */}
-                    <div className="flex-shrink-0 w-full flex gap-6">
-                      {plans.slice(0, 2).map((plan, index) => (
-                        <div 
-                          key={`${plan.id}-view1-${index}`}
-                          className="flex-shrink-0 w-[calc(50%-12px)] bg-card/50 backdrop-blur-sm border border-white/10 rounded-3xl overflow-hidden shadow-2xl group cursor-pointer hover:border-primary/50 hover:shadow-primary/20 transition-all duration-300"
-                        >
-                          <div className="relative aspect-[4/3] overflow-hidden">
-                            <img 
-                              src={plan.image} 
-                              alt={plan.title} 
-                              className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
-                            <div className="absolute top-4 left-4 bg-primary backdrop-blur-sm px-4 py-2 rounded-full border border-primary/30 shadow-sm">
-                              <span className="text-sm font-bold text-primary-foreground">{plan.title}</span>
+                    {Array.from({ length: Math.ceil(planFamilyCount / 2) }, (_, viewIdx) => (
+                      <div key={`plan-view-${viewIdx}`} className="flex-shrink-0 w-full flex gap-6">
+                        {planFamilies.slice(viewIdx * 2, viewIdx * 2 + 2).map((family) => (
+                          <div
+                            key={family.id}
+                            className="flex-shrink-0 w-[calc(50%-12px)] bg-card/50 backdrop-blur-sm border border-white/10 rounded-3xl overflow-hidden shadow-2xl group cursor-pointer hover:border-primary/50 hover:shadow-primary/20 transition-all duration-300"
+                          >
+                            <div className="relative aspect-[4/3] overflow-hidden">
+                              <img
+                                src={family.image}
+                                alt={planTitle(family)}
+                                className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                              />
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+                              <div className="absolute bottom-4 left-4 z-10 max-w-[calc(100%-2rem)] bg-primary backdrop-blur-sm px-4 py-2 rounded-full border border-primary/30 shadow-sm">
+                                <span className="text-sm font-bold text-primary-foreground leading-tight">{planTitle(family)}</span>
+                              </div>
                             </div>
-                            {plan.popular && (
-                              <div className="absolute bottom-4 left-4 right-4">
-                                <div className="bg-primary/20 backdrop-blur-sm px-3 py-1.5 rounded-full inline-block mb-2 border border-primary/30">
-                                  <span className="text-xs font-bold text-primary">{language === "is" ? "Vinsælast" : "Most popular"}</span>
+                            <div className="p-6 space-y-4 bg-card/80">
+                              <p className="text-foreground/80 leading-relaxed text-sm">{planDescription(family)}</p>
+                              <div className="flex gap-8 text-sm pt-2 border-t border-white/10">
+                                <div>
+                                  <div className="font-bold text-primary mb-1">LENGD:</div>
+                                  <div className="text-foreground/60">{planDuration(family)}</div>
+                                </div>
+                                <div>
+                                  <div className="font-bold text-primary mb-1">{language === "is" ? "ÆFINGAR/VIKU:" : "SESSIONS/WEEK:"}</div>
+                                  <div className="text-foreground/60">{family.sessions}</div>
                                 </div>
                               </div>
-                            )}
-                          </div>
-                          <div className="p-6 space-y-4 bg-card/80">
-                            <p className="text-foreground/80 leading-relaxed text-sm">
-                              {plan.description}
-                            </p>
-                            <div className="flex gap-8 text-sm pt-2 border-t border-white/10">
-                              <div>
-                                <div className="font-bold text-primary mb-1">LENGD:</div>
-                                <div className="text-foreground/60">{plan.duration}</div>
-                              </div>
-                              <div>
-                                <div className="font-bold text-primary mb-1">{language === "is" ? "ÆFINGAR/VIKU:" : "SESSIONS/WEEK:"}</div>
-                                <div className="text-foreground/60">{plan.sessions}</div>
-                              </div>
                             </div>
                           </div>
-                        </div>
-                      ))}
-                    </div>
-                    
-                    {/* View 2: Plans 3-4 (index 2-3) */}
-                    <div className="flex-shrink-0 w-full flex gap-6">
-                      {plans.slice(2, 4).map((plan, index) => (
-                        <div 
-                          key={`${plan.id}-view2-${index}`}
-                          className="flex-shrink-0 w-[calc(50%-12px)] bg-card/50 backdrop-blur-sm border border-white/10 rounded-3xl overflow-hidden shadow-2xl group cursor-pointer hover:border-primary/50 hover:shadow-primary/20 transition-all duration-300"
-                        >
-                          <div className="relative aspect-[4/3] overflow-hidden">
-                            <img 
-                              src={plan.image} 
-                              alt={plan.title} 
-                              className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
-                            <div className="absolute top-4 left-4 bg-primary backdrop-blur-sm px-4 py-2 rounded-full border border-primary/30 shadow-sm">
-                              <span className="text-sm font-bold text-primary-foreground">{plan.title}</span>
-                            </div>
-                            {plan.popular && (
-                              <div className="absolute bottom-4 left-4 right-4">
-                                <div className="bg-primary/20 backdrop-blur-sm px-3 py-1.5 rounded-full inline-block mb-2 border border-primary/30">
-                                  <span className="text-xs font-bold text-primary">{language === "is" ? "Vinsælast" : "Most popular"}</span>
-                                </div>
-                              </div>
-                            )}
-                          </div>
-                          <div className="p-6 space-y-4 bg-card/80">
-                            <p className="text-foreground/80 leading-relaxed text-sm">
-                              {plan.description}
-                            </p>
-                            <div className="flex gap-8 text-sm pt-2 border-t border-white/10">
-                              <div>
-                                <div className="font-bold text-primary mb-1">LENGD:</div>
-                                <div className="text-foreground/60">{plan.duration}</div>
-                              </div>
-                              <div>
-                                <div className="font-bold text-primary mb-1">{language === "is" ? "ÆFINGAR/VIKU:" : "SESSIONS/WEEK:"}</div>
-                                <div className="text-foreground/60">{plan.sessions}</div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
+                        ))}
+                      </div>
+                    ))}
                   </div>
                 </div>
 
@@ -1128,20 +1176,56 @@ const AppLanding = () => {
               <div className="space-y-0">
                 {(language === "is"
                   ? [
-                      { q: "Hvað kostar appið?", a: "Frá 2.990 kr. á mánuði. Einnig í boði 3 mánaða (7.990 kr.) og ársáskrift (25.100 kr. með 30% afslætti). Engin binding." },
-                      { q: "Hentar þetta byrjendum?", a: "Já, appið er með sérstök plön fyrir byrjendur og kennslumyndbönd við hverja einustu æfingu." },
-                      { q: "Þarf ég aðgang að rækt?", a: "Við erum bæði með plön fyrir ræktina og heimaæfingar. Þú velur það sem hentar þér." },
-                      { q: "Get ég hætt hvenær sem er?", a: "Já, það er enginn uppsagnarfrestur. Þú getur sagt upp áskriftinni hvenær sem er inni á þínu svæði." },
-                      { q: "Hvar er appið fáanlegt?", a: "Appið er komið í App Store fyrir iPhone. Android útgáfa er í undirbúningi og þú getur skráð þig á Android prófanir hér á síðunni." },
-                      { q: "Eru þetta sömu plönin og þú notar með viðskiptavinum?", a: "Já, þetta eru nákvæmlega sömu plönin og ég nota með viðskiptavinum mínum í fjarþjálfun." }
+                      {
+                        q: "Hvað kostar appið?",
+                        a: "Frá 2.990 kr. á mánuði. Einnig 3 mánuðir (7.990 kr.) og ársáskrift (25.100 kr. með 30% afslætti). Engin binding. Allir eiginleikar og yfir 40 æfingarplön innifalin í öllum áskriftum.",
+                      },
+                      {
+                        q: "Hentar þetta byrjendum?",
+                        a: "Já. Þú finnur byrjendaplön með skýrum skrefum og myndbönd við hverja æfingu svo tæknin og framkvæmdin verði auðveld.",
+                      },
+                      {
+                        q: "Þarf ég aðgang að rækt?",
+                        a: "Nei, ekki endilega. Í appinu eru plön bæði fyrir ræktina og heimaæfingar, svo þú getur valið það sem passar við daginn þinn og búnaðinn þinn.",
+                      },
+                      {
+                        q: "Get ég hætt hvenær sem er?",
+                        a: "Já. Enginn bindingartími. Þú segir bara upp áskriftinni hvenær sem hentar inni á reikningnum þínum.",
+                      },
+                      {
+                        q: "Hvar er appið fáanlegt?",
+                        a: "iPhone: GF Training er í App Store. Android: útgáfan er í takmarkaðri beta og þú getur skráð þig á þessari síðu til að fá boð þegar pláss er laust.",
+                      },
+                      {
+                        q: "Hvernig finn ég rétta æfingaplanið fyrir mig?",
+                        a: "Náðu í appið, svaraðu nokkrum spurningum um markmið, reynslu og aðstæður og við stingum upp á plani sem hentar. Þú getur alltaf skipt um seinna ef þú vilt prófa eitthvað annað.",
+                      },
                     ]
                   : [
-                      { q: "How much does the app cost?", a: "From 2,990 ISK per month. Also available as 3 months (7,990 ISK) and yearly (25,100 ISK with 30% discount). No commitment." },
-                      { q: "Is this suitable for beginners?", a: "Yes. The app includes beginner-friendly plans and video guidance for every exercise." },
-                      { q: "Do I need gym access?", a: "We provide both gym plans and home workout plans, so you can choose what fits you." },
-                      { q: "Can I cancel anytime?", a: "Yes. There is no cancellation notice period; you can cancel anytime." },
-                      { q: "Where is the app available?", a: "The app is available on the iPhone App Store. Android is in progress, and you can sign up for testing here." },
-                      { q: "Are these the same plans you use with coaching clients?", a: "Yes, these are the same core plans used in my online coaching." }
+                      {
+                        q: "How much does the app cost?",
+                        a: "From 2,990 ISK per month. You can also choose 3 months (7,990 ISK) or yearly (25,100 ISK with a 30% discount). No lock-in. Every subscription includes all features and 40+ training plans.",
+                      },
+                      {
+                        q: "Is this suitable for beginners?",
+                        a: "Yes. There are beginner plans with clear steps, and video guidance on every exercise so technique and execution stay simple.",
+                      },
+                      {
+                        q: "Do I need gym access?",
+                        a: "Not necessarily. The app includes both gym-based programs and home workouts, so you can pick what matches your schedule and equipment.",
+                      },
+                      {
+                        q: "Can I cancel anytime?",
+                        a: "Yes. There is no long lock-in. Cancel whenever it suits you from your account in the app.",
+                      },
+                      {
+                        q: "Where is the app available?",
+                        a: "iPhone: GF Training is on the App Store. Android: the app is in a limited beta, and you can sign up on this site to get an invite when a spot opens.",
+                      },
+                      {
+                        q: "How do I find the right workout plan for me?",
+                        a: "Download the app, answer a few questions about your goals, experience and setup, and we suggest a plan that fits. You can switch plans later whenever you want to try something new.",
+                      },
                     ]
                 ).map((item, i, arr) => (
                   <div key={i}>
@@ -1348,7 +1432,8 @@ const AppLanding = () => {
 
         {isAndroidModalOpen && (
           <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm p-4 flex items-center justify-center">
-            <div className="relative w-full max-w-xl max-h-[90vh] overflow-y-auto rounded-3xl border border-white/10 bg-background p-6 sm:p-8">
+            <div className="relative w-full max-w-xl max-h-[90vh] overflow-y-auto rounded-3xl border border-primary/25 bg-background p-6 sm:p-8 shadow-[0_0_60px_-12px_hsl(var(--primary)/0.35)]">
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/80 to-transparent" aria-hidden />
               <button
                 type="button"
                 onClick={() => setIsAndroidModalOpen(false)}
@@ -1358,14 +1443,31 @@ const AppLanding = () => {
                 <X className="w-5 h-5 text-white" />
               </button>
 
-              <h3 className="text-2xl sm:text-3xl font-black font-display mb-2">
+              <div className="mb-4 flex flex-wrap items-center gap-2">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/35 bg-primary/15 px-3 py-1 text-xs font-bold uppercase tracking-wide text-primary">
+                  <Sparkles className="h-3.5 w-3.5" aria-hidden />
+                  Beta
+                </span>
+                <span className="inline-flex items-center gap-1 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-semibold text-white/80">
+                  <Zap className="h-3.5 w-3.5 text-primary" aria-hidden />
+                  {language === "is" ? "Takmarkað pláss" : "Limited spots"}
+                </span>
+              </div>
+
+              <h3 className="text-2xl sm:text-3xl font-black font-display mb-2 leading-tight">
                 {language === "is" ? (
-                  <>Skráning í <span className="text-primary">Android prófanir</span></>
+                  <>
+                    Android-appið er tilbúið,{" "}
+                    <span className="text-primary">vertu með í prófunum</span>
+                  </>
                 ) : (
-                  <>Android <span className="text-primary">testing signup</span></>
+                  <>
+                    The Android app is ready,{" "}
+                    <span className="text-primary">join the beta</span>
+                  </>
                 )}
               </h3>
-              <p className="text-foreground/70 mb-6">
+              <p className="text-foreground/75 mb-6 text-sm sm:text-base leading-relaxed">
                 {t.androidModalDesc}
               </p>
 

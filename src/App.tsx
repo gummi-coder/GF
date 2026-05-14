@@ -27,53 +27,16 @@ import Askorun from "./pages/Askorun";
 import AskorunSignup from "./pages/AskorunSignup";
 import Links from "./pages/Links";
 import Hjalp from "./pages/Hjalp";
+import Fjarthjalfun from "./pages/Fjarthjalfun";
 import FacebookPixel from "@/components/FacebookPixel";
-import { useEffect } from "react";
 
 const queryClient = new QueryClient();
-
-// Global disable for ConvertKit/Gummi forms - can be re-enabled later
-const DisableKitForms = () => {
-  useEffect(() => {
-    // Override gummi function to prevent form creation
-    const disableGummi = () => {
-      if (typeof (window as any).gummi === 'function') {
-        (window as any).gummi = function() {
-          // Disabled - do nothing
-          return;
-        };
-      }
-    };
-
-    // Run immediately
-    disableGummi();
-
-    // Keep checking in case script loads later
-    const interval = setInterval(disableGummi, 500);
-    
-    // Also use MutationObserver to catch when gummi gets defined
-    const observer = new MutationObserver(disableGummi);
-    observer.observe(document.documentElement, {
-      attributes: true,
-      childList: true,
-      subtree: true,
-    });
-
-    return () => {
-      clearInterval(interval);
-      observer.disconnect();
-    };
-  }, []);
-
-  return null;
-};
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <DisableKitForms />
       <BrowserRouter>
                <ScrollToTop />
                <FacebookPixel />
@@ -100,6 +63,8 @@ const App = () => (
                 <Route path="/askorun-signup" element={<AskorunSignup />} />
                 <Route path="/links" element={<Links />} />
                 <Route path="/hjalp" element={<Hjalp />} />
+                <Route path="/fjarthjalfun" element={<Fjarthjalfun />} />
+                <Route path="/fjarthalfun" element={<Fjarthjalfun />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                  <Route path="*" element={<NotFound />} />
                </Routes>

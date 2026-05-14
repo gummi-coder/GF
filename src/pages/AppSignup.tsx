@@ -48,27 +48,6 @@ const AppSignup = () => {
     }
   }, [searchParams]);
 
-  // Disable Gummi/ConvertKit forms on this page
-  useEffect(() => {
-    const removeConvertKitForms = () => {
-      const gummiForms = document.querySelectorAll(
-        'body > .gummi-form-container, body > [id*="gummi-form"], body > form[data-sv-form], body > .ck_form'
-      );
-      gummiForms.forEach(form => {
-        if (!form.closest('[data-app-signup]')) {
-          (form as HTMLElement).style.display = 'none';
-          (form as HTMLElement).remove();
-        }
-      });
-    };
-    
-    removeConvertKitForms();
-    const interval = setInterval(removeConvertKitForms, 500);
-    setTimeout(() => clearInterval(interval), 10000);
-    
-    return () => clearInterval(interval);
-  }, []);
-
   const isFormValid =
     formData.fullName.trim() !== "" &&
     formData.kennitala.trim() !== "" &&

@@ -48,20 +48,6 @@ const Signup = () => {
     }
   }, [planParam]);
 
-  // Remove any ConvertKit email signup forms from this page
-  useEffect(() => {
-    const removeConvertKitForms = () => {
-      // Remove ConvertKit forms that might be injected
-      const convertKitForms = document.querySelectorAll('form[data-sv-form], .ck_form, [id*="ck"], [class*="convertkit"]');
-      convertKitForms.forEach(form => form.remove());
-    };
-
-    // Remove immediately and set up interval to catch any that load later
-    removeConvertKitForms();
-    const interval = setInterval(removeConvertKitForms, 500);
-
-    return () => clearInterval(interval);
-  }, []);
   const isFormValid =
     formData.fullName.trim() !== "" &&
     formData.email.trim() !== "" &&

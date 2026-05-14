@@ -247,29 +247,6 @@ const Macros = () => {
   const [results, setResults] = useState<any>(null);
   const [showResults, setShowResults] = useState(false);
 
-  // Remove any email signup forms from the bottom of the page
-  useEffect(() => {
-    const removeEmailForms = () => {
-      // Remove ConvertKit/Gummi forms that might be injected by global scripts
-      const allForms = document.querySelectorAll('form[data-sv-form], .ck_form, [id*="ck"], [class*="convertkit"], [class*="formkit"], [data-sv-form]');
-      allForms.forEach(form => {
-        form.remove();
-      });
-      
-      // Also check for Gummi forms
-      const allGummiForms = document.querySelectorAll('[id*="gummi"]');
-      allGummiForms.forEach(form => {
-        form.remove();
-      });
-    };
-
-    // Remove immediately and set up interval to catch any that load later
-    removeEmailForms();
-    const interval = setInterval(removeEmailForms, 500);
-
-    return () => clearInterval(interval);
-  }, []);
-
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => {
       const newData = { ...prev, [field]: value };

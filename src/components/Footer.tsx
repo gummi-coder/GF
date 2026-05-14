@@ -1,5 +1,4 @@
 import { Facebook, Instagram, Linkedin } from "lucide-react";
-import { useEffect, useRef } from "react";
 
 // X (Twitter) Icon
 const XIcon = ({ className }: { className?: string }) => (
@@ -26,30 +25,6 @@ const TikTokIcon = ({ className }: { className?: string }) => (
 );
 
 const Footer = () => {
-  const formContainerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    // Wait for ConvertKit form to load and move it to our container
-    const checkForForm = setInterval(() => {
-      if (formContainerRef.current) {
-        // Look for ConvertKit form elements
-        const convertKitForm = document.querySelector('form[data-sv-form]') || 
-                               document.querySelector('.ck_form') ||
-                               document.querySelector('[id*="ck"]');
-        
-        if (convertKitForm && formContainerRef.current && !formContainerRef.current.contains(convertKitForm)) {
-          formContainerRef.current.appendChild(convertKitForm as Node);
-          clearInterval(checkForForm);
-        }
-      }
-    }, 100);
-
-    // Stop checking after 10 seconds
-    setTimeout(() => clearInterval(checkForForm), 10000);
-
-    return () => clearInterval(checkForForm);
-  }, []);
-
   return (
     <footer className="pb-6 px-8">
       {/* Main Footer */}
@@ -115,15 +90,17 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Newsletter Signup */}
+        {/* Newsletter / updates */}
         <div className="border-t border-white/10 pt-6 mb-6">
-          <div className="text-center mb-4">
+          <div className="text-center mb-2">
             <h3 className="text-sm font-bold text-white mb-1">Fáðu uppfærslur</h3>
-            <p className="text-white/60 text-xs">Nýjustu ráðin um heilsu og þjálfun</p>
-          </div>
-          
-          <div className="max-w-sm mx-auto" ref={formContainerRef}>
-            {/* ConvertKit form will be injected here */}
+            <p className="text-white/60 text-xs mb-3">Nýjustu ráðin um heilsu og þjálfun</p>
+            <a
+              href="/contact"
+              className="text-primary text-xs font-semibold hover:underline"
+            >
+              Hafa samband
+            </a>
           </div>
         </div>
 

@@ -6,7 +6,7 @@
     </style>
   </defs>
   <!-- Centered GF monogram on transparent background -->
-  <text x="256" y="256" fill="#000" class="text" font-size="300" text-anchor="middle" dominant-baseline="central" letter-spacing="4">GF</text>
+  <text x="256" y="256" fill="#EDFF2B" class="text" font-size="300" text-anchor="middle" dominant-baseline="central" letter-spacing="4">GF</text>
 </svg>
 
 
