@@ -1,14 +1,17 @@
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
 import { useLocation, Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
+import { useEffect } from "react";
 
 const Terms = () => {
   const location = useLocation();
-  const params = new URLSearchParams(location.search);
-  const isAskorunContext = params.get("context") === "askorun";
-  const fromSignup = params.get("from") === "signup";
-  const isPrivacyHash = (location.hash === "#privacy" || location.hash === "#terms") && !fromSignup;
+
+  useEffect(() => {
+    if (location.hash) {
+      document.querySelector(location.hash)?.scrollIntoView({ behavior: "smooth" });
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [location.hash]);
 
   return (
     <div
@@ -23,34 +26,18 @@ const Terms = () => {
         backgroundRepeat: 'no-repeat, no-repeat'
       }}
     >
-      {isPrivacyHash ? (
-        <nav className="fixed top-6 left-4 right-4 z-50">
-          <div className="bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl px-6 max-w-[1200px] mx-auto">
-            <div className="flex items-center h-16">
-              <Link to="/" className="flex items-center gap-2 text-white hover:text-primary transition-colors">
-                <ArrowLeft size={20} />
-                <span className="text-sm font-medium">Tilbaka</span>
-              </Link>
-            </div>
+      <nav className="fixed top-6 left-4 right-4 z-50">
+        <div className="bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl px-6 max-w-[1200px] mx-auto">
+          <div className="flex items-center h-16">
+            <Link to="/" className="flex items-center gap-2 text-white hover:text-primary transition-colors">
+              <ArrowLeft size={20} />
+              <span className="text-sm font-medium">Tilbaka</span>
+            </Link>
           </div>
-        </nav>
-      ) : isAskorunContext ? (
-        <nav className="fixed top-6 left-8 right-8 z-50">
-          <div className="bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl px-8 max-w-[1200px] mx-auto">
-            <div className="flex items-center justify-between h-20">
-              <div className="flex items-center select-none">
-                <span className="text-2xl font-black tracking-tight uppercase font-display">
-                  GF<span className="text-primary">Training</span>
-                </span>
-              </div>
-            </div>
-          </div>
-        </nav>
-      ) : (
-        <Navigation />
-      )}
+        </div>
+      </nav>
 
-      <section className={`pb-8 px-4 ${isPrivacyHash ? 'pt-28' : 'pt-32'}`}>
+      <section className="pb-8 px-4 pt-28">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-10">
             <h1 className="text-4xl md:text-6xl font-black font-display mb-4">Skilmálar & Persónuvernd</h1>
@@ -174,22 +161,6 @@ const Terms = () => {
         </div>
       </section>
 
-      {!isPrivacyHash && (
-        isAskorunContext ? (
-          <footer className="pb-12 px-8">
-            <div className="bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl px-8 py-8 max-w-[1200px] mx-auto text-center">
-              <div className="mb-3">
-                <span className="text-lg font-black">
-                  GF<span className="text-primary">TRAINING</span>
-                </span>
-              </div>
-              <div className="text-white/40 text-xs">© 2025 GF Training</div>
-            </div>
-          </footer>
-        ) : (
-          <Footer />
-        )
-      )}
     </div>
   );
 };

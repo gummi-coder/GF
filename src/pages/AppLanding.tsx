@@ -1335,7 +1335,7 @@ const AppLanding = () => {
                       </a>
                     </li>
                     <li>
-                      <Link to="/app-signup?plan=fjarthjalfun" className="hover:text-white transition-colors text-white/70">
+                      <Link to="/fjarthalfun" className="hover:text-white transition-colors text-white/70">
                         {language === "is" ? "Fjarþjálfun" : "Online coaching"}
                       </Link>
                     </li>

@@ -417,9 +417,10 @@ const Fjarthjalfun = () => {
             </Link>
             
             <div className="flex flex-wrap justify-center gap-6 md:gap-8 text-sm md:text-base text-white/60">
+              <Link to="/hjalp" className="hover:text-white transition-colors">Hjálp</Link>
               <Link to="/terms#terms" className="hover:text-white transition-colors">Skilmálar</Link>
-              <Link to="/contact" className="hover:text-white transition-colors">Hafa samband</Link>
-              <Link to="/" className="hover:text-white transition-colors">Appið</Link>
+              <Link to="/terms#privacy" className="hover:text-white transition-colors">Persónuvernd</Link>
+              <Link to="/" className="hover:text-white transition-colors">Forsíða</Link>
             </div>
           </div>
           
