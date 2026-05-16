@@ -186,7 +186,7 @@ const AppLanding = () => {
       durationIs: "8 vikur",
       durationEn: "8 weeks",
       sessions: "4–5",
-    },
+    }, 
     {
       id: 5,
       image: "/images/plan-families/5.png",
@@ -1117,42 +1117,66 @@ const AppLanding = () => {
         </section>
 
         {/* How it Works */}
-        <section className="py-12 sm:py-16 lg:py-24 px-4">
+        <section className="py-16 sm:py-24 lg:py-32 px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-black font-display text-center mb-8 sm:mb-12 lg:mb-16">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black font-display text-center mb-16 sm:mb-20">
               {language === "is" ? "Svona byrjar þú" : "How to start"}
             </h2>
             
-            <div className="grid md:grid-cols-3 gap-12 text-center relative">
-              {/* Connecting Line (Desktop) */}
-              <div className="hidden md:block absolute top-12 left-[16%] right-[16%] h-0.5 bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
-
+            <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
               {[
                 {
-                  step: "01",
+                  step: language === "is" ? "Skref 1" : "Step 1",
                   title: language === "is" ? "Þú sækir GF Training appið" : "Download the GF Training app",
                   desc: language === "is" ? "Í App Store fyrir iPhone" : "On the App Store for iPhone",
+                  image: "/images/step1-cropped.png"
                 },
                 {
-                  step: "02",
+                  step: language === "is" ? "Skref 2" : "Step 2",
                   title: language === "is" ? "Þú svarar nokkrum spurningum" : "Answer a few questions",
-                  desc: language === "is" ? "Svara nokkrum spurningum um markmið og reynslu" : "Tell us about your goals and experience",
+                  desc: language === "is" ? "Svaraðu nokkrum spurningum um markmið og reynslu" : "Tell us about your goals and experience",
+                  image: "/images/step2-cropped.png"
                 },
                 {
-                  step: "03",
-                  title: language === "is" ? "Þú færð plan sem henter þínum markmiðum" : "Get a plan that fits your goals",
-                  desc: language === "is" ? "Byrjaðu strax með plani sem passar þér" : "Start right away with a plan that suits you",
+                  step: language === "is" ? "Skref 3" : "Step 3",
+                  title: language === "is" ? "Þú færð plan sem hentar þér" : "Get a plan that fits you",
+                  desc: language === "is" ? "Byrjaðu strax með plani sem passar þínum markmiðum" : "Start right away with a plan that suits your goals",
+                  image: "/images/step3-cropped.png"
                 }
               ].map((item, i) => (
-                <div key={i} className="relative z-10 space-y-4">
-                  <div className="w-24 h-24 rounded-full bg-card border border-white/10 flex items-center justify-center text-3xl font-black font-display mx-auto shadow-xl">
-                    <span className="text-primary">{item.step}</span>
+                <article
+                  key={i}
+                  className="group relative flex flex-col rounded-2xl border border-white/[0.08] bg-[#0c0c0c] overflow-hidden transition-all duration-300 hover:border-white/20 hover:shadow-[0_24px_60px_rgba(0,0,0,0.45)]"
+                >
+                  <span className="absolute top-5 left-5 z-10 inline-flex items-center rounded-full border border-white/15 bg-[#141414] px-3.5 py-1 text-[11px] font-bold uppercase tracking-wide text-white/90 shadow-lg">
+                    {item.step}
+                  </span>
+
+                  <div className="relative flex min-h-[300px] sm:min-h-[320px] items-center justify-center px-6 pt-14 pb-8 bg-gradient-to-b from-white/[0.07] via-white/[0.02] to-transparent">
+                    <div
+                      className="pointer-events-none absolute inset-x-8 top-1/2 h-32 -translate-y-1/2 rounded-full bg-primary/15 blur-3xl opacity-60 group-hover:opacity-90 transition-opacity"
+                      aria-hidden
+                    />
+                    <div className="relative w-[58%] max-w-[210px] min-w-[140px]">
+                      <div className="rounded-[1.65rem] bg-gradient-to-b from-zinc-500/70 to-zinc-900 p-[3px] shadow-[0_16px_40px_rgba(0,0,0,0.55)] ring-1 ring-white/20">
+                        <div className="overflow-hidden rounded-[1.45rem] bg-black">
+                          <img
+                            src={item.image}
+                            alt={item.title}
+                            className="block w-full h-auto"
+                            loading="lazy"
+                          />
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                    <p className="text-foreground/60 max-w-[200px] mx-auto">{item.desc}</p>
+
+                  <div className="flex flex-1 flex-col px-6 pb-8 pt-1 text-left">
+                    <h3 className="text-lg sm:text-xl font-bold text-white leading-snug mb-2">{item.title}</h3>
+                    <p className="text-sm text-white/55 leading-relaxed">{item.desc}</p>
                   </div>
-                </div>
+                </article>
+
               ))}
             </div>
           </div>
