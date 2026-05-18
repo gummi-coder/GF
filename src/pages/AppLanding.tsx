@@ -1146,17 +1146,12 @@ const AppLanding = () => {
               ].map((item, i) => (
                 <article
                   key={i}
-                  className="group relative flex flex-col rounded-2xl border border-white/[0.08] bg-[#0c0c0c] overflow-hidden transition-all duration-300 hover:border-white/20 hover:shadow-[0_24px_60px_rgba(0,0,0,0.45)]"
+                  className="group relative flex flex-col items-center"
                 >
-                  <span className="absolute top-5 left-5 z-10 inline-flex items-center rounded-full border border-white/15 bg-[#141414] px-3.5 py-1 text-[11px] font-bold uppercase tracking-wide text-white/90 shadow-lg">
-                    {item.step}
-                  </span>
-
-                  <div className="relative flex min-h-[300px] sm:min-h-[320px] items-center justify-center px-6 pt-14 pb-8 bg-gradient-to-b from-white/[0.07] via-white/[0.02] to-transparent">
-                    <div
-                      className="pointer-events-none absolute inset-x-8 top-1/2 h-32 -translate-y-1/2 rounded-full bg-primary/15 blur-3xl opacity-60 group-hover:opacity-90 transition-opacity"
-                      aria-hidden
-                    />
+                  <div className="relative flex w-full flex-col items-center min-h-[300px] sm:min-h-[320px] justify-center pb-8">
+                    <p className="mb-4 text-[11px] font-bold uppercase tracking-wide text-white/70 text-center">
+                      {item.step}
+                    </p>
                     <div className="relative w-[58%] max-w-[210px] min-w-[140px]">
                       <div className="rounded-[1.65rem] bg-gradient-to-b from-zinc-500/70 to-zinc-900 p-[3px] shadow-[0_16px_40px_rgba(0,0,0,0.55)] ring-1 ring-white/20">
                         <div className="overflow-hidden rounded-[1.45rem] bg-black">
@@ -1171,7 +1166,7 @@ const AppLanding = () => {
                     </div>
                   </div>
 
-                  <div className="flex flex-1 flex-col px-6 pb-8 pt-1 text-left">
+                  <div className="flex flex-1 flex-col items-center pb-8 text-center max-w-xs mx-auto">
                     <h3 className="text-lg sm:text-xl font-bold text-white leading-snug mb-2">{item.title}</h3>
                     <p className="text-sm text-white/55 leading-relaxed">{item.desc}</p>
                   </div>
