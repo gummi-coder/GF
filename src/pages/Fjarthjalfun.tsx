@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { PlayCircle, Check, Plus, X } from "lucide-react";
+import { PlayCircle, Check, Plus, X, ArrowRight } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -21,9 +21,9 @@ type Testimonial = {
 
 const testimonialsTop: Testimonial[] = [
   {
-    name: "Jón Jónsson",
+    name: "Einar Tómasson",
     initialBg: "bg-[#4285F4]",
-    reviews: "Local Guide · 12 reviews",
+    reviews: "12 reviews",
     time: "2 weeks ago",
     isNew: true,
     highlight: "Besta ákvörðun sem ég hef tekið.",
@@ -31,7 +31,7 @@ const testimonialsTop: Testimonial[] = [
     offset: "md:-translate-y-4",
   },
   {
-    name: "Gunnar Gunnarsson",
+    name: "Gunnar Þorsteinsson",
     initialBg: "bg-[#9C27B0]",
     reviews: "5 reviews",
     time: "1 month ago",
@@ -41,9 +41,9 @@ const testimonialsTop: Testimonial[] = [
     offset: "md:translate-y-8",
   },
   {
-    name: "Sigurður Sigurðsson",
+    name: "Sigurður Már",
     initialBg: "bg-[#E91E63]",
-    reviews: "Local Guide · 8 reviews",
+    reviews: "8 reviews",
     time: "3 months ago",
     isNew: false,
     highlight: "Frábært viðmót og fagleg vinnubrögð.",
@@ -54,9 +54,9 @@ const testimonialsTop: Testimonial[] = [
 
 const testimonialsBottom: Testimonial[] = [
   {
-    name: "Magnús Magnússon",
+    name: "Magnús Steinarsson",
     initialBg: "bg-[#0F9D58]",
-    reviews: "Local Guide · 6 reviews",
+    reviews: "6 reviews",
     time: "3 weeks ago",
     isNew: true,
     highlight: "Fjarþjálfunin skilar raunverulegum árangri.",
@@ -64,7 +64,7 @@ const testimonialsBottom: Testimonial[] = [
     offset: "md:translate-y-6",
   },
   {
-    name: "Ólafur Ólafsson",
+    name: "Ólafur Rafnsson",
     initialBg: "bg-[#F4B400]",
     reviews: "9 reviews",
     time: "2 months ago",
@@ -74,9 +74,9 @@ const testimonialsBottom: Testimonial[] = [
     offset: "md:-translate-y-6",
   },
   {
-    name: "Björn Björnsson",
+    name: "Björn Helgi",
     initialBg: "bg-[#DB4437]",
-    reviews: "Local Guide · 15 reviews",
+    reviews: "15 reviews",
     time: "5 months ago",
     isNew: false,
     highlight: "Persónuleg aðstoð sem skilar sér.",
@@ -165,6 +165,12 @@ const faqItems = [
     ),
   },
 ];
+
+const primaryCtaClass =
+  "group bg-primary hover:bg-[#eeff28] text-black font-black text-base md:text-lg px-10 md:px-14 h-14 md:h-[4.25rem] rounded-xl w-full sm:w-auto min-w-[300px] uppercase tracking-wide border border-black/15 shadow-[0_6px_0_0_#0a0a0a,0_10px_32px_rgba(230,255,40,0.45)] hover:shadow-[0_4px_0_0_#0a0a0a,0_14px_40px_rgba(230,255,40,0.55)] hover:-translate-y-0.5 active:translate-y-1 active:shadow-[0_2px_0_0_#0a0a0a] transition-all duration-150 ease-out";
+
+const formSubmitClass =
+  "group w-full h-14 md:h-[3.75rem] bg-primary hover:bg-[#eeff28] text-black font-black text-lg rounded-xl mt-3 uppercase tracking-wide border border-black/15 shadow-[0_5px_0_0_#000,0_8px_28px_rgba(230,255,40,0.35)] hover:shadow-[0_3px_0_0_#000,0_12px_32px_rgba(230,255,40,0.45)] hover:-translate-y-0.5 active:translate-y-0.5 active:shadow-[0_2px_0_0_#000] transition-all duration-150 disabled:opacity-50 disabled:pointer-events-none disabled:shadow-none disabled:translate-y-0";
 
 const Fjarthjalfun = () => {
   const location = useLocation();
@@ -289,7 +295,7 @@ const Fjarthjalfun = () => {
             </h1>
 
             <p className="text-lg md:text-2xl text-white/80 font-medium max-w-3xl mx-auto mt-6">
-              Skráðu þig í fjarþjálfun — Fjarlægðu getgáturnar og fáðu kerfi sem virkar.
+              Skráðu þig í fjarþjálfun og fáðu kerfi sem virkar og er að fara skila þér alvöru árangri.
             </p>
 
             {/* Black bg stops ~85% down the video; bottom strip sits on white */}
@@ -310,7 +316,7 @@ const Fjarthjalfun = () => {
           </div>
         </div>
 
-        <div className="bg-white px-6 pb-20 md:pb-28 pt-[calc(9%+1rem)] md:pt-[calc(9%+1.25rem)]">
+        <div className="bg-white px-6 pb-20 md:pb-28 pt-[calc(9%+1rem)] md:pt-28">
           <div className="max-w-3xl mx-auto text-center space-y-8 md:space-y-10">
             <p className="text-xl md:text-2xl lg:text-[1.65rem] text-black leading-snug md:leading-snug font-normal px-2">
               Þetta er persónuleg fjarþjálfun þar sem þú færð{" "}
@@ -318,11 +324,11 @@ const Fjarthjalfun = () => {
               <span className="font-bold">eftirfylgni</span> frá þjálfara sem hefur hjálpað hundruðum að ná sínu besta formi.
             </p>
 
-            <Button
-              onClick={scrollToPricing}
-              className="bg-primary hover:bg-primary/90 text-black font-black text-base md:text-lg px-12 md:px-16 h-14 md:h-16 rounded-lg w-full sm:w-auto min-w-[280px] shadow-none hover:shadow-md transition-all uppercase tracking-wide"
-            >
-              Ég er tilbúinn að byrja
+            <Button onClick={scrollToPricing} className={primaryCtaClass}>
+              <span className="inline-flex items-center justify-center gap-2.5">
+                Ég er tilbúinn að byrja
+                <ArrowRight className="w-5 h-5 shrink-0 transition-transform group-hover:translate-x-1" strokeWidth={2.5} />
+              </span>
             </Button>
           </div>
         </div>
@@ -360,7 +366,7 @@ const Fjarthjalfun = () => {
               <div className="space-y-6 text-center">
                 <h3 className="text-2xl font-black tracking-tight">#1: Persónuleg eftirfylgni</h3>
                 <div className="aspect-[4/3] w-full bg-white rounded-2xl overflow-hidden shadow-xl border border-gray-200/60">
-                  <img src="/images/step1-cropped.png" alt="Persónuleg eftirfylgni" className="w-full h-full object-cover" />
+                  <img src="/images/IMG_2091.jpg" alt="Persónuleg eftirfylgni" className="w-full h-full object-cover object-center" />
                 </div>
                 <p className="text-gray-700 leading-relaxed text-[15px] px-2 font-medium">
                   Þú færð vikulegt yfirferð og aðhald. Við förum yfir árangurinn, lögum það sem þarf að laga og tryggjum að þú sért alltaf á réttri leið að þínu markmiði.
@@ -370,7 +376,7 @@ const Fjarthjalfun = () => {
               <div className="space-y-6 text-center">
                 <h3 className="text-2xl font-black tracking-tight">#2: Sérsniðið æfingaplan</h3>
                 <div className="aspect-[4/3] w-full bg-white rounded-2xl overflow-hidden shadow-xl border border-gray-200/60">
-                  <img src="/images/step2-cropped.png" alt="Sérsniðið æfingaplan" className="w-full h-full object-cover" />
+                  <img src="/images/IMG_3234.jpg" alt="Sérsniðið æfingaplan" className="w-full h-full object-cover" />
                 </div>
                 <p className="text-gray-700 leading-relaxed text-[15px] px-2 font-medium">
                   Við brjótum niður hvernig þú átt að æfa til að hámarka árangur. Planið er sérsniðið að þínum aðstæðum, hvort sem þú æfir heima eða í ræktinni.
@@ -380,7 +386,7 @@ const Fjarthjalfun = () => {
               <div className="space-y-6 text-center">
                 <h3 className="text-2xl font-black tracking-tight">#3: Mataræði & Venjur</h3>
                 <div className="aspect-[4/3] w-full bg-white rounded-2xl overflow-hidden shadow-xl border border-gray-200/60">
-                  <img src="/images/step3-cropped.png" alt="Mataræði & Venjur" className="w-full h-full object-cover" />
+                  <img src="/images/mataræði-venjur.jpg" alt="Mataræði & Venjur" className="w-full h-full object-cover" />
                 </div>
                 <p className="text-gray-700 leading-relaxed text-[15px] px-2 font-medium">
                   Þú færð skýr skref til að brjótast í gegnum hindranir. Við setjum upp mataræði sem hentar þínum lífsstíl svo þú náir árangri án þess að svelta þig.
@@ -389,11 +395,11 @@ const Fjarthjalfun = () => {
             </div>
 
             <div className="text-center mt-16">
-              <Button 
-                onClick={scrollToPricing}
-                className="bg-black hover:bg-black/90 text-white font-bold text-lg px-10 h-14 rounded-full uppercase tracking-wide"
-              >
-                Ég er tilbúinn að byrja
+              <Button onClick={scrollToPricing} className={primaryCtaClass}>
+                <span className="inline-flex items-center justify-center gap-2.5">
+                  Ég er tilbúinn að byrja
+                  <ArrowRight className="w-5 h-5 shrink-0 transition-transform group-hover:translate-x-1" strokeWidth={2.5} />
+                </span>
               </Button>
             </div>
 
@@ -412,13 +418,10 @@ const Fjarthjalfun = () => {
           <div className="max-w-xl mx-auto">
             <div className="space-y-7">
               {/* Header */}
-              <div className="text-center space-y-3 mb-1">
+              <div className="text-center mb-1">
                 <h1 className="text-4xl md:text-5xl font-black tracking-tight text-black">
                   Byrjaðu með Fjarþjálfun
                 </h1>
-                <p className="text-lg text-gray-600 max-w-md mx-auto">
-                  Einstaklingsmiðað fjarþjálfun með persónulegum þjálfara.
-                </p>
               </div>
 
               {/* Pricing Card */}
@@ -446,7 +449,7 @@ const Fjarthjalfun = () => {
                       <h3 className="text-2xl font-bold text-white mb-2">Takk fyrir skráninguna!</h3>
                       <p className="text-gray-400 mb-5">Þú færð tölvupóst með leiðbeiningum um hvernig á að byrja.</p>
                       <Link to="/">
-                        <Button className="bg-primary hover:bg-primary/90 text-black font-bold h-11 px-8 rounded-xl">
+                        <Button className={`${primaryCtaClass} min-w-0 h-12 md:h-14 text-base px-8 shadow-[0_4px_0_0_#0a0a0a,0_8px_24px_rgba(230,255,40,0.4)]`}>
                           Til baka á forsíðuna
                         </Button>
                       </Link>
@@ -511,12 +514,17 @@ const Fjarthjalfun = () => {
                       </Label>
                     </div>
 
-                    <Button 
-                      className="w-full h-12 bg-primary hover:bg-primary/90 text-black font-bold text-lg rounded-xl mt-3 transition-all disabled:opacity-50 disabled:hover:bg-primary"
+                    <Button
+                      className={formSubmitClass}
                       onClick={handleSubmit}
                       disabled={!isFormValid || isSubmitting}
                     >
-                      {isSubmitting ? "Sendi..." : "Byrja núna"}
+                      <span className="inline-flex items-center justify-center gap-2.5">
+                        {isSubmitting ? "Sendi..." : "Byrja núna"}
+                        {!isSubmitting && (
+                          <ArrowRight className="w-5 h-5 shrink-0 transition-transform group-hover:translate-x-1" strokeWidth={2.5} />
+                        )}
+                      </span>
                     </Button>
                   </div>
                 )}
@@ -541,12 +549,12 @@ const Fjarthjalfun = () => {
                   id={item.question.startsWith("Hvað kostar") ? "pricing" : undefined}
                   className="border-0"
                 >
-                  <AccordionTrigger className="group bg-black hover:no-underline rounded-xl data-[state=open]:rounded-b-none px-6 py-5 md:py-6 text-white font-bold text-base md:text-xl text-center [&>svg:last-child]:hidden relative">
+                  <AccordionTrigger className="group bg-black hover:no-underline rounded-xl data-[state=open]:rounded-b-none px-6 py-6 md:py-8 text-white font-bold text-lg md:text-2xl lg:text-[1.75rem] text-center [&>svg:last-child]:hidden relative">
                     <span className="flex-1 pr-10">{item.question}</span>
                     <Plus className="w-5 h-5 absolute right-6 top-1/2 -translate-y-1/2 group-data-[state=open]:hidden" />
                     <X className="w-5 h-5 absolute right-6 top-1/2 -translate-y-1/2 hidden group-data-[state=open]:block" />
                   </AccordionTrigger>
-                  <AccordionContent className="bg-white text-gray-800 px-6 md:px-8 py-6 md:py-8 text-base md:text-lg leading-relaxed rounded-b-xl shadow-sm border border-t-0 border-gray-200">
+                  <AccordionContent className="bg-white text-gray-800 px-6 md:px-8 py-6 md:py-8 text-base md:text-lg leading-relaxed rounded-b-xl">
                     <div className="space-y-4">{item.content}</div>
                   </AccordionContent>
                 </AccordionItem>
@@ -554,11 +562,11 @@ const Fjarthjalfun = () => {
             </Accordion>
 
             <div className="mt-10 md:mt-12 flex justify-center">
-              <Button
-                onClick={scrollToPricing}
-                className="w-full sm:w-auto min-w-[280px] h-14 md:h-16 px-10 bg-black hover:bg-black/90 text-white font-black text-base md:text-lg rounded-xl uppercase tracking-wide shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all"
-              >
-                Ég er tilbúinn að byrja
+              <Button onClick={scrollToPricing} className={primaryCtaClass}>
+                <span className="inline-flex items-center justify-center gap-2.5">
+                  Ég er tilbúinn að byrja
+                  <ArrowRight className="w-5 h-5 shrink-0 transition-transform group-hover:translate-x-1" strokeWidth={2.5} />
+                </span>
               </Button>
             </div>
           </div>
@@ -573,7 +581,7 @@ const Fjarthjalfun = () => {
               <img
                 src="/images/gf-training-logo10.png"
                 alt="GF Training"
-                className="h-12 sm:h-16 md:h-20 w-auto"
+                className="h-16 sm:h-20 md:h-24 lg:h-28 w-auto"
               />
             </Link>
             
