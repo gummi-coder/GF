@@ -1,11 +1,170 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { PlayCircle, Check } from "lucide-react";
+import { PlayCircle, Check, Plus, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import SEO from "@/components/SEO";
+
+type Testimonial = {
+  name: string;
+  initialBg: string;
+  reviews: string;
+  time: string;
+  isNew: boolean;
+  highlight: string;
+  text: string;
+  offset: string;
+};
+
+const testimonialsTop: Testimonial[] = [
+  {
+    name: "Jón Jónsson",
+    initialBg: "bg-[#4285F4]",
+    reviews: "Local Guide · 12 reviews",
+    time: "2 weeks ago",
+    isNew: true,
+    highlight: "Besta ákvörðun sem ég hef tekið.",
+    text: "Missti 10 kíló og hef aldrei verið sterkari. Ég byrjaði að sjá árangur strax á fyrstu vikunum.",
+    offset: "md:-translate-y-4",
+  },
+  {
+    name: "Gunnar Gunnarsson",
+    initialBg: "bg-[#9C27B0]",
+    reviews: "5 reviews",
+    time: "1 month ago",
+    isNew: true,
+    highlight: "Loksins kerfi sem ég get fylgt.",
+    text: "Mæli 100% með GF Training. Þetta er ekki bara æfingaplan, heldur lífsstílsbreyting sem virkar.",
+    offset: "md:translate-y-8",
+  },
+  {
+    name: "Sigurður Sigurðsson",
+    initialBg: "bg-[#E91E63]",
+    reviews: "Local Guide · 8 reviews",
+    time: "3 months ago",
+    isNew: false,
+    highlight: "Frábært viðmót og fagleg vinnubrögð.",
+    text: "Þetta breytti öllu fyrir mig. Ég hef prófað mörg forrit en þetta er það fyrsta sem ég hef haldið mig við.",
+    offset: "md:-translate-y-2",
+  },
+];
+
+const testimonialsBottom: Testimonial[] = [
+  {
+    name: "Magnús Magnússon",
+    initialBg: "bg-[#0F9D58]",
+    reviews: "Local Guide · 6 reviews",
+    time: "3 weeks ago",
+    isNew: true,
+    highlight: "Fjarþjálfunin skilar raunverulegum árangri.",
+    text: "Ég fékk sérsniðið plan og vikulega eftirfylgni sem hélt mér á réttri leið. Ekkert gisk, bara skýr skref.",
+    offset: "md:translate-y-6",
+  },
+  {
+    name: "Ólafur Ólafsson",
+    initialBg: "bg-[#F4B400]",
+    reviews: "9 reviews",
+    time: "2 months ago",
+    isNew: false,
+    highlight: "Mataræðið var loksins einfalt að fylgja.",
+    text: "Ég hélt að ég þyrfti að svelta mig til að ná markmiðum. Kerfið passaði við líf mitt og ég sá breytingu strax.",
+    offset: "md:-translate-y-6",
+  },
+  {
+    name: "Björn Björnsson",
+    initialBg: "bg-[#DB4437]",
+    reviews: "Local Guide · 15 reviews",
+    time: "5 months ago",
+    isNew: false,
+    highlight: "Persónuleg aðstoð sem skilar sér.",
+    text: "Hver spurning var svöruð með skýrleika og ég vissi alltaf hvað ég átti að gera næst. Mæli eindregið með.",
+    offset: "md:translate-y-2",
+  },
+];
+
+const ReviewCard = ({ testimonial }: { testimonial: Testimonial }) => (
+  <div
+    className={`mx-auto w-full max-w-md bg-white p-4 sm:p-5 md:p-6 rounded-xl md:rounded-2xl border border-gray-200/80 shadow-md md:shadow-xl text-black flex flex-col gap-3 md:gap-4 transform transition-transform ${testimonial.offset}`}
+  >
+    <div className="flex items-center gap-2.5 md:gap-3 min-w-0">
+      <div className={`w-9 h-9 md:w-10 md:h-10 shrink-0 rounded-full ${testimonial.initialBg} flex items-center justify-center text-white font-medium text-base md:text-lg`}>
+        {testimonial.name.charAt(0)}
+      </div>
+      <div className="min-w-0">
+        <div className="font-bold text-sm md:text-[15px] leading-tight">{testimonial.name}</div>
+        <div className="text-gray-500 text-[11px] md:text-xs mt-0.5 truncate">{testimonial.reviews}</div>
+      </div>
+    </div>
+    <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+      <div className="flex text-[#fbbc04]">
+        {[...Array(5)].map((_, j) => (
+          <svg key={j} className="w-3.5 h-3.5 md:w-4 md:h-4 fill-current" viewBox="0 0 20 20">
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+          </svg>
+        ))}
+      </div>
+      <span className="text-gray-500 text-[11px] md:text-xs">{testimonial.time}</span>
+      {testimonial.isNew && (
+        <span className="bg-gray-100 text-gray-800 text-[9px] md:text-[10px] font-bold px-1.5 py-0.5 rounded border border-gray-200">NEW</span>
+      )}
+    </div>
+    <p className="text-gray-800 text-sm md:text-[15px] leading-relaxed">
+      <span className="bg-[#fef08a] px-1 rounded box-decoration-clone">{testimonial.highlight}</span>{" "}
+      {testimonial.text}
+    </p>
+  </div>
+);
+
+const faqItems = [
+  {
+    question: "Hvernig fer fjarþjálfunin fram?",
+    content: (
+      <>
+        <p>Þetta er ekki bara eitthvað app. Þetta er fjarþjálfun. Með mér.</p>
+        <p>Bústu við engum innantómum hvatningarræðum. Það þýðir - við förum beint í verkið.</p>
+        <p>Í byrjun förum við yfir stöðuna þína, setjum upp markmið og búum til ramma sem tryggir að þú náir árangri. Þetta er sama kerfi og ég hef notað til að hjálpa hundruðum viðskiptavina.</p>
+        <p>Í hverri viku förum við yfir árangurinn, greinum hvað gengur vel og lögum það sem má betur fara.</p>
+      </>
+    ),
+  },
+  {
+    question: "Hverju get ég átt von á?",
+    content: (
+      <>
+        <p>Markmiðið: Þú gengur í burtu með skýr, raunhæf skref í hverri viku.</p>
+        <p>Þú færð minn tíma og athygli. Við sníðum ráðgjöfina að þínum lífsstíl, reynslu, markmiðum og aðstæðum.</p>
+        <p>Þetta er persónuleg aðstoð sem beinist að þinni stærstu áskorun, hvort sem það er mataræðið, æfingarnar eða hugarfarið.</p>
+      </>
+    ),
+  },
+  {
+    question: "Hentar þetta mér?",
+    content: (
+      <>
+        <p>Ef þú ert ekki tilbúinn að leggja á þig vinnuna, þá er þetta <strong>ekki</strong> fyrir þig.</p>
+        <p>Ef þú vilt ná raunverulegum árangri og ert tilbúinn að fylgja leiðbeiningum, <strong>þá getum við hjálpað.</strong></p>
+        <p>Við höfum unnið með fólki á öllum aldri og úr öllum stéttum. Hvort sem þú ert byrjandi eða lengra kominn, þá aðlögum við kerfið að þér.</p>
+      </>
+    ),
+  },
+  {
+    question: "Hvað kostar fjarþjálfunin?",
+    content: (
+      <>
+        <p>Verðið er 24.995 kr. á mánuði. Þetta gerir okkur kleift að:</p>
+        <ol className="list-decimal list-inside space-y-2 ml-2">
+          <li>Halda gæðunum í hámarki (ég tek aðeins inn takmarkaðan fjölda í einu)</li>
+          <li>Veita þér þá persónulegu þjónustu sem þú þarft til að ná árangri</li>
+        </ol>
+        <p>Ef þú hefur ekki náð árangri hingað til, þá er kominn tími á breytingu.</p>
+        <p>Ef þú ert tilbúinn, þá getum við hjálpað þér að komast á næsta stig.</p>
+      </>
+    ),
+  },
+];
 
 const Fjarthjalfun = () => {
   const location = useLocation();
@@ -20,6 +179,19 @@ const Fjarthjalfun = () => {
 
   const scrollToPricing = () => {
     document.getElementById("umsokn")?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const allFaqOpen = faqItems.map((_, i) => `item-${i}`);
+  const [openFaqItems, setOpenFaqItems] = useState<string[]>(allFaqOpen);
+  const [faqHasCollapsedOnce, setFaqHasCollapsedOnce] = useState(false);
+
+  const handleFaqValueChange = (value: string[]) => {
+    if (!faqHasCollapsedOnce && value.length < openFaqItems.length) {
+      setOpenFaqItems([]);
+      setFaqHasCollapsedOnce(true);
+      return;
+    }
+    setOpenFaqItems(value);
   };
 
   const [formData, setFormData] = useState({
@@ -86,109 +258,131 @@ const Fjarthjalfun = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white font-sans selection:bg-primary selection:text-black">
+    <div className="min-h-screen bg-white text-black font-sans selection:bg-primary selection:text-black">
       <SEO 
         title="Fjarþjálfun | GF Training" 
         description="Persónuleg fjarþjálfun sem skilar árangri. Sérsniðið æfingaplan, mataræði og eftirfylgni."
       />
 
-      {/* Minimal Top Banner */}
-      <div className="bg-white text-black py-2.5 px-4 text-center text-xs md:text-sm font-bold tracking-widest uppercase flex items-center justify-center gap-2">
-        <span className="text-red-500">●</span> FJARÞJÁLFUN | OPPIÐ FYRIR UMSÓKNIR
+      {/* Sticky signup pill — always visible */}
+      <div className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 py-2 bg-[#0a0a0a]/90 backdrop-blur-md border-b border-white/5">
+        <button
+          type="button"
+          onClick={scrollToPricing}
+          className="inline-flex items-center gap-2 rounded-full bg-white hover:bg-white/95 text-black px-4 md:px-5 py-1.5 md:py-2 text-[10px] md:text-[11px] font-bold tracking-[0.12em] uppercase transition-all border border-black/10 shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]"
+        >
+          <span className="relative flex h-1.5 w-1.5 shrink-0">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-50" />
+            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-red-500" />
+          </span>
+          Fjarþjálfun | Opnið fyrir umsóknir
+        </button>
       </div>
 
-      <main>
-        {/* Hero Section */}
-        <section className="pt-16 md:pt-24 pb-16 px-6">
-          <div className="max-w-4xl mx-auto text-center space-y-6">
+      <main className="pt-11">
+        {/* Hero — black ends ~80% down the video; white starts under the bottom edge */}
+        <div className="bg-[#0a0a0a] text-white overflow-visible">
+          <div className="max-w-4xl mx-auto text-center px-6 pt-16 md:pt-24">
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.1]">
               Ert þú það sem hamlar <br className="hidden md:block" />
               <span className="text-white/60">árangrinum þínum?</span>
             </h1>
-            
-            <p className="text-lg md:text-2xl text-white/80 font-medium max-w-3xl mx-auto pt-4">
+
+            <p className="text-lg md:text-2xl text-white/80 font-medium max-w-3xl mx-auto mt-6">
               Skráðu þig í fjarþjálfun — Fjarlægðu getgáturnar og fáðu kerfi sem virkar.
             </p>
 
-            {/* Video Placeholder (Vidalytics style) */}
-            <div className="relative w-full aspect-video bg-[#111] border border-white/10 rounded-xl mt-12 overflow-hidden group cursor-pointer shadow-2xl">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center pl-1 group-hover:scale-110 transition-transform duration-300 shadow-[0_0_30px_rgba(237,255,43,0.3)]">
-                  <PlayCircle className="w-10 h-10 text-black" strokeWidth={1.5} />
+            {/* Black bg stops ~85% down the video; bottom strip sits on white */}
+            <div className="relative mt-10 md:mt-12 pb-[48%] md:pb-[47%]">
+              <div className="absolute inset-x-0 top-0 z-20 aspect-video bg-[#111] border border-white/10 rounded-xl overflow-hidden group cursor-pointer shadow-2xl">
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center pl-1 group-hover:scale-110 transition-transform duration-300 shadow-[0_0_30px_rgba(237,255,43,0.3)]">
+                    <PlayCircle className="w-10 h-10 text-black" strokeWidth={1.5} />
+                  </div>
+                </div>
+                <div className="absolute bottom-0 inset-x-0 h-1/3 bg-gradient-to-t from-black/80 to-transparent pointer-events-none"></div>
+                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs font-medium text-white/70">
+                  <span>00:00 / 03:45</span>
+                  <span>GF Training</span>
                 </div>
               </div>
-              <div className="absolute bottom-0 inset-x-0 h-1/3 bg-gradient-to-t from-black/80 to-transparent pointer-events-none"></div>
-              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs font-medium text-white/70">
-                <span>00:00 / 03:45</span>
-                <span>GF Training</span>
-              </div>
-            </div>
-
-            <p className="text-base md:text-lg text-white/70 max-w-2xl mx-auto mt-10 leading-relaxed">
-              Þetta er persónuleg fjarþjálfun þar sem þú færð sérsniðið æfingaplan, markvissa næringarráðgjöf og eftirfylgni frá þjálfara sem hefur hjálpað hundruðum að ná sínu besta formi.
-            </p>
-
-            <div className="pt-8">
-              <Button 
-                onClick={scrollToPricing}
-                className="bg-primary hover:bg-primary/90 text-black font-black text-lg md:text-xl px-10 md:px-14 h-16 md:h-20 rounded-sm w-full md:w-auto shadow-[0_0_40px_rgba(237,255,43,0.2)] hover:shadow-[0_0_60px_rgba(237,255,43,0.4)] transition-all uppercase tracking-wide"
-              >
-                Ég er tilbúinn að byrja
-              </Button>
             </div>
           </div>
-        </section>
+        </div>
+
+        <div className="bg-white px-6 pb-20 md:pb-28 pt-[calc(9%+1rem)] md:pt-[calc(9%+1.25rem)]">
+          <div className="max-w-3xl mx-auto text-center space-y-8 md:space-y-10">
+            <p className="text-xl md:text-2xl lg:text-[1.65rem] text-black leading-snug md:leading-snug font-normal px-2">
+              Þetta er persónuleg fjarþjálfun þar sem þú færð{" "}
+              <span className="font-bold">sérsniðið æfingaplan</span>, markvissa næringarráðgjöf og{" "}
+              <span className="font-bold">eftirfylgni</span> frá þjálfara sem hefur hjálpað hundruðum að ná sínu besta formi.
+            </p>
+
+            <Button
+              onClick={scrollToPricing}
+              className="bg-primary hover:bg-primary/90 text-black font-black text-base md:text-lg px-12 md:px-16 h-14 md:h-16 rounded-lg w-full sm:w-auto min-w-[280px] shadow-none hover:shadow-md transition-all uppercase tracking-wide"
+            >
+              Ég er tilbúinn að byrja
+            </Button>
+          </div>
+        </div>
 
         {/* Social Proof / Testimonials */}
-        <section className="py-16 border-y border-white/10 bg-[#111]">
-          <div className="max-w-7xl mx-auto px-6">
-            <h3 className="text-center text-xl font-bold text-white/80 mb-12">Hvað fólk er að segja:</h3>
-            <div className="grid md:grid-cols-3 gap-6">
-              {[
-                { name: "Jón Jónsson", text: "Besta ákvörðun sem ég hef tekið. Missti 10 kíló og hef aldrei verið sterkari." },
-                { name: "Gunnar Gunnarsson", text: "Loksins kerfi sem ég get fylgt. Mæli 100% með GF Training." },
-                { name: "Sigurður Sigurðsson", text: "Frábært viðmót og fagleg vinnubrögð. Þetta breytti öllu fyrir mig." }
-              ].map((t, i) => (
-                <div key={i} className="bg-[#1a1a1a] p-8 rounded-lg border border-white/5">
-                  <div className="flex text-primary mb-4">
-                    {[...Array(5)].map((_, j) => <span key={j}>★</span>)}
-                  </div>
-                  <p className="text-white/80 mb-6 italic">"{t.text}"</p>
-                  <p className="font-bold">— {t.name}</p>
-                </div>
+        <section className="py-12 md:py-20 bg-white overflow-hidden">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <h3 className="text-center text-xl md:text-3xl font-bold text-black mb-8 md:mb-16">Hvað fólk er að segja:</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
+              {testimonialsTop.map((t, i) => (
+                <ReviewCard key={i} testimonial={t} />
               ))}
             </div>
           </div>
         </section>
 
         {/* 3 Pillars Section */}
-        <section className="py-24 px-6" id="innifalid">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-5xl font-black text-center mb-16 tracking-tight">
-              Hvað færðu í fjarþjálfuninni:
-            </h2>
+        <section className="py-20 bg-white text-black" id="innifalid">
+          {/* Torn Banner — wide with torn top/bottom edges */}
+          <div className="mx-4 sm:mx-6 md:mx-10 lg:mx-16 mb-16 md:mb-20 mt-4 drop-shadow-xl overflow-hidden">
+            <div className="w-full h-6 md:h-8 bg-[url('/images/torn-edge-top.svg')] bg-repeat-x bg-bottom" style={{ backgroundSize: '1200px 100%' }}></div>
+
+            <div className="bg-[#1a1a1a] py-10 md:py-14 px-6">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-center text-white tracking-tight max-w-5xl mx-auto">
+                Hvað færðu í <span className="underline decoration-4 underline-offset-4 decoration-primary">fjarþjálfuninni</span>:
+              </h2>
+            </div>
+
+            <div className="w-full h-6 md:h-8 bg-[url('/images/torn-edge-bottom.svg')] bg-repeat-x bg-top" style={{ backgroundSize: '1200px 100%' }}></div>
+          </div>
+
+          <div className="max-w-6xl mx-auto px-6">
             
-            <div className="grid md:grid-cols-3 gap-12 md:gap-8">
-              <div className="space-y-4">
-                <div className="text-6xl font-black text-white/10 mb-2">#1</div>
-                <h3 className="text-2xl font-bold text-primary">Persónuleg eftirfylgni</h3>
-                <p className="text-white/70 leading-relaxed">
+            <div className="grid md:grid-cols-3 gap-12 md:gap-10">
+              <div className="space-y-6 text-center">
+                <h3 className="text-2xl font-black tracking-tight">#1: Persónuleg eftirfylgni</h3>
+                <div className="aspect-[4/3] w-full bg-white rounded-2xl overflow-hidden shadow-xl border border-gray-200/60">
+                  <img src="/images/step1-cropped.png" alt="Persónuleg eftirfylgni" className="w-full h-full object-cover" />
+                </div>
+                <p className="text-gray-700 leading-relaxed text-[15px] px-2 font-medium">
                   Þú færð vikulegt yfirferð og aðhald. Við förum yfir árangurinn, lögum það sem þarf að laga og tryggjum að þú sért alltaf á réttri leið að þínu markmiði.
                 </p>
               </div>
               
-              <div className="space-y-4">
-                <div className="text-6xl font-black text-white/10 mb-2">#2</div>
-                <h3 className="text-2xl font-bold text-primary">Sérsniðið æfingaplan</h3>
-                <p className="text-white/70 leading-relaxed">
+              <div className="space-y-6 text-center">
+                <h3 className="text-2xl font-black tracking-tight">#2: Sérsniðið æfingaplan</h3>
+                <div className="aspect-[4/3] w-full bg-white rounded-2xl overflow-hidden shadow-xl border border-gray-200/60">
+                  <img src="/images/step2-cropped.png" alt="Sérsniðið æfingaplan" className="w-full h-full object-cover" />
+                </div>
+                <p className="text-gray-700 leading-relaxed text-[15px] px-2 font-medium">
                   Við brjótum niður hvernig þú átt að æfa til að hámarka árangur. Planið er sérsniðið að þínum aðstæðum, hvort sem þú æfir heima eða í ræktinni.
                 </p>
               </div>
               
-              <div className="space-y-4">
-                <div className="text-6xl font-black text-white/10 mb-2">#3</div>
-                <h3 className="text-2xl font-bold text-primary">Mataræði & Venjur</h3>
-                <p className="text-white/70 leading-relaxed">
+              <div className="space-y-6 text-center">
+                <h3 className="text-2xl font-black tracking-tight">#3: Mataræði & Venjur</h3>
+                <div className="aspect-[4/3] w-full bg-white rounded-2xl overflow-hidden shadow-xl border border-gray-200/60">
+                  <img src="/images/step3-cropped.png" alt="Mataræði & Venjur" className="w-full h-full object-cover" />
+                </div>
+                <p className="text-gray-700 leading-relaxed text-[15px] px-2 font-medium">
                   Þú færð skýr skref til að brjótast í gegnum hindranir. Við setjum upp mataræði sem hentar þínum lífsstíl svo þú náir árangri án þess að svelta þig.
                 </p>
               </div>
@@ -197,209 +391,176 @@ const Fjarthjalfun = () => {
             <div className="text-center mt-16">
               <Button 
                 onClick={scrollToPricing}
-                className="bg-primary hover:bg-primary/90 text-black font-bold text-lg px-10 h-14 rounded-sm uppercase tracking-wide"
+                className="bg-black hover:bg-black/90 text-white font-bold text-lg px-10 h-14 rounded-full uppercase tracking-wide"
               >
                 Ég er tilbúinn að byrja
               </Button>
             </div>
+
+            <div className="mt-16 md:mt-32">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 max-w-5xl mx-auto">
+                {testimonialsBottom.map((t, i) => (
+                  <ReviewCard key={i} testimonial={t} />
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* FAQ / Info Section */}
-        <section className="py-24 px-6 bg-[#111]" id="spurningar">
-          <div className="max-w-3xl mx-auto space-y-16">
-            
-            <div className="space-y-4">
-              <h2 className="text-2xl md:text-3xl font-bold">Hvernig fer fjarþjálfunin fram?</h2>
-              <p className="text-white/70 leading-relaxed text-lg">
-                Þetta er ekki bara eitthvað app. Þetta er fjarþjálfun. Með mér.
-              </p>
-              <p className="text-white/70 leading-relaxed text-lg">
-                Bústu við engum innantómum hvatningarræðum. Það þýðir - við förum beint í verkið.
-              </p>
-              <p className="text-white/70 leading-relaxed text-lg">
-                Í byrjun förum við yfir stöðuna þína, setjum upp markmið og búum til ramma sem tryggir að þú náir árangri. Þetta er sama kerfi og ég hef notað til að hjálpa hundruðum viðskiptavina.
-              </p>
-              <p className="text-white/70 leading-relaxed text-lg">
-                Í hverri viku förum við yfir árangurinn, greinum hvað gengur vel og lögum það sem má betur fara.
-              </p>
-            </div>
+        {/* Signup Section */}
+        <section className="py-14 md:py-16 px-6 bg-white text-black" id="umsokn">
+          <div className="max-w-xl mx-auto">
+            <div className="space-y-7">
+              {/* Header */}
+              <div className="text-center space-y-3 mb-1">
+                <h1 className="text-4xl md:text-5xl font-black tracking-tight text-black">
+                  Byrjaðu með Fjarþjálfun
+                </h1>
+                <p className="text-lg text-gray-600 max-w-md mx-auto">
+                  Einstaklingsmiðað fjarþjálfun með persónulegum þjálfara.
+                </p>
+              </div>
 
-            <div className="space-y-4">
-              <h2 className="text-2xl md:text-3xl font-bold">Hverju get ég átt von á?</h2>
-              <p className="text-white/70 leading-relaxed text-lg">
-                Markmiðið: Þú gengur í burtu með skýr, raunhæf skref í hverri viku.
-              </p>
-              <p className="text-white/70 leading-relaxed text-lg">
-                Þú færð minn tíma og athygli. Við sníðum ráðgjöfina að þínum lífsstíl, reynslu, markmiðum og aðstæðum.
-              </p>
-              <p className="text-white/70 leading-relaxed text-lg">
-                Þetta er persónuleg aðstoð sem beinist að þinni stærstu áskorun, hvort sem það er mataræðið, æfingarnar eða hugarfarið.
-              </p>
-            </div>
-
-            <div className="space-y-4">
-              <h2 className="text-2xl md:text-3xl font-bold">Hentar þetta mér?</h2>
-              <p className="text-white/70 leading-relaxed text-lg">
-                Ef þú ert ekki tilbúinn að leggja á þig vinnuna, þá er þetta <strong>ekki</strong> fyrir þig.
-              </p>
-              <p className="text-white/70 leading-relaxed text-lg">
-                Ef þú vilt ná raunverulegum árangri og ert tilbúinn að fylgja leiðbeiningum, <strong>þá getum við hjálpað.</strong>
-              </p>
-              <p className="text-white/70 leading-relaxed text-lg">
-                Við höfum unnið með fólki á öllum aldri og úr öllum stéttum. Hvort sem þú ert byrjandi eða lengra kominn, þá aðlögum við kerfið að þér.
-              </p>
-            </div>
-
-            <div className="space-y-4" id="pricing">
-              <h2 className="text-2xl md:text-3xl font-bold">Hvað kostar fjarþjálfunin?</h2>
-              <p className="text-white/70 leading-relaxed text-lg">
-                Verðið er 24.995 kr. á mánuði. Þetta gerir okkur kleift að:
-              </p>
-              <ol className="list-decimal list-inside text-white/70 leading-relaxed text-lg space-y-2 ml-2">
-                <li>Halda gæðunum í hámarki (ég tek aðeins inn takmarkaðan fjölda í einu)</li>
-                <li>Veita þér þá persónulegu þjónustu sem þú þarft til að ná árangri</li>
-              </ol>
-              <p className="text-white/70 leading-relaxed text-lg mt-4">
-                Ef þú hefur ekki náð árangri hingað til, þá er kominn tími á breytingu.
-              </p>
-              <p className="text-white/70 leading-relaxed text-lg">
-                Ef þú ert tilbúinn, þá getum við hjálpað þér að komast á næsta stig.
-              </p>
-            </div>
-
-            <div className="pt-16 pb-10" id="umsokn">
-              <div className="container mx-auto max-w-2xl">
-                <div className="space-y-8">
-                  {/* Header */}
-                  <div className="text-center space-y-4">
-                    <h1 className="text-4xl md:text-5xl font-black tracking-tight">
-                      Byrjaðu með <span className="text-primary">Fjarþjálfun</span>
-                    </h1>
-                    <p className="text-lg text-white/70 max-w-xl mx-auto">
-                      Einstaklingsmiðað fjarþjálfun með persónulegum þjálfara.
-                    </p>
+              {/* Pricing Card */}
+              <div className="bg-[#111] text-white rounded-2xl shadow-xl p-6 md:p-8 relative overflow-hidden">
+                {/* Yellow accent line on top */}
+                <div className="absolute top-0 left-0 w-full h-1 bg-primary"></div>
+                
+                <div className="text-center mb-6 pb-6 border-b border-gray-800">
+                  <div className="flex items-baseline justify-center gap-1 mb-0.5">
+                    <span className="text-5xl font-black tracking-tight text-white">
+                      24.995
+                    </span>
+                    <span className="text-xl font-bold text-gray-400">kr.</span>
                   </div>
+                  <div className="text-gray-400 font-medium text-sm">á mánuði</div>
+                </div>
 
-                  {/* Pricing Card */}
-                  <div className="bg-[#111] rounded-xl border border-white/10 p-6 md:p-8">
-                    <div className="text-center mb-8">
-                      <div className="flex items-baseline justify-center gap-1 mb-1">
-                        <span className="text-5xl font-black tracking-tight">
-                          24.995
-                        </span>
-                        <span className="text-xl font-bold text-white/50">kr.</span>
+                {/* Signup Form */}
+                {isSubmitted ? (
+                  <div className="space-y-5 py-5">
+                    <div className="text-center">
+                      <div className="w-14 h-14 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                        <Check className="w-7 h-7 text-black" />
                       </div>
-                      <div className="text-white/60 font-medium text-sm">á mánuði</div>
+                      <h3 className="text-2xl font-bold text-white mb-2">Takk fyrir skráninguna!</h3>
+                      <p className="text-gray-400 mb-5">Þú færð tölvupóst með leiðbeiningum um hvernig á að byrja.</p>
+                      <Link to="/">
+                        <Button className="bg-primary hover:bg-primary/90 text-black font-bold h-11 px-8 rounded-xl">
+                          Til baka á forsíðuna
+                        </Button>
+                      </Link>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="space-y-4 text-left">
+                    <div className="space-y-2">
+                      <Label htmlFor="fullName" className="text-gray-300 font-medium ml-1">Fullt nafn *</Label>
+                      <Input 
+                        id="fullName" 
+                        placeholder="Jón Jónsson" 
+                        className="bg-[#222] border-gray-800 text-white placeholder:text-gray-500 h-12 rounded-xl focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+                        value={formData.fullName}
+                        onChange={(e) => setFormData((prev) => ({ ...prev, fullName: e.target.value }))}
+                      />
                     </div>
 
-                    {/* Signup Form */}
-                    {isSubmitted ? (
-                      <div className="space-y-6 py-6">
-                        <div className="text-center">
-                          <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                            <Check className="w-8 h-8 text-black" />
-                          </div>
-                          <h3 className="text-2xl font-bold text-white mb-2">Takk fyrir skráninguna!</h3>
-                          <p className="text-white/70 mb-4">Þú færð tölvupóst með leiðbeiningum um hvernig á að byrja.</p>
-                          <Link to="/">
-                            <Button className="bg-primary hover:bg-primary/90 text-black font-bold">
-                              Til baka á forsíðuna
-                            </Button>
-                          </Link>
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="space-y-6 text-left">
-                        <div className="space-y-2">
-                          <Label htmlFor="fullName" className="text-white">Fullt nafn *</Label>
-                          <Input 
-                            id="fullName" 
-                            placeholder="Fullt nafn" 
-                            className="bg-black/50 border-white/20 text-white"
-                            value={formData.fullName}
-                            onChange={(e) => setFormData((prev) => ({ ...prev, fullName: e.target.value }))}
-                          />
-                        </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="kennitala" className="text-gray-300 font-medium ml-1">Kennitala *</Label>
+                      <Input 
+                        id="kennitala" 
+                        placeholder="000000-0000" 
+                        className="bg-[#222] border-gray-800 text-white placeholder:text-gray-500 h-12 rounded-xl focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+                        value={formData.kennitala}
+                        onChange={(e) => setFormData((prev) => ({ ...prev, kennitala: e.target.value }))}
+                      />
+                    </div>
 
-                        <div className="space-y-2">
-                          <Label htmlFor="kennitala" className="text-white">Kennitala *</Label>
-                          <Input 
-                            id="kennitala" 
-                            placeholder="000000-0000" 
-                            className="bg-black/50 border-white/20 text-white"
-                            value={formData.kennitala}
-                            onChange={(e) => setFormData((prev) => ({ ...prev, kennitala: e.target.value }))}
-                          />
-                        </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="email" className="text-gray-300 font-medium ml-1">Netfang *</Label>
+                      <Input 
+                        id="email" 
+                        type="email"
+                        placeholder="jon@daemi.is" 
+                        className="bg-[#222] border-gray-800 text-white placeholder:text-gray-500 h-12 rounded-xl focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+                        value={formData.email}
+                        onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
+                      />
+                    </div>
 
-                        <div className="space-y-2">
-                          <Label htmlFor="email" className="text-white">Netfang *</Label>
-                          <Input 
-                            id="email" 
-                            type="email"
-                            placeholder="Netfang" 
-                            className="bg-black/50 border-white/20 text-white"
-                            value={formData.email}
-                            onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
-                          />
-                        </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="goal" className="text-gray-300 font-medium ml-1">Hvað er markmið þitt? *</Label>
+                      <Input 
+                        id="goal" 
+                        placeholder="T.d. vöðvaaukning, fitubrennsla, styrkur..." 
+                        className="bg-[#222] border-gray-800 text-white placeholder:text-gray-500 h-12 rounded-xl focus:border-primary focus:ring-1 focus:ring-primary transition-all"
+                        value={formData.goal}
+                        onChange={(e) => setFormData((prev) => ({ ...prev, goal: e.target.value }))}
+                      />
+                    </div>
 
-                        <div className="space-y-2">
-                          <Label htmlFor="goal" className="text-white">Hvað er markmið þitt? *</Label>
-                          <Input 
-                            id="goal" 
-                            placeholder="T.d. vöðvaaukning, fitubrennsla, styrkur..." 
-                            className="bg-black/50 border-white/20 text-white"
-                            value={formData.goal}
-                            onChange={(e) => setFormData((prev) => ({ ...prev, goal: e.target.value }))}
-                          />
-                        </div>
+                    <div className="flex items-start space-x-3 pt-2 pb-1 ml-1">
+                      <Checkbox 
+                        id="terms" 
+                        className="mt-1 border-gray-600 data-[state=checked]:bg-primary data-[state=checked]:text-black data-[state=checked]:border-primary"
+                        checked={formData.terms}
+                        onCheckedChange={(checked) => setFormData((prev) => ({ ...prev, terms: checked as boolean }))}
+                      />
+                      <Label htmlFor="terms" className="text-sm text-gray-400 leading-tight">
+                        Ég samþykki <Link to="/terms#terms" className="text-white underline decoration-gray-600 underline-offset-2 hover:decoration-primary hover:text-primary transition-colors font-medium">skilmála</Link> og <Link to="/terms#privacy" className="text-white underline decoration-gray-600 underline-offset-2 hover:decoration-primary hover:text-primary transition-colors font-medium">persónuverndarstefnu</Link> *
+                      </Label>
+                    </div>
 
-                        <div className="flex items-start space-x-3 pt-2">
-                          <Checkbox 
-                            id="terms" 
-                            className="mt-1 border-white/50 data-[state=checked]:bg-primary data-[state=checked]:text-black"
-                            checked={formData.terms}
-                            onCheckedChange={(checked) => setFormData((prev) => ({ ...prev, terms: checked as boolean }))}
-                          />
-                          <Label htmlFor="terms" className="text-sm text-white/80 leading-tight">
-                            Ég samþykki <Link to="/terms#terms" className="text-primary hover:underline">skilmála</Link> og <Link to="/terms#privacy" className="text-primary hover:underline">persónuverndarstefnu</Link> *
-                          </Label>
-                        </div>
-
-                        <Button 
-                          className="w-full h-12 bg-primary hover:bg-primary/90 text-black font-bold text-lg rounded-xl mt-4 transition-all"
-                          onClick={handleSubmit}
-                          disabled={!isFormValid || isSubmitting}
-                        >
-                          {isSubmitting ? "Sendi..." : "Byrja núna"}
-                        </Button>
-                      </div>
-                    )}
+                    <Button 
+                      className="w-full h-12 bg-primary hover:bg-primary/90 text-black font-bold text-lg rounded-xl mt-3 transition-all disabled:opacity-50 disabled:hover:bg-primary"
+                      onClick={handleSubmit}
+                      disabled={!isFormValid || isSubmitting}
+                    >
+                      {isSubmitting ? "Sendi..." : "Byrja núna"}
+                    </Button>
                   </div>
-
-                  {/* Features List */}
-                  <div className="grid sm:grid-cols-2 gap-4 pt-4 px-2">
-                    {[
-                      "Einstaklingsmiðað æfingaplan",
-                      "Næringarráðgjöf",
-                      "Tveggja vikna eftirfylgni",
-                      "Aðgangur að appinu",
-                      "Stanslaus samskipti við þjálfara"
-                    ].map((feature, i) => (
-                      <div key={i} className="flex items-center gap-3">
-                        <div className="w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0">
-                          <Check className="w-3 h-3 text-green-500" />
-                        </div>
-                        <span className="text-sm font-medium text-white/80">{feature}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                )}
               </div>
             </div>
+          </div>
+        </section>
 
+        {/* FAQ Accordion */}
+        <section className="pt-4 pb-24 px-6 bg-white text-black" id="spurningar">
+          <div className="max-w-3xl mx-auto">
+            <Accordion
+              type="multiple"
+              value={openFaqItems}
+              onValueChange={handleFaqValueChange}
+              className="space-y-4"
+            >
+              {faqItems.map((item, i) => (
+                <AccordionItem
+                  key={i}
+                  value={`item-${i}`}
+                  id={item.question.startsWith("Hvað kostar") ? "pricing" : undefined}
+                  className="border-0"
+                >
+                  <AccordionTrigger className="group bg-black hover:no-underline rounded-xl data-[state=open]:rounded-b-none px-6 py-5 md:py-6 text-white font-bold text-base md:text-xl text-center [&>svg:last-child]:hidden relative">
+                    <span className="flex-1 pr-10">{item.question}</span>
+                    <Plus className="w-5 h-5 absolute right-6 top-1/2 -translate-y-1/2 group-data-[state=open]:hidden" />
+                    <X className="w-5 h-5 absolute right-6 top-1/2 -translate-y-1/2 hidden group-data-[state=open]:block" />
+                  </AccordionTrigger>
+                  <AccordionContent className="bg-white text-gray-800 px-6 md:px-8 py-6 md:py-8 text-base md:text-lg leading-relaxed rounded-b-xl shadow-sm border border-t-0 border-gray-200">
+                    <div className="space-y-4">{item.content}</div>
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+
+            <div className="mt-10 md:mt-12 flex justify-center">
+              <Button
+                onClick={scrollToPricing}
+                className="w-full sm:w-auto min-w-[280px] h-14 md:h-16 px-10 bg-black hover:bg-black/90 text-white font-black text-base md:text-lg rounded-xl uppercase tracking-wide shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all"
+              >
+                Ég er tilbúinn að byrja
+              </Button>
+            </div>
           </div>
         </section>
       </main>

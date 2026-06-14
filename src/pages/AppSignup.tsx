@@ -58,10 +58,10 @@ const AppSignup = () => {
   const pricing = isFjarthjalfun
     ? { price: "24.990 kr.", period: "á mánuði", total: "", label: "Fjarþjálfun" }
     : paymentPeriod === "annual"
-      ? { price: "25.100 kr.", period: "á ári", total: "", label: "" }
+      ? { price: "12.384 kr.", period: "á ári", total: "", label: "" }
       : paymentPeriod === "quarterly"
-        ? { price: "7.990 kr.", period: "fyrir 3 mánuði", total: "", label: "" }
-        : { price: "2.990 kr.", period: "á mánuði", total: "", label: "" };
+        ? { price: "2.505 kr.", period: "fyrir 3 mánuði", total: "", label: "" }
+        : { price: "1.250 kr.", period: "á mánuði", total: "", label: "" };
 
   const handleSubmit = async () => {
     if (isSubmitting) return;
@@ -168,7 +168,7 @@ const AppSignup = () => {
                 <div className="text-center mb-6">
                   {!isFjarthjalfun && paymentPeriod === "annual" && (
                     <div className="inline-block bg-green-500/20 text-green-500 font-bold px-3 py-1 rounded-full text-xs mb-4">
-                      30% afsláttur
+                      17% afsláttur
                     </div>
                   )}
                   {!isFjarthjalfun && paymentPeriod === "monthly" && (

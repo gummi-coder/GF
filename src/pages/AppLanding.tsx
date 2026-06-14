@@ -300,14 +300,16 @@ const AppLanding = () => {
       ];
 
   type AppPricingBadge = { kind: "primary" | "discount"; text: string };
-  const eurPerIsk = 1 / 150;
   const formatIskWithDots = (value: number) =>
     new Intl.NumberFormat("en-US").format(value).replace(/,/g, ".");
+  const formatUsd = (value: number) =>
+    new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(value);
 
   const appPricingTiers: {
     period: "monthly" | "quarterly" | "annual";
     title: string;
     priceIsk: number;
+    priceUsd: number;
     subline: string;
     badge: AppPricingBadge | null;
     border: string;
@@ -315,7 +317,8 @@ const AppLanding = () => {
     {
       period: "monthly",
       title: language === "is" ? "Mánaðarlegt" : "Monthly",
-      priceIsk: 2990,
+      priceIsk: 1250,
+      priceUsd: 9.99,
       subline: language === "is" ? "á mánuði" : "per month",
       badge: { kind: "primary", text: language === "is" ? "Vinsælast" : "Most popular" },
       border: "border-primary",
@@ -323,7 +326,8 @@ const AppLanding = () => {
     {
       period: "quarterly",
       title: language === "is" ? "3 mánuðir" : "3 months",
-      priceIsk: 7990,
+      priceIsk: 2505,
+      priceUsd: 19.99,
       subline: language === "is" ? "fyrir 3 mánuði" : "for 3 months",
       badge: null,
       border: "border-white/20",
@@ -331,9 +335,10 @@ const AppLanding = () => {
     {
       period: "annual",
       title: language === "is" ? "Árlegt" : "Yearly",
-      priceIsk: 25100,
+      priceIsk: 12384,
+      priceUsd: 99,
       subline: language === "is" ? "á ári" : "per year",
-      badge: { kind: "discount", text: language === "is" ? "30% afsláttur" : "30% discount" },
+      badge: { kind: "discount", text: language === "is" ? "17% afsláttur" : "17% discount" },
       border: "border-white/20",
     },
   ];
@@ -399,8 +404,8 @@ const AppLanding = () => {
         title={language === "is" ? "GF Training app | Æfingaplön, makró og mælingar fyrir karla" : "GF Training app | Training plans, macros and progress tracking"}
         description={
           language === "is"
-            ? "Sæktu GF Training á iPhone: sérhönnuð æfingaplön, myndbönd við hverja æfingu, mælingar og macro tracking - allt í einu appi. Verð frá 2.990 kr. á mánuði."
-            : "Download GF Training on iPhone: custom workout plans, exercise videos, tracking and macro guidance - all in one app."
+            ? "Sæktu GF Training á iPhone: sérhönnuð æfingaplön, myndbönd við hverja æfingu, mælingar og macro tracking - allt í einu appi. Verð frá 1.250 kr. á mánuði."
+            : "Download GF Training on iPhone: custom workout plans, exercise videos, tracking and macro guidance - all in one app. From $9.99/month."
         }
         keywords="GF Training app, workout app, fitness app, macro tracking, training plan, iPhone, App Store, strength training"
         canonical="https://gftraining.is/"
@@ -1086,11 +1091,7 @@ const AppLanding = () => {
                     </div>
                     {language === "en" && (
                       <div className="text-primary/90 font-semibold mb-1 text-sm text-center">
-                        {new Intl.NumberFormat("en-IE", {
-                          style: "currency",
-                          currency: "EUR",
-                          maximumFractionDigits: 0,
-                        }).format(tier.priceIsk * eurPerIsk)}
+                        {formatUsd(tier.priceUsd)}
                       </div>
                     )}
                     <div className="text-foreground/60 font-medium mb-6 text-sm text-center">{tier.subline}</div>
@@ -1201,7 +1202,7 @@ const AppLanding = () => {
                   ? [
                       {
                         q: "Hvað kostar appið?",
-                        a: "Frá 2.990 kr. á mánuði. Einnig 3 mánuðir (7.990 kr.) og ársáskrift (25.100 kr. með 30% afslætti). Engin binding. Allir eiginleikar og yfir 40 æfingarplön innifalin í öllum áskriftum.",
+                        a: "Frá 1.250 kr. á mánuði. Einnig 3 mánuðir (2.505 kr.) og ársáskrift (12.384 kr. með 17% afslætti). Engin binding. Allir eiginleikar og yfir 40 æfingarplön innifalin í öllum áskriftum.",
                       },
                       {
                         q: "Hentar þetta byrjendum?",
@@ -1227,7 +1228,7 @@ const AppLanding = () => {
                   : [
                       {
                         q: "How much does the app cost?",
-                        a: "From 2,990 ISK per month. You can also choose 3 months (7,990 ISK) or yearly (25,100 ISK with a 30% discount). No lock-in. Every subscription includes all features and 40+ training plans.",
+                        a: "From 1,250 ISK ($9.99) per month. You can also choose 3 months (2,505 ISK / $19.99) or yearly (12,384 ISK / $99 with a 17% discount). No lock-in. Every subscription includes all features and 40+ training plans.",
                       },
                       {
                         q: "Is this suitable for beginners?",
