@@ -295,7 +295,7 @@ const Fjarthjalfun = () => {
             </h1>
 
             <p className="text-lg md:text-2xl text-white/80 font-medium max-w-3xl mx-auto mt-6">
-              Skráðu þig í fjarþjálfun og fáðu kerfi sem virkar og er að fara skila þér alvöru árangri.
+              Skráðu þig í fjarþjálfun og fáðu kerfi sem virkar og skila þér alvöru árangri.
             </p>
 
             {/* Black bg stops ~85% down the video; bottom strip sits on white */}
