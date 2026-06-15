@@ -34,6 +34,7 @@ const AppLanding = () => {
     navPricing: language === "is" ? "Verð" : "Pricing",
     navFaq: language === "is" ? "Spurningar" : "FAQ",
     startNow: language === "is" ? "Byrja núna" : "Start now",
+    heroCta: language === "is" ? "Prófaðu FRÍTT í 2 vikur" : "Try free for 2 weeks",
     heroTitleLead: language === "is" ? "Byggðu upp styrk, vöðva og sjálfstraust -" : "Build strength, muscle and confidence -",
     heroTitleHighlight: language === "is" ? "allt á einum stað" : "all in one place",
     heroDescription:
@@ -622,7 +623,7 @@ const AppLanding = () => {
                     onClick={handleStartNowClick}
                     className="h-12 sm:h-14 px-6 sm:px-8 rounded-full bg-primary hover:bg-primary/90 text-black font-bold text-base sm:text-lg shadow-lg hover:shadow-xl transition-all w-full sm:w-auto"
                   >
-                    {t.startNow}
+                    {t.heroCta}
                   </Button>
                 </div>
 
@@ -1083,15 +1084,23 @@ const AppLanding = () => {
                     )}
                     {!tier.badge && <div className="mb-3 h-[28px]" aria-hidden />}
 
-                    <div className="flex items-baseline justify-center gap-1 mb-1">
-                      <span className="text-4xl sm:text-5xl font-black font-display tracking-tight">
-                        {formatIskWithDots(tier.priceIsk)}
-                      </span>
-                      <span className="text-lg font-bold text-foreground/50">kr.</span>
-                    </div>
-                    {language === "en" && (
-                      <div className="text-primary/90 font-semibold mb-1 text-sm text-center">
-                        {formatUsd(tier.priceUsd)}
+                    {language === "en" ? (
+                      <>
+                        <div className="flex items-baseline justify-center gap-1 mb-1">
+                          <span className="text-4xl sm:text-5xl font-black font-display tracking-tight">
+                            {formatUsd(tier.priceUsd)}
+                          </span>
+                        </div>
+                        <div className="text-foreground/60 font-semibold mb-1 text-sm text-center">
+                          {formatIskWithDots(tier.priceIsk)} kr.
+                        </div>
+                      </>
+                    ) : (
+                      <div className="flex items-baseline justify-center gap-1 mb-1">
+                        <span className="text-4xl sm:text-5xl font-black font-display tracking-tight">
+                          {formatIskWithDots(tier.priceIsk)}
+                        </span>
+                        <span className="text-lg font-bold text-foreground/50">kr.</span>
                       </div>
                     )}
                     <div className="text-foreground/60 font-medium mb-6 text-sm text-center">{tier.subline}</div>
