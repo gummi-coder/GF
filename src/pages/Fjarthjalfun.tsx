@@ -418,7 +418,7 @@ const Fjarthjalfun = () => {
               {/* Header */}
               <div className="text-center mb-1">
                 <h1 className="text-4xl md:text-5xl font-black tracking-tight text-black">
-                  Byrjaðu með Fjarþjálfun
+                  Byrjaðu í Fjarþjálfun
                 </h1>
               </div>
 
