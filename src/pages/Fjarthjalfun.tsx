@@ -60,7 +60,7 @@ const testimonialsBottom: Testimonial[] = [
     time: "3 weeks ago",
     isNew: true,
     highlight: "Fjarþjálfunin skilar raunverulegum árangri.",
-    text: "Ég fékk sérsniðið plan og vikulega eftirfylgni sem hélt mér á réttri leið. Ekkert gisk, bara skýr skref.",
+    text: "Ég fékk sérsniðið plan og vikulega eftirfylgni sem hélt mér á réttri leið.",
     offset: "md:translate-y-6",
   },
   {
@@ -123,8 +123,6 @@ const faqItems = [
     question: "Hvernig fer fjarþjálfunin fram?",
     content: (
       <>
-        <p>Þetta er ekki bara eitthvað app. Þetta er fjarþjálfun. Með mér.</p>
-        <p>Bústu við engum innantómum hvatningarræðum. Það þýðir - við förum beint í verkið.</p>
         <p>Í byrjun förum við yfir stöðuna þína, setjum upp markmið og búum til ramma sem tryggir að þú náir árangri. Þetta er sama kerfi og ég hef notað til að hjálpa hundruðum viðskiptavina.</p>
         <p>Í hverri viku förum við yfir árangurinn, greinum hvað gengur vel og lögum það sem má betur fara.</p>
       </>
@@ -289,13 +287,13 @@ const Fjarthjalfun = () => {
         {/* Hero — black ends ~80% down the video; white starts under the bottom edge */}
         <div className="bg-[#0a0a0a] text-white overflow-visible">
           <div className="max-w-4xl mx-auto text-center px-6 pt-16 md:pt-24">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.1]">
-              Ert þú það sem hamlar <br className="hidden md:block" />
-              <span className="text-white/60">árangrinum þínum?</span>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.15]">
+              <span className="block">Er ekki kominn tíma á að</span>
+              <span className="block text-white/60">losa þig við aukakílóin?</span>
             </h1>
 
             <p className="text-lg md:text-2xl text-white/80 font-medium max-w-3xl mx-auto mt-6">
-              Skráðu þig í fjarþjálfun og fáðu kerfi sem virkar og skila þér alvöru árangri.
+              Það er enginn að fara koma og bjarga þér, svo taktu fyrsta skrefið í dag og skráðu þig í fjarþjálfun.
             </p>
 
             {/* Black bg stops ~85% down the video; bottom strip sits on white */}
@@ -369,7 +367,7 @@ const Fjarthjalfun = () => {
                   <img src="/images/IMG_2091.jpg" alt="Persónuleg eftirfylgni" className="w-full h-full object-cover object-center" />
                 </div>
                 <p className="text-gray-700 leading-relaxed text-[15px] px-2 font-medium">
-                  Þú færð vikulegt yfirferð og aðhald. Við förum yfir árangurinn, lögum það sem þarf að laga og tryggjum að þú sért alltaf á réttri leið að þínu markmiði.
+                  Þú færð vikulegt árangurs check-ins og aðhald. Við förum yfir árangurinn, lögum það sem þarf að laga og tryggjum að þú náir þínu markmiði.
                 </p>
               </div>
               
