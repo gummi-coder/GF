@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import SEO from "@/components/SEO";
+import AppLogoIntro from "@/components/AppLogoIntro";
 import { Button } from "@/components/ui/button";
 import { Check, ChevronDown, ChevronUp, ChevronLeft, ChevronRight, ArrowRight, BarChart3, CalendarDays, Dumbbell, Zap, Video, PlayCircle, Trophy, Timer, Menu, X, Sparkles } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
@@ -26,6 +27,9 @@ const AppLanding = () => {
   const [isDeviceChoiceOpen, setIsDeviceChoiceOpen] = useState(false);
   const mobileCarouselRef = useRef<HTMLDivElement>(null);
   const desktopCarouselRef = useRef<HTMLDivElement>(null);
+  const navLogoRef = useRef<HTMLImageElement>(null);
+  const [introComplete, setIntroComplete] = useState(false);
+  const handleIntroComplete = useCallback(() => setIntroComplete(true), []);
   const [androidFormState, handleAndroidSubmit] = useForm("xnjlrwww");
 
   const t = {
@@ -414,6 +418,7 @@ const AppLanding = () => {
       />
 
       <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/30" data-app-landing>
+        <AppLogoIntro navLogoRef={navLogoRef} onComplete={handleIntroComplete} />
         <div className={isAndroidModalOpen || isDeviceChoiceOpen ? "blur-sm pointer-events-none select-none" : ""}>
         
         {/* Navigation - OWNU Style */}
@@ -422,7 +427,14 @@ const AppLanding = () => {
         }`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 md:h-24 flex items-center justify-between relative">
             <Link to="/" className="flex items-center z-10">
-              <img src="/images/gf-training-logo10.png" alt="GF Training" className="h-14 sm:h-16 md:h-24 w-auto" />
+              <img
+                ref={navLogoRef}
+                src="/images/gf-training-logo10.png"
+                alt="GF Training"
+                className={`h-14 sm:h-16 md:h-24 w-auto ${
+                  introComplete ? "opacity-100" : "opacity-0"
+                }`}
+              />
             </Link>
             
             <div className="hidden md:flex items-center gap-6 lg:gap-8">
