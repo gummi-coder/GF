@@ -279,7 +279,7 @@ const Fjarthjalfun = () => {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-50" />
             <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-red-500" />
           </span>
-          Fjarþjálfun | Opnið fyrir umsóknir
+          Fjarþjálfun | Opið fyrir umsóknir
         </button>
       </div>
 
@@ -288,7 +288,7 @@ const Fjarthjalfun = () => {
         <div className="bg-[#0a0a0a] text-white overflow-visible">
           <div className="max-w-4xl mx-auto text-center px-6 pt-16 md:pt-24">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.15]">
-              <span className="block">Er ekki kominn tíma á að</span>
+              <span className="block">Er ekki komin tími til að</span>
               <span className="block text-white/60">losa þig við aukakílóin?</span>
             </h1>
 
@@ -367,7 +367,7 @@ const Fjarthjalfun = () => {
                   <img src="/images/IMG_2091.jpg" alt="Persónuleg eftirfylgni" className="w-full h-full object-cover object-center" />
                 </div>
                 <p className="text-gray-700 leading-relaxed text-[15px] px-2 font-medium">
-                  Þú færð vikulegt árangurs check-ins og aðhald. Við förum yfir árangurinn, lögum það sem þarf að laga og tryggjum að þú náir þínu markmiði.
+                  Þú færð vikuleg árangurs check-in og aðhald. Við förum yfir árangurinn, lögum það sem þarf að laga og tryggjum að þú náir þínu markmiði.
                 </p>
               </div>
               
