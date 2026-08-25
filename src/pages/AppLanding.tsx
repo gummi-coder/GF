@@ -138,6 +138,8 @@ const AppLanding = () => {
   type PlanFamily = {
     id: number;
     image: string;
+    /** CSS object-position so face/subject stays in frame when cropped */
+    imagePosition?: string;
     nameIs: string;
     nameEn: string;
     descIs: string;
@@ -151,6 +153,8 @@ const AppLanding = () => {
     {
       id: 1,
       image: "/images/plan-families/1.png",
+      // Wide photo with face on the upper-right — keep head visible on tall crops
+      imagePosition: "78% 12%",
       nameIs: "Heimaæfingar",
       nameEn: "Home Workout",
       descIs: "Æfðu heima án ræktar: líkamansþyngd, einföld verkfæri og skýr framvinda.",
@@ -866,6 +870,7 @@ const AppLanding = () => {
                             src={family.image}
                             alt={planTitle(family)}
                             className="w-full h-full object-cover"
+                            style={family.imagePosition ? { objectPosition: family.imagePosition } : undefined}
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/30"></div>
                           <div className="absolute inset-0 flex flex-col justify-end p-6">
@@ -894,6 +899,7 @@ const AppLanding = () => {
                           src={planFamilies[0].image}
                           alt={planTitle(planFamilies[0])}
                           className="w-full h-full object-cover"
+                          style={planFamilies[0].imagePosition ? { objectPosition: planFamilies[0].imagePosition } : undefined}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/30"></div>
                         <div className="absolute inset-0 flex flex-col justify-end p-6">
@@ -1008,6 +1014,7 @@ const AppLanding = () => {
                                 src={family.image}
                                 alt={planTitle(family)}
                                 className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                                style={family.imagePosition ? { objectPosition: family.imagePosition } : undefined}
                               />
                               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
                               <div className="absolute bottom-4 left-4 z-10 max-w-[calc(100%-2rem)] bg-primary backdrop-blur-sm px-4 py-2 rounded-full border border-primary/30 shadow-sm">
