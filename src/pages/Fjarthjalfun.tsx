@@ -214,6 +214,43 @@ const Fjarthjalfun = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || hasStarted) return;
+
+    const playMutedPreview = () => {
+      video.defaultMuted = true;
+      video.muted = true;
+      void video.play().catch(() => {
+        // Some mobile browsers intentionally block autoplay (for example in Low Power Mode).
+      });
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          playMutedPreview();
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.25 },
+    );
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") playMutedPreview();
+    };
+
+    observer.observe(video);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    playMutedPreview();
+
+    return () => {
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, [hasStarted]);
+
   const activateVideo = async () => {
     const video = videoRef.current;
     if (!video) return;
@@ -447,6 +484,12 @@ const Fjarthjalfun = () => {
                   onEnded={() => setIsPlaying(false)}
                   onTimeUpdate={(event) => setCurrentTime(event.currentTarget.currentTime)}
                   onLoadedMetadata={(event) => setDuration(event.currentTarget.duration)}
+                  onCanPlay={(event) => {
+                    if (!hasStarted) {
+                      event.currentTarget.muted = true;
+                      void event.currentTarget.play().catch(() => undefined);
+                    }
+                  }}
                   aria-label="GF Training kynningarmyndband"
                 />
 
