@@ -448,8 +448,8 @@ const Fjarthjalfun = () => {
         <div className="bg-[#0a0a0a] text-white overflow-visible">
           <div className="max-w-4xl mx-auto text-center px-6 pt-12 md:pt-16 [@media(min-width:768px)_and_(max-height:950px)]:pt-10">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl [@media(min-width:768px)_and_(max-height:950px)]:text-[2.75rem] font-black tracking-tight leading-[1.15]">
-              <span className="block">Er ekki komin tími til að</span>
-              <span className="block text-white/60">losa þig við aukakílóin?</span>
+              <span className="block">Er ekki kominn tími til að</span>
+              <span className="block text-white/60">þú losir þig við aukakílóin?</span>
             </h1>
 
             <p className="text-lg md:text-xl text-white/80 font-medium max-w-3xl mx-auto mt-4">
