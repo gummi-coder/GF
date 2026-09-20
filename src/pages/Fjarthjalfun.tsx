@@ -14,73 +14,66 @@ type Testimonial = {
   reviews: string;
   time: string;
   isNew: boolean;
-  highlight: string;
   text: string;
   offset: string;
 };
 
 const testimonialsTop: Testimonial[] = [
   {
-    name: "Einar Tómasson",
+    name: "Einar T.",
     initialBg: "bg-[#4285F4]",
-    reviews: "12 reviews",
-    time: "2 weeks ago",
+    reviews: "12 umsagnir",
+    time: "fyrir 2 vikum",
     isNew: true,
-    highlight: "Besta ákvörðun sem ég hef tekið.",
-    text: "Missti 10 kíló og hef aldrei verið sterkari. Ég byrjaði að sjá árangur strax á fyrstu vikunum.",
+    text: "Ég er búinn að missa 10 kg og líður miklu betur. Mikilvægast er að ég hef náð að halda mér við þetta.",
     offset: "md:-translate-y-4",
   },
   {
-    name: "Gunnar Þorsteinsson",
+    name: "Gunnar Þ.",
     initialBg: "bg-[#9C27B0]",
-    reviews: "5 reviews",
-    time: "1 month ago",
+    reviews: "5 umsagnir",
+    time: "fyrir 1 mánuði",
     isNew: true,
-    highlight: "Loksins kerfi sem ég get fylgt.",
-    text: "Mæli 100% með GF Training. Þetta er ekki bara æfingaplan, heldur lífsstílsbreyting sem virkar.",
+    text: "Þægilegt að hafa æfingarnar og allt annað á einum stað. Þetta hefur hjálpað mér að koma góðri rútínu á æfingarnar.",
     offset: "md:translate-y-8",
   },
   {
-    name: "Sigurður Már",
+    name: "Sigurður M.",
     initialBg: "bg-[#E91E63]",
-    reviews: "8 reviews",
-    time: "3 months ago",
+    reviews: "8 umsagnir",
+    time: "fyrir 3 mánuðum",
     isNew: false,
-    highlight: "Frábært viðmót og fagleg vinnubrögð.",
-    text: "Þetta breytti öllu fyrir mig. Ég hef prófað mörg forrit en þetta er það fyrsta sem ég hef haldið mig við.",
+    text: "Góð þjónusta og flott eftirfylgni. Ég hef prófað nokkur prógrömm en þetta er það fyrsta sem ég hef náð að halda mig við.",
     offset: "md:-translate-y-2",
   },
 ];
 
 const testimonialsBottom: Testimonial[] = [
   {
-    name: "Magnús Steinarsson",
+    name: "Magnús S.",
     initialBg: "bg-[#0F9D58]",
-    reviews: "6 reviews",
-    time: "3 weeks ago",
+    reviews: "6 umsagnir",
+    time: "fyrir 3 vikum",
     isNew: true,
-    highlight: "Fjarþjálfunin skilar raunverulegum árangri.",
-    text: "Ég fékk sérsniðið plan og vikulega eftirfylgni sem hélt mér á réttri leið.",
+    text: "Ég var búinn að reyna oft að koma mér af stað en gafst alltaf upp. Planið var einfalt og eftirfylgnin hjálpaði mér að halda áfram.",
     offset: "md:translate-y-6",
   },
   {
-    name: "Ólafur Rafnsson",
+    name: "Ólafur R.",
     initialBg: "bg-[#F4B400]",
-    reviews: "9 reviews",
-    time: "2 months ago",
+    reviews: "9 umsagnir",
+    time: "fyrir 2 mánuðum",
     isNew: false,
-    highlight: "Mataræðið var loksins einfalt að fylgja.",
-    text: "Ég hélt að ég þyrfti að svelta mig til að ná markmiðum. Kerfið passaði við líf mitt og ég sá breytingu strax.",
+    text: "Mataræðið var miklu einfaldara en ég bjóst við. Ég þurfti ekki að svelta mig eða hætta að borða allt sem mér finnst gott.",
     offset: "md:-translate-y-6",
   },
   {
-    name: "Björn Helgi",
+    name: "Björn H.",
     initialBg: "bg-[#DB4437]",
-    reviews: "15 reviews",
-    time: "5 months ago",
+    reviews: "15 umsagnir",
+    time: "fyrir 5 mánuðum",
     isNew: false,
-    highlight: "Persónuleg aðstoð sem skilar sér.",
-    text: "Hver spurning var svöruð með skýrleika og ég vissi alltaf hvað ég átti að gera næst. Mæli eindregið með.",
+    text: "Mér fannst gott að fá skýr svör og vita alltaf hvað ég ætti að gera næst. Mæli klárlega með þessu.",
     offset: "md:translate-y-2",
   },
 ];
@@ -108,11 +101,10 @@ const ReviewCard = ({ testimonial }: { testimonial: Testimonial }) => (
       </div>
       <span className="text-gray-500 text-[11px] md:text-xs">{testimonial.time}</span>
       {testimonial.isNew && (
-        <span className="bg-gray-100 text-gray-800 text-[9px] md:text-[10px] font-bold px-1.5 py-0.5 rounded border border-gray-200">NEW</span>
+        <span className="bg-gray-100 text-gray-800 text-[9px] md:text-[10px] font-bold px-1.5 py-0.5 rounded border border-gray-200">NÝTT</span>
       )}
     </div>
     <p className="text-gray-800 text-sm md:text-[15px] leading-relaxed">
-      <span className="bg-[#fef08a] px-1 rounded box-decoration-clone">{testimonial.highlight}</span>{" "}
       {testimonial.text}
     </p>
   </div>
@@ -401,7 +393,7 @@ const Fjarthjalfun = () => {
       formDataToSend.append('period', 'monthly');
       formDataToSend.append('terms', formData.terms ? 'yes' : 'no');
 
-      const response = await fetch("https://formspree.io/f/maqqqwew", {
+      const response = await fetch("https://formspree.io/f/mqpapkng", {
         method: "POST",
         body: formDataToSend,
         headers: {
@@ -678,13 +670,8 @@ const Fjarthjalfun = () => {
                       <div className="w-14 h-14 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
                         <Check className="w-7 h-7 text-black" />
                       </div>
-                      <h3 className="text-2xl font-bold text-white mb-2">Takk fyrir skráninguna!</h3>
-                      <p className="text-gray-400 mb-5">Þú færð tölvupóst með leiðbeiningum um hvernig á að byrja.</p>
-                      <Link to="/">
-                        <Button className={`${primaryCtaClass} min-w-0 h-12 md:h-14 text-base px-8 shadow-[0_4px_0_0_#0a0a0a,0_8px_24px_rgba(230,255,40,0.4)]`}>
-                          Til baka á forsíðuna
-                        </Button>
-                      </Link>
+                      <h3 className="text-2xl font-bold text-white mb-2">Takk fyrir!</h3>
+                      <p className="text-gray-400">Við höfum samband við þig eins fljótt og auðið er.</p>
                     </div>
                   </div>
                 ) : (
