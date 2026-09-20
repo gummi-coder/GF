@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { PlayCircle, Check, Plus, X, ArrowRight } from "lucide-react";
+import { Play, Pause, Volume2, VolumeX, Maximize, Minimize, Check, Plus, X, ArrowRight } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -170,9 +170,140 @@ const primaryCtaClass =
 const formSubmitClass =
   "group w-full h-14 md:h-[3.75rem] bg-primary hover:bg-[#eeff28] text-black font-black text-lg rounded-xl mt-3 uppercase tracking-wide border border-black/15 shadow-[0_5px_0_0_#000,0_8px_28px_rgba(230,255,40,0.35)] hover:shadow-[0_3px_0_0_#000,0_12px_32px_rgba(230,255,40,0.45)] hover:-translate-y-0.5 active:translate-y-0.5 active:shadow-[0_2px_0_0_#000] transition-all duration-150 disabled:opacity-50 disabled:pointer-events-none disabled:shadow-none disabled:translate-y-0";
 
+const VIDEO_URL = "https://dylyfowzjxyrznjvfhuj.supabase.co/storage/v1/object/public/website-videos/gfvideo.mp4";
+
+const formatTime = (seconds: number) => {
+  if (!Number.isFinite(seconds)) return "00:00";
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = Math.floor(seconds % 60);
+  return `${minutes.toString().padStart(2, "0")}:${remainingSeconds.toString().padStart(2, "0")}`;
+};
+
 const Fjarthjalfun = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const videoContainerRef = useRef<HTMLDivElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [hasStarted, setHasStarted] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [volume, setVolume] = useState(1);
+  const [isMuted, setIsMuted] = useState(true);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  useEffect(() => {
+    const fullscreenDocument = document as Document & { webkitFullscreenElement?: Element };
+    const handleFullscreenChange = () => setIsFullscreen(Boolean(document.fullscreenElement || fullscreenDocument.webkitFullscreenElement));
+    const video = videoRef.current as (HTMLVideoElement & {
+      addEventListener: HTMLVideoElement["addEventListener"];
+    }) | null;
+    const handleWebkitBeginFullscreen = () => setIsFullscreen(true);
+    const handleWebkitEndFullscreen = () => setIsFullscreen(false);
+
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+    document.addEventListener("webkitfullscreenchange", handleFullscreenChange);
+    video?.addEventListener("webkitbeginfullscreen", handleWebkitBeginFullscreen);
+    video?.addEventListener("webkitendfullscreen", handleWebkitEndFullscreen);
+
+    return () => {
+      document.removeEventListener("fullscreenchange", handleFullscreenChange);
+      document.removeEventListener("webkitfullscreenchange", handleFullscreenChange);
+      video?.removeEventListener("webkitbeginfullscreen", handleWebkitBeginFullscreen);
+      video?.removeEventListener("webkitendfullscreen", handleWebkitEndFullscreen);
+    };
+  }, []);
+
+  const activateVideo = async () => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.currentTime = 0;
+    video.muted = false;
+    setIsMuted(false);
+    setHasStarted(true);
+    await video.play();
+  };
+
+  const togglePlayback = async () => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (!hasStarted) {
+      await activateVideo();
+      return;
+    }
+
+    if (video.paused) {
+      await video.play();
+    } else {
+      video.pause();
+    }
+  };
+
+  const handleSeek = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const nextTime = Number(event.target.value);
+    if (videoRef.current) videoRef.current.currentTime = nextTime;
+    setCurrentTime(nextTime);
+  };
+
+  const handleVolumeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const nextVolume = Number(event.target.value);
+    if (videoRef.current) {
+      videoRef.current.volume = nextVolume;
+      videoRef.current.muted = nextVolume === 0;
+    }
+    setVolume(nextVolume);
+    setIsMuted(nextVolume === 0);
+  };
+
+  const toggleMute = () => {
+    const nextMuted = !isMuted;
+    if (videoRef.current) {
+      videoRef.current.muted = nextMuted;
+      if (!nextMuted && volume === 0) videoRef.current.volume = 1;
+    }
+    if (!nextMuted && volume === 0) setVolume(1);
+    setIsMuted(nextMuted);
+  };
+
+  const toggleFullscreen = async () => {
+    const fullscreenDocument = document as Document & {
+      webkitFullscreenElement?: Element;
+      webkitExitFullscreen?: () => Promise<void> | void;
+    };
+    const container = videoContainerRef.current as (HTMLDivElement & {
+      webkitRequestFullscreen?: () => Promise<void> | void;
+    }) | null;
+    const video = videoRef.current as (HTMLVideoElement & {
+      webkitEnterFullscreen?: () => void;
+      webkitExitFullscreen?: () => void;
+      webkitDisplayingFullscreen?: boolean;
+    }) | null;
+
+    if (document.fullscreenElement) {
+      await document.exitFullscreen();
+      return;
+    }
+
+    if (fullscreenDocument.webkitFullscreenElement && fullscreenDocument.webkitExitFullscreen) {
+      await fullscreenDocument.webkitExitFullscreen();
+      return;
+    }
+
+    if (isFullscreen && video?.webkitExitFullscreen) {
+      video.webkitExitFullscreen();
+      return;
+    }
+
+    if (container?.requestFullscreen) {
+      await container.requestFullscreen();
+    } else if (container?.webkitRequestFullscreen) {
+      await container.webkitRequestFullscreen();
+    } else if (video?.webkitEnterFullscreen) {
+      video.webkitEnterFullscreen();
+    }
+  };
 
   /** Legacy anchor from old in-page nav; keep URL clean */
   useEffect(() => {
@@ -286,37 +417,97 @@ const Fjarthjalfun = () => {
       <main className="pt-11">
         {/* Hero — black ends ~80% down the video; white starts under the bottom edge */}
         <div className="bg-[#0a0a0a] text-white overflow-visible">
-          <div className="max-w-4xl mx-auto text-center px-6 pt-16 md:pt-24">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.15]">
+          <div className="max-w-4xl mx-auto text-center px-6 pt-12 md:pt-16 [@media(min-width:768px)_and_(max-height:950px)]:pt-10">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl [@media(min-width:768px)_and_(max-height:950px)]:text-[2.75rem] font-black tracking-tight leading-[1.15]">
               <span className="block">Er ekki komin tími til að</span>
               <span className="block text-white/60">losa þig við aukakílóin?</span>
             </h1>
 
-            <p className="text-lg md:text-2xl text-white/80 font-medium max-w-3xl mx-auto mt-6">
+            <p className="text-lg md:text-xl text-white/80 font-medium max-w-3xl mx-auto mt-4">
               Það er enginn að fara koma og bjarga þér, svo taktu fyrsta skrefið í dag og skráðu þig í fjarþjálfun.
             </p>
 
             {/* Black bg stops ~85% down the video; bottom strip sits on white */}
-            <div className="relative mt-10 md:mt-12 pb-[48%] md:pb-[47%]">
-              <div className="absolute inset-x-0 top-0 z-20 aspect-video bg-[#111] border border-white/10 rounded-xl overflow-hidden group cursor-pointer shadow-2xl">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center pl-1 group-hover:scale-110 transition-transform duration-300 shadow-[0_0_30px_rgba(237,255,43,0.3)]">
-                    <PlayCircle className="w-10 h-10 text-black" strokeWidth={1.5} />
-                  </div>
-                </div>
-                <div className="absolute bottom-0 inset-x-0 h-1/3 bg-gradient-to-t from-black/80 to-transparent pointer-events-none"></div>
-                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs font-medium text-white/70">
-                  <span>00:00 / 03:45</span>
-                  <span>GF Training</span>
+            <div className="relative max-w-3xl mx-auto mt-7 md:mt-8 [@media(min-width:768px)_and_(max-height:950px)]:mt-5 [@media(min-width:768px)_and_(max-height:950px)]:max-w-[680px] pb-[48%] md:pb-[47%]">
+              <div ref={videoContainerRef} className="absolute inset-x-0 top-0 z-20 aspect-video bg-[#111] border border-white/10 rounded-xl overflow-hidden group shadow-2xl">
+                <video
+                  ref={videoRef}
+                  src={VIDEO_URL}
+                  preload="metadata"
+                  playsInline
+                  autoPlay
+                  muted={isMuted}
+                  loop={!hasStarted}
+                  className="h-full w-full object-cover"
+                  onClick={togglePlayback}
+                  onPlay={() => {
+                    setIsPlaying(true);
+                  }}
+                  onPause={() => setIsPlaying(false)}
+                  onEnded={() => setIsPlaying(false)}
+                  onTimeUpdate={(event) => setCurrentTime(event.currentTarget.currentTime)}
+                  onLoadedMetadata={(event) => setDuration(event.currentTarget.duration)}
+                  aria-label="GF Training kynningarmyndband"
+                />
+
+                {!hasStarted && (
+                  <button
+                    type="button"
+                    onClick={activateVideo}
+                    className="absolute inset-0 flex items-center justify-center cursor-pointer"
+                    aria-label="Spila myndband frá byrjun með hljóði"
+                  >
+                    <span className="video-sound-prompt flex max-w-[85%] flex-col items-center gap-2 rounded-2xl border border-primary/50 bg-black/75 px-7 py-5 text-center text-white backdrop-blur-sm transition-[border-color] duration-300 group-hover:border-primary sm:px-10 sm:py-7">
+                      <Volume2 className="h-9 w-9 sm:h-11 sm:w-11" strokeWidth={2} />
+                      <span className="text-base font-black leading-tight sm:text-xl">Myndbandið er í gangi</span>
+                      <span className="text-xs font-bold uppercase tracking-wide text-primary sm:text-sm">Smelltu til að kveikja á hljóði</span>
+                    </span>
+                  </button>
+                )}
+
+                <div className="absolute bottom-0 inset-x-0 h-1/3 bg-gradient-to-t from-black/90 to-transparent pointer-events-none" />
+                <div className="absolute bottom-0 inset-x-0 flex items-center gap-2.5 px-3 py-3 md:gap-3 md:px-4 md:py-4 text-white">
+                  <button type="button" onClick={togglePlayback} className="shrink-0 text-white/90 hover:text-primary transition-colors" aria-label={isPlaying ? "Gera hlé" : "Spila"}>
+                    {isPlaying ? <Pause className="h-5 w-5 fill-current" /> : <Play className="h-5 w-5 fill-current" />}
+                  </button>
+                  <span className="shrink-0 text-[10px] sm:text-xs font-medium tabular-nums text-white/80">
+                    {formatTime(currentTime)} / {formatTime(duration)}
+                  </span>
+                  <input
+                    type="range"
+                    min="0"
+                    max={duration || 0}
+                    step="0.1"
+                    value={currentTime}
+                    onChange={handleSeek}
+                    className="min-w-0 flex-1 h-1 cursor-pointer accent-primary"
+                    aria-label="Staða myndbands"
+                  />
+                  <button type="button" onClick={toggleMute} className="shrink-0 text-white/90 hover:text-primary transition-colors" aria-label={isMuted ? "Kveikja á hljóði" : "Slökkva á hljóði"}>
+                    {isMuted ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
+                  </button>
+                  <input
+                    type="range"
+                    min="0"
+                    max="1"
+                    step="0.05"
+                    value={volume}
+                    onChange={handleVolumeChange}
+                    className="hidden sm:block w-16 md:w-20 h-1 cursor-pointer accent-primary"
+                    aria-label="Hljóðstyrkur"
+                  />
+                  <button type="button" onClick={toggleFullscreen} className="shrink-0 text-white/90 hover:text-primary transition-colors" aria-label={isFullscreen ? "Minnka myndband" : "Fylla skjáinn"}>
+                    {isFullscreen ? <Minimize className="h-5 w-5" /> : <Maximize className="h-5 w-5" />}
+                  </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="bg-white px-6 pb-20 md:pb-28 pt-[calc(9%+1rem)] md:pt-28">
-          <div className="max-w-3xl mx-auto text-center space-y-8 md:space-y-10">
-            <p className="text-xl md:text-2xl lg:text-[1.65rem] text-black leading-snug md:leading-snug font-normal px-2">
+        <div className="bg-white px-6 pb-20 md:pb-24 pt-[calc(6%+1rem)] md:pt-20 [@media(min-width:768px)_and_(max-height:950px)]:pt-10">
+          <div className="max-w-3xl mx-auto text-center space-y-7 md:space-y-8 [@media(min-width:768px)_and_(max-height:950px)]:space-y-5">
+            <p className="text-xl md:text-2xl lg:text-[1.5rem] [@media(min-width:768px)_and_(max-height:950px)]:text-xl text-black leading-snug md:leading-snug font-normal px-2">
               Þetta er persónuleg fjarþjálfun þar sem þú færð{" "}
               <span className="font-bold">sérsniðið æfingaplan</span>, markvissa næringarráðgjöf og{" "}
               <span className="font-bold">eftirfylgni</span> frá þjálfara sem hefur hjálpað hundruðum að ná sínu besta formi.
